@@ -30,6 +30,8 @@ namespace CloVis
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            // test :
+            new Resume.BoxBackground(0,0,100);
         }
 
         /// <summary>
