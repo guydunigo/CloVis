@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Resume;
+using ResumeElements;
 
 namespace CloVis
 {
@@ -22,6 +24,8 @@ namespace CloVis
     /// </summary>
     sealed partial class App : Application
     {
+        public Index index;
+
         /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
         /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
@@ -31,7 +35,8 @@ namespace CloVis
             this.InitializeComponent();
             this.Suspending += OnSuspending;
             // test :
-            new Resume.BoxBackground(0,0,100);
+            index = new Index("index", new ElementList<Element>("root"));
+
         }
 
         /// <summary>

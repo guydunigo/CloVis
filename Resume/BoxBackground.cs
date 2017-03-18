@@ -19,7 +19,6 @@ namespace Resume
             Color = color;
             BorderColor = borderColor;
             Image = img;
-            if (Z > 50) throw new Exception("Child setter not used during initialization");
         }
 
         /// <summary>

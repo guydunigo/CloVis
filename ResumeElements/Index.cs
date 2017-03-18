@@ -11,6 +11,13 @@ namespace ResumeElements
     /// </summary>
     public class Index : ElementList<Data>
     {
+        public Index(string name, ElementList<Element> root, bool isDefault = false) : base(name, isDefault)
+        {}
+        public Index(string name, bool isDefault = false) : this(name, new ElementList<Element>("root"), isDefault)
+        {}
+
+
+
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
         /// </summary>

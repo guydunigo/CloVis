@@ -9,43 +9,55 @@ namespace ResumeElements
         {
             Description = description;
             double Level = level;
-            categories = new List<ElementList<Element>>();
+            categories = new List<ElementList>();
+        }
+
+        protected string name;
+        public new string Name
+        {
+            get => name;
+            set
+            {
+                throw new NotImplementedException();
+            } // modifies categories lists keys as well
         }
 
         public string Description { get; set; }
 
-        protected List<ElementList<Element>> categories;
+        protected List<ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
         /// </summary>
-        public List<ElementList<Element>> Categories
+        public List<ElementList> Categories
         {
             get
             {
-                return new List<ElementList<Element>>(categories);
+                return new List<ElementList>(categories);
             }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cat"></param>
-        public void AddCategory(ElementList<Element> cat)
+        public void AddCategory(ElementList cat)
         {
-            categories.Remove(cat);
-            cat.Add(this);
-            // Add in the category too
-            throw new NotImplementedException();
+            if (!categories.Contains(cat))
+            {
+                cat.Add(this);
+                categories.Add(cat);
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="cat"></param>
-        public void RemoveCategory(ElementList<Element> cat)
+        public void RemoveCategory(ElementList cat)
         {
-            // Remove from the category too
-            categories.Remove(cat);
-            cat.Remove(this);
-            throw new NotImplementedException();
+            if (categories.Contains(cat))
+            {
+                cat.Remove(this);
+                categories.Remove(cat);
+            }
         }
 
         protected double level;
