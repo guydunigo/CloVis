@@ -12,16 +12,6 @@ namespace ResumeElements
             categories = new List<ElementList>();
         }
 
-        protected string name;
-        public new string Name
-        {
-            get => name;
-            set
-            {
-                throw new NotImplementedException();
-            } // modifies categories lists keys as well
-        }
-
         public string Description { get; set; }
 
         protected List<ElementList> categories;

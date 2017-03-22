@@ -16,7 +16,17 @@ namespace ResumeElements
         public Index(string name, bool isDefault = false) : this(name, new ElementList<Element>("root"), isDefault)
         {}
 
+        // Add new info
+        // Remove info
 
+        //find a piece of data
+        //Find a list
+        //find an element by name/value
+        //+return list
+
+        // Contains recursive
+
+        // Child in CV ? update to mainIndex ?
 
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
