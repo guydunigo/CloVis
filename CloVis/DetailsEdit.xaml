@@ -22,7 +22,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <SymbolIcon HorizontalAlignment="Left" Symbol="Back" Grid.Column="0"/>
-                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser sur le CV</TextBlock>
+                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
                                 </Grid>
                             </Button>
                         </StackPanel>
@@ -45,7 +45,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <SymbolIcon HorizontalAlignment="Left" Symbol="Back" Grid.Column="0"/>
-                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser sur le CV</TextBlock>
+                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
                                 </Grid>
                             </Button>
                         </StackPanel>
@@ -63,7 +63,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     <SymbolIcon HorizontalAlignment="Left" Symbol="Back" Grid.Column="0"/>
-                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser sur le CV</TextBlock>
+                                    <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
                                 </Grid>
                             </Button>
                         </StackPanel>
