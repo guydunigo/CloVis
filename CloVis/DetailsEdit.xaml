@@ -71,7 +71,12 @@
                 </ListView>
             </SplitView.Pane>
             <StackPanel HorizontalAlignment="Stretch">
-                <Button Background="{ThemeResource CloVisBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" Content="Enregistrer"/>
+                <Button Background="{ThemeResource CloVisBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" BorderThickness="1" BorderBrush="White">
+                    <StackPanel Orientation="Horizontal">
+                        <SymbolIcon Foreground="White" Symbol="Save" Margin="5"/>
+                        <TextBlock Foreground="White" Margin="5">Enregistrer</TextBlock>
+                    </StackPanel>
+                </Button>
                 <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                     <ListViewHeaderItem Content="Coordonnées"/>
                     <ListViewItem Foreground="Red">
