@@ -13,32 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace CloVis
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class DetailsEdit : Page
     {
-        public MainPage()
+        public DetailsEdit()
         {
             this.InitializeComponent();
-        }
-
-        private void StartPage_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(StartPage));
-        }
-
-        private void EditMode_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(EditionMode));
-        }
-        private void DetailsEdit_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(DetailsEdit));
         }
     }
 }
