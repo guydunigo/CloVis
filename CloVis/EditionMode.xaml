@@ -7,9 +7,22 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.TopAppBar>
+        <CommandBar Foreground="White" Background="{ThemeResource CloVisLightBlue}" ClosedDisplayMode="Compact">
+            <AppBarButton Icon="Save" Label="Enregistrer" Foreground="White"/>
+            <AppBarButton Icon="Download" Label="Importer" Foreground="White"/>
+            <AppBarButton Icon="Upload"  Label="Exporter" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>
+            <AppBarButton Icon="Setting" Label="Paramètres" Foreground="White"/>
+            <AppBarButton Icon="Help" Label="Aide" Foreground="White"/>
+            <AppBarSeparator Foreground="White"/>
+            <AppBarButton Icon="Clear" Label="Retour à l'accueil" Foreground="White"/>
+        </CommandBar>
+    </Page.TopAppBar>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left">
-            <SplitView.Pane >
+        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left" VerticalAlignment="Stretch">
+            <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -91,46 +104,13 @@
                 <SplitView.Pane>
                     <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="300"/>
-                            <RowDefinition Height="1000"/>
+                            <RowDefinition MaxHeight="300"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom">
-                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Download" Grid.Column="0"/>
-                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Importer</TextBlock>
-                                </Grid>
-                            </Button>
-                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Upload" Grid.Column="0"/>
-                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Exporter</TextBlock>
-                                </Grid>
-                            </Button>
-                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Save" Grid.Column="0"/>
-                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Enregistrer</TextBlock>
-                                </Grid>
-                            </Button>
-                        </StackPanel>
-                        <GridView BorderThickness="0,1,0,1" BorderBrush="White" Margin="0,5" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <GridView BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" MaxHeight="300" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                             <GridView.Header>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Vos CV"/>
+                                    <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Vos CV"/>
                                 </Border>
                             </GridView.Header>
                             <GridViewItem Margin="5" Padding="5">
@@ -166,10 +146,10 @@
                                 </StackPanel>
                             </GridViewItem>
                         </GridView>
-                        <GridView BorderThickness="0,1,0,1" BorderBrush="White" Margin="0,5" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <GridView BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                             <GridView.Header>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="White">
-                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Modèles"/>
+                                    <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Modèles"/>
                                 </Border>
                             </GridView.Header>
                             <GridViewItem Margin="5" Padding="5">
@@ -248,19 +228,19 @@
                     </Grid>
                 </SplitView.Pane>
                 <Grid>
-                    <Button Background="{ThemeResource CloVisBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10">
+                    <Image Source="/Assets/CV_Example.png"/>
+                    <Button Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White">
                         <StackPanel Orientation="Horizontal">
-                            <SymbolIcon HorizontalAlignment="Right" Symbol="Back"/>
+                            <SymbolIcon HorizontalAlignment="Right" Symbol="ClosePane"/>
                             <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
                         </StackPanel>
                     </Button>
-                    <Button Background="{ThemeResource CloVisBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10">
+                    <Button Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
-                            <SymbolIcon Margin="5,0" HorizontalAlignment="Right" Symbol="Forward"/>
+                            <SymbolIcon Margin="5,0" HorizontalAlignment="Right" Symbol="OpenPane"/>
                         </StackPanel>
                     </Button>
-                    <Image Source="/Assets/CV_Example.png"/>
                 </Grid>
             </SplitView>
         </SplitView>
