@@ -89,8 +89,162 @@
             </SplitView.Pane>
             <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Right">
                 <SplitView.Pane>
-                    <Grid>
-                        
+                    <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="300"/>
+                            <RowDefinition Height="1000"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom">
+                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Download" Grid.Column="0"/>
+                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Importer</TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Upload" Grid.Column="0"/>
+                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Exporter</TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button BorderThickness="0,0,0,1" BorderBrush="White" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <SymbolIcon HorizontalAlignment="Right" Symbol="Save" Grid.Column="0"/>
+                                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Enregistrer</TextBlock>
+                                </Grid>
+                            </Button>
+                        </StackPanel>
+                        <GridView BorderThickness="0,1,0,1" BorderBrush="White" Margin="0,5" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <GridView.Header>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Vos CV"/>
+                                </Border>
+                            </GridView.Header>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 1" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 2" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 3" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 4" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                        </GridView>
+                        <GridView BorderThickness="0,1,0,1" BorderBrush="White" Margin="0,5" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                            <GridView.Header>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="White">
+                                    <TextBlock VerticalAlignment="Top" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Modèles"/>
+                                </Border>
+                            </GridView.Header>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 1" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 2" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 3" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 4" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 5" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 6" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 7" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 8" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                            <GridViewItem Margin="5" Padding="5">
+                                <StackPanel HorizontalAlignment="Stretch">
+                                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 9" Margin="5"/>
+                                    <Viewbox MaxWidth="100">
+                                        <Image Source="/Assets/CV_Example.png"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </GridViewItem>
+                        </GridView>
                     </Grid>
                 </SplitView.Pane>
                 <Grid>
@@ -106,6 +260,7 @@
                             <SymbolIcon Margin="5,0" HorizontalAlignment="Right" Symbol="Forward"/>
                         </StackPanel>
                     </Button>
+                    <Image Source="/Assets/CV_Example.png"/>
                 </Grid>
             </SplitView>
         </SplitView>
