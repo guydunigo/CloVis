@@ -34,6 +34,7 @@ namespace CloVis
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
             // test :
             index = new Index("index", new ElementList<Element>("root"));
 
@@ -78,6 +79,30 @@ namespace CloVis
                 // Vérifiez que la fenêtre actuelle est active
                 Window.Current.Activate();
             }
+
+            // Handle the back button use : (go back to start page)
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += (s, eargs) =>
+            {
+                Frame root = Window.Current.Content as Frame;
+                if (root == null)
+                    return;
+
+                // Navigate back if possible, and if the event has not 
+                // already been handled .
+                if (root.CanGoBack && eargs.Handled == false)
+                {
+                    eargs.Handled = true;
+                    root.GoBack();
+                }
+            };
+            // Display it if needed
+            rootFrame.Navigated += (sender, eargs) =>
+            {
+                // Each time a navigation event occurs, update the Back button's visibility
+                Windows.UI.Core.SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                ((Frame)sender).CanGoBack ? Windows.UI.Core.AppViewBackButtonVisibility.Visible :
+                Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
+            };
         }
 
         /// <summary>
