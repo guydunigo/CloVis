@@ -8,6 +8,12 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource SystemAccentColor}" IsPaneOpen="True" OpenPaneLength="500">
+            <SplitView.Pane>
+                <StackPanel>
+                    
+                </StackPanel>
+            </SplitView.Pane>
+        </SplitView>
     </Grid>
 </Page>

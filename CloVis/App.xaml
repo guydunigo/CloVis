@@ -5,4 +5,10 @@
     xmlns:local="using:CloVis"
     RequestedTheme="Light">
 
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Default">
+            <Color x:Key="SystemAccentColor">#048B9a</Color>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
 </Application>
