@@ -117,7 +117,6 @@
     <None Include="CloVis_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\CV_Example.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
@@ -153,6 +152,13 @@
     <Content Include="Assets\Wide310x150Logo.scale-125.png" />
     <Content Include="Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="CV_Examples\CV_Example.png" />
+    <Content Include="CV_Examples\CV_Example_1.png" />
+    <Content Include="CV_Examples\CV_Example_2.png" />
+    <Content Include="CV_Examples\CV_Example_3.png" />
+    <Content Include="CV_Examples\CV_Example_4.png" />
+    <Content Include="CV_Examples\CV_Example_5.png" />
+    <Content Include="CV_Examples\CV_Example_6.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -194,6 +200,7 @@
       <Name>Resume</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

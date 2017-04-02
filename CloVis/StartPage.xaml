@@ -60,7 +60,7 @@
                         <Grid>
                             <StackPanel HorizontalAlignment="Stretch">
                                 <Viewbox MaxWidth="150">
-                                    <Image Source="/Assets/CV_Example.png"/>
+                                    <Image Source="/CV_Examples/CV_Example.png"/>
                                 </Viewbox>
                                 <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 1" Margin="5"/>
                             </StackPanel>
@@ -79,7 +79,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 2" Margin="5"/>
                         </StackPanel>
@@ -87,7 +87,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_2.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 3" Margin="5"/>
                         </StackPanel>
@@ -95,7 +95,7 @@
                     <GridViewItem Margin="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_3.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 4" Margin="5"/>
                         </StackPanel>
@@ -110,7 +110,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_5.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 1" Margin="5"/>
                         </StackPanel>
@@ -118,7 +118,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_3.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 2" Margin="5"/>
                         </StackPanel>
@@ -126,7 +126,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 3" Margin="5"/>
                         </StackPanel>
@@ -134,7 +134,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 4" Margin="5"/>
                         </StackPanel>
@@ -142,7 +142,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_6.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 5" Margin="5"/>
                         </StackPanel>
@@ -150,7 +150,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_4.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 6" Margin="5"/>
                         </StackPanel>
@@ -158,7 +158,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_2.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 7" Margin="5"/>
                         </StackPanel>
@@ -166,7 +166,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 8" Margin="5"/>
                         </StackPanel>
@@ -174,7 +174,7 @@
                     <GridViewItem Margin="5" Padding="5">
                         <StackPanel HorizontalAlignment="Stretch">
                             <Viewbox MaxWidth="150">
-                                <Image Source="/Assets/CV_Example.png"/>
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 9" Margin="5"/>
                         </StackPanel>
