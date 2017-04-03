@@ -9,9 +9,9 @@ namespace ResumeElements
     /// <summary>
     /// Specifies a timespan with set starting and ending dates
     /// </summary>
-    public class DataDated: Data<string>
+    public class DataDated<T>: Data<T>
     {
-        public DataDated(string name, string value, DateTime start, DateTime end = default(DateTime), string description = "", double level = -1, bool isDefault = false) : base(name, value, description, level, isDefault)
+        public DataDated(string name, T value, DateTime start, DateTime end = default(DateTime), double level = -1, string description = "", bool isDefault = false) : base(name, value, level, description, isDefault)
         {
             StartTime = start;
             EndTime = end;

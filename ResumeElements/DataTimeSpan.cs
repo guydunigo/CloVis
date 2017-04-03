@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public class DataTimeSpan: Data<string>
+    public class DataTimeSpan<T>: Data<T>
     {
-        public DataTimeSpan(string name, string value, TimeSpan span, string description = "", double level = -1, bool isDefault = false) : base(name, value, description, level, isDefault)
+        public DataTimeSpan(string name, T value, TimeSpan span, double level = -1, string description = "", bool isDefault = false) : base(name, value, level, description, isDefault)
         {
             TimeSpan = span;
             throw new NotImplementedException("StringFormat");
