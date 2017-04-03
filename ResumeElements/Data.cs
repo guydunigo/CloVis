@@ -5,7 +5,7 @@ namespace ResumeElements
 {
     public abstract class Data: Element
     {
-        public Data(string name, string description = "", double level = -1, bool isDefault = false) : base(name, isDefault)
+		public Data(string name, string description = "", double level = -1, bool isDefault = false) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
             double Level = level;
