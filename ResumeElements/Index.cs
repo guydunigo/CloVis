@@ -11,10 +11,10 @@ namespace ResumeElements
     /// </summary>
     public class Index : ElementList<Data>
     {
-        public Index(string name, ElementList<Element> root, bool isDefault = false) : base(name, isDefault)
-        {}
-        public Index(string name, bool isDefault = false) : this(name, new ElementList<Element>("root"), isDefault)
-        {}
+        public Index(string name, bool isDefault = false) : base(name, isDefault)
+        {
+            Root = new ElementList<Element>("root");
+        }
 
         // Add new info
         // Remove info
