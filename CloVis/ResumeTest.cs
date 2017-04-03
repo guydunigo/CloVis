@@ -14,8 +14,10 @@ namespace CloVis
         {
             Resume.Resume CV;
 
-            var nom = new Data<string>("nom", "Clémence");
+            var nom = new Data<string>("nom", "Clovis");
             var tel = new Data<string>("Tel", "+33");
+			var mail = new Data<string>("mail", "gloubiboulga@enib.fr");
+
 			var competences = new ElementList("competences");
 			var info = new ElementList("info")
 					{
