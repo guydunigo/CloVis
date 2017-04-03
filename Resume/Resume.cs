@@ -28,6 +28,6 @@ namespace Resume
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
-        public Fonts Font { get; set; }
+        public Fonts Fonts { get; set; }
     }
 }

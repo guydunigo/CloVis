@@ -10,11 +10,12 @@ namespace Resume
 {
     public class FontElement
     {
-        public FontElement(string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false)
-            : this(new FontFamily(fontFamilyName), size, color, italic, bold, underlined, upperCase)
+        public FontElement(string name, string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false)
+            : this(name, new FontFamily(fontFamilyName), size, color, italic, bold, underlined, upperCase)
         { }
-        public FontElement(FontFamily font, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false)
+        public FontElement(string name, FontFamily font, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false)
         {
+            Name = name;
             Font = font;
             FontSize = size;
             Color = color;
@@ -24,6 +25,7 @@ namespace Resume
             UpperCase = upperCase;
         }
 
+        public string Name { get; }
         public FontFamily Font { get; set; }
         public double FontSize { get; set; }
         public bool Italic { get; set; }
