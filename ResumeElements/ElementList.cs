@@ -12,7 +12,7 @@ namespace ResumeElements
         public ElementList(string name, bool isDefault = false) : base(name, isDefault)
         {
         }
-        public abstract void Add(Element item);
+        public abstract void Add(object item);
         public abstract void Remove(Element item);
     }
 
@@ -61,12 +61,12 @@ namespace ResumeElements
         public int Count => throw new NotImplementedException();
 
         public bool IsReadOnly => throw new NotImplementedException();
-        
+
         /// <summary>
         /// Shouldn't be called as you can only add a T kind of value
         /// </summary>
         /// <param name="value"></param>
-        public override void Add(Element value)
+        public override void Add(object value)
         {
             throw new ArgumentException("Value must be of type T");
         }
