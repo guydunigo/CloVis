@@ -74,7 +74,7 @@ namespace ResumeElements
     /// <summary>
     /// 
     /// </summary>
-    /// <typeparam name="T">Can be a string, or an image </typeparam>
+    /// <typeparam name="T">Can be a string, or an image (ie. Data<string> or Data<int>)</typeparam>
     public class Data<T> : Data
     {
         public Data(string name, T value, string description = "", double level = -1, bool isDefault = false) : base(name, description, level, isDefault)
