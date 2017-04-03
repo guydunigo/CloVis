@@ -20,12 +20,11 @@ namespace CloVis
 
 			var competences = new ElementList("competences");
 			var info = new ElementList("info")
-					{
-
-						new Data<string>("C", "C", 2),
-						new Data<string>("C++","C++",1),
-						new Data<string>("java","java",1),
-					}
+			{
+				new Data<string>("C", "C", 2),
+				new Data<string>("C++","C++",1),
+				new Data<string>("java","java",1),
+			};
 			competences.Add(info);
 
 			var management = new Data<string>("Business Process", "Business Process", 4);
