@@ -9,7 +9,7 @@ namespace Resume
 {
     public class BoxBackground : Box
     {
-        public BoxBackground(double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0)
+        public BoxBackground(double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0) //deg? trigo ?
             : this(Colors.Transparent,Colors.Transparent , x, y, z, sizeX, sizeY, img, angle)
         {}
         public BoxBackground(Color color, Color borderColor, double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0)

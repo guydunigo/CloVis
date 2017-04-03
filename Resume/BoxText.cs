@@ -9,7 +9,7 @@ namespace Resume
 {
     public class BoxText: Box
     {
-        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0)
+        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0)//0 en the upper left corner - cm
             : base(x, y, z, sizeX, sizeY, 0)
         {}
 
