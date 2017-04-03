@@ -15,6 +15,7 @@ namespace ResumeElements
         {
             StartTime = start;
             EndTime = end;
+            throw new NotImplementedException("StringFormat");
         }
 
         public DateTime StartTime { get; set; }
