@@ -43,6 +43,14 @@ namespace CloVis
 				new DataDated<string>("bac","bac",new DateTime(1992,11,14)),
 			};
 
+			var Titre1 = new FontElement("Tahoma", 14, blue); //ARGB 0 on voit rien, 255 opaque
+			var corps = new FontElement("Calibri", 11, new Color() { R = 155, G = 120, B = 12, A = 190 });
+
+
+
+			new Font("Polices_cv");
+			Font.Add("Titre 1", Titre1); //Font.fonts.Add : classe Font(s) à modifier
+			Font.Add("corps", corps);
 
 
             return CV;
