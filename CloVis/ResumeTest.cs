@@ -61,10 +61,11 @@ namespace CloVis
 
 			new boite_de_competences = new BoxText(10.5, 15, 60, 10.5, 6); //boite de texte qui contiendra les competences
 			new fond= new BoxBackground(0,10,10,21,6); //boite de fond
-			fond.Color.set(A = 140, G = 255); //verte
+			fond.Color = new Color() { A = 140, R = 255 }; //verte un peu transparente
 
 			boite_de_competences.Element = competences;
 
+			//ajouter au layout, puis au CV + ajout liste de polices
             return CV;
         }
     }
