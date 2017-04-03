@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 using Resume;
 using ResumeElements;
 
+/*fonction d'alignement pour les boites ?
+mettre à jour la classe Fonts
+trouver si l'angle pour les boites est en rad/deg et le sens de rotation
+
+
+*/
+
 namespace CloVis
 {
     static class ResumeTest
@@ -52,6 +59,11 @@ namespace CloVis
 			Font.Add("Titre 1", Titre1); //Font.fonts.Add : classe Font(s) à modifier
 			Font.Add("corps", corps);
 
+			new boite_de_competences = new BoxText(10.5, 15, 60, 10.5, 6); //boite de texte qui contiendra les competences
+			new fond= new BoxBackground(0,10,10,21,6); //boite de fond
+			fond.Color.set(A = 140, G = 255); //verte
+
+			boite_de_competences.Element = competences;
 
             return CV;
         }
