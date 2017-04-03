@@ -227,8 +227,8 @@
                         </GridView>
                     </Grid>
                 </SplitView.Pane>
-                <Grid>
-                    <Image Source="/CV_Examples/CV_Example_4.png"/>
+                <Grid Background="WhiteSmoke">
+                    <Image Source="/CV_Examples/CV_Example_1.png"/>
                     <Button Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon HorizontalAlignment="Right" Symbol="ClosePane"/>
