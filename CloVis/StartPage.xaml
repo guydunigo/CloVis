@@ -1,0 +1,186 @@
+﻿<Page
+    x:Class="CloVis.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CloVis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SplitView  DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left" VerticalAlignment="Stretch">
+            <SplitView.Pane>
+                <Grid Padding="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
+                            <Grid>
+                                <SymbolIcon HorizontalAlignment="Left" Symbol="OpenFile"/>
+                                <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Ouvrir / Importer</TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
+                            <Grid>
+                                <SymbolIcon HorizontalAlignment="Left" Symbol="Edit"/>
+                                <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Modifier vos données</TextBlock>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White">
+                            <Grid>
+                                <SymbolIcon HorizontalAlignment="Left" Symbol="Setting"/>
+                                <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Paramètres</TextBlock>
+                            </Grid>
+                        </Button>
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White">
+                            <Grid>
+                                <SymbolIcon HorizontalAlignment="Left" Symbol="Help"/>
+                                <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Aide</TextBlock>
+                            </Grid>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </SplitView.Pane>
+            <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" MaxHeight="400"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <GridView Padding="0" Margin="0,5" Grid.Row="0" MaxHeight="300" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <GridView.Header>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CloVisBlue}">
+                            <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="{ThemeResource CloVisBlue}" FontSize="30" TextAlignment="Center" Text="Vos CV"/>
+                        </Border>
+                    </GridView.Header>
+                    <GridViewItem Margin="5" Padding="5">
+                        <Grid>
+                            <StackPanel HorizontalAlignment="Stretch">
+                                <Viewbox MaxWidth="150">
+                                    <Image Source="/CV_Examples/CV_Example.png"/>
+                                </Viewbox>
+                                <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 1" Margin="5"/>
+                            </StackPanel>
+                            <Button Background="White" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Foreground="{ThemeResource CloVisBlue}" Width="30" Padding="0">
+                                <ContentControl>
+                                    <SymbolIcon Symbol="More"/>
+                                </ContentControl>
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Exporter"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </Grid>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 2" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_2.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 3" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_3.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 4" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                </GridView>
+                <GridView Padding="0" Margin="0,5" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <GridView.Header>
+                        <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CloVisBlue}">
+                            <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="{ThemeResource CloVisBlue}" FontSize="30" TextAlignment="Center" Text="Modèles"/>
+                        </Border>
+                    </GridView.Header>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_5.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 1" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_3.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 2" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 3" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 4" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_6.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 5" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_4.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 6" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_2.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 7" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 8" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                    <GridViewItem Margin="5" Padding="5">
+                        <StackPanel HorizontalAlignment="Stretch">
+                            <Viewbox MaxWidth="150">
+                                <Image Source="/CV_Examples/CV_Example_1.png"/>
+                            </Viewbox>
+                            <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 9" Margin="5"/>
+                        </StackPanel>
+                    </GridViewItem>
+                </GridView>
+            </Grid>
+        </SplitView>
+    </Grid>
+</Page>

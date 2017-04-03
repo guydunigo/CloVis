@@ -8,5 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Margin="20" Content="Start page" Tag="StartPage" Click="StartPage_Click"/>
+            <Button Margin="20" Content="Edit mode" Tag="EditionMode" Click="EditMode_Click"/>
+            <Button Margin="20" Content="Details Edit" Tag="DetailsEdit" Click="DetailsEdit_Click"/>
+        </StackPanel>
+
     </Grid>
 </Page>

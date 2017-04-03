@@ -5,4 +5,19 @@
     xmlns:local="using:CloVis"
     RequestedTheme="Light">
 
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <Color x:Key="SystemAccentColor">#048B9a</Color>
+                    <Color x:Key="SystemAccentColorLight">#26ADBC</Color>
+                    <Color x:Key="SystemAccentColorYellow">#f89521</Color>
+                    <SolidColorBrush x:Key="CloVisBlue" Color="{ThemeResource SystemAccentColor}"/>
+                    <SolidColorBrush x:Key="CloVisLightBlue" Color="{ThemeResource SystemAccentColorLight}"/>
+                    <SolidColorBrush x:Key="CloVisYellow" Color="{ThemeResource SystemAccentColorYellow}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+
 </Application>
