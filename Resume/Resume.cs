@@ -18,7 +18,7 @@ namespace Resume
         /// Each Elements elements are the objects of a BoxText in the resume.
         /// ! Is it relevant as the textboxes already list these ?
         /// </summary>
-        protected List<Element> elmts;
+        public Index Index { get; set; }
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes
@@ -28,6 +28,6 @@ namespace Resume
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
-        public Font Font { get; set; }
+        public Fonts Font { get; set; }
     }
 }

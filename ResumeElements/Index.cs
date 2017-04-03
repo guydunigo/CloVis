@@ -14,6 +14,7 @@ namespace ResumeElements
         public Index(string name, bool isDefault = false) : base(name, isDefault)
         {
             Root = new ElementList<Element>("root");
+            throw new NotImplementedException("Base ElementsLists");
         }
 
         // Add new info

@@ -8,16 +8,19 @@ namespace Resume
 {
     public enum FontElementCategory { Title1, Title2, Title3, Body, Reference };
 
-    public class Font
+    public class Fonts
     {
-        public Font(string name)
+        public Fonts(string name)
         {
             Name = name;
-            Fonts = new Dictionary<FontElementCategory, FontElement>();
+            Dict = new Dictionary<FontElementCategory, FontElement>();
             // Default ?
+
         }
 
         public string Name { get; set; }
-        public Dictionary<FontElementCategory,FontElement> Fonts { get; set; }
+        public Dictionary<FontElementCategory,FontElement> Dict { get; set; }
+
+
     }
 }

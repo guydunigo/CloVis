@@ -19,6 +19,7 @@ namespace Resume
             Color = color;
             BorderColor = borderColor;
             Image = img;
+            throw new NotImplementedException("BorderRadius");
         }
 
         /// <summary>

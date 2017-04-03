@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    class DataTimeSpan: Data<string>
+    public class DataTimeSpan: Data<string>
     {
         public DataTimeSpan(string name, string value, TimeSpan span, string description = "", double level = -1, bool isDefault = false) : base(name, value, description, level, isDefault)
         {

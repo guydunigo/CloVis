@@ -34,10 +34,6 @@ namespace CloVis
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
-            // test :
-            index = new Index("index", new ElementList<Element>("root"));
-
         }
 
         /// <summary>
