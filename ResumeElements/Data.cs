@@ -10,6 +10,7 @@ namespace ResumeElements
             Description = description;
             double Level = level;
             categories = new List<ElementList>();
+	    Index.AddData(this);
         }
 
         public string Description { get; set; }
