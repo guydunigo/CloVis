@@ -39,8 +39,10 @@ namespace ResumeElements
         public ICollection Keys => elements.Keys;
 
         public ICollection Values => elements.Values;
-
-        T IDictionary<string, T>.this[string key] { get => elements[key];
+        
+        public T this[string key]
+        {
+            get => elements[key];
             set
             {
                 // If the given value's name matches the key
@@ -50,8 +52,12 @@ namespace ResumeElements
                     AddToElements(value);
                     elements[key] = value;
                 }
-                else throw new ArgumentException("The new value hasn't a name corresponding to the key");
+                else throw new ArgumentException("The new value hasn't a name corresponding to the key"); // Or rename it ?
             }
+        }
+
+        T IDictionary<string, T>.this[string key] { get => this[key];
+            set => this[key] = value;
         }
 
         ICollection<string> IDictionary<string, T>.Keys => elements.Keys;

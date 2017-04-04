@@ -13,12 +13,7 @@ namespace Resume
         {
             // default ? Fonts, ...
         }
-
-        /// <summary>
-        /// Each Elements elements are the objects of a BoxText in the resume.
-        /// ! Is it relevant as the textboxes already list these ?
-        /// </summary>
-        public Index Index { get; set; }
+        
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes

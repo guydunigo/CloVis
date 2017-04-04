@@ -18,7 +18,8 @@ namespace ResumeElements
             Name = name;
             IsDefault = isDefault;
         }
-
+        
+        // throw new NotImplementedException("locked ?")
         public bool IsDefault { get; set; }
         public string Name { get; }
     }

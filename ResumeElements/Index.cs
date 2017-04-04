@@ -9,27 +9,63 @@ namespace ResumeElements
     /// <summary>
     /// The index lists all piece of Data that can be put in a resume and it contains the root of the whole hierarchy of those/this data
     /// </summary>
-    public class Index : ElementList<Data>
+    public static class Index
     {
-        public Index(string name, bool isDefault = true) : base(name, isDefault)
+        public static ElementList<Data> DataIndex { get; } = new ElementList<Data>("Index");
+        
+        public static void AddData(Data d)
         {
-            Root = new ElementList<Element>("root");
-            throw new NotImplementedException("Base ElementsLists");
+            DataIndex.Add(d);
+        }
+        public static void RemoveData(Data d)
+        {
+            if (DataIndex.Contains(d))
+            {
+                DataIndex.Remove(d);
+                d.ClearCategories();
+            }
+        }
+        public static void RemoveData(string name)
+        {
+            Data t = DataIndex.Find(name);
+            if (t != null)
+            {
+                RemoveData(t);
+            }
         }
 
-        // Add new info
-        // Remove info
-        
-        //find an element by name/value
-        //+return list
+        /// <summary>
+        /// Return a list of all pieces of Data unlisted in any categories other than the index
+        /// </summary>
+        /// <returns></returns>
+        public static ElementList<Data> GetMiscellaneaous()
+        {
+            var misc = new ElementList<Data>("Divers");
+            foreach(Data d in DataIndex)
+            {
+                if (d.Categories.Count == 1 && d.Categories[0] == DataIndex)
+                {
+                    misc.Add(d);
+                }
+            }
+            return misc;
+        }
 
-        // Contains recursive
-
-        // Child in CV ? update to mainIndex ?
+        // Child : update to mainIndex ?
 
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
         /// </summary>
-        public ElementList<Element> Root { get; set; }
+        public static ElementList<ElementList> Root { get; set; } = new ElementList<ElementList>("root")
+        {
+            new ElementList<Element>("Coordonnées")
+            {
+                new Data<string>("Nom",""),
+                //...
+            },
+            new ElementList<Element>("Compétences"),
+            new ElementList<Element>("Divers") // In Data class too
+            // Remplir
+        };
     }
 }
