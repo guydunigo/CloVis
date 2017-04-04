@@ -17,7 +17,7 @@ namespace Resume
             Dict = new Dictionary<string, FontElement>();
         }
 
-        public FontElement this[string key] { get => Dict[key]; set => Dict[key] = value; }
+        public FontElement this[string key] { get => Dict[key]; set => Dict[key] = value; } // => signifie fonction rapide qui retourne ce qui suit
 
         public string Name { get; set; }
         public Dictionary<string,FontElement> Dict { get; set; }
