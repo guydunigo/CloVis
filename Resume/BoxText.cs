@@ -20,5 +20,7 @@ namespace Resume
         public override double Z { get => z; set => z = value < 51 ? 51 : value; }
 
         public ResumeElements.Element Element { get; set; }
+        
+        public string DefaultElement { get; set; }
     }
 }
