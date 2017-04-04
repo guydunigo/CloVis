@@ -5,7 +5,7 @@ namespace ResumeElements
 {
     public abstract class Data: Element
     {
-		public Data(string name, double level = -1, string description = "", bool isDefault = false) : base(name, isDefault)//appel au constructeur de la classe mere (element)
+		public Data(string name, double level = -1, string description = "", bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
             double Level = level;
@@ -77,7 +77,7 @@ namespace ResumeElements
     /// <typeparam name="T">Can be a string, or an image (ie. Data<string> or Data<int>)</typeparam>
     public class Data<T> : Data
     {
-        public Data(string name, T value, double level = -1, string description = "", bool isDefault = false) : base(name, level, description, isDefault)
+        public Data(string name, T value, double level = -1, string description = "", bool isDefault = true) : base(name, level, description, isDefault)
         {
             Value = value;
         }

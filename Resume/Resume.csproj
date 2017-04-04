@@ -113,6 +113,7 @@
     <Compile Include="BoxText.cs" />
     <Compile Include="Fonts.cs" />
     <Compile Include="FontElement.cs" />
+    <Compile Include="Layout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resume.cs" />
     <Compile Include="Template.cs" />

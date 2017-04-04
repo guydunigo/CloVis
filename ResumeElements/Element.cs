@@ -13,7 +13,7 @@ namespace ResumeElements
         /// </summary>
         /// <param name="name">Elements name, there can't be two elements with the same name</param>
         /// <param name="isDefault">Defines wehter the element is to be shown on a resume by default (may not be used)</param>
-        public Element(string name, bool isDefault = false)
+        public Element(string name, bool isDefault = true)
         {
             Name = name;
             IsDefault = isDefault;

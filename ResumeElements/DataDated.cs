@@ -11,7 +11,7 @@ namespace ResumeElements
     /// </summary>
     public class DataDated<T>: Data<T>
     {
-        public DataDated(string name, T value, DateTime start, DateTime end = default(DateTime), double level = -1, string description = "", bool isDefault = false) : base(name, value, level, description, isDefault)
+        public DataDated(string name, T value, DateTime start, DateTime end = default(DateTime), double level = -1, string description = "", bool isDefault = true) : base(name, value, level, description, isDefault)
         {
             StartTime = start;
             EndTime = end;

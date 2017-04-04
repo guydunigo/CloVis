@@ -9,7 +9,7 @@ namespace ResumeElements
 {
     public abstract class ElementList : Element
     {
-        public ElementList(string name, bool isDefault = false) : base(name, isDefault)
+        public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
         }
         public abstract void Add(object item);
@@ -20,7 +20,7 @@ namespace ResumeElements
     {
         protected Dictionary<string,T> elements;
 
-        public ElementList(string name, bool isDefault = false) : base(name, isDefault)
+        public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
             elements = new Dictionary<string, T>();
         }

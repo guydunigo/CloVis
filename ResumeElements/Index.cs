@@ -11,7 +11,7 @@ namespace ResumeElements
     /// </summary>
     public class Index : ElementList<Data>
     {
-        public Index(string name, bool isDefault = false) : base(name, isDefault)
+        public Index(string name, bool isDefault = true) : base(name, isDefault)
         {
             Root = new ElementList<Element>("root");
             throw new NotImplementedException("Base ElementsLists");
@@ -19,9 +19,7 @@ namespace ResumeElements
 
         // Add new info
         // Remove info
-
-        //find a piece of data
-        //Find a list
+        
         //find an element by name/value
         //+return list
 
