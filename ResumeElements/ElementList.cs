@@ -78,13 +78,21 @@ namespace ResumeElements
         }
         public void Add(T value)
         {
-            if (!elements.ContainsKey(value.Name))
+            // Preventing self-containing lists
+            if (value.Find(Name) != null)
             {
-                AddToElements(value);
-                elements.Add(value.Name, value);
+                throw ArgumentException("A list can't contain itself or another list containing it.")
             }
             else
-                throw new ArgumentException("An element with the same name already exists in the dictionary");
+            {
+                if (!elements.ContainsKey(value.Name))
+                {
+                    AddToElements(value);
+                    elements.Add(value.Name, value);
+                }
+                else
+                    throw new ArgumentException("An element with the same name already exists in the dictionary");
+            }
         }
         public void Add(string key, T value)
         {

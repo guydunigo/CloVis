@@ -33,6 +33,11 @@ namespace ResumeElements
             }
         }
 
+        public static Element Find(string name)
+        {
+            return Root.Find(name);
+        }
+
         /// <summary>
         /// Return a list of all pieces of Data unlisted in any categories other than the index
         /// </summary>
