@@ -42,5 +42,14 @@ namespace ResumeElements
                 }
             }
         }
+
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            return new DataDated<T>(Name, Value, StartTime, EndTime, Level, Description, true);
+        }
     }
 }

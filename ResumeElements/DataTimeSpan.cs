@@ -15,5 +15,14 @@ namespace ResumeElements
         }
 
         public TimeSpan TimeSpan { get; set; }
+
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            return new DataTimeSpan<T>(Name, Value, TimeSpan, Level, Description, true);
+        }
     }
 }
