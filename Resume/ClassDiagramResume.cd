@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Resume.Resume">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Resume.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.Template">
+    <Position X="5.5" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Template.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.Layout">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Layout.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.Box">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEECAARBAYAE=</HashCode>
+      <FileName>Box.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.BoxBackground">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAABAAAAAAgAAAAAE=</HashCode>
+      <FileName>BoxBackground.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.BoxText">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>BoxText.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resume.Fonts" BaseTypeListCollapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAIAAAAAAAAEABAQCAAABAQAAAAAAAAEAAAgAABQIgE=</HashCode>
+      <FileName>Fonts.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Resume.FontElement">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAASAAAAAAAgQAAAAAAAAAAAAAgAACAAE=</HashCode>
+      <FileName>FontElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
