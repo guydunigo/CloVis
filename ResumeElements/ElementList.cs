@@ -215,5 +215,27 @@ namespace ResumeElements
         {
             return elements.GetEnumerator();
         }
+
+        /// <summary>
+        /// Returns an Element matching the given name if it exists or null if it doesn't.
+        /// As every Element should have a different name, there shouldn't be any problems
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The first Element matching the given name or null if not found.</returns>
+        public override Element Find(string name)
+        {
+            Element res = null;
+            if (elements.Keys.Contains(name))
+            {
+                return this[name];
+            }
+            else
+                foreach(Element e in elements.Values)
+                {
+                    res = e.Find("value");
+                    if (res != null) return res;
+                }
+            return null;
+        }
     }
 }

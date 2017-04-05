@@ -27,8 +27,7 @@ namespace ResumeElements
         }
         public static void RemoveData(string name)
         {
-            Data t = DataIndex.Find(name);
-            if (t != null)
+            if (DataIndex.Find(name) is Data t)
             {
                 RemoveData(t);
             }

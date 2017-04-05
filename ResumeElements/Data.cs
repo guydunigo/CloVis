@@ -15,6 +15,12 @@ namespace ResumeElements
 
         public string Description { get; set; }
 
+        public override Element Find(string name)
+        {
+            if (Name == name) return this;
+            else return null;
+        }
+
         protected List<ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
