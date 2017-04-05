@@ -245,5 +245,20 @@ namespace ResumeElements
                 }
             return null;
         }
+
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            var temp = new ElementList<T>(Name, true);
+            foreach(T e in elements.Values)
+            {
+                temp.Add(e.Copy());
+            }
+
+            return temp;
+        }
     }
 }

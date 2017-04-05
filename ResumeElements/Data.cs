@@ -102,5 +102,13 @@ namespace ResumeElements
         /// </summary>
         public T Value { get; set; }
 
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            return new Data<T>(Name, Value, Level, Description, true, true);
+        }
     }
 }

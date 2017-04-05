@@ -22,6 +22,12 @@ namespace ResumeElements
 
         public abstract Element Find(string name);
 
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public abstract Element Copy();
+
         // throw new NotImplementedException("locked ?")
         public bool IsDefault { get; set; }
         public string Name { get; }
