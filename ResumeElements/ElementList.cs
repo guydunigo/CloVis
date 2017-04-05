@@ -81,7 +81,7 @@ namespace ResumeElements
             // Preventing self-containing lists
             if (value.Find(Name) != null)
             {
-                throw ArgumentException("A list can't contain itself or another list containing it.")
+                throw new ArgumentException("A list can't contain itself or another list containing it.");
             }
             else
             {
