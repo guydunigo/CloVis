@@ -19,7 +19,8 @@ namespace Resume
         /// It is maybe advisable to separate those two kinds of boxes
         /// ! If you add an TextBox, you have to register its element to le elmts list.
         /// </summary>
-        public List<Box> Boxes { get; set; }
+        public Layout Layout { get; set; }
+
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>

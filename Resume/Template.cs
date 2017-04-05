@@ -8,8 +8,8 @@ namespace Resume
 {
     class Template: Resume
     {
-        // Forward the elements to the user data or adding it to the template object ?
-        // Provide an already filled template to be sure that it will render correctly when the user browses it ?
-        // ...
+        // Useful ?
+
+        //  Method : create Resume from Data ?
     }
 }

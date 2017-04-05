@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Resume
 {
-    class Layout
+    public class Layout
     {
-        private List<BoxBackground> BackBoxes;
-        private List<BoxText> TextBoxes;
+        public List<BoxBackground> BackBoxes;
+        public List<BoxText> TextBoxes;
         // Element List + Index
     }
 }
