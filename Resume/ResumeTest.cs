@@ -3,23 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Resume;
 using ResumeElements;
 using Windows.UI;
 
-/*
- * fonction d'alignement pour les boites ?
- * layout class
- * trouver si l'angle pour les boites est en rad/deg et le sens de rotation
- */
-
-namespace CloVis
+namespace Resume
 {
-    static class ResumeTest
+    public static class ResumeTest
     {
-        static Resume.Resume GetResumeTest()
+        static Resume GetResumeTest()
         {
-            Resume.Resume CV;
+            Resume CV;
 
             var coordonnees = new ElementList<Element>("coordonnees")
             {
@@ -51,7 +44,7 @@ namespace CloVis
                 new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24)),
                 new DataDated<string>("bac","bac",new DateTime(1992,11,14)),
             };
-            
+
             var fonts = new Fonts("Polices_cv")
             {
                 new FontElement("Titre 1", "Tahoma", 14, new Color() { R = 0, G = 0, B = 255, A = 255 }), //ARGB 0 on voit rien, 255 opaque
@@ -69,7 +62,7 @@ namespace CloVis
 
             throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
 
-            CV = new Resume.Resume()
+            CV = new Resume()
             {
                 Fonts = fonts
             };

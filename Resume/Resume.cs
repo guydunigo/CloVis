@@ -25,5 +25,10 @@ namespace Resume
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
         public Fonts Fonts { get; set; }
+
+        public void UpdateFromIndex()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

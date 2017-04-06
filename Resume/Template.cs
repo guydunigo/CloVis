@@ -11,5 +11,14 @@ namespace Resume
         // Useful ?
 
         //  Method : create Resume from Data ?
+
+        /// <summary>
+        /// Fill the blanks automatically using index and boxes default values
+        /// </summary>
+        /// <returns></returns>
+        public Resume CreateResume()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

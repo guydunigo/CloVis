@@ -9,17 +9,20 @@
 
     <Page.Resources>
         <DataTemplate x:Key="NavLinkItemTemplate" x:DataType="local:NavLink">
-            <ListViewItem Tag="{Binding Tag}" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
-                <Grid>
-                    <SymbolIcon HorizontalAlignment="Left" Symbol="{Binding Symbol}"/>
-                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Text="{Binding Label}"/>
-                </Grid>
-            </ListViewItem>
+            <StackPanel Orientation="Horizontal" Tag="{Binding Tag}" Margin="2,0,0,0">
+                <SymbolIcon Foreground="White" HorizontalAlignment="Left" Symbol="{Binding Symbol}"/>
+                <TextBlock Foreground="White" Margin="24,0,0,0" VerticalAlignment="Center" Text="{Binding Label}"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate>
+            <Grid>
+                
+            </Grid>
         </DataTemplate>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <SplitView  DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left" VerticalAlignment="Stretch">
+        <SplitView  DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" PanePlacement="Left" VerticalAlignment="Stretch">
             <SplitView.Pane>
                 <Grid Padding="5">
                     <Grid.RowDefinitions>
@@ -29,7 +32,7 @@
                     </Grid.RowDefinitions>
                     <ListView x:Name="TopNavLinkList" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch"
                               ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"
-                              ItemsSource="{Binding TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/>
+                              ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/>
                     <!--<StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
                             <Grid>

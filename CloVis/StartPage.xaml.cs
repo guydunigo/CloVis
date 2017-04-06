@@ -28,14 +28,14 @@ namespace CloVis
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.OpenFile , Label="Ouvrir / Importer", Tag="OpenFile" },
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Edit , Label="Modifiez vos données", Tag="DetailsEdit" },
         };
-        public ObservableCollection<NavLink> TopNavLinks { get; }
+        public ObservableCollection<NavLink> TopNavLinks { get => topNavLinks; }
 
         private ObservableCollection<NavLink> bottomNavLinks = new ObservableCollection<NavLink>()
         {
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Setting , Label="Paramètres", Tag="Settings" },
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Help , Label="Aide", Tag="Help" },
         };
-        public ObservableCollection<NavLink> BottomNavLinks { get; }
+        public ObservableCollection<NavLink> BottomNavLinks { get => bottomNavLinks; }
 
         public StartPage()
         {
