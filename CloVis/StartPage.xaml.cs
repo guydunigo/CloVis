@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +23,35 @@ namespace CloVis
     /// </summary>
     public sealed partial class StartPage : Page
     {
+        private ObservableCollection<NavLink> topNavLinks = new ObservableCollection<NavLink>()
+        {
+            new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.OpenFile , Label="Ouvrir / Importer", Tag="OpenFile" },
+            new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Edit , Label="Modifiez vos données", Tag="DetailsEdit" },
+        };
+        public ObservableCollection<NavLink> TopNavLinks { get; }
+
+        private ObservableCollection<NavLink> bottomNavLinks = new ObservableCollection<NavLink>()
+        {
+            new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Setting , Label="Paramètres", Tag="Settings" },
+            new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Help , Label="Aide", Tag="Help" },
+        };
+        public ObservableCollection<NavLink> BottomNavLinks { get; }
+
         public StartPage()
         {
             this.InitializeComponent();
         }
+
+        private void NavLinkList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class NavLink
+    {
+        public string Label { get; set; }
+        public Symbol Symbol { get; set; }
+        public string Tag { get; set; }
     }
 }

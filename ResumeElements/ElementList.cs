@@ -28,12 +28,14 @@ namespace ResumeElements
         protected void RemoveFromElements(Element e)
         {
             if (e is Data temp)
-                temp.Categories.Remove(this);
+                temp.RemoveFromCategory(this);
         }
         protected void AddToElements(Element e)
         {
-            if (e is Data temp && !temp.Categories.Contains(this))
-                temp.Categories.Add(this);
+            if (e is Data temp && !(temp.Categories.Contains(this)))
+            {
+                temp.AddToCategory(this);
+            }
         }
 
         public ICollection Keys => elements.Keys;
@@ -74,7 +76,10 @@ namespace ResumeElements
         /// <param name="value"></param>
         public override void Add(object value)
         {
-            throw new ArgumentException("Value must be of type T");
+            if (value is T temp)
+                Add(temp);
+            else
+                throw new ArgumentException("Value must be of type T");
         }
         public void Add(T value)
         {
@@ -85,13 +90,13 @@ namespace ResumeElements
             }
             else
             {
-                if (!elements.ContainsKey(value.Name))
+                if (Find(value.Name) == null)
                 {
                     AddToElements(value);
                     elements.Add(value.Name, value);
                 }
                 else
-                    throw new ArgumentException("An element with the same name already exists in the dictionary");
+                    throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
             }
         }
         public void Add(string key, T value)

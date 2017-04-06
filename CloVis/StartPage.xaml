@@ -7,15 +7,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="NavLinkItemTemplate" x:DataType="local:NavLink">
+            <ListViewItem Tag="{Binding Tag}" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
+                <Grid>
+                    <SymbolIcon HorizontalAlignment="Left" Symbol="{Binding Symbol}"/>
+                    <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Text="{Binding Label}"/>
+                </Grid>
+            </ListViewItem>
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView  DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left" VerticalAlignment="Stretch">
             <SplitView.Pane>
                 <Grid Padding="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListView x:Name="TopNavLinkList" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch"
+                              ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"
+                              ItemsSource="{Binding TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/>
+                    <!--<StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="OpenFile"/>
@@ -28,8 +43,8 @@
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Modifier vos données</TextBlock>
                             </Grid>
                         </Button>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
+                    </StackPanel>-->
+                    <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="Setting"/>

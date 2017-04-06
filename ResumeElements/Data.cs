@@ -44,6 +44,7 @@ namespace ResumeElements
                 categories.Add(cat);
             }
         }
+
         /// <summary>
         /// 
         /// </summary>
@@ -55,6 +56,25 @@ namespace ResumeElements
                 cat.Remove(this);
                 categories.Remove(cat);
             }
+        }
+        
+        /// <summary>
+        /// Method used by ElementList.AddToElement() (Not a big fan :/ )
+        /// </summary>
+        /// <param name="cat"></param>
+        internal void AddToCategory(ElementList cat)
+        {
+            if (!categories.Contains(cat))
+                categories.Add(cat);
+        }
+        /// <summary>
+        /// Method used by ElementList.RemoveFromElement() (Not a big fan :/ )
+        /// </summary>
+        /// <param name="cat"></param>
+        internal void RemoveFromCategory(ElementList cat)
+        {
+            if (categories.Contains(cat))
+                categories.Remove(cat);
         }
 
         public void ClearCategories()
