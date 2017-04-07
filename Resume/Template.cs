@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Resume
 {
-    class Template: Resume
+    public class Template: Resume
     {
         // Useful ?
 

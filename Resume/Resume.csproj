@@ -118,6 +118,7 @@
     <Compile Include="Resume.cs" />
     <Compile Include="ResumeTest.cs" />
     <Compile Include="Template.cs" />
+    <Compile Include="TemplateTest.cs" />
     <EmbeddedResource Include="Properties\Resume.rd.xml" />
   </ItemGroup>
   <ItemGroup>

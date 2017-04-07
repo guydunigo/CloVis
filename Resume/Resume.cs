@@ -26,6 +26,8 @@ namespace Resume
         /// </summary>
         public Fonts Fonts { get; set; }
 
+        public string Name { get; set; }
+
         public void UpdateFromIndex()
         {
             throw new NotImplementedException();

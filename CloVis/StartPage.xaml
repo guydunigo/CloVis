@@ -14,9 +14,14 @@
                 <TextBlock Foreground="White" Margin="24,0,0,0" VerticalAlignment="Center" Text="{Binding Label}"/>
             </StackPanel>
         </DataTemplate>
-        <DataTemplate>
-            <Grid>
-                
+        <DataTemplate x:Key="BottomNavLinkItemTemplate" x:DataType="local:NavLink">
+            <Grid Padding="5" Tag="{Binding Tag}" BorderThickness="0,1,0,0" BorderBrush="White" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <SymbolIcon Foreground="White" Grid.Column="0" HorizontalAlignment="Left" Symbol="{Binding Symbol}"/>
+                <TextBlock Foreground="White" Grid.Column="1" Margin="5,0" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding Label}"/>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -61,6 +66,9 @@
                             </Grid>
                         </Button>
                     </StackPanel>
+                    <ListView x:Name="BottomNavLinkList" SelectionMode="None" Grid.Row="1" VerticalAlignment="Stretch"
+                              ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"
+                              ItemsSource="{x:Bind BottomNavLinks}" ItemTemplate="{StaticResource BottomNavLinkItemTemplate}"/>
                 </Grid>
             </SplitView.Pane>
             <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">

@@ -10,7 +10,7 @@ namespace Resume
 {
     public static class ResumeTest
     {
-        static Resume GetResumeTest()
+        public static Resume GetResumeTest()
         {
             Resume CV;
 
