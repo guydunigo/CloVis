@@ -141,6 +141,12 @@ namespace CloVis
 
             //Templates.Add(TemplateTest.GetTemplate_1());
             //Templates.Add(TemplateTest.GetTemplate_2());
+
+            // Fill templates with defaults informations
+            foreach(Template e in Templates)
+            {
+                e.UpdateFromIndex();
+            }
         }
 
         public void LoadContent()
@@ -149,5 +155,9 @@ namespace CloVis
             LoadTemplates();
         }
 
+        public void SaveResumes()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
