@@ -36,5 +36,14 @@ namespace Resume
         /// Defines wether the text shown with this PoliceElement will be in upper case no matter how the user entered it or not
         /// </summary>
         public bool UpperCase { get; set; }
+        
+        /// <summary>
+        /// Deep copy
+        /// </summary>
+        /// <returns></returns>
+        public FontElement Copy()
+        {
+            return new FontElement(Name, Font, FontSize, Color, Italic, Bold, Underlined, UpperCase);
+        }
     }
 }

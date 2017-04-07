@@ -30,7 +30,23 @@ namespace Resume
 
         public void UpdateFromIndex()
         {
-            throw new NotImplementedException();
+            foreach(BoxText b in Layout.TextBoxes)
+            {
+                b.UpdateFromIndex();
+            }
+        }
+
+        /// <summary>
+        /// Deep copy of the resume
+        /// </summary>
+        public Resume Copy()
+        {
+            return new Resume()
+            {
+                Layout = Layout.Copy(),
+                Fonts = Fonts.Copy(),
+                Name = Name
+            };
         }
     }
 }

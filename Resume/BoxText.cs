@@ -21,8 +21,24 @@ namespace Resume
         /// </summary>
         public override double Z { get => z; set => z = value < 51 ? 51 : value; }
 
-        public ResumeElements.Element Element { get; set; }
+        protected ResumeElements.Element element;
+        public ResumeElements.Element Element { get => element; set => value.Copy(); }
         
         public string DefaultElement { get; set; }
+
+        /// <summary>
+        /// Performs a deep copy of the box
+        /// </summary>
+        /// <returns></returns>
+        public BoxText Copy()
+        {
+            return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement);
+        }
+
+        public void UpdateFromIndex()
+        {
+            throw new NotImplementedException();
+            Element.UpdateFromIndex();
+        }
     }
 }

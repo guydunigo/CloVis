@@ -47,5 +47,14 @@ namespace Resume
         /// Defines the background image of the box
         /// </summary>
         public Windows.UI.Xaml.Controls.Image Image { get; set; }
+
+        /// <summary>
+        /// Performs a deep copy of the box
+        /// </summary>
+        /// <returns></returns>
+        public BoxBackground Copy()
+        {
+            return new BoxBackground(X, Y, Z, SizeX, SizeY, Image, Angle);
+        }
     }
 }

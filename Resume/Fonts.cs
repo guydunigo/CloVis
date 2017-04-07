@@ -114,5 +114,19 @@ namespace Resume
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Deep copy
+        /// </summary>
+        /// <returns></returns>
+        public Fonts Copy()
+        {
+            var temp = new Fonts(Name);
+            foreach(string f in Dict.Keys)
+            {
+                temp.Dict.Add(f,Dict[f].Copy());
+            }
+            return temp;
+        }
     }
 }

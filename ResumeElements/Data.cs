@@ -130,5 +130,10 @@ namespace ResumeElements
         {
             return new Data<T>(Name, Value, Level, Description, true, true);
         }
+
+        public override void UpdateFromIndex()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -8,15 +8,7 @@ namespace Resume
 {
     public class Template: Resume
     {
-        // Useful ?
-
-        //  Method : create Resume from Data ?
-
-        /// <summary>
-        /// Fill the blanks automatically using index and boxes default values
-        /// </summary>
-        /// <returns></returns>
-        public Resume CreateResume()
+        public Template() // Useless ?
         {
             throw new NotImplementedException();
         }

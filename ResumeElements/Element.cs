@@ -31,5 +31,7 @@ namespace ResumeElements
         // throw new NotImplementedException("locked ?")
         public bool IsDefault { get; set; }
         public string Name { get; }
+
+        public abstract void UpdateFromIndex();
     }
 }

@@ -265,5 +265,10 @@ namespace ResumeElements
 
             return temp;
         }
+
+        public override void UpdateFromIndex()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
