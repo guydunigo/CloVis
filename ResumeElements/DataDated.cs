@@ -51,5 +51,17 @@ namespace ResumeElements
         {
             return new DataDated<T>(Name, Value, StartTime, EndTime, Level, Description, true);
         }
+
+        public override void UpdateFromIndex()
+        {
+            base.UpdateFromIndex();
+            if (Index.Find(Name) is DataDated<T> d)
+            {
+                StartTime = d.StartTime;
+                EndTime = d.EndTime;
+            }
+            else
+                throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+        }
     }
 }

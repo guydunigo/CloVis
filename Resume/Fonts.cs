@@ -57,12 +57,12 @@ namespace Resume
 
         public bool Contains(KeyValuePair<string, FontElement> item)
         {
-            throw new NotImplementedException();
+            return Dict.Contains(item);
         }
 
         public bool ContainsKey(string key)
         {
-            throw new NotImplementedException();
+            return Dict.ContainsKey(key);
         }
 
         public void CopyTo(FontElement[] array, int arrayIndex)
@@ -72,7 +72,11 @@ namespace Resume
 
         public void CopyTo(KeyValuePair<string, FontElement>[] array, int arrayIndex)
         {
-            throw new NotImplementedException();
+            foreach(KeyValuePair<string, FontElement> p in Dict)
+            {
+                array[arrayIndex] = p;
+                arrayIndex++;
+            }
         }
 
         public IEnumerator<FontElement> GetEnumerator()
@@ -92,17 +96,17 @@ namespace Resume
 
         public bool Remove(string key)
         {
-            throw new NotImplementedException();
+            return Dict.Remove(key);
         }
 
         public bool Remove(KeyValuePair<string, FontElement> item)
         {
-            throw new NotImplementedException();
+            return Dict.Remove(item.Key);
         }
 
         public bool TryGetValue(string key, out FontElement value)
         {
-            throw new NotImplementedException();
+            return Dict.TryGetValue(key, out value);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -112,7 +116,7 @@ namespace Resume
 
         IEnumerator<KeyValuePair<string, FontElement>> IEnumerable<KeyValuePair<string, FontElement>>.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return Dict.GetEnumerator();
         }
 
         /// <summary>

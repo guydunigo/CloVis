@@ -24,5 +24,16 @@ namespace ResumeElements
         {
             return new DataTimeSpan<T>(Name, Value, TimeSpan, Level, Description, true);
         }
+
+        public override void UpdateFromIndex()
+        {
+            base.UpdateFromIndex();
+            if (Index.Find(Name) is DataTimeSpan<T> d)
+            {
+                TimeSpan = d.TimeSpan;
+            }
+            else
+                throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+        }
     }
 }

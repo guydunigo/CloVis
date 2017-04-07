@@ -66,9 +66,9 @@ namespace ResumeElements
 
         ICollection<T> IDictionary<string, T>.Values => elements.Values;
 
-        public int Count => throw new NotImplementedException();
+        public int Count => elements.Count;
 
-        public bool IsReadOnly => throw new NotImplementedException();
+        public bool IsReadOnly => false;
 
         /// <summary>
         /// Shouldn't be called as you can only add a T kind of value
@@ -268,7 +268,17 @@ namespace ResumeElements
 
         public override void UpdateFromIndex()
         {
-            throw new NotImplementedException();
+            if (Index.Find(Name) is ElementList<T> l)
+            {
+                foreach(T t in elements.Values)
+                {
+                    t.UpdateFromIndex();
+                }
+            }
+            else if (Index.Find(Name) == null)
+                throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+            else
+                throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
         }
     }
 }

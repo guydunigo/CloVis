@@ -37,7 +37,6 @@ namespace Resume
 
         public void UpdateFromIndex()
         {
-            throw new NotImplementedException();
             Element.UpdateFromIndex();
         }
     }
