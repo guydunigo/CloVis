@@ -60,12 +60,17 @@ namespace Resume
 
             boite_de_competences.Element = competences;
 
-            throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
+            //throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
 
             CV = new Resume()
             {
                 Fonts = fonts
+             
             };
+
+            CV.Layout = new Layout();
+            CV.Layout.AddBackBox(fond);
+            CV.Layout.AddTextBox(boite_de_competences);
 
             return CV;
         }
