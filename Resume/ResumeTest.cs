@@ -16,33 +16,33 @@ namespace Resume
 
             var coordonnees = new ElementList<Element>("coordonnees")
             {
-                new Data<string>("nom", "Clovis"),
-                new Data<string>("téléphone", "+33660606060"),
-                new Data<string>("mél", "gloubiboulga@enib.fr")
+                new Data<string>("nom", "Clovis", -1, "",true),
+                new Data<string>("téléphone", "+33660606060", -1, "", true),
+                new Data<string>("mél", "gloubiboulga@enib.fr", -1, "", true)
             };
 
             var competences = new ElementList<Element>("compétences")
             {
                 new ElementList<Data>("informatique")
                 {
-                    new Data<string>("c", "C", 2),
-                    new Data<string>("c++","C++",1),
-                    new Data<string>("java","java",1)
+                    new Data<string>("c", "C", 2, "",true),
+                    new Data<string>("c++","C++",1, "",true),
+                    new Data<string>("java","java",1, "",true)
                 },
-                new Data<string>("business process", "Business Process", 4)
+                new Data<string>("business process", "Business Process", 4, "",true)
             };
 
             var langues = new ElementList<Element>("langues")
             {
-                new Data<string>("anglais", "anglais", 5),
-                new Data<string>("allemand","allemand",2),
-                new Data<string>("chinois","chinois",1.5),
+                new Data<string>("anglais", "anglais", 5, "",true),
+                new Data<string>("allemand","allemand",2, "",true),
+                new Data<string>("chinois","chinois",1.5, "",true),
             };
 
             var diplomes = new ElementList<Element>("diplômes")
             {
-                new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "D"),
-                new DataDated<string>("bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "D")
+                new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "D",-1, "",true),
+                new DataDated<string>("bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "D",-1, "",true)
             };
 
             var fonts = new Fonts("Polices_cv")

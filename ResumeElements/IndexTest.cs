@@ -10,7 +10,7 @@ namespace ResumeElements
     {
         public static void FillIndex()
         {
-            (Index.DataIndex["name"] as Data<string>).Value = "Clovis";
+            (Index.DataIndex["nom"] as Data<string>).Value = "Clovis";
             (Index.DataIndex["téléphone"] as Data<string>).Value = "+33660606060";
             (Index.DataIndex["mél"] as Data<string>).Value = "gloubiboulga@enib.fr";
 

@@ -22,16 +22,17 @@ namespace Resume
         public BoxBackground(double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0) //deg? trigo ?
             : this(Colors.Transparent,Colors.Transparent , x, y, z, sizeX, sizeY, img, angle)
         {}
-        public BoxBackground(Color color, Color borderColor, double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0)
+        public BoxBackground(Color color, Color borderColor, double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0, double borderRadius = 0)
             : base(x, y, z, sizeX, sizeY, 0)
         {
             // Default ?
             Color = color;
             BorderColor = borderColor;
             Image = img;
-            throw new NotImplementedException("BorderRadius");
+            BorderRadius = borderRadius;
         }
-
+        
+        public double BorderRadius;
 
         /// <summary>
         /// Box depth position, determines whether an element is above another one or below.
