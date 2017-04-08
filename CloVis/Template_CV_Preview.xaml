@@ -9,8 +9,10 @@
 
     <!--="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
     <Grid Background="WhiteSmoke">
-        <Grid Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Height="297" Width="210">
-            
-        </Grid>
+        <Viewbox>
+            <Grid Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Width="210" Height="297">
+
+            </Grid>
+        </Viewbox>
     </Grid>
 </Page>

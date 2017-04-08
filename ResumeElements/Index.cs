@@ -62,13 +62,16 @@ namespace ResumeElements
         /// </summary>
         public static ElementList<ElementList> Root { get; set; } = new ElementList<ElementList>("root")
         {
-            new ElementList<Element>("Coordonnées")
+            new ElementList<Element>("coordonnées")
             {
-                new Data<string>("Nom",""),
+                new Data<string>("nom",""),
+                new Data<string>("téléphone",""),
+                new Data<string>("mél",""),
                 //...
             },
-            new ElementList<Element>("Compétences"),
-            new ElementList<Element>("Divers") // In Data class too
+            new ElementList<Element>("compétences"),
+            new ElementList<Element>("langues"),
+            new ElementList<Element>("diplômes"),
             // Remplir
         };
     }

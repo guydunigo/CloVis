@@ -17,19 +17,19 @@ namespace Resume
             var coordonnees = new ElementList<Element>("coordonnees")
             {
                 new Data<string>("nom", "Clovis"),
-                new Data<string>("Tel", "+33660606060"),
-                new Data<string>("mail", "gloubiboulga@enib.fr")
+                new Data<string>("téléphone", "+33660606060"),
+                new Data<string>("mél", "gloubiboulga@enib.fr")
             };
 
-            var competences = new ElementList<Element>("competences")
+            var competences = new ElementList<Element>("compétences")
             {
-                new ElementList<Data>("info")
+                new ElementList<Data>("informatique")
                 {
-                    new Data<string>("C", "C", 2),
-                    new Data<string>("C++","C++",1),
+                    new Data<string>("c", "C", 2),
+                    new Data<string>("c++","C++",1),
                     new Data<string>("java","java",1)
                 },
-                new Data<string>("Business Process", "Business Process", 4)
+                new Data<string>("business process", "Business Process", 4)
             };
 
             var langues = new ElementList<Element>("langues")
@@ -39,10 +39,10 @@ namespace Resume
                 new Data<string>("chinois","chinois",1.5),
             };
 
-            var diplomes = new ElementList<Element>("diplomes")
+            var diplomes = new ElementList<Element>("diplômes")
             {
-                new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24)),
-                new DataDated<string>("bac","bac",new DateTime(1992,11,14)),
+                new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "D"),
+                new DataDated<string>("bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "D")
             };
 
             var fonts = new Fonts("Polices_cv")
@@ -51,7 +51,7 @@ namespace Resume
                 new FontElement("Corps", "Calibri", 11, new Color() { R = 155, G = 120, B = 12, A = 190 })
             };
 
-            var boite_de_competences = new BoxText(10.5, 15, 60, 10.5, 6); //boite de texte qui contiendra les competences
+            var boite_de_competences = new BoxText(10.5, 15, 60, 10.5, 6, 0, "Compétences"); //boite de texte qui contiendra les competences
 
             var fond = new BoxBackground(0, 10, 10, 21, 6)
             {
@@ -64,8 +64,8 @@ namespace Resume
 
             CV = new Resume()
             {
-                Fonts = fonts
-             
+                Fonts = fonts,
+                Name = "CV 1"
             };
 
             CV.Layout = new Layout();

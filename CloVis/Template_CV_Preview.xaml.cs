@@ -24,7 +24,7 @@ namespace CloVis
     /// </summary>
     public sealed partial class Template_CV_Preview : Page
     {
-        public Template_CV_Preview(Resume.Resume resume)
+        public Template_CV_Preview(/*Resume.Resume resume*/)
         {
             this.InitializeComponent();
         }

@@ -30,7 +30,9 @@ namespace CloVis
         /// </summary>
         public App()
         {
+            LoadIndex();
             LoadContent();
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -131,12 +133,15 @@ namespace CloVis
         public void LoadResumes()
         {
             // async ?
-
-            //Resumes.Add(ResumeTest.GetResumeTest());
+            Resumes = new List<Resume.Resume>
+            {
+                ResumeTest.GetResumeTest()
+            };
         }
 
         public void LoadTemplates()
         {
+            Templates = new List<Template>();
             // async ?
 
             //Templates.Add(TemplateTest.GetTemplate_1());
@@ -153,6 +158,11 @@ namespace CloVis
         {
             LoadResumes();
             LoadTemplates();
+        }
+
+        public void LoadIndex()
+        {
+            IndexTest.FillIndex();
         }
 
         public void SaveResumes()
