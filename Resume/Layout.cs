@@ -35,5 +35,41 @@ namespace Resume
                 TextBoxes = tempTB
             };
         }
+
+        /// <summary>
+        /// Create a new BackBox and add it to Layout
+        /// </summary>
+        public void AddBackBox(double x, double y, double z, double SizeX, double SizeY,Windows.UI.Xaml.Controls.Image img)
+        {
+            var box = new BoxBackground(x, y, z, SizeX, SizeY, img);
+            BackBoxes.Add(box);
+        }
+
+        /// <summary>
+        /// Add a previously created BackBox to Layout
+        /// </summary>
+        public void AddBackBox(BoxBackground box)
+        {
+            BackBoxes.Add(box);
+        }
+
+
+        /// <summary>
+        /// Create a new TextBox and add it to Layout
+        /// </summary>
+        public void AddTextBox(double x, double y, double z, double SizeX, double SizeY, double o, string defaultElmt)
+        {
+            var box = new BoxText(x,y,z,SizeX,SizeY,o,defaultElmt);
+            TextBoxes.Add(box);
+        }
+
+        /// <summary>
+        /// Add a previously created TextBox to Layout
+        /// </summary>
+        public void AddTextBox(BoxText box)
+        {
+            TextBoxes.Add(box);
+        }
+
     }
 }
