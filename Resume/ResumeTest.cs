@@ -68,10 +68,11 @@ namespace Resume
                 Name = "CV 1"
             };
 
+            /*
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddTextBox(boite_de_competences);
-
+            */
             return CV;
         }
     }
