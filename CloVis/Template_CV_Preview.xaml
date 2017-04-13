@@ -11,8 +11,9 @@
     <Grid Background="WhiteSmoke">
         <Viewbox>
             <Grid x:Name="Resume" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Width="210" Height="297">
-                <Image Height="100" Width="100" Stretch="Fill" Source="/CV_Examples/CV_Example.png" />
-                <Border Height="100" Width="100" CornerRadius="10" BorderThickness="2" BorderBrush="ForestGreen"/>
+                <!--<Image Height="100" Width="100" Stretch="Fill" Source="/CV_Examples/CV_Example.png" />
+                <Border Height="100" Width="100" CornerRadius="10" BorderThickness="2" BorderBrush="ForestGreen"/>-->
+                
             </Grid>
         </Viewbox>
     </Grid>

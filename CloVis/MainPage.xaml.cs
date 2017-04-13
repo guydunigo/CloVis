@@ -42,7 +42,7 @@ namespace CloVis
         }
         private void Template_CV_Preview_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(Template_CV_Preview));
+            this.Frame.Navigate(typeof(Template_CV_Preview), ((App)(Application.Current)).Resumes[0]);
         }
     }
 }

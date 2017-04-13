@@ -8,6 +8,12 @@ namespace Resume
 {
     public class Layout
     {
+        public Layout()
+        {
+            BackBoxes = new List<BoxBackground>();
+            TextBoxes = new List<BoxText>();
+        }
+
         public List<BoxBackground> BackBoxes { get; set; }
         public List<BoxText> TextBoxes { get; set; }
         // Element List + Index

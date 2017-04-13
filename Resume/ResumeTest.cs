@@ -51,9 +51,9 @@ namespace Resume
                 new FontElement("Corps", "Calibri", 11, new Color() { R = 155, G = 120, B = 12, A = 190 })
             };
 
-            var boite_de_competences = new BoxText(10.5, 15, 60, 10.5, 6, 0, "Compétences"); //boite de texte qui contiendra les competences
+            var boite_de_competences = new BoxText(105, 150, 60, 105, 60, 0, "Compétences"); //boite de texte qui contiendra les competences
 
-            var fond = new BoxBackground(0, 10, 10, 21, 6)
+            var fond = new BoxBackground(0, 100, 100, 210, 60)
             {
                 Color = new Color() { A = 140, R = 255 } //verte un peu transparente
             }; //boite de fond
@@ -67,12 +67,11 @@ namespace Resume
                 Fonts = fonts,
                 Name = "CV 1"
             };
-
-            /*
+            
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddTextBox(boite_de_competences);
-            */
+            
             return CV;
         }
     }
