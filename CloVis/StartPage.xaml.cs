@@ -37,14 +37,32 @@ namespace CloVis
         };
         public ObservableCollection<NavLink> BottomNavLinks { get => bottomNavLinks; }
 
+        public List<Resume.Resume> Resumes { get; set; }
+
         public StartPage()
         {
+            Resumes = ((App)(Application.Current)).Resumes;
             this.InitializeComponent();
         }
 
         private void NavLinkList_ItemClick(object sender, ItemClickEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void StackPanel_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            ((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Visible;
+        }
+        
+        private void StackPanel_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            ((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Collapsed;
         }
     }
 

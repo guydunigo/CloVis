@@ -32,8 +32,9 @@ namespace CloVis
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var resume = (e.Parameter as Resume.Resume);
-            DisplayBackgroundBoxes(resume);
-            DisplayTextBoxes(resume);
+            vbox.Child = new Resume_Preview() { Resume = resume };
+            //DisplayBackgroundBoxes(resume);
+            //DisplayTextBoxes(resume);
         }
         /*
         public Template_CV_Preview(Resume.Resume resume)
@@ -42,7 +43,7 @@ namespace CloVis
 
             this.InitializeComponent();
         }*/
-
+        /*
         public void DisplayBackgroundBoxes(Resume.Resume resume)
         {
             foreach (BoxBackground b in resume.Layout.BackBoxes)
@@ -95,5 +96,6 @@ namespace CloVis
             //throw new NotImplementedException("Generate rich text");
             return temp;
         }
+        */
     }
 }

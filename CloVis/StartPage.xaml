@@ -24,6 +24,28 @@
                 <TextBlock Foreground="White" Grid.Column="1" Margin="5,0" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Right" Text="{Binding Label}"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ResumePreviewTemplate">
+            <Grid Margin="5" Padding="1" MaxWidth="150" PointerEntered="StackPanel_PointerEntered" PointerExited="StackPanel_PointerExited">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <local:Resume_Preview Resume="{Binding}" BorderThickness="1" BorderBrush="{StaticResource CloVisBlue}"/>
+                </Viewbox>
+                <TextBlock Grid.Row="1" Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="5"/>
+                <Button x:Name="Btn" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Foreground="{ThemeResource CloVisBlue}" Width="30" Padding="0" Visibility="Collapsed">
+                    <ContentControl>
+                        <SymbolIcon Symbol="More"/>
+                    </ContentControl>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Exporter"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -71,18 +93,20 @@
                               ItemsSource="{x:Bind BottomNavLinks}" ItemTemplate="{StaticResource BottomNavLinkItemTemplate}"/>
                 </Grid>
             </SplitView.Pane>
-            <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" MaxHeight="400"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <GridView Padding="0" Margin="0,5" Grid.Row="0" MaxHeight="300" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <GridView Padding="5" Margin="0,5" Grid.Row="0" MaxHeight="300" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Single"
+                              ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
+                              ItemsSource="{x:Bind Resumes}" ItemTemplate="{StaticResource ResumePreviewTemplate}">
                     <GridView.Header>
-                        <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CloVisBlue}">
+                        <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" BorderBrush="{ThemeResource CloVisBlue}">
                             <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="{ThemeResource CloVisBlue}" FontSize="30" TextAlignment="Center" Text="Vos CV"/>
                         </Border>
                     </GridView.Header>
-                    <GridViewItem Margin="5" Padding="5">
+                    <!--<GridViewItem Margin="5" Padding="5">
                         <Grid>
                             <StackPanel HorizontalAlignment="Stretch">
                                 <Viewbox MaxWidth="150">
@@ -125,7 +149,7 @@
                             </Viewbox>
                             <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="CV 4" Margin="5"/>
                         </StackPanel>
-                    </GridViewItem>
+                    </GridViewItem>-->
                 </GridView>
                 <GridView Padding="0" Margin="0,5" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
                     <GridView.Header>
