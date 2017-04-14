@@ -57,12 +57,14 @@ namespace CloVis
 
         private void StackPanel_PointerEntered(object sender, PointerRoutedEventArgs e)
         {
-            ((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Visible;
+            //((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Visible;
+            //throw new NotImplementedException();
         }
-        
+
         private void StackPanel_PointerExited(object sender, PointerRoutedEventArgs e)
         {
-            ((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Collapsed;
+            //((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Collapsed;
+            //throw new NotImplementedException();
         }
     }
 
