@@ -99,12 +99,8 @@
             </SplitView.Pane>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
 
-                <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <GridView x:Name="YourCV" Padding="5" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Single"
+                <StackPanel Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="WhiteSmoke">
+                    <GridView Padding="5" Margin="0,5" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
                               ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
                               ItemsSource="{x:Bind Resumes}" ItemTemplate="{StaticResource ResumePreviewTemplate}">
                         <GridView.Header>
@@ -157,12 +153,15 @@
                         </StackPanel>
                     </GridViewItem>-->
                     </GridView>
-                    <GridView Padding="0" Margin="0,5" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                    <GridView Padding="5" Margin="0,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
+                              ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
+                              ItemsSource="{x:Bind Templates}" ItemTemplate="{StaticResource ResumePreviewTemplate}">
                         <GridView.Header>
-                            <Border BorderThickness="0,0,0,1" BorderBrush="{ThemeResource CloVisBlue}">
+                            <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" BorderBrush="{ThemeResource CloVisBlue}">
                                 <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="{ThemeResource CloVisBlue}" FontSize="30" TextAlignment="Center" Text="Modèles"/>
                             </Border>
                         </GridView.Header>
+                        <!--
                         <GridViewItem Margin="5" Padding="5">
                             <StackPanel HorizontalAlignment="Stretch">
                                 <Viewbox MaxWidth="150">
@@ -234,9 +233,9 @@
                                 </Viewbox>
                                 <TextBlock Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="Modèle 9" Margin="5"/>
                             </StackPanel>
-                        </GridViewItem>
+                        </GridViewItem>-->
                     </GridView>
-                </Grid>
+                </StackPanel>
             </ScrollViewer>
         </SplitView>
     </Grid>

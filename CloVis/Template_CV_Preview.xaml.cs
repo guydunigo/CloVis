@@ -33,69 +33,6 @@ namespace CloVis
         {
             var resume = (e.Parameter as Resume.Resume);
             vbox.Child = new Resume_Preview() { Resume = resume };
-            //DisplayBackgroundBoxes(resume);
-            //DisplayTextBoxes(resume);
         }
-        /*
-        public Template_CV_Preview(Resume.Resume resume)
-        {
-            DisplayBackgroundBoxes(resume);
-
-            this.InitializeComponent();
-        }*/
-        /*
-        public void DisplayBackgroundBoxes(Resume.Resume resume)
-        {
-            foreach (BoxBackground b in resume.Layout.BackBoxes)
-            {
-                Resume.Children.Add(new Windows.UI.Xaml.Shapes.Rectangle()
-                {
-                    Width = b.SizeX,
-                    Height = b.SizeY,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness() { Left = b.X, Top = b.Y },
-                    Fill = new SolidColorBrush(b.Color),
-                    RadiusX = b.BorderRadius,
-                    RadiusY = b.BorderRadius,
-                    StrokeThickness = 2,
-                    Stroke = new SolidColorBrush(b.BorderColor),
-                    RenderTransform = new RotateTransform()
-                    {
-                        Angle = b.Angle
-                    },
-                });
-            }
-        }
-
-        public void DisplayTextBoxes(Resume.Resume resume)
-        {
-            string tempText = RenderText(resume.Fonts);
-
-            foreach (BoxText b in resume.Layout.TextBoxes)
-            {
-                Resume.Children.Add(new Windows.UI.Xaml.Controls.TextBlock()
-                {
-                    Width = b.SizeX,
-                    Height = b.SizeY,
-                    HorizontalAlignment = HorizontalAlignment.Left,
-                    VerticalAlignment = VerticalAlignment.Top,
-                    Margin = new Thickness() { Left = b.X, Top = b.Y },
-                    RenderTransform = new RotateTransform()
-                    {
-                        Angle = b.Angle
-                    },
-                    Text = tempText,
-                });
-            }
-        }
-
-        public string RenderText(Resume.Fonts fonts)
-        {
-            string temp = "Test";
-            //throw new NotImplementedException("Generate rich text");
-            return temp;
-        }
-        */
     }
 }

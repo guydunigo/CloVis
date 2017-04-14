@@ -9,10 +9,7 @@
 
     <!--="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
     <Grid Background="WhiteSmoke">
-        <Viewbox x:Name="vbox" MaxHeight="297" MaxWidth="210">
-            <!--
-            <Grid x:Name="Resume" Background="White" VerticalAlignment="Center" HorizontalAlignment="Center" Width="210" Height="297">
-            </Grid>-->
+        <Viewbox x:Name="vbox">
         </Viewbox>
     </Grid>
 </Page>

@@ -38,10 +38,12 @@ namespace CloVis
         public ObservableCollection<NavLink> BottomNavLinks { get => bottomNavLinks; }
 
         public List<Resume.Resume> Resumes { get; set; }
+        public List<Resume.Template> Templates { get; set; }
 
         public StartPage()
         {
             Resumes = ((App)(Application.Current)).Resumes;
+            Templates = ((App)(Application.Current)).Templates;
             this.InitializeComponent();
         }
 
