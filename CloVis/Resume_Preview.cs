@@ -51,7 +51,6 @@ namespace CloVis
             }
         }
 
-
         public void OnLoaded(object sender, RoutedEventArgs e)
         {
             (GetTemplateChild("Resume") as Grid).Children.Clear();
@@ -93,37 +92,92 @@ namespace CloVis
         {
             if (Resume != null)
             {
-                string tempText = RenderText(Resume.Fonts);
+                RichTextBlock tempText = null;
 
                 foreach (BoxText b in Resume.Layout.TextBoxes)
                 {
-                    elementsToAdd.Add(new Windows.UI.Xaml.Controls.TextBlock()
+                    tempText = RenderTextBox(b.Element, Resume.Fonts);
+                    tempText.Width = b.SizeX;
+                    tempText.Height = b.SizeY;
+                    tempText.HorizontalAlignment = HorizontalAlignment.Left;
+                    tempText.VerticalAlignment = VerticalAlignment.Top;
+                    tempText.Margin = new Thickness() { Left = b.X, Top = b.Y };
+                    tempText.RenderTransform = new RotateTransform()
                     {
-                        Width = b.SizeX,
-                        Height = b.SizeY,
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        VerticalAlignment = VerticalAlignment.Top,
-                        Margin = new Thickness() { Left = b.X, Top = b.Y },
-                        RenderTransform = new RotateTransform()
-                        {
-                            Angle = b.Angle
-                        },
-                        Text = tempText,
-                    });
+                        Angle = b.Angle
+                    };
+                    // throw new NotImplementedException("Z index");
+                    elementsToAdd.Add(tempText);
                 }
             }
         }
 
-        public string RenderText(Resume.Fonts fonts)
+        public Inline RenderText(string text, FontElement font = null)
         {
-            if (Resume != null)
+            //throw new NotImplementedException();
+
+            var tempText = new Run() { Text = text };
+            Inline res = tempText;
+            if (font != null)
             {
-                string temp = "Test";
-                //throw new NotImplementedException("Generate rich text");
-                return temp;
+                tempText.Foreground = new SolidColorBrush(font.Color);
+                tempText.FontFamily = font.Font;
+                tempText.FontSize = font.FontSize;
+                if (font.UpperCase) tempText.Text = tempText.Text.ToUpper();
+                if (font.Underlined)
+                {
+                    var temp = new Underline();
+                    temp.Inlines.Add(res);
+                    res = temp;
+                }
+                if (font.Bold)
+                {
+                    var temp = new Bold();
+                    temp.Inlines.Add(res);
+                    res = temp;
+                }
+                if (font.Italic)
+                {
+                    var temp = new Italic();
+                    temp.Inlines.Add(res);
+                    res = temp;
+                }
             }
             else
-                return "Error rendering text !";
+            {
+                //throw new NotImplementedException("default ?");
+            }
+
+            return res;
+        }
+
+        public RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
+        {
+            RichTextBlock box = new RichTextBlock();
+            Paragraph para = null;
+            if (Resume != null && element != null && fonts != null)
+            {
+                //throw new NotImplementedException("Generate rich text");
+                FontElement fe = null;
+
+
+                para = new Paragraph();
+                fonts.TryGetValue("Titre 1", out fe);
+
+                para.Inlines.Add(RenderText(element.Name,fe));
+                box.Blocks.Add(para);
+            }
+            else
+            {
+                para = new Paragraph();
+                para.Inlines.Add(new Run()
+                {
+                    Text = "Error rendering text !"
+                });
+                box.Blocks.Add(para);
+            }
+
+            return box;
         }
     }
 }

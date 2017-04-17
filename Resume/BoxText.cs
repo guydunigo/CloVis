@@ -22,7 +22,7 @@ namespace Resume
         public override double Z { get => z; set => z = value < 51 ? 51 : value; }
 
         protected ResumeElements.Element element;
-        public ResumeElements.Element Element { get => element; set => value.Copy(); }
+        public ResumeElements.Element Element { get => element; set => element = value.Copy(); }
         
         public string DefaultElement { get; set; }
 
@@ -32,7 +32,7 @@ namespace Resume
         /// <returns></returns>
         public BoxText Copy()
         {
-            return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement);
+            return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement) { Element = Element.Copy() };
         }
 
         public void UpdateFromIndex()
