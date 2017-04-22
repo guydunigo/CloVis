@@ -15,6 +15,7 @@ namespace Resume
         {
             Name = name;
             Dict = new Dictionary<string, FontElement>();
+            // throw new NotImplementedException("Integer/Enum/string?");
         }
 
         public FontElement this[string key] { get => Dict[key]; set => Dict[key] = value; } // => signifie fonction rapide qui retourne ce qui suit

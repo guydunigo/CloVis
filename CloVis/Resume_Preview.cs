@@ -26,7 +26,7 @@ namespace CloVis
         }
 
         private List<UIElement> elementsToAdd;
-        
+
         public Resume.Resume Resume
         {
             get => (Resume.Resume)(GetValue(ResumeProperty));
@@ -157,15 +157,125 @@ namespace CloVis
             Paragraph para = null;
             if (Resume != null && element != null && fonts != null)
             {
-                //throw new NotImplementedException("Generate rich text");
+                //throw new NotImplementedException("Generate rich text up to how many layers ? and shift ? (tab)");
                 FontElement fe = null;
-
-
+                
                 para = new Paragraph();
                 fonts.TryGetValue("Titre 1", out fe);
 
-                para.Inlines.Add(RenderText(element.Name,fe));
+                para.Inlines.Add(RenderText(element.Name, fe));
                 box.Blocks.Add(para);
+
+                if (element is ElementList list)
+                {
+                    //throw new NotImplementedException("Factoriser, c'est sale");
+                    foreach (Element e in list.Values)
+                    {
+                        if (e is ElementList l2)
+                        {
+                            para = new Paragraph();
+                            fonts.TryGetValue("Titre 2", out fe);
+
+                            para.Inlines.Add(RenderText(e.Name, fe));
+                            box.Blocks.Add(para);
+
+                            foreach (Element e1 in l2.Values)
+                            {
+                                if (e1 is ElementList<Element> l3)
+                                {
+                                    para = new Paragraph();
+                                    para.TextIndent = 10;
+                                    fonts.TryGetValue("Corps", out fe);
+
+                                    para.Inlines.Add(RenderText(e1.Name, fe));
+                                    box.Blocks.Add(para);
+                                }
+                                else if (e1 is Data d)
+                                {
+                                    para = new Paragraph();
+                                    para.TextIndent = 10;
+                                    string text = "";
+
+                                    // Adds date if DataDated or DataTimeSpan then display the value
+                                    if (d is DataDated<object> dd)
+                                    {
+                                        text = dd.StartTime.ToString(dd.DisplayFormat);
+
+                                        // If it hasn't finished
+                                        if (dd.EndTime == default(DateTime))
+                                        {
+                                            text = "Depuis " + text;
+                                        }
+                                        // If there's an end date
+                                        else if (dd.EndTime != dd.StartTime)
+                                        {
+                                            text += " - " + dd.EndTime.ToString(dd.DisplayFormat);
+                                        }
+
+                                    }
+                                    else if (d is DataTimeSpan<object> dts)
+                                    {
+                                        text = dts.TimeSpan.ToString(dts.DisplayFormat);
+                                    }
+
+                                    if (text != "")
+                                    {
+                                        fonts.TryGetValue("Titre 4", out fe);
+                                        para.Inlines.Add(RenderText(text + " ", fe));
+                                    }
+
+                                    //throw new NotImplementedException("Level ? Dots for enum ?);
+
+                                    fonts.TryGetValue("Corps", out fe);
+                                    para.Inlines.Add(RenderText(d.Val.ToString(), fe));
+                                    box.Blocks.Add(para);
+                                }
+                            }
+                        }
+                        else if (e is Data d)
+                        {
+                            para = new Paragraph();
+                            string text = "";
+
+                            // Adds date if DataDated or DataTimeSpan then display the value
+                            // throw new NotImplementedException("Generic bug (gen necessary ?)");
+                            if (d is DataDated<object> dd)
+                            {
+                                text = dd.StartTime.ToString(dd.DisplayFormat);
+
+                                // If it hasn't finished
+                                if (dd.EndTime == default(DateTime))
+                                {
+                                    text = "Depuis " + text;
+                                }
+                                // If there's an end date
+                                else if (dd.EndTime != dd.StartTime)
+                                {
+                                    text += " - " + dd.EndTime.ToString(dd.DisplayFormat);
+                                }
+
+                            }
+                            else if (d is DataTimeSpan<object> dts)
+                            {
+                                text = dts.TimeSpan.ToString(dts.DisplayFormat);
+                            }
+
+                            if (text != "")
+                            {
+                                fonts.TryGetValue("Titre 2", out fe);
+                                para.Inlines.Add(RenderText(text + " ", fe));
+                            }
+
+                            //throw new NotImplementedException("Level ? Dots for enum ?);
+
+                            fonts.TryGetValue("Titre 2", out fe);
+                            para.Inlines.Add(RenderText(d.Val.ToString(), fe));
+                            box.Blocks.Add(para);
+                        }
+                    }
+                }
+
+
             }
             else
             {

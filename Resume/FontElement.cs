@@ -17,6 +17,7 @@ namespace Resume
         {
             Name = name;
             Font = font;
+            //throw new NotImplementedException("Check ratio with actual size in the view");
             FontSize = size;
             Color = color;
             Italic = italic;

@@ -14,6 +14,8 @@ namespace ResumeElements
         }
         public abstract void Add(object item);
         public abstract void Remove(Element item);
+        public abstract ICollection Values { get; }
+        public abstract ICollection Keys { get; }
     }
 
     public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string,T> where T : Element
@@ -38,9 +40,9 @@ namespace ResumeElements
             }
         }
 
-        public ICollection Keys => elements.Keys;
+        public override ICollection Keys => elements.Keys;
 
-        public ICollection Values => elements.Values;
+        public override ICollection Values => elements.Values;
         
         public T this[string key]
         {
