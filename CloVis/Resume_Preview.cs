@@ -112,10 +112,8 @@ namespace CloVis
             }
         }
 
-        public Inline RenderText(string text, FontElement font = null)
+        public Inline RenderText(string text, FontElement font)
         {
-            //throw new NotImplementedException();
-
             var tempText = new Run() { Text = text };
             Inline res = tempText;
             if (font != null)
@@ -145,7 +143,7 @@ namespace CloVis
             }
             else
             {
-                //throw new NotImplementedException("default ?");
+                throw new NullReferenceException("No FontElement given !");
             }
 
             return res;
@@ -156,7 +154,7 @@ namespace CloVis
             RichTextBlock box = new RichTextBlock();
             if (Resume != null && element != null && fonts != null)
             {
-                //throw new NotImplementedException("Generate rich text up to how many layers ? and shift ? (tab)");
+                //throw new NotImplementedException("Generate rich text up to how many layers ? and shift (tab) ? Carriage return ? Dots for enum ?");
                 var LayersNumber = 3;
 
                 RenderElement(box, fonts, element, LayersNumber);
@@ -205,7 +203,6 @@ namespace CloVis
                 string text = "";
 
                 // Adds date if DataDated or DataTimeSpan then display the value
-                // throw new NotImplementedException("Generic bug (gen necessary ?)");
                 if (d is DataDated<string> dd)
                 {
                     text = dd.StartTime.ToString(dd.DisplayFormat);
@@ -232,9 +229,7 @@ namespace CloVis
                     fonts.TryGetValue(layer++, out fe);
                     para.Inlines.Add(RenderText(text + " : ", fe));
                 }
-
-                //throw new NotImplementedException("Carriage return ? Dots for enum ?);
-
+                
                 fonts.TryGetValue(layer, out fe);
                 para.Inlines.Add(RenderText(d.Value, fe));
                 box.Blocks.Add(para);

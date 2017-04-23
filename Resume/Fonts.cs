@@ -13,7 +13,6 @@ namespace Resume
         {
             Name = name;
             List = new List<FontElement>();
-            // throw new NotImplementedException("Integer/Enum/string?");
         }
 
         public FontElement this[int index] { get => List[index]; set => List[index] = value; }

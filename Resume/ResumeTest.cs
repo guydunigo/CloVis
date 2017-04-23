@@ -61,9 +61,7 @@ namespace Resume
             }; //boite de fond
 
             boite_de_competences.Element = competences;
-
-            //throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
-
+            
             CV = new Resume()
             {
                 Fonts = fonts,

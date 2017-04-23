@@ -114,7 +114,6 @@ namespace ResumeElements
     {
         public Data(string name, T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, level, description, isIndependant, isDefault)
         {
-            // throw new NotImplementedException("Is Generic useful ?");
             Value = value;
         }
 
