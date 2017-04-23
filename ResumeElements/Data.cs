@@ -13,8 +13,6 @@ namespace ResumeElements
 	        if (!isIndependant) Index.AddData(this);
         }
 
-        public abstract object Val { get; set; }
-
         public string Description { get; set; }
 
         public override Element Find(string name)
@@ -120,11 +118,10 @@ namespace ResumeElements
             Value = value;
         }
 
-        public override object Val { get => Value; set => Value = (T)value; } // throw Ugly
         /// <summary>
         /// Actual information (Text, image,time,number)
         /// </summary>
-        public new T Value { get; set; }
+        public T Value { get; set; }
 
         /// <summary>
         /// Provides a deep copy of every Elements and sub-Elements.
