@@ -9,7 +9,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="CV_Template_Preview">
-            <Grid Margin="5" Padding="1" MaxWidth="75">
+            <Grid Margin="5" Padding="1" MaxWidth="150">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -119,16 +119,16 @@
             </SplitView.Pane>
             <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Right">
                 <SplitView.Pane>
-                    <Grid Padding="5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <GridView ScrollViewer.VerticalScrollMode="Auto" MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
+                        <GridView MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
                                   ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind Resumes}" ItemTemplate="{StaticResource CV_Template_Preview }">
                             <GridView.Header>
-                                <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="2">
+                                <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="0,2">
                                     <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Vos CV"/>
                                 </Border>
                             </GridView.Header>
@@ -166,11 +166,11 @@
                                 </StackPanel>
                             </GridViewItem>-->
                         </GridView>
-                        <GridView ScrollViewer.VerticalScrollMode="Auto" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
+                        <GridView BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
                                   ItemClick="Templates_ItemClick" IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind Templates}" ItemTemplate="{StaticResource CV_Template_Preview}">
                             <GridView.Header>
-                                <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="2">
+                                <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="0,2">
                                     <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="Modèles"/>
                                 </Border>
                             </GridView.Header>
