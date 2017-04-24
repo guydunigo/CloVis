@@ -22,9 +22,24 @@ namespace CloVis
     /// </summary>
     public sealed partial class EditionMode : Page
     {
+        public List<Resume.Resume> Resumes { get; set; }
+        public List<Resume.Template> Templates { get; set; }
+
         public EditionMode()
         {
+            Resumes = ((App)(Application.Current)).Resumes;
+            Templates = ((App)(Application.Current)).Templates;
             this.InitializeComponent();
+        }
+
+        private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Templates_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }
