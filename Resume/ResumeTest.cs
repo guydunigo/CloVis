@@ -54,14 +54,28 @@ namespace Resume
             };
 
             var boite_de_competences = new BoxText(105, 150, 60, 105, 60, 0, "Compétences"); //boite de texte qui contiendra les competences
+            var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
+            var boite_de_langues = new BoxText(0, 150, 60, 105, 60, 0, "Langues");
+            var boite_de_diplomes = new BoxText(105, 150, 60, 105, 60, 0, "Diplômes");
+
+
 
             var fond = new BoxBackground(0, 100, 100, 210, 60)
             {
-                Color = new Color() { A = 140, R = 255 } //verte un peu transparente
+                Color = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
             boite_de_competences.Element = competences;
+<<<<<<< HEAD
+            boite_de_coordonnees.Element = coordonnees;
+            boite_de_langues.Element = langues;
+            boite_de_diplomes.Element = diplomes;
+
+            //throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
+
+=======
             
+>>>>>>> af3ceefc3a97dd691519b187f510b8adfa88fbee
             CV = new Resume()
             {
                 Fonts = fonts,
@@ -71,7 +85,10 @@ namespace Resume
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddTextBox(boite_de_competences);
-            
+            CV.Layout.AddTextBox(boite_de_coordonnees);
+            CV.Layout.AddTextBox(boite_de_langues);
+            CV.Layout.AddTextBox(boite_de_diplomes);
+
             return CV;
         }
     }
