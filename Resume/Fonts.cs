@@ -7,117 +7,87 @@ using System.Threading.Tasks;
 
 namespace Resume
 {
-    //public enum FontElementCategory { Title1, Title2, Title3, Body, Reference };
-
-    public class Fonts: ICollection<FontElement>, IDictionary<string, FontElement>, IEnumerable<FontElement>
+    public class Fonts: ICollection<FontElement>, IList<FontElement>, IEnumerable<FontElement>
     {
         public Fonts(string name)
         {
             Name = name;
-            Dict = new Dictionary<string, FontElement>();
-            // throw new NotImplementedException("Integer/Enum/string?");
+            List = new List<FontElement>();
         }
 
-        public FontElement this[string key] { get => Dict[key]; set => Dict[key] = value; } // => signifie fonction rapide qui retourne ce qui suit
+        public FontElement this[int index] { get => List[index]; set => List[index] = value; }
 
         public string Name { get; set; }
-        public Dictionary<string,FontElement> Dict { get; set; }
 
-        public int Count => Dict.Count;
+        /// <summary>
+        /// The Default is the last element in the list. If the list is empty, return a basic black test.
+        /// </summary>
+        public FontElement Default
+        {
+            get
+            {
+                if (Count != 0) return this[Count - 1];
+                else return new FontElement("Tahoma", 5, Windows.UI.Colors.Black);
+            }
+        }
+
+        /// <summary>
+        /// Store all the FontElements from the most important (eg. Title 1) to least (eg. Body text). The Default value is the last element.
+        /// </summary>
+        public List<FontElement> List { get; set; }
+
+        public int Count => List.Count;
 
         public bool IsReadOnly => false;
 
-        public ICollection<string> Keys => Dict.Keys;
-
-        public ICollection<FontElement> Values => Dict.Values;
-
-        public void Add(string key, FontElement value)
-        {
-            Dict.Add(key, value);
-        }
-
         public void Add(FontElement item)
         {
-            Dict.Add(item.Name, item);
-        }
-
-        public void Add(KeyValuePair<string, FontElement> item)
-        {
-            Dict.Add(item.Key,item.Value);
+            List.Add(item);
         }
 
         public void Clear()
         {
-            Dict.Clear();
+            List.Clear();
         }
 
         public bool Contains(FontElement item)
         {
-            return Dict.ContainsValue(item);
-        }
-
-        public bool Contains(KeyValuePair<string, FontElement> item)
-        {
-            return Dict.Contains(item);
-        }
-
-        public bool ContainsKey(string key)
-        {
-            return Dict.ContainsKey(key);
+            return List.Contains(item);
         }
 
         public void CopyTo(FontElement[] array, int arrayIndex)
         {
-            Dict.Values.CopyTo(array, arrayIndex);
-        }
-
-        public void CopyTo(KeyValuePair<string, FontElement>[] array, int arrayIndex)
-        {
-            foreach(KeyValuePair<string, FontElement> p in Dict)
-            {
-                array[arrayIndex] = p;
-                arrayIndex++;
-            }
+            List.CopyTo(array, arrayIndex);
         }
 
         public IEnumerator<FontElement> GetEnumerator()
         {
-            return Dict.Values.GetEnumerator();
+            return List.GetEnumerator();
+        }
+
+        public int IndexOf(FontElement item)
+        {
+            return List.IndexOf(item);
+        }
+
+        public void Insert(int index, FontElement item)
+        {
+            List.Insert(index, item);
         }
 
         public bool Remove(FontElement item)
         {
-            foreach(string name in Dict.Keys)
-            {
-                if (Dict[name] == item)
-                    return Dict.Remove(name);
-            }
-            return false;
+            return List.Remove(item);
         }
 
-        public bool Remove(string key)
+        public void RemoveAt(int index)
         {
-            return Dict.Remove(key);
-        }
-
-        public bool Remove(KeyValuePair<string, FontElement> item)
-        {
-            return Dict.Remove(item.Key);
-        }
-
-        public bool TryGetValue(string key, out FontElement value)
-        {
-            return Dict.TryGetValue(key, out value);
+            List.RemoveAt(index);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return Dict.Values.GetEnumerator();
-        }
-
-        IEnumerator<KeyValuePair<string, FontElement>> IEnumerable<KeyValuePair<string, FontElement>>.GetEnumerator()
-        {
-            return Dict.GetEnumerator();
+            return GetEnumerator();
         }
 
         /// <summary>
@@ -127,11 +97,31 @@ namespace Resume
         public Fonts Copy()
         {
             var temp = new Fonts(Name);
-            foreach(string f in Dict.Keys)
+            foreach(FontElement e in List)
             {
-                temp.Dict.Add(f,Dict[f].Copy());
+                temp.List.Add(e.Copy());
             }
             return temp;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="e">The output values the requested element at this index if it exists, the last one if not</param>
+        /// <returns>Returns true if there is a FontElement at this index and false otherwise.</returns>
+        public bool TryGetValue(int index, out FontElement e)
+        {
+            if (index < Count)
+            {
+                e = this[index];
+                return true;
+            }
+            else
+            {
+                e = Default;
+                return false;
+            }
         }
     }
 }

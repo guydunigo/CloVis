@@ -47,22 +47,28 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Titre 1", "Tahoma", 7, new Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true), //ARGB 0 on voit rien, 255 opaque
-                new FontElement("Titre 2", "Tahoma", 6, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, true),
-                new FontElement("Titre 3", "Tahoma", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
-                new FontElement("Corps", "Calibri", 5, new Color() { R = 155, G = 120, B = 12, A = 190 })
+                new FontElement("Tahoma", 7, new Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true), //ARGB 0 on voit rien, 255 opaque
+                new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, true),
+                new FontElement("Tahoma", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
+                new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
             };
 
             var boite_de_competences = new BoxText(105, 150, 60, 105, 60, 0, "Compétences"); //boite de texte qui contiendra les competences
+            var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
+            var boite_de_langues = new BoxText(0, 150, 60, 105, 60, 0, "Langues");
+            var boite_de_diplomes = new BoxText(105, 150, 60, 105, 60, 0, "Diplômes");
+
+
 
             var fond = new BoxBackground(0, 100, 100, 210, 60)
             {
-                Color = new Color() { A = 140, R = 255 } //verte un peu transparente
+                Color = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
             boite_de_competences.Element = competences;
-
-            //throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
+            boite_de_coordonnees.Element = coordonnees;
+            boite_de_langues.Element = langues;
+            boite_de_diplomes.Element = diplomes;
 
             CV = new Resume()
             {
@@ -73,7 +79,10 @@ namespace Resume
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddTextBox(boite_de_competences);
-            
+            CV.Layout.AddTextBox(boite_de_coordonnees);
+            CV.Layout.AddTextBox(boite_de_langues);
+            CV.Layout.AddTextBox(boite_de_diplomes);
+
             return CV;
         }
     }
