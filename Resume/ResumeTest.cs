@@ -66,16 +66,10 @@ namespace Resume
             }; //boite de fond
 
             boite_de_competences.Element = competences;
-<<<<<<< HEAD
             boite_de_coordonnees.Element = coordonnees;
             boite_de_langues.Element = langues;
             boite_de_diplomes.Element = diplomes;
 
-            //throw new NotImplementedException("ajouter au layout, puis au CV + ajout liste de polices");
-
-=======
-            
->>>>>>> af3ceefc3a97dd691519b187f510b8adfa88fbee
             CV = new Resume()
             {
                 Fonts = fonts,
