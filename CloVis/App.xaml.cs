@@ -152,6 +152,7 @@ namespace CloVis
             foreach(Template e in Templates)
             {
                 e.UpdateFromIndex();
+                if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
             }
         }
 

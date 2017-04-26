@@ -134,16 +134,17 @@ namespace ResumeElements
         public override void UpdateFromIndex()
         {
             // + in daughters
-            if (Index.Find(Name) is Data<T> d)
+            var temp = Index.Find(Name);
+            if (temp is Data<T> d)
             {
                 Level = d.Level;
                 Value = d.Value;
                 Description = d.Description;
             }
-            else if (Index.Find(Name) == null)
-                throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
-            else
-                throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+            //else if (temp == null)
+            //    throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+            //else
+            //    throw new InvalidCastException("The type of the Element in the Index does not match this one and therefore, it can't be updated.");
         }
     }
 }

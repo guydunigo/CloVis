@@ -57,9 +57,7 @@ namespace Resume
             var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
             var boite_de_langues = new BoxText(0, 150, 60, 105, 60, 0, "Langues");
             var boite_de_diplomes = new BoxText(105, 150, 60, 105, 60, 0, "Diplômes");
-
-
-
+            
             var fond = new BoxBackground(0, 100, 100, 210, 60)
             {
                 Color = new Color() { A = 140, G = 255 } //verte un peu transparente

@@ -96,7 +96,29 @@ namespace CloVis
 
                 foreach (BoxText b in Resume.Layout.TextBoxes)
                 {
-                    tempText = RenderTextBox(b.Element, Resume.Fonts);
+                    if (b.Element != null)
+                        tempText = RenderTextBox(b.Element, Resume.Fonts);
+                    else
+                    {
+                        tempText = new RichTextBlock();
+
+                        var para = new Paragraph();
+                        para.Inlines.Add(new Run()
+                        {
+                            Text = "Element non trouvé.\nCette boite attend un élément nommé : ",
+                            FontSize = 5,
+                            Foreground = new SolidColorBrush(Windows.UI.Colors.Black)
+                        });
+                        var temp = new Bold();
+                        temp.Inlines.Add(new Run()
+                        {
+                            Text = b.DefaultElement,
+                            FontSize = 5,
+                            Foreground = new SolidColorBrush(Windows.UI.Colors.Red)
+                        });
+                        para.Inlines.Add(temp);
+                        tempText.Blocks.Add(para);
+                    }
                     tempText.Width = b.SizeX;
                     tempText.Height = b.SizeY;
                     tempText.HorizontalAlignment = HorizontalAlignment.Left;
@@ -152,23 +174,15 @@ namespace CloVis
         public RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
-            if (Resume != null && element != null && fonts != null)
+            if (element != null && fonts != null)
             {
                 //throw new NotImplementedException("Generate rich text up to how many layers ? and shift (tab) ? Carriage return ? Dots for enum ?");
                 var LayersNumber = 3;
 
                 RenderElement(box, fonts, element, LayersNumber);
             }
-            else
-            {
-                var para = new Paragraph();
-                para.Inlines.Add(new Run()
-                {
-                    Text = "Error rendering text !",
-                    Foreground = new SolidColorBrush(Windows.UI.Colors.Red)
-                });
-                box.Blocks.Add(para);
-            }
+            else if (fonts == null) throw new NullReferenceException("Fonts is null !");
+            else if (element == null) throw new NullReferenceException("No element given.");
 
             return box;
         }
@@ -189,7 +203,7 @@ namespace CloVis
 
                 para.Inlines.Add(RenderText(element.Name, fe));
                 box.Blocks.Add(para);
-                
+
                 if (remainingLayers > 0)
                 {
                     foreach (Element e in list.Values)
@@ -229,7 +243,7 @@ namespace CloVis
                     fonts.TryGetValue(layer++, out fe);
                     para.Inlines.Add(RenderText(text + " : ", fe));
                 }
-                
+
                 fonts.TryGetValue(layer, out fe);
                 para.Inlines.Add(RenderText(d.Value, fe));
                 box.Blocks.Add(para);

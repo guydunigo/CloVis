@@ -18,8 +18,8 @@ namespace Resume
             var template = new Template();
 
             var boite_competences = new BoxText(100, 80, 50, 105, 75, 0, "compétences");
-            //var boite_contact = new BoxText(30, 40, 20, 60, 70, 10, "Contact");
-            //var boite_centres_dinteret = new BoxText(20, 200, 10, 150, 50, 0, "Centres d'intérêt");
+            var boite_contact = new BoxText(30, 40, 20, 60, 70, 10, "Contact");
+            var boite_centres_dinteret = new BoxText(20, 200, 10, 150, 50, 0, "Centres d'intérêt");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "langues");
             var fond = new BoxBackground(30, 40, 10, 100, 100, null, 20)
             {
@@ -29,7 +29,7 @@ namespace Resume
             template.Layout = new Layout();
             template.Layout.AddTextBox(boite_langues);
             template.Layout.AddTextBox(boite_competences);
-            //template.Layout.AddTextBox(boite_centres_dinteret);
+            template.Layout.AddTextBox(boite_centres_dinteret);
             template.Layout.AddBackBox(fond);
 
             return template;
@@ -38,7 +38,7 @@ namespace Resume
         {
             var template = new Template();
             var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "diplômes");
-            //var boite_contact = new BoxText(100, 40, 20, 60, 70, 10, "Contact");
+            var boite_contact = new BoxText(100, 40, 20, 60, 70, 10, "Contact");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "langues");
             var fond = new BoxBackground(100, 40, 50, 30, 50, null, 20)
             { 
@@ -47,7 +47,7 @@ namespace Resume
 
 
             template.Layout = new Layout();
-            //template.Layout.AddTextBox(boite_contact);
+            template.Layout.AddTextBox(boite_contact);
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddTextBox(boite_langues);
             template.Layout.AddBackBox(fond);
