@@ -22,14 +22,22 @@ namespace CloVis
     /// </summary>
     public sealed partial class EditionMode : Page
     {
-        public List<Resume.Resume> Resumes { get; set; }
-        public List<Resume.Template> Templates { get; set; }
+        public List<Resume.Resume> Resumes { get => ((App)(Application.Current)).Resumes; }
+        public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
+
+        private Resume.Resume resume;
+        public Resume.Resume Resume { get => resume; set => Resume = value.Copy(); }
 
         public EditionMode()
         {
-            Resumes = ((App)(Application.Current)).Resumes;
-            Templates = ((App)(Application.Current)).Templates;
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            var resume = (e.Parameter as Resume.Resume);
+            CV.Child = new Resume_Preview() { Resume = resume };
         }
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)

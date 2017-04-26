@@ -54,7 +54,7 @@ namespace CloVis
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //throw new NotImplementedException();
+            this.Frame.Navigate(typeof(EditionMode), e.ClickedItem);
         }
 
         private void StackPanel_PointerEntered(object sender, PointerRoutedEventArgs e)
