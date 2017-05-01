@@ -26,7 +26,7 @@ namespace CloVis
         }
 
         private List<UIElement> elementsToAdd;
-        
+
         public Resume.Resume Resume
         {
             get => (Resume.Resume)(GetValue(ResumeProperty));
@@ -96,7 +96,29 @@ namespace CloVis
 
                 foreach (BoxText b in Resume.Layout.TextBoxes)
                 {
-                    tempText = RenderTextBox(b.Element, Resume.Fonts);
+                    if (b.Element != null)
+                        tempText = RenderTextBox(b.Element, Resume.Fonts);
+                    else
+                    {
+                        tempText = new RichTextBlock();
+
+                        var para = new Paragraph();
+                        para.Inlines.Add(new Run()
+                        {
+                            Text = "Element non trouvé.\nCette boite attend un élément nommé : ",
+                            FontSize = 5,
+                            Foreground = new SolidColorBrush(Windows.UI.Colors.Black)
+                        });
+                        var temp = new Bold();
+                        temp.Inlines.Add(new Run()
+                        {
+                            Text = b.DefaultElement,
+                            FontSize = 5,
+                            Foreground = new SolidColorBrush(Windows.UI.Colors.Red)
+                        });
+                        para.Inlines.Add(temp);
+                        tempText.Blocks.Add(para);
+                    }
                     tempText.Width = b.SizeX;
                     tempText.Height = b.SizeY;
                     tempText.HorizontalAlignment = HorizontalAlignment.Left;
@@ -112,10 +134,8 @@ namespace CloVis
             }
         }
 
-        public Inline RenderText(string text, FontElement font = null)
+        public Inline RenderText(string text, FontElement font)
         {
-            //throw new NotImplementedException();
-
             var tempText = new Run() { Text = text };
             Inline res = tempText;
             if (font != null)
@@ -145,7 +165,7 @@ namespace CloVis
             }
             else
             {
-                //throw new NotImplementedException("default ?");
+                throw new NullReferenceException("No FontElement given !");
             }
 
             return res;
@@ -154,30 +174,80 @@ namespace CloVis
         public RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
-            Paragraph para = null;
-            if (Resume != null && element != null && fonts != null)
+            if (element != null && fonts != null)
             {
-                //throw new NotImplementedException("Generate rich text");
-                FontElement fe = null;
+                //throw new NotImplementedException("Generate rich text up to how many layers ? and shift (tab) ? Carriage return ? Dots for enum ?");
+                var LayersNumber = 3;
 
-
-                para = new Paragraph();
-                fonts.TryGetValue("Titre 1", out fe);
-
-                para.Inlines.Add(RenderText(element.Name,fe));
-                box.Blocks.Add(para);
+                RenderElement(box, fonts, element, LayersNumber);
             }
-            else
-            {
-                para = new Paragraph();
-                para.Inlines.Add(new Run()
-                {
-                    Text = "Error rendering text !"
-                });
-                box.Blocks.Add(para);
-            }
+            else if (fonts == null) throw new NullReferenceException("Fonts is null !");
+            else if (element == null) throw new NullReferenceException("No element given.");
 
             return box;
+        }
+
+        public void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
+        {
+            Paragraph para = null;
+
+            FontElement fe = null;
+            para = new Paragraph()
+            {
+                //TextIndent = layer > 0 ? 10 * (layer - 1) : 0
+            };
+
+            if (element is ElementList list)
+            {
+                fonts.TryGetValue(layer, out fe);
+
+                para.Inlines.Add(RenderText(element.Name, fe));
+                box.Blocks.Add(para);
+
+                if (remainingLayers > 0)
+                {
+                    foreach (Element e in list.Values)
+                    {
+                        RenderElement(box, fonts, e, remainingLayers - 1, layer + 1);
+                    }
+                }
+            }
+            else if (element is Data<string> d)
+            {
+                string text = "";
+
+                // Adds date if DataDated or DataTimeSpan then display the value
+                if (d is DataDated<string> dd)
+                {
+                    text = dd.StartTime.ToString(dd.DisplayFormat);
+
+                    // If it hasn't finished
+                    if (dd.EndTime == default(DateTime))
+                    {
+                        text = "Depuis " + text;
+                    }
+                    // If there's an end date
+                    else if (dd.EndTime != dd.StartTime)
+                    {
+                        text += " - " + dd.EndTime.ToString(dd.DisplayFormat);
+                    }
+
+                }
+                else if (d is DataTimeSpan<string> dts)
+                {
+                    text = dts.TimeSpan.ToString(dts.DisplayFormat);
+                }
+
+                if (text != "")
+                {
+                    fonts.TryGetValue(layer++, out fe);
+                    para.Inlines.Add(RenderText(text + " : ", fe));
+                }
+
+                fonts.TryGetValue(layer, out fe);
+                para.Inlines.Add(RenderText(d.Value, fe));
+                box.Blocks.Add(para);
+            }
         }
     }
 }

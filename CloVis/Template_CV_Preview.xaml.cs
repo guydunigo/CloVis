@@ -31,6 +31,7 @@ namespace CloVis
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
             var resume = (e.Parameter as Resume.Resume);
             vbox.Child = new Resume_Preview() { Resume = resume };
         }

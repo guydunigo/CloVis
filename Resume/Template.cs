@@ -10,7 +10,7 @@ namespace Resume
     {
         public Template() // Useless ?
         {
-            throw new NotImplementedException("Useless ?");
+            //throw new NotImplementedException("Useless ?");
         }
     }
 }

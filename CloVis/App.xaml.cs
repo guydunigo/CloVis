@@ -145,13 +145,14 @@ namespace CloVis
             Templates = new List<Template>();
             // async ?
 
-            //Templates.Add(TemplateTest.GetTemplate_1());
-            //Templates.Add(TemplateTest.GetTemplate_2());
+            Templates.Add(TemplateTest.GetTemplate_1());
+            Templates.Add(TemplateTest.GetTemplate_2());
 
             // Fill templates with defaults informations
             foreach(Template e in Templates)
             {
                 e.UpdateFromIndex();
+                if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
             }
         }
 

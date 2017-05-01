@@ -22,7 +22,7 @@ namespace Resume
         public override double Z { get => z; set => z = value < 51 ? 51 : value; }
 
         protected ResumeElements.Element element;
-        public ResumeElements.Element Element { get => element; set => element = value.Copy(); }
+        public ResumeElements.Element Element { get => element; set => element = value?.Copy(); }
         
         public string DefaultElement { get; set; }
 
@@ -37,7 +37,13 @@ namespace Resume
 
         public void UpdateFromIndex()
         {
-            Element.UpdateFromIndex();
+            if (Element != null)
+                Element.UpdateFromIndex();
+            else
+            {
+                // Try to find the default element in the index
+                Element = ResumeElements.Index.Find(DefaultElement);
+            }
         }
     }
 }
