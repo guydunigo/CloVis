@@ -17,4 +17,18 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style TargetType="local:ElementList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ElementList">
+                    <Grid x:Name="EList"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

@@ -9,7 +9,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="CV_Template_Preview">
-            <Grid Margin="5" Padding="1" MaxWidth="150">
+            <Grid Margin="5" Padding="1" MaxWidth="75">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
