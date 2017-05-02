@@ -49,7 +49,7 @@ namespace CloVis
         {
 
         }
-        private void LeftButtonClick(object sender, RoutedEventHandler e)
+        private void LeftButtonClick(object sender, RoutedEventArgs e)
         {
             if (LeftPane.IsPaneOpen)
             {
@@ -65,7 +65,7 @@ namespace CloVis
             }
 
         }
-        private void RightButtonClick(object sender, RoutedEventHandler e)
+        private void RightButtonClick(object sender, RoutedEventArgs e)
         {
             if (RightPane.IsPaneOpen)
             {
