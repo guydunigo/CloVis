@@ -53,10 +53,10 @@ namespace Resume
                 new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
             };
 
-            var boite_de_competences = new BoxText(105, 150, 60, 105, 30, 0, "Compétences"); //boite de texte qui contiendra les competences
+            var boite_de_langues = new BoxText(105, 150, 60, 105, 72.5, 0, "Langues"); //boite de texte qui contiendra les competences
             var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
-            var boite_de_langues = new BoxText(0, 150, 60, 105, 60, 0, "Langues");
-            var boite_de_diplomes = new BoxText(105, 180, 60, 105, 30, 0, "Diplômes");
+            var boite_de_competences = new BoxText(0, 150, 60, 105, 60, 0, "Compétences");
+            var boite_de_diplomes = new BoxText(105, 222.5, 60, 105, 72.5, 0, "Diplômes");
             
             var fond = new BoxBackground(0, 100, 100, 210, 60)
             {
