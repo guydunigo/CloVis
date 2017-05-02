@@ -68,6 +68,11 @@ namespace CloVis
             //((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Collapsed;
             //throw new NotImplementedException();
         }
+        
+        private void Details_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DetailsEdit));
+        }
     }
 
     public class NavLink
