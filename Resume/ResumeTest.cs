@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -63,7 +63,12 @@ namespace Resume
                 Color = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
-            boite_de_competences.Element = competences;
+			var fond2 = new BoxBackground(115, 150, 100, 160, 73,null,-40)
+			{
+				Color = new Color() { A = 140, G = 255 } //verte un peu transparente
+			}; //boite de fond
+
+			boite_de_competences.Element = competences;
             boite_de_coordonnees.Element = coordonnees;
             boite_de_langues.Element = langues;
             boite_de_diplomes.Element = diplomes;
@@ -76,6 +81,7 @@ namespace Resume
             
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
+            CV.Layout.AddBackBox(fond2);
             CV.Layout.AddTextBox(boite_de_competences);
             CV.Layout.AddTextBox(boite_de_coordonnees);
             CV.Layout.AddTextBox(boite_de_langues);
