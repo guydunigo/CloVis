@@ -49,5 +49,37 @@ namespace CloVis
         {
 
         }
+        private void LeftButtonClick(object sender, RoutedEventHandler e)
+        {
+            if (LeftPane.IsPaneOpen)
+            {
+            LeftPane.IsPaneOpen = false;
+            LeftButtonText.Text = "augmenter";
+            LeftButtonIcon.Symbol = Symbol.OpenPane;
+            }
+            else
+            {
+            LeftPane.IsPaneOpen = true;
+            LeftButtonText.Text = "réduire";
+            LeftButtonIcon.Symbol = Symbol.ClosePane;
+            }
+
+        }
+        private void RightButtonClick(object sender, RoutedEventHandler e)
+        {
+            if (RightPane.IsPaneOpen)
+            {
+            RightPane.IsPaneOpen = false;
+            RightButtonText.Text = "augmenter";
+            RightButtonIcon.Symbol = Symbol.ClosePane;
+            }
+            else
+            {
+            RightPane.IsPaneOpen = true;
+            RightButtonText.Text = "réduire";
+            RightButtonIcon.Symbol = Symbol.OpenPane;
+            }
+
+        }
     }
 }
