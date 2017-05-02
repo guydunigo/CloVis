@@ -18,10 +18,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:ElementList" >
+    <Style TargetType="local:ElementView" >
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:ElementList">
+                <ControlTemplate TargetType="local:ElementView">
                     <Grid x:Name="EList"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"

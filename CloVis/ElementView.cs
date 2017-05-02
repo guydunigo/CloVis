@@ -13,11 +13,11 @@ using Windows.UI.Xaml.Media;
 
 namespace CloVis
 {
-    public sealed class ElementList : Control
+    public sealed class ElementView : Control
     {
-        public ElementList()
+        public ElementView()
         {
-            this.DefaultStyleKey = typeof(ElementList);
+            this.DefaultStyleKey = typeof(ElementView);
             this.Loaded += OnLoaded;
 
             elementsToAdd = new List<UIElement>();
