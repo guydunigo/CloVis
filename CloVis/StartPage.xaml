@@ -62,22 +62,22 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <ListView x:Name="TopNavLinkList" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch"
-                              ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"
-                              ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"/>
-                    <!--<StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                              ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"/>
+                              <!--ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"--> 
+                    <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="OpenFile"/>
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Ouvrir / Importer</TextBlock>
                             </Grid>
                         </Button>
-                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White" Click="Details_Click">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="Edit"/>
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Modifier vos données</TextBlock>
                             </Grid>
                         </Button>
-                    </StackPanel>-->
+                    </StackPanel>
                     <StackPanel Grid.Row="2" VerticalAlignment="Bottom">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White">
                             <Grid>
