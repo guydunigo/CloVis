@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,7 +70,7 @@ namespace Resume
 
             var fond3 = new BoxBackground(-15, -4, 100, 700, 65, null, 50)
 			{
-				Color = new Color() { A = 10, B = 200, G = 200, R = 255}
+				Color = new Color() { A = 255, B = 200, G = 200, R = 255}
 			};
 
 			boite_de_competences.Element = competences;
