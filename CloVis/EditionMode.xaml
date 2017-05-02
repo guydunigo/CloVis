@@ -104,7 +104,7 @@
                                 </Grid>
                             </ListViewHeaderItem>
                         </ListView>
-                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Click="DetailsButton_Click">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
