@@ -79,7 +79,11 @@ namespace CloVis
             RightButtonText.Text = "réduire";
             RightButtonIcon.Symbol = Symbol.OpenPane;
             }
-
+            
+        private void DetailsButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(DetailsEdit));
+        }
         }
     }
 }
