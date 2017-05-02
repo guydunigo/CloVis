@@ -37,7 +37,7 @@ namespace CloVis
         {
             base.OnNavigatedTo(e);
             var resume = (e.Parameter as Resume.Resume);
-            CV.Child = new Resume_Preview() { Resume = resume };
+            CV.Child = new Resume_Preview() { Resume = resume, BorderThickness=new Thickness(1), BorderBrush=Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
         }
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
