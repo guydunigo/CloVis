@@ -68,6 +68,11 @@ namespace Resume
 				Color = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
 			}; //boite de fond
 
+            var fond3 = new BoxBackground(-15, -4, 100, 700, 65, null, 50)
+			{
+				Color = new Color() { A = 10, B = 200, G = 200, R = 255}
+			};
+
 			boite_de_competences.Element = competences;
             boite_de_coordonnees.Element = coordonnees;
             boite_de_langues.Element = langues;
@@ -82,6 +87,7 @@ namespace Resume
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddBackBox(fond2);
+            CV.Layout.AddBackBox(fond3);
             CV.Layout.AddTextBox(boite_de_competences);
             CV.Layout.AddTextBox(boite_de_coordonnees);
             CV.Layout.AddTextBox(boite_de_langues);
