@@ -247,7 +247,7 @@ namespace ResumeElements
             else
                 foreach(Element e in elements.Values)
                 {
-                    res = e.Find("value");
+                    res = e.Find(name);
                     if (res != null) return res;
                 }
             return null;
@@ -270,17 +270,22 @@ namespace ResumeElements
 
         public override void UpdateFromIndex()
         {
-            if (Index.Find(Name) is ElementList<T> l)
+            var temp = Index.Find(Name);
+            if (temp is ElementList<T> l)
             {
                 foreach(T t in elements.Values)
                 {
                     t.UpdateFromIndex();
                 }
             }
-            else if (Index.Find(Name) == null)
-                throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+            else if (temp == null)
+            {
+                //throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+            }
             else
-                throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
+            {
+                //throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
+            }
         }
     }
 }

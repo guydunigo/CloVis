@@ -23,7 +23,7 @@ namespace Resume
 
             var competences = new ElementList<Element>("compétences")
             {
-                new ElementList<Data>("informatique")
+                new ElementList<Element>("informatique")
                 {
                     new Data<string>("c", "C", 2, "",true),
                     new Data<string>("c++","C++",1, "",true),

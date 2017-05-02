@@ -35,6 +35,8 @@ namespace ResumeElements
 
         public static Element Find(string name)
         {
+            var temp = DataIndex.Find(name);
+            if (temp != null) return temp;
             return Root.Find(name);
         }
 

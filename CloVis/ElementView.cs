@@ -37,9 +37,9 @@ namespace CloVis
         }
         
         public static readonly DependencyProperty ElementProperty =
-            DependencyProperty.Register("Element", typeof(Element), typeof(Resume_Preview), new PropertyMetadata(null, OnResumeChanged));
+            DependencyProperty.Register("Element", typeof(Element), typeof(Resume_Preview), new PropertyMetadata(null, OnElementChanged));
 
-        private static void OnResumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is ElementView instance && instance.Element != null)
             {

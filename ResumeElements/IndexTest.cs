@@ -12,7 +12,7 @@ namespace ResumeElements
         {
             (Index.DataIndex["nom"] as Data<string>).Value = "Clovis";
             (Index.DataIndex["téléphone"] as Data<string>).Value = "+33660606060";
-            (Index.DataIndex["mél"] as Data<string>).Value = "gloubiboulga@enib.fr";
+            (Index.DataIndex["mél"] as Data<string>).Value = "robert@enib.fr";
 
             Index.Root["compétences"].Add(new ElementList<Element>("informatique")
             {

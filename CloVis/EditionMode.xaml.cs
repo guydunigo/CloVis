@@ -26,7 +26,7 @@ namespace CloVis
         public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
 
         private Resume.Resume resume;
-        public Resume.Resume Resume { get => resume; set => resume = value.Copy(); }
+        public Resume.Resume Resume { get => resume; set => resume = value; }
 
         public EditionMode()
         {
@@ -36,7 +36,7 @@ namespace CloVis
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var resume = (e.Parameter as Resume.Resume);
+            resume = (e.Parameter as Resume.Resume);
             CV.Child = new Resume_Preview() { Resume = resume, BorderThickness=new Thickness(1), BorderBrush=Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
         }
 
@@ -86,9 +86,12 @@ namespace CloVis
             this.Frame.Navigate(typeof(DetailsEdit));
         }
         
-        private void Actualiser_Click(objet sender, RoutedEventArgs e)
+        private void Actualiser_Click(object sender, RoutedEventArgs e)
         {
             resume.UpdateFromIndex();
+            var temp = ((ResumeElements.ElementList<ResumeElements.Element>)resume.Layout.TextBoxes[1].Element)["mél"];
+            //CV.Child = new Resume_Preview() { Resume = resume, BorderThickness = new Thickness(1), BorderBrush = Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
+            (CV.Child as Resume_Preview).Resume = resume;
         }
     }
 }
