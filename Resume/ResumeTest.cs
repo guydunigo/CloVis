@@ -58,7 +58,7 @@ namespace Resume
             var boite_de_competences = new BoxText(0, 150, 60, 105, 60, 0, "Compétences");
             var boite_de_diplomes = new BoxText(105, 222.5, 60, 105, 72.5, 0, "Diplômes");
             
-            var fond = new BoxBackground(0, 100, 100, 210, 60)
+            var fond = new BoxBackground(0, 70, 100, 210, 60)
             {
                 Color = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
