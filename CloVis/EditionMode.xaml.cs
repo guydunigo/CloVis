@@ -85,5 +85,10 @@ namespace CloVis
         {
             this.Frame.Navigate(typeof(DetailsEdit));
         }
+        
+        private void Actualiser_Click(objet sender, RoutedEventArgs e)
+        {
+            resume.UpdateFromIndex();
+        }
     }
 }
