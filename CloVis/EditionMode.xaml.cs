@@ -26,7 +26,7 @@ namespace CloVis
         public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
 
         private Resume.Resume resume;
-        public Resume.Resume Resume { get => resume; set => Resume = value.Copy(); }
+        public Resume.Resume Resume { get => resume; set => resume = value.Copy(); }
 
         public EditionMode()
         {
@@ -79,11 +79,11 @@ namespace CloVis
             RightButtonText.Text = "réduire";
             RightButtonIcon.Symbol = Symbol.OpenPane;
             }
-            
+        }
+
         private void DetailsButton_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(DetailsEdit));
-        }
         }
     }
 }
