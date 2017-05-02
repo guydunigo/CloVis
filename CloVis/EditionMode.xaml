@@ -16,7 +16,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="2"/>
                 <Viewbox Grid.Row="1">
-                    <local:Resume_Preview Resume="{Binding}"/>
+                    <local:Resume_Preview Resume="{Binding}" BorderThickness="3" BorderBrush="{StaticResource CloVisBlue}"/>
                 </Viewbox>
             </Grid>
         </DataTemplate>

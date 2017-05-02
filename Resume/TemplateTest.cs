@@ -20,10 +20,10 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Tahoma", 7,  new Color() { R = 120, G = 120, B = 200, A = 100 }, false, true, true, false),    //italic, gras, souligné
-                new FontElement("Tahoma", 5, new Color() { R = 0, G = 0, B = 150, A = 255 },true, true, false, true),
-                new FontElement("Calibri", 4, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
-                new FontElement("Calibri", 3, new Color() { R = 70, G = 70, B = 200, A = 190 },false, false, false, false)
+                new FontElement("Tahoma", 1,  new Color() { R = 120, G = 120, B = 200, A = 100 }, false, true, true, false),    //italic, gras, souligné
+                new FontElement("Tahoma", 3, new Color() { R = 0, G = 0, B = 150, A = 255 },true, true, false, true),
+                new FontElement("Calibri", 2, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
+                new FontElement("Calibri", 1, new Color() { R = 70, G = 70, B = 200, A = 190 },false, false, false, false)
         };
             var boite_competences = new BoxText(75, 80, 50, 105, 75, 0, "compétences");
             var boite_coordonnées = new BoxText(5, 40, 20, 200, 60, 10, "coordonnées");
@@ -31,7 +31,7 @@ namespace Resume
             var boite_langues = new BoxText(5, 200, 10, 70, 50, 0, "langues");
             var boite_diplomes = new BoxText(75, 130, 20, 130, 50, 0, "diplômes");
 
-            var fond = new BoxBackground(0, 0, 20, 70, 300, null, 20)
+            var fond = new BoxBackground(0, 0, 20, 70, 300, null, 0)
             {
                 Color = new Color() { A = 50, B = 120, G = 130 } // fond peu transparent qui se trouve sous la boite contact
             };
@@ -39,6 +39,11 @@ namespace Resume
             var fond2 = new BoxBackground(65, 0, 40, 150, 300)
             {
                 Color = new Color() { A = 200, R = 50, G = 120, B = 120 }
+            };
+
+            var fond3 = new BoxBackground(120, 100, 20, 70, 70, null, 20)
+            {
+                Color = new Color() { A = 200, R=255}
             };
 
             template.Layout = new Layout();
@@ -49,6 +54,7 @@ namespace Resume
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddBackBox(fond);
             template.Layout.AddBackBox(fond2);
+            template.Layout.AddBackBox(fond3);
 
             return template;
         }
@@ -73,7 +79,7 @@ namespace Resume
             var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "coordonnées");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "langues");
             
-            var fond = new BoxBackground(0, 100, 50, 210, 190, null, 20)
+            var fond = new BoxBackground(0, 100, 50, 210, 190, null, 0)
             { 
                 Color = new Color() { A = 200, R = 255, G = 255, B=51} // fond jaune
             };
