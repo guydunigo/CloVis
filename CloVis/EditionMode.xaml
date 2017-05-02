@@ -24,7 +24,7 @@
     
     <Page.TopAppBar>
         <CommandBar Foreground="White" Background="{ThemeResource CloVisLightBlue}" ClosedDisplayMode="Compact">
-            <AppBarButton Icon="Sync" Label="Actualiser les données" Foreground="White"/>
+            <AppBarButton Icon="Sync" Label="Actualiser les données" Foreground="White" Click="Actualiser_Click"/>
             <AppBarSeparator Foreground="White"/>
             <AppBarButton Icon="Save" Label="Enregistrer" Foreground="White"/>
             <AppBarButton Icon="Download" Label="Importer" Foreground="White"/>
