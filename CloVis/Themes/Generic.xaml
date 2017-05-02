@@ -7,12 +7,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:Resume_Preview">
-                    <Grid x:Name="Resume"
+                    <ScrollViewer
+                        VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled"
+                                  HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled"
                         Background="White"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Width="210" Height="297">
-                    </Grid>
+                        <Grid  x:Name="Resume"/>
+                    </ScrollViewer>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -22,7 +25,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:ElementView">
-                    <Grid x:Name="EList"
+                    <Grid x:Name="Element"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
