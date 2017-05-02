@@ -16,7 +16,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="2"/>
                 <Viewbox Grid.Row="1">
-                    <local:Resume_Preview Resume="{Binding}" BorderThickness="3" BorderBrush="{StaticResource CloVisBlue}"/>
+                    <local:Resume_Preview Resume="{Binding}"/>
                 </Viewbox>
             </Grid>
         </DataTemplate>
@@ -251,7 +251,7 @@
                 </SplitView.Pane>
                 <Grid x:Name="Workspace" Background="WhiteSmoke">
                     <!--<Image Source="/CV_Examples/CV_Example_1.png"/>-->
-                    <Viewbox x:Name="CV" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Viewbox>
+                    <Viewbox x:Name="CV" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="3" BorderBrush="{StaticResource CloVisBlue}"></Viewbox>
                     <Button x:Name="LeftButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="LeftButtonClick">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon x:Name="LeftButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
