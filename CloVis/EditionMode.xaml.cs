@@ -93,5 +93,11 @@ namespace CloVis
             //CV.Child = new Resume_Preview() { Resume = resume, BorderThickness = new Thickness(1), BorderBrush = Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
             (CV.Child as Resume_Preview).Resume = resume;
         }
+
+        private void ZoomSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (sender is Slider slider && WorkBench != null)
+                WorkBench.ChangeView(0, 0, (float)slider.Value);
+        }
     }
 }

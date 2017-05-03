@@ -21,7 +21,7 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Page.TopAppBar>
         <CommandBar Foreground="White" Background="{ThemeResource CloVisLightBlue}" ClosedDisplayMode="Compact">
             <AppBarButton Icon="Sync" Label="Actualiser les données" Foreground="White" Click="Actualiser_Click"/>
@@ -36,7 +36,7 @@
             <AppBarButton Icon="Clear" Label="Retour à l'accueil" Foreground="White"/>
         </CommandBar>
     </Page.TopAppBar>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView x:Name="LeftPane" DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left" VerticalAlignment="Stretch">
             <SplitView.Pane>
@@ -249,27 +249,29 @@
                         </GridView>
                     </Grid>
                 </SplitView.Pane>
-                    <Grid x:Name="Workspace" Background="WhiteSmoke">
+                <Grid Background="WhiteSmoke">
                     <!--<Image Source="/CV_Examples/CV_Example_1.png"/>-->
-                    <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto"
+                    <ScrollViewer x:Name="WorkBench" HorizontalScrollMode="Auto" VerticalScrollMode="Auto"
                               HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
-                              ZoomMode="Enabled"
-                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                              ZoomMode="Enabled" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Viewbox x:Name="CV" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                     </ScrollViewer>
+                    <Slider x:Name="ZoomSlider" Orientation="Horizontal" Value="1" Minimum="0.1" Maximum="5" StepFrequency="0.1" ValueChanged="ZoomSlider_ValueChanged"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,5" Width="200"/>
+
                     <Button x:Name="LeftButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="LeftButtonClick">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon x:Name="LeftButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
-                                <TextBlock x:Name="LeftButtonText" Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
-                            </StackPanel>
-                        </Button>
-                        <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
-                                <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="OpenPane"/>
-                            </StackPanel>
-                        </Button>
-                    </Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon x:Name="LeftButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
+                            <TextBlock x:Name="LeftButtonText" Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
+                            <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="OpenPane"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
             </SplitView>
         </SplitView>
     </Grid>
