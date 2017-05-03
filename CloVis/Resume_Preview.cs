@@ -51,7 +51,7 @@ namespace CloVis
             }
         }
 
-        public void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             (GetTemplateChild("Resume") as Grid).Children.Clear();
 
@@ -61,7 +61,7 @@ namespace CloVis
             }
         }
 
-        public void RenderBackgroundBoxes()
+        private void RenderBackgroundBoxes()
         {
             if (Resume != null)
             {
@@ -88,7 +88,7 @@ namespace CloVis
             }
         }
 
-        public void RenderTextBoxes()
+        private void RenderTextBoxes()
         {
             if (Resume != null)
             {
@@ -134,7 +134,7 @@ namespace CloVis
             }
         }
 
-        public Inline RenderText(string text, FontElement font)
+        private static Inline RenderText(string text, FontElement font)
         {
             var tempText = new Run() { Text = text };
             Inline res = tempText;
@@ -171,7 +171,7 @@ namespace CloVis
             return res;
         }
 
-        public RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
+        private static RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
             if (element != null && fonts != null)
@@ -187,7 +187,7 @@ namespace CloVis
             return box;
         }
 
-        public void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
+        private static void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
         {
             Paragraph para = null;
 

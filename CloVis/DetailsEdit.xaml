@@ -77,7 +77,38 @@
                         <TextBlock Foreground="White" Margin="5">Enregistrer</TextBlock>
                     </StackPanel>
                 </Button>
-                <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Stretch" Padding="5">
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="5,0" MinWidth="0"/>
+                        <TextBlock Text="Coordonnées"/>
+                    </StackPanel>
+                    <StackPanel Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Margin="5,0" MinWidth="0"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="Nom :"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Margin="5,0" MinWidth="0"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="Prénom :"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Margin="5,0" MinWidth="0"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="Mél :"/>
+                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="5,0" MinWidth="0"/>
+                        <TextBlock Text="Diplômes"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Margin="5,0" MinWidth="0"/>
+                        <TextBlock Text="Expérience professionnelle"/>
+                    </StackPanel>
+                </StackPanel>
+                <!--<ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Multiple">
                     <ListViewHeaderItem Content="Coordonnées"/>
                     <ListViewItem Foreground="Red">
                         <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
@@ -99,7 +130,7 @@
                     </ListViewItem>
                     <ListViewHeaderItem Content="Diplômes"/>
                     <ListViewHeaderItem Content="Expérience professionnelle"/>
-                </ListView>
+                </ListView>-->
             </StackPanel>
         </SplitView>
     </Grid>
