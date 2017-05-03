@@ -253,6 +253,7 @@
                     <!--<Image Source="/CV_Examples/CV_Example_1.png"/>-->
                     <ScrollViewer x:Name="WorkBench" HorizontalScrollMode="Auto" VerticalScrollMode="Auto"
                               HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                              ViewChanged="WorkBench_ViewChanged"
                               ZoomMode="Enabled" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <Viewbox x:Name="CV" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
                     </ScrollViewer>

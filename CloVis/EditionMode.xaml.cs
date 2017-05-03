@@ -99,5 +99,10 @@ namespace CloVis
             if (sender is Slider slider && WorkBench != null)
                 WorkBench.ChangeView(0, 0, (float)slider.Value);
         }
+
+        private void WorkBench_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            ZoomSlider.Value = WorkBench.ZoomFactor;
+        }
     }
 }
