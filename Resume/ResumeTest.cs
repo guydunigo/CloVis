@@ -14,7 +14,7 @@ namespace Resume
         {
             Resume CV;
 
-            var coordonnees = new ElementList<Element>("coordonnees")
+            var coordonnees = new ElementList<Element>("coordonnées")
             {
                 new Data<string>("nom", "Clovis", -1, "",true),
                 new Data<string>("téléphone", "+33660606060", -1, "", true),

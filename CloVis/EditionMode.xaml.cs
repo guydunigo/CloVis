@@ -91,6 +91,7 @@ namespace CloVis
             resume.UpdateFromIndex();
             var temp = ((ResumeElements.ElementList<ResumeElements.Element>)resume.Layout.TextBoxes[1].Element)["mél"];
             //CV.Child = new Resume_Preview() { Resume = resume, BorderThickness = new Thickness(1), BorderBrush = Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
+            (CV.Child as Resume_Preview).Resume = null;
             (CV.Child as Resume_Preview).Resume = resume;
         }
 

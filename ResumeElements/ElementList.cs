@@ -278,14 +278,12 @@ namespace ResumeElements
                     t.UpdateFromIndex();
                 }
             }
+            /*
             else if (temp == null)
-            {
-                //throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
-            }
+                throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
             else
-            {
-                //throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
-            }
+                throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
+            */
         }
     }
 }
