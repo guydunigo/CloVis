@@ -8,7 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Right">
+        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left">
             <SplitView.Pane>
                 <ListView>
                     <ListViewHeaderItem Foreground="White" Content="Nouvelle catégorie"/>
@@ -71,43 +71,68 @@
                 </ListView>
             </SplitView.Pane>
             <StackPanel HorizontalAlignment="Stretch">
-                <Button Background="{ThemeResource CloVisBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10,10" BorderThickness="1" BorderBrush="White">
-                    <StackPanel Orientation="Horizontal">
-                        <SymbolIcon Foreground="White" Symbol="Save" Margin="5"/>
-                        <TextBlock Foreground="White" Margin="5">Enregistrer</TextBlock>
-                    </StackPanel>
-                </Button>
-                <StackPanel HorizontalAlignment="Stretch" Padding="5">
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="5,0" MinWidth="0"/>
-                        <TextBlock Text="Coordonnées"/>
-                    </StackPanel>
-                    <StackPanel Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}">
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Margin="5,0" MinWidth="0"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="Nom :"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                <Border BorderThickness="0,0,0,2" Margin="20,0,20,20" Padding="0,10" BorderBrush="{StaticResource CloVisBlue}">
+                    <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
+                </Border>
+                <ListView HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True">
+                    <ListViewItem>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Remove"  Foreground="{StaticResource CloVisBlue}"
+                                            PointerPressed="SymbolIcon_PointerPressed" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
+                                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Coordonnées"/>
+                            </StackPanel>
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True">
+                                <ListViewItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Nom :"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Prénom :"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                                <ListViewItem>
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Mél :"/>
+                                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Margin="5,0" MinWidth="0"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="Prénom :"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
+                                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Diplômes"/>
+                            </StackPanel>
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
+                                
+                            </ListView>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <CheckBox Margin="5,0" MinWidth="0"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="Mél :"/>
-                            <TextBlock Margin="5,0" Foreground="Red" Text="à remplir"/>
+                    </ListViewItem>
+                    <ListViewItem>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
+                                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Expérience professionnelle"/>
+                            </StackPanel>
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
+
+                            </ListView>
                         </StackPanel>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="5,0" MinWidth="0"/>
-                        <TextBlock Text="Diplômes"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <CheckBox Margin="5,0" MinWidth="0"/>
-                        <TextBlock Text="Expérience professionnelle"/>
-                    </StackPanel>
-                </StackPanel>
+                    </ListViewItem>
+                </ListView>
                 <!--<ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="Multiple">
                     <ListViewHeaderItem Content="Coordonnées"/>
                     <ListViewItem Foreground="Red">

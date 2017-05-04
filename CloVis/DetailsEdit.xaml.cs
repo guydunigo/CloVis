@@ -26,5 +26,39 @@ namespace CloVis
         {
             this.InitializeComponent();
         }
+
+        private void SymbolIcon_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            var temp = sender as SymbolIcon;
+            if (temp.Symbol == Symbol.Add)
+                temp.Foreground = Application.Current.Resources["CloVisBlue"] as SolidColorBrush;
+        }
+
+        private void SymbolIcon_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            var temp = sender as SymbolIcon;
+            if (temp.Symbol == Symbol.Add)
+                temp.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
+        }
+
+        private void SymbolIcon_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            var temp = sender as SymbolIcon;
+            if (temp.Symbol == Symbol.Add)
+            {
+                temp.Symbol = Symbol.Remove;
+                temp.Foreground = Application.Current.Resources["CloVisBlue"] as SolidColorBrush;
+
+                ((temp.Parent as StackPanel).Parent as StackPanel).Children[1].Visibility = Visibility.Visible;
+            }
+            else if (temp.Symbol == Symbol.Remove)
+            {
+                temp.Symbol = Symbol.Add;
+                temp.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
+
+                ((temp.Parent as StackPanel).Parent as StackPanel).Children[1].Visibility = Visibility.Collapsed;
+            }
+            //throw new NotImplementedException("show sublist");
+        }
     }
 }
