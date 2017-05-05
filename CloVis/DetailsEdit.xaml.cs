@@ -60,5 +60,25 @@ namespace CloVis
             }
             //throw new NotImplementedException("show sublist");
         }
+
+        private void ElementList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Data_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Element_PointerEntered(object sender, PointerRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Element_PointerExited(object sender, PointerRoutedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

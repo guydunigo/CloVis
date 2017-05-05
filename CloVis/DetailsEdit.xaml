@@ -71,24 +71,37 @@
                 </ListView>
             </SplitView.Pane>
             <StackPanel HorizontalAlignment="Stretch">
-                <Border BorderThickness="0,0,0,2" Margin="20,0,20,20" Padding="0,10" BorderBrush="{StaticResource CloVisBlue}">
+                <Border BorderThickness="0,0,0,2" Margin="20,0,20,20" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
                     <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
                 </Border>
                 <ListView HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True">
                     <ListViewItem>
                         <StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Remove"  Foreground="{StaticResource CloVisBlue}"
+                            <StackPanel Orientation="Horizontal" DoubleTapped="ElementList_DoubleTapped">
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Remove"  Foreground="{ThemeResource CloVisBlue}"
                                             PointerPressed="SymbolIcon_PointerPressed" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
                                 <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Coordonnées"/>
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
                             </StackPanel>
-                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True">
-                                <ListViewItem>
-                                    <StackPanel Orientation="Horizontal">
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" HorizontalContentAlignment="Stretch">
+                                <ListViewItem HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal" DoubleTapped="Data_DoubleTapped" HorizontalAlignment="Stretch">
                                         <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Nom :"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                        <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                            <Button.Content>
+                                                <Viewbox Height="20" Width="30">
+                                                    <SymbolIcon Symbol="More"/>
+                                                </Viewbox>
+                                            </Button.Content>
+                                            <Button.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
+                                        </Button>
                                     </StackPanel>
                                 </ListViewItem>
                                 <ListViewItem>
@@ -96,6 +109,19 @@
                                         <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Prénom :"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                        <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
+                                        <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                            <Button.Content>
+                                                <Viewbox Height="20" Width="30">
+                                                    <SymbolIcon Symbol="More"/>
+                                                </Viewbox>
+                                            </Button.Content>
+                                            <Button.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
+                                        </Button>
                                     </StackPanel>
                                 </ListViewItem>
                                 <ListViewItem>
@@ -103,6 +129,19 @@
                                         <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="Mél :"/>
                                         <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="à remplir"/>
+                                        <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
+                                        <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                            <Button.Content>
+                                                <Viewbox Height="20" Width="30">
+                                                    <SymbolIcon Symbol="More"/>
+                                                </Viewbox>
+                                            </Button.Content>
+                                            <Button.Flyout>
+                                                <MenuFlyout>
+                                                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                                </MenuFlyout>
+                                            </Button.Flyout>
+                                        </Button>
                                     </StackPanel>
                                 </ListViewItem>
                             </ListView>
@@ -114,8 +153,9 @@
                                 <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
                                 <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Diplômes"/>
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
                             </StackPanel>
-                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
                                 
                             </ListView>
                         </StackPanel>
@@ -126,8 +166,9 @@
                                 <SymbolIcon VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black" PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited"/>
                                 <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text="Expérience professionnelle"/>
+                                <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
                             </StackPanel>
-                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{StaticResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
+                            <ListView Margin="30,0" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
 
                             </ListView>
                         </StackPanel>

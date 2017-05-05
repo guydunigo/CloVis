@@ -125,8 +125,7 @@ namespace CloVis
             //TODO: enregistrez l'état de l'application et arrêtez toute activité en arrière-plan
             deferral.Complete();
         }
-
-
+        
         public List<Resume.Resume> Resumes { get; set; }
         public List<Resume.Template> Templates { get; set; }
 

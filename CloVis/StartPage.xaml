@@ -31,10 +31,10 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Viewbox Grid.Row="0">
-                    <local:Resume_Preview Resume="{Binding}" BorderThickness="1" BorderBrush="{StaticResource CloVisBlue}"/>
+                    <local:Resume_Preview Resume="{Binding}" BorderThickness="1" BorderBrush="{ThemeResource CloVisBlue}"/>
                 </Viewbox>
                 <TextBlock Grid.Row="1" Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="5"/>
-                <Button x:Name="Btn" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5" Visibility="Visible" >
+                <Button x:Name="Btn" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5" Visibility="Visible" >
                     <ContentControl>
                         <Viewbox Height="20" Width="30">
                             <SymbolIcon  Symbol="More"/>
