@@ -64,6 +64,8 @@ namespace CloVis
         private void ElementList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
             test.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = ResumeElements.Index.Root["Coordonnées"] } });
+            test.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> } });
+
             //throw new NotImplementedException();
         }
 

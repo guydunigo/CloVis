@@ -35,17 +35,18 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:IndexDataView" >
+    <Style TargetType="local:IndexDataTextView" >
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:IndexDataView">
+                <ControlTemplate TargetType="local:IndexDataTextView">
                     <StackPanel x:Name="DataStackPanel" Orientation="Horizontal" DataContext="Data"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                         <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="{TemplateBinding Name}"/>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0" Foreground="Red" Text="{TemplateBinding Value}"/>
+                        <TextBlock x:Name="Name" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
+                        <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                        <TextBlock x:Name="Value" VerticalAlignment="Center" Margin="5,0" Text=""/>
                         <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
                         <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                             <Button.Content>

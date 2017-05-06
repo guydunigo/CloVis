@@ -102,7 +102,7 @@
     <Compile Include="EditionMode.xaml.cs">
       <DependentUpon>EditionMode.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IndexDataView.cs" />
+    <Compile Include="IndexDataTextView.cs" />
     <Compile Include="IndexElementListView.cs" />
     <Compile Include="IndexView.cs" />
     <Compile Include="MainPage.xaml.cs">
