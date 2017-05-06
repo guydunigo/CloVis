@@ -25,11 +25,11 @@ namespace Resume
                 new FontElement("Verdana", 4, new Color() { R = 255, G = 0, B = 255, A = 255 },true, false, false, false),
                 new FontElement("Comic Sans MS", 3, new Color() { R = 70, G = 70, B = 200, A = 190 },false, false, false, false)
         };
-            var boite_competences = new BoxText(75, 80, 50, 105, 75, 0, "compétences");
-            var boite_coordonnées = new BoxText(5, 40, 20, 200, 60, 10, "coordonnées");
-            var boite_centres_dinteret = new BoxText(75, 200, 10, 150, 50, 0, "Centres d'intérêt");
-            var boite_langues = new BoxText(5, 200, 10, 70, 50, 0, "langues");
-            var boite_diplomes = new BoxText(75, 130, 20, 130, 50, 0, "diplômes");
+            var boite_competences = new BoxText(75, 80, 50, 105, 75, 0, "Compétences");
+            var boite_coordonnées = new BoxText(5, 40, 20, 200, 60, 10, "Coordonnées");
+            var boite_centres_dinteret = new BoxText(75, 200, 10, 150, 50, 0, "Centres d'intérêts");
+            var boite_langues = new BoxText(5, 200, 10, 70, 50, 0, "Langues");
+            var boite_diplomes = new BoxText(75, 130, 20, 130, 50, 0, "Diplômes");
 
             var fond = new BoxBackground(0, 0, 20, 70, 300, null, 0)
             {
@@ -76,9 +76,9 @@ namespace Resume
                 new FontElement("Tahoma", 4, new Color() { R = 170, G = 0, B = 0, A = 190 },false, false, true, false)
             };
 
-            var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "diplômes");
-            var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "coordonnées");
-            var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "langues");
+            var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "Diplômes");
+            var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
+            var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
             
             var fond = new BoxBackground(0, 100, 50, 210, 190, null, 0)
             { 

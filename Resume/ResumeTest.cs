@@ -14,35 +14,35 @@ namespace Resume
         {
             Resume CV;
 
-            var coordonnees = new ElementList<Element>("coordonnées")
+            var coordonnees = new ElementList<Element>("Coordonnées")
             {
-                new Data<string>("nom", "Clovis", -1, "",true),
-                new Data<string>("téléphone", "+33660606060", -1, "", true),
-                new Data<string>("mél", "gloubiboulga@enib.fr", -1, "", true)
+                new Data<string>("Nom", "Clovis", -1, "",true),
+                new Data<string>("Téléphone", "+33660606060", -1, "", true),
+                new Data<string>("Mél", "gloubiboulga@enib.fr", -1, "", true)
             };
 
-            var competences = new ElementList<Element>("compétences")
+            var competences = new ElementList<Element>("Compétences")
             {
-                new ElementList<Element>("informatique")
+                new ElementList<Element>("Informatique")
                 {
-                    new Data<string>("c", "C", 2, "",true),
-                    new Data<string>("c++","C++",1, "",true),
-                    new Data<string>("java","java",1, "",true)
+                    new Data<string>("C", "C", 2, "",true),
+                    new Data<string>("C++","C++",1, "",true),
+                    new Data<string>("Java","java",1, "",true)
                 },
-                new Data<string>("business process", "Business Process", 4, "",true)
+                new Data<string>("Business process", "Business Process", 4, "",true)
             };
 
-            var langues = new ElementList<Element>("langues")
+            var langues = new ElementList<Element>("Langues")
             {
-                new Data<string>("anglais", "anglais", 5, "",true),
-                new Data<string>("allemand","allemand",2, "",true),
-                new Data<string>("chinois","chinois",1.5, "",true),
+                new Data<string>("Anglais", "anglais", 5, "",true),
+                new Data<string>("Allemand","allemand",2, "",true),
+                new Data<string>("Chinois","chinois",1.5, "",true),
             };
 
-            var diplomes = new ElementList<Element>("diplômes")
+            var diplomes = new ElementList<Element>("Diplômes")
             {
                 new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "D",-1, "",true),
-                new DataDated<string>("bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "D",-1, "",true)
+                new DataDated<string>("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "D",-1, "",true)
             };
 
             var fonts = new Fonts("Polices_cv")

@@ -64,18 +64,18 @@ namespace ResumeElements
         /// </summary>
         public static ElementList<ElementList> Root { get; set; } = new ElementList<ElementList>("root")
         {
-            new ElementList<Element>("coordonnées")
+            new ElementList<Element>("Coordonnées")
             {
-                new Data<string>("nom",""),
-                new Data<string>("téléphone",""),
-                new Data<string>("mél",""),
-		new Data<string>("adresse",""),
+                new Data<string>("Nom",""),
+                new Data<string>("Téléphone",""),
+                new Data<string>("Mél",""),
+		new Data<string>("Adresse",""),
 
                 //...
             },
-            new ElementList<Element>("compétences"),
-            new ElementList<Element>("langues"),
-            new ElementList<Element>("diplômes"),
+            new ElementList<Element>("Compétences"),
+            new ElementList<Element>("Langues"),
+            new ElementList<Element>("Diplômes"),
             // Remplir
         };
     }

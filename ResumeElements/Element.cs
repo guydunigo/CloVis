@@ -16,7 +16,7 @@ namespace ResumeElements
         public Element(string name, bool isDefault = true)
         {
             //throw new NotImplementedException("Check if name isn't already used");
-            Name = name.ToLower();
+            Name = name;
             IsDefault = isDefault;
         }
 
