@@ -74,7 +74,7 @@
                 <Border BorderThickness="0,0,0,2" Margin="20,0,20,20" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
                     <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
                 </Border>
-                <ListView HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True">
+                <ListView x:Name="test" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True">
                     <ListViewItem>
                         <StackPanel>
                             <StackPanel Orientation="Horizontal" DoubleTapped="ElementList_DoubleTapped">

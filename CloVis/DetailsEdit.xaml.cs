@@ -63,7 +63,8 @@ namespace CloVis
 
         private void ElementList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            test.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = ResumeElements.Index.Root["Coordonnées"] } });
+            //throw new NotImplementedException();
         }
 
         private void Data_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
