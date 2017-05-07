@@ -32,7 +32,11 @@ namespace CloVis
         {
             foreach(ResumeElements.ElementList el in ResumeElements.Index.Root.Values)
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = el } });
-            IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = ResumeElements.Index.GetMiscellaneaous() } });
+
+            // If some data is not listed anywhere, show the miscellaneous category
+            var divers = ResumeElements.Index.GetMiscellaneous();
+            if (divers.Count > 0)
+                IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = divers } });
 
             IndexList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> } });
         }

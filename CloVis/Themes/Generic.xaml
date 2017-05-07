@@ -39,28 +39,57 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:IndexDataTextView">
-                    <StackPanel x:Name="DataStackPanel" Orientation="Horizontal" DataContext="Data"
+                    <Grid>
+                        <StackPanel x:Name="DataView" Orientation="Horizontal" DataContext="Data"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                        <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
-                        <TextBlock x:Name="Name" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
-                        <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
-                        <TextBlock x:Name="Value" VerticalAlignment="Center" Margin="5,0" Text=""/>
-                        <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
-                        <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
-                            <Button.Content>
-                                <Viewbox Height="20" Width="30">
-                                    <SymbolIcon Symbol="More"/>
-                                </Viewbox>
-                            </Button.Content>
-                            <Button.Flyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
-                                </MenuFlyout>
-                            </Button.Flyout>
-                        </Button>
-                    </StackPanel>
+                            <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                            <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                            <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text=""/>
+                            <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button.Content>
+                                    <Viewbox Height="20" Width="30">
+                                        <SymbolIcon Symbol="More"/>
+                                    </Viewbox>
+                                </Button.Content>
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                        <StackPanel Visibility="Collapsed" x:Name="DataEdit" Orientation="Horizontal" DataContext="Data"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                            <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                            <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                            <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,0" Text=""/>
+                            <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button.Content>
+                                    <Viewbox Height="20" Width="30">
+                                        <SymbolIcon Symbol="Accept"/>
+                                    </Viewbox>
+                                </Button.Content>
+                            </Button>
+                            <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button.Content>
+                                    <Viewbox Height="20" Width="30">
+                                        <SymbolIcon Symbol="More"/>
+                                    </Viewbox>
+                                </Button.Content>
+                                <Button.Flyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

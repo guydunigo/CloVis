@@ -44,7 +44,7 @@ namespace ResumeElements
         /// Return a list of all pieces of Data unlisted in any categories other than the index
         /// </summary>
         /// <returns></returns>
-        public static ElementList<Data> GetMiscellaneaous()
+        public static ElementList<Data> GetMiscellaneous()
         {
             var misc = new ElementList<Data>("Divers");
             foreach(Data d in DataIndex.Values)
