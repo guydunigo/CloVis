@@ -25,63 +25,17 @@ namespace CloVis
         public DetailsEdit()
         {
             this.InitializeComponent();
+            this.Loaded += OnLoaded;
         }
 
-        private void SymbolIcon_PointerEntered(object sender, PointerRoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            var temp = sender as SymbolIcon;
-            if (temp.Symbol == Symbol.Add)
-                temp.Foreground = Application.Current.Resources["CloVisBlue"] as SolidColorBrush;
+            foreach(ResumeElements.ElementList el in ResumeElements.Index.Root.Values)
+                IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = el } });
+            IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = ResumeElements.Index.GetMiscellaneaous() } });
+
+            IndexList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> } });
         }
 
-        private void SymbolIcon_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            var temp = sender as SymbolIcon;
-            if (temp.Symbol == Symbol.Add)
-                temp.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
-        }
-
-        private void SymbolIcon_PointerPressed(object sender, PointerRoutedEventArgs e)
-        {
-            var temp = sender as SymbolIcon;
-            if (temp.Symbol == Symbol.Add)
-            {
-                temp.Symbol = Symbol.Remove;
-                temp.Foreground = Application.Current.Resources["CloVisBlue"] as SolidColorBrush;
-
-                ((temp.Parent as StackPanel).Parent as StackPanel).Children[1].Visibility = Visibility.Visible;
-            }
-            else if (temp.Symbol == Symbol.Remove)
-            {
-                temp.Symbol = Symbol.Add;
-                temp.Foreground = new SolidColorBrush(Windows.UI.Colors.Black);
-
-                ((temp.Parent as StackPanel).Parent as StackPanel).Children[1].Visibility = Visibility.Collapsed;
-            }
-            //throw new NotImplementedException("show sublist");
-        }
-
-        private void ElementList_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            test.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = ResumeElements.Index.Root["Coordonnées"] } });
-            test.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> } });
-
-            //throw new NotImplementedException();
-        }
-
-        private void Data_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Element_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void Element_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -47,7 +47,7 @@ namespace ResumeElements
         public static ElementList<Data> GetMiscellaneaous()
         {
             var misc = new ElementList<Data>("Divers");
-            foreach(Data d in DataIndex)
+            foreach(Data d in DataIndex.Values)
             {
                 if (d.Categories.Count == 1 && d.Categories[0] == DataIndex)
                 {
