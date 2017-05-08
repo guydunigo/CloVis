@@ -95,13 +95,15 @@
                             </StackPanel>
                             <StackPanel x:Name="DateEdit" Visibility="Collapsed" >
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox x:Name="DateForeword" Text="" Margin="2"/>
+                                    <TextBox x:Name="DateForeword" Text="" Margin="2" PlaceholderText="Some text"/>
                                     <ComboBox x:Name="DateFirstField" Margin="2">
                                         <x:String>D&#x00E9;but</x:String>
                                         <x:String>Fin</x:String>
                                     </ComboBox>
                                     <DatePicker x:Name="DateFirst" Margin="2"/>
-                                    <TextBox x:Name="DateMiddleword" Text="" Margin="2"/>
+                                    <TextBox x:Name="DateMiddleword" Margin="2" PlaceholderText="Some text"/>
+                                    <TextBlock x:Name="DataFirstFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
+                                    <TextBox x:Name="DateFirstFormat" Margin="2"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <ComboBox x:Name="DateSecondField" Margin="2">
@@ -110,13 +112,15 @@
                                         <x:String>Fin</x:String>
                                     </ComboBox>
                                     <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2"/>
-                                    <TextBox Visibility="Collapsed" x:Name="DateEndword" Text="" Margin="2"/>
+                                    <TextBox Visibility="Collapsed" x:Name="DateEndword" Text="" Margin="2" PlaceholderText="Some text"/>
+                                    <TextBlock Visibility="Collapsed" x:Name="DataSecondFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
+                                    <TextBox Visibility="Collapsed" x:Name="DateSecondFormat" Margin="2"/>
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel x:Name="TimeSpanEdit" Visibility="Collapsed" Orientation="Horizontal">
-                                <TextBox x:Name="TSForeword" Text="" Margin="2"/>
+                                <TextBox x:Name="TSForeword" Text="" Margin="2" PlaceholderText="Some text"/>
                                 <TextBox x:Name="TSMiddleword" Text="" PlaceholderText="Nombre de jours" Margin="2"/>
-                                <TextBox x:Name="TSEndword" Text="" Margin="2"/>
+                                <TextBox x:Name="TSEndword" Text="" Margin="2" PlaceholderText="Some text"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>

@@ -67,12 +67,12 @@ namespace ResumeElements
             if (DisplayFormat[rank + 1] == '1')
             {
                 tab[1] = "start";
-                tab[2] = StartTime.ToString(GetDisplayFormat(1));
+                tab[2] = GetDisplayFormat(1);
             }
             else if (DisplayFormat[rank + 1] == '2')
             {
                 tab[1] = "end";
-                tab[2] = EndTime.ToString(GetDisplayFormat(2));
+                tab[2] = GetDisplayFormat(2);
             }
 
             rank = DisplayFormat.IndexOf(")$");
@@ -86,12 +86,12 @@ namespace ResumeElements
                 if (temp[rank + 1] == '1')
                 {
                     tab[4] = "start";
-                    tab[5] = StartTime.ToString(GetDisplayFormat(1));
+                    tab[5] = GetDisplayFormat(1);
                 }
                 else if (temp[rank + 1] == '2')
                 {
                     tab[4] = "end";
-                    tab[5] = EndTime.ToString(GetDisplayFormat(2));
+                    tab[5] = GetDisplayFormat(2);
                 }
 
                 rank = temp.IndexOf(")$");
@@ -108,8 +108,11 @@ namespace ResumeElements
         public string RenderDates()
         {
             var res = GetDisplayFormatStructure();
-
-            return res[0] + res[2] + res[3] + res[5] + res[6];
+            var date1 = res[1] == "start" ? StartTime.ToString(res[2]) : EndTime.ToString(res[2]);
+            var date2 = "";
+            if (res[4] != "")
+                date2 = res[4] == "start" ? StartTime.ToString(res[5]) : EndTime.ToString(res[5]);
+            return res[0] + date1 + res[3] + date2 + res[6];
         }
 
         /// <summary>

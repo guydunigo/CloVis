@@ -48,7 +48,7 @@ namespace ResumeElements
 
             tab[0] = DisplayFormat.Substring(0, rank);
 
-            tab[1] = TimeSpan.ToString(GetDisplayFormat());
+            tab[1] = GetDisplayFormat();
 
             rank = DisplayFormat.IndexOf(")$");
             tab[2] = DisplayFormat.Substring(rank + 2);
@@ -60,7 +60,7 @@ namespace ResumeElements
         {
             var res = GetDisplayFormatStructure();
 
-            return res[0] + res[1]+ res[2];
+            return res[0] + TimeSpan.ToString(res[1]) + res[2];
         }
 
         /// <summary>

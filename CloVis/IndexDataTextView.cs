@@ -90,6 +90,28 @@ namespace CloVis
 
             //throw new NotImplementedException("Save Index ?");
         }
+        public static void ShowSecondDate(IndexDataTextView instance)
+        {
+            if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
+                ds.Visibility = Visibility.Visible;
+            if (instance.GetTemplateChild("DateSecondFormat") is TextBox form)
+                form.Visibility = Visibility.Visible;
+            if (instance.GetTemplateChild("DataSecondFormatName") is TextBlock txt)
+                txt.Visibility = Visibility.Visible;
+            if (instance.GetTemplateChild("DateEndword") is TextBox end)
+                end.Visibility = Visibility.Visible;
+        }
+        public static void HideSecondDate(IndexDataTextView instance)
+        {
+            if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
+                ds.Visibility = Visibility.Collapsed;
+            if (instance.GetTemplateChild("DateSecondFormat") is TextBox form)
+                form.Visibility = Visibility.Collapsed;
+            if (instance.GetTemplateChild("DateSecondFormatName") is TextBlock txt)
+                txt.Visibility = Visibility.Collapsed;
+            if (instance.GetTemplateChild("DateEndword") is TextBox end)
+                end.Visibility = Visibility.Collapsed;
+        }
 
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -129,30 +151,26 @@ namespace CloVis
                         dff.SelectedIndex = tab[1] == "start" ? 0 : 1;
                     if (instance.GetTemplateChild("DateFirst") is DatePicker df)
                         df.Date = tab[1] == "start" ? dd.StartTime : dd.EndTime;
+                    if (instance.GetTemplateChild("DateFirstFormat") is TextBox form)
+                        form.Text = tab[2];
                     if (instance.GetTemplateChild("DateMiddleword") is TextBox mid)
                         mid.Text = tab[3];
                     if (instance.GetTemplateChild("DateSecondField") is ComboBox dsf)
                         if (tab[4] == "")
                         {
                             dsf.SelectedIndex = 0;
-                            if (instance.GetTemplateChild("DateSecond") is DatePicker ds1)
-                                ds1.Visibility = Visibility.Collapsed;
-                            if (instance.GetTemplateChild("DateEndword") is TextBox end1)
-                                end1.Visibility = Visibility.Collapsed;
+                            HideSecondDate(instance);
                         }
                         else
                         {
                             dsf.SelectedIndex = tab[4] == "start" ? 1 : 2;
+                            ShowSecondDate(instance);
                             if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
-                            {
-                                ds.Visibility = Visibility.Visible;
                                 ds.Date = tab[4] == "start" ? dd.StartTime : dd.EndTime;
-                            }
+                            if (instance.GetTemplateChild("DateSecondFormat") is TextBox form1)
+                                form1.Text = tab[5];
                             if (instance.GetTemplateChild("DateEndword") is TextBox end)
-                            {
-                                end.Visibility = Visibility.Visible;
                                 end.Text = tab[6];
-                            }
                         }
                 }
                 else if (instance.Data is DataTimeSpan<string> dts)
@@ -162,7 +180,7 @@ namespace CloVis
                     if (instance.GetTemplateChild("TSForeword") is TextBox fore)
                         fore.Text = tab[0];
                     if (instance.GetTemplateChild("TSMiddleword") is TextBox mid)
-                        mid.Text = tab[1];
+                        mid.Text = dts.TimeSpan.ToString(tab[1]);
                     if (instance.GetTemplateChild("TSEndword") is TextBox end)
                         end.Text = tab[2];
                 }
