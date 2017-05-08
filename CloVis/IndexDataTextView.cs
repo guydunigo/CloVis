@@ -121,6 +121,25 @@ namespace CloVis
                     dd.DisplayFormat = temp;
                 }
             }
+            else if (Data is DataTimeSpan<string> dts)
+            {
+                if (GetTemplateChild("TSMiddleword") is TextBox tsmid)
+                {
+                    try
+                    {
+                        dts.TimeSpan = new TimeSpan(int.Parse(tsmid.Text), 0, 0, 0);
+                    }
+                    catch(FormatException)
+                    {
+                        // If it can't convert the Int, the user didn't enter a number so we don't updat ethe value.
+                    }
+                }
+                if (GetTemplateChild("TSForeword") is TextBox tsfore &&
+                        GetTemplateChild("TSEndword") is TextBox tsend)
+                {
+                    dts.DisplayFormat = tsfore.Text + "$(" + dts.GetDisplayFormat() + ")$" + tsend.Text;
+                }
+            }
 
             // Back to View mode :
             SwitchToViewData();

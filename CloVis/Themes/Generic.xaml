@@ -39,7 +39,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:IndexDataTextView">
-                    <Grid>
+                    <StackPanel>
                         <StackPanel x:Name="DataView" Orientation="Horizontal" DataContext="Data"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -49,7 +49,7 @@
                             <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
                             <TextBlock Visibility="Collapsed" x:Name="TimeView" VerticalAlignment="Center" Margin="5,0" Text=""/>
                             <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text=""/>
-                            <Button x:Name="EditBtn" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                            <Button x:Name="EditBtn" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                                 <Button.Content>
                                     <Viewbox Height="20" Width="30">
                                         <SymbolIcon Symbol="Edit"/>
@@ -78,7 +78,7 @@
                                 <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{TemplateBinding Name}"/>
                                 <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
                                 <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text=""/>
-                                <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                                     <Button.Content>
                                         <Viewbox Height="20" Width="30">
                                             <SymbolIcon Symbol="Accept"/>
@@ -131,7 +131,7 @@
                                 <TextBox x:Name="TSEndword" Text="" Margin="2" PlaceholderText="Some text"/>
                             </StackPanel>
                         </StackPanel>
-                    </Grid>
+                    </StackPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
