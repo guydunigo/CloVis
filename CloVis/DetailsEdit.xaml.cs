@@ -30,6 +30,7 @@ namespace CloVis
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            // List elements in hierarchy
             foreach(ResumeElements.ElementList el in ResumeElements.Index.Root.Values)
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = el } });
 
@@ -38,7 +39,10 @@ namespace CloVis
             if (divers.Count > 0)
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = divers } });
 
-            IndexList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> } });
+            // List data from A to Z
+            foreach (ResumeElements.Data d in ResumeElements.Index.DataIndex.Values)
+                if (d is ResumeElements.Data<string> el)
+                    DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });
         }
 
     }

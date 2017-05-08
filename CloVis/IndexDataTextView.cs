@@ -111,7 +111,7 @@ namespace CloVis
                         + "$" + ((first.SelectedItem as string) == (first.Items[0] as string) ? "1" : "2") + "("
                         + fform.Text + ")$"
                         + mid.Text;
-                    if (second.SelectedItem is string s && s != (first.Items[0] as string))
+                    if (second.SelectedItem is string s && s != (second.Items[0] as string))
                     {
                         temp += "$" + ((second.SelectedItem as string) == (second.Items[1] as string) ? "1" : "2") + "("
                             + sform.Text + ")$"
@@ -200,6 +200,8 @@ namespace CloVis
                         {
                             dsf.SelectedIndex = 0;
                             HideSecondDate(instance);
+                            if (instance.GetTemplateChild("DateSecondFormat") is TextBox form1)
+                                form1.Text = tab[2]; // Completes automatically the field with the same format as the first one
                         }
                         else
                         {

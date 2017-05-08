@@ -8,7 +8,7 @@ namespace ResumeElements
 {
     public class DataTimeSpan<T>: Data<T>
     {
-        public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isDefault = true) : base(name, value, level, description, isDefault)
+        public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
             TimeSpan = span;
 

@@ -22,7 +22,7 @@ namespace ResumeElements
         /// <param name="level"></param>
         /// <param name="description"></param>
         /// <param name="isDefault"></param>
-        public DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isDefault = true) : base(name, value, level, description, isDefault)
+        public DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
             StartTime = start;
             EndTime = end;

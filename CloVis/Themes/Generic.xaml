@@ -94,6 +94,7 @@
                                     <Button.Flyout>
                                         <MenuFlyout>
                                             <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
+                                            <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
                                             <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
                                             <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
                                         </MenuFlyout>
