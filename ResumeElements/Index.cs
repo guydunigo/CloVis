@@ -76,6 +76,9 @@ namespace ResumeElements
             new ElementList<Element>("Compétences"),
             new ElementList<Element>("Langues"),
             new ElementList<Element>("Diplômes"),
+            new ElementList<Element>("Études"),
+            new ElementList<Element>("Expérience professionnelle"),
+            new ElementList<Element>("Centres d'intérêts"),
             // Remplir
         };
     }

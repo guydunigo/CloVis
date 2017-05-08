@@ -219,19 +219,7 @@ namespace CloVis
                 // Adds date if DataDated or DataTimeSpan then display the value
                 if (d is DataDated<string> dd)
                 {
-                    text = dd.StartTime.ToString(dd.DisplayFormat);
-
-                    // If it hasn't finished
-                    if (dd.EndTime == default(DateTime))
-                    {
-                        text = "Depuis " + text;
-                    }
-                    // If there's an end date
-                    else if (dd.EndTime != dd.StartTime)
-                    {
-                        text += " - " + dd.EndTime.ToString(dd.DisplayFormat);
-                    }
-
+                    text = dd.RenderDates();
                 }
                 else if (d is DataTimeSpan<string> dts)
                 {

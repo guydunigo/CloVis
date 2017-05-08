@@ -31,6 +31,9 @@ namespace CloVis
 
             if (GetTemplateChild("AcceptChanges") is Button btn)
                 btn.Click += AcceptChanges_Click;
+            if (GetTemplateChild("ValueEdit") is TextBox tb)
+                KeyDown += AcceptChanges_KeyDown;
+            //throw new NotImplementedException("Pressing Enter = validating");
         }
 
         public ResumeElements.Data<string> Data
@@ -56,6 +59,19 @@ namespace CloVis
             if (GetTemplateChild("DataView") is StackPanel sp1)
                 sp1.Visibility = Visibility.Visible;
         }
+        public void AcceptChanges()
+        {
+            if (GetTemplateChild("ValueEdit") is TextBox tb)
+                Data.Value = tb.Text;
+
+            // Back to View mode :
+            SwitchToViewData();
+
+            // Update values in the fields :
+            OnDataChanged(this, null);
+
+            //throw new NotImplementedException("Save Index ?");
+        }
 
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -80,16 +96,13 @@ namespace CloVis
 
         private void AcceptChanges_Click(object sender, RoutedEventArgs e)
         {
-            if (GetTemplateChild("ValueEdit") is TextBox tb)
-                Data.Value = tb.Text;
+            AcceptChanges();
+        }
 
-            // Back to View mode :
-            SwitchToViewData();
-
-            // Update values in the fields :
-            OnDataChanged(this, null);
-
-            //throw new NotImplementedException("Save Index ?");
+        private void AcceptChanges_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+                AcceptChanges();
         }
     }
 }

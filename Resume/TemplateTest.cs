@@ -27,7 +27,8 @@ namespace Resume
         };
             var boite_competences = new BoxText(75, 80, 50, 105, 75, 0, "Compétences");
             var boite_coordonnées = new BoxText(5, 40, 20, 200, 60, 10, "Coordonnées");
-            var boite_centres_dinteret = new BoxText(75, 200, 10, 150, 50, 0, "Centres d'intérêts");
+            var boite_etudes = new BoxText(75, 200, 10, 150, 50, 0, "Études");
+            var boite_exp = new BoxText(75, 250, 10, 150, 50, 0, "Expérience professionnelle");
             var boite_langues = new BoxText(5, 200, 10, 70, 50, 0, "Langues");
             var boite_diplomes = new BoxText(75, 130, 20, 130, 50, 0, "Diplômes");
 
@@ -51,7 +52,8 @@ namespace Resume
             template.Layout.AddTextBox(boite_coordonnées);
             template.Layout.AddTextBox(boite_langues);
             template.Layout.AddTextBox(boite_competences);
-            template.Layout.AddTextBox(boite_centres_dinteret);
+            template.Layout.AddTextBox(boite_etudes);
+            template.Layout.AddTextBox(boite_exp);
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddBackBox(fond);
             template.Layout.AddBackBox(fond2);

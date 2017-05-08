@@ -26,17 +26,124 @@ namespace ResumeElements
         {
             StartTime = start;
             EndTime = end;
+            DisplayFormat = displayFormat;
+        }
 
-            if (displayFormat == "")
-                GenerateDisplayFormat();
-            //throw new NotImplementedException("DisplayFormat");
+        private string displayFormat;
+        /// <summary>
+        /// If there is two dates (beginning and ending) : "[words] $1(display format)$ [words] $2(display format)$ [word]" (the two dates can be switched)
+        /// If there is just a single date or it is not finished : "[words] $1(display format)$ [words]"
+        /// 
+        /// The date display format using the type described at this address :
+        /// https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
+        /// </summary>
+        public string DisplayFormat
+        {
+            get => displayFormat;
+            set
+            {
+                if (IsDisplayFormatGood(value))
+                    displayFormat = value;
+                else
+                    displayFormat = GenerateDisplayFormat();
+            }
+        }
+
+        public string RenderDates()
+        {
+            var res = "";
+            var temp = "";
+
+
+            var rank = DisplayFormat.IndexOf("$");
+
+            res = DisplayFormat.Substring(0, rank);
+
+            if (DisplayFormat[rank + 1] == '1')
+                res += StartTime.ToString(GetDisplayFormat(1));
+            else if (DisplayFormat[rank + 1] == '2')
+                res += EndTime.ToString(GetDisplayFormat(2));
+            
+            rank = DisplayFormat.IndexOf(")$");
+
+            if (DisplayFormat.Contains("$2"))
+            {
+                temp = DisplayFormat.Substring(rank + 2);
+                rank = temp.IndexOf("$");
+                res += temp.Substring(0, rank);
+
+                if (temp[rank + 1] == '1')
+                    res += StartTime.ToString(GetDisplayFormat(1));
+                else if (temp[rank + 1] == '2')
+                    res += EndTime.ToString(GetDisplayFormat(2));
+
+                rank = temp.IndexOf(")$");
+                res += temp.Substring(rank + 2);
+            }
+            else
+            {
+                res += DisplayFormat.Substring(rank + 2);
+            }
+
+            return res;
         }
 
         /// <summary>
-        /// The timeSpan display format using the type described at this address :
-        /// https://msdn.microsoft.com/en-us/library/az4se3k1(v=vs.110).aspx
+        /// Useful ?
         /// </summary>
-        public string DisplayFormat { get; set; }
+        /// <returns></returns>
+        public static bool IsDisplayFormatGood(string format)
+        {
+            var date = new DateTime(2000, 12, 1);
+
+            if (format == "") return false;
+
+            if (format.Contains("$1") == false)
+                return false;
+            try
+            {
+                date.ToString(GetDisplayFormatFrom(format,1));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            if (format.Contains("$2") == true)
+            {
+                try
+                {
+                    date.ToString(GetDisplayFormatFrom(format,2));
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="date">1 for start and 2 for end time</param>
+        /// <returns></returns>
+        public string GetDisplayFormat(int date)
+        {
+            return GetDisplayFormatFrom(DisplayFormat, date);
+        }
+
+        public static string GetDisplayFormatFrom(string format, int date)
+        {
+            var res = "";
+            var rank = format.IndexOf("$" + date.ToString());
+            res = format.Substring(rank+3);
+            rank = res.IndexOf(")$");
+            res = res.Substring(0, rank);
+
+            return res;
+        }
 
         /// <summary>
         /// Generate the format to display the date based on the given dates
@@ -44,7 +151,20 @@ namespace ResumeElements
         /// <returns></returns>
         public string GenerateDisplayFormat()
         {
-            throw new NotImplementedException();
+            var res = "$1(D)$";
+
+            // If it hasn't finished
+            if (EndTime == default(DateTime))
+            {
+                res = "Depuis " + res;
+            }
+            // If there's an end date
+            else if (EndTime != StartTime)
+            {
+                res += " - " + "$2(D)$";
+            }
+
+            return res;
         }
 
         protected DateTime startTime;
@@ -85,6 +205,8 @@ namespace ResumeElements
                 {
                     endTime = StartTime;
                 }
+                else
+                    endTime = value;
             }
         }
 
