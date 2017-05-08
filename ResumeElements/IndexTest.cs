@@ -24,10 +24,10 @@ namespace ResumeElements
             Index.Root["Langues"].Add(new Data<string>("Anglais", "anglais", 5));
             Index.Root["Langues"].Add(new Data<string>("Allemand", "allemand", 5));
             Index.Root["Langues"].Add(new Data<string>("Chinois", "chinois", 5));
-            Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017, 12, 24), new DateTime(2017, 12, 24), "En $1(Y)$"));
+            Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017, 12, 24), new DateTime(2017, 12, 24), "En $1(Y)$"));
             Index.Root["Diplômes"].Add(new DataDated<string>("Bac", "bac", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
             Index.Root["Études"].Add(new DataDated<string>("Université de Ulm", "Université de Ulm", new DateTime(1992, 11, 14), new DateTime(1998, 11, 14), "De $1(yy)$ à $2(yy)$"));
-            Index.Root["Expérience professionnelle"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", "Ingénieur narcoleptiques", new TimeSpan(300,0,0,0), "Pendant $(%d)$ jours"));
+            Index.Root["Expériences professionnelles"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", "Ingénieur narcoleptiques", new TimeSpan(300,0,0,0), "Pendant $(%d)$ jours"));
         }
     }
 }

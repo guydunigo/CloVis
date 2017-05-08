@@ -47,6 +47,7 @@
                             <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                             <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
                             <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                            <TextBlock Visibility="Collapsed" x:Name="TimeView" VerticalAlignment="Center" Margin="5,0" Text=""/>
                             <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text=""/>
                             <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                 <Button.Content>
@@ -61,33 +62,62 @@
                                 </Button.Flyout>
                             </Button>
                         </StackPanel>
-                        <StackPanel Visibility="Collapsed" x:Name="DataEdit" Orientation="Horizontal" DataContext="Data"
+                        <StackPanel Padding="0" Margin="0" Visibility="Collapsed"  x:Name="DataEdit"  DataContext="Data"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
-                            <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
-                            <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
-                            <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
-                            <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,0" Text=""/>
-                            <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
-                                <Button.Content>
-                                    <Viewbox Height="20" Width="30">
-                                        <SymbolIcon Symbol="Accept"/>
-                                    </Viewbox>
-                                </Button.Content>
-                            </Button>
-                            <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
-                                <Button.Content>
-                                    <Viewbox Height="20" Width="30">
-                                        <SymbolIcon Symbol="More"/>
-                                    </Viewbox>
-                                </Button.Content>
-                                <Button.Flyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
-                                    </MenuFlyout>
-                                </Button.Flyout>
-                            </Button>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                                <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                                <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,0" Text=""/>
+                                <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                    <Button.Content>
+                                        <Viewbox Height="20" Width="30">
+                                            <SymbolIcon Symbol="Accept"/>
+                                        </Viewbox>
+                                    </Button.Content>
+                                </Button>
+                                <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                    <Button.Content>
+                                        <Viewbox Height="20" Width="30">
+                                            <SymbolIcon Symbol="More"/>
+                                        </Viewbox>
+                                    </Button.Content>
+                                    <Button.Flyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
+                                            <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
+                                            <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                        </MenuFlyout>
+                                    </Button.Flyout>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel x:Name="DateEdit" Visibility="Collapsed" >
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox x:Name="DateForeword" Text="" Margin="2"/>
+                                    <ComboBox x:Name="DateFirstField" Margin="2">
+                                        <x:String>D&#x00E9;but</x:String>
+                                        <x:String>Fin</x:String>
+                                    </ComboBox>
+                                    <DatePicker x:Name="DateFirst" Margin="2"/>
+                                    <TextBox x:Name="DateMiddleword" Text="" Margin="2"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <ComboBox x:Name="DateSecondField" Margin="2">
+                                        <x:String>Pas de deuxi&#x00E8;me date</x:String>
+                                        <x:String>D&#x00E9;but</x:String>
+                                        <x:String>Fin</x:String>
+                                    </ComboBox>
+                                    <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2"/>
+                                    <TextBox Visibility="Collapsed" x:Name="DateEndword" Text="" Margin="2"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel x:Name="TimeSpanEdit" Visibility="Collapsed" Orientation="Horizontal">
+                                <TextBox x:Name="TSForeword" Text="" Margin="2"/>
+                                <TextBox x:Name="TSMiddleword" Text="" PlaceholderText="Nombre de jours" Margin="2"/>
+                                <TextBox x:Name="TSEndword" Text="" Margin="2"/>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>

@@ -41,7 +41,7 @@ namespace Resume
 
             var diplomes = new ElementList<Element>("Diplômes")
             {
-                new DataDated<string>("Flying Spaghetti Monster degree", "Flyer Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(D)$",-1, "",true),
+                new DataDated<string>("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(d)$",-1, "",true),
                 new DataDated<string>("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1, "",true)
             };
 

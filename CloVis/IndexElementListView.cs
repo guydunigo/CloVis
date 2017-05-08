@@ -106,14 +106,6 @@ namespace CloVis
         {
             if (e is ResumeElements.ElementList el)
                 Add(new IndexElementListView() { ElementList = el });
-            else if (e is ResumeElements.DataDated<string> dd)
-            {
-                //throw new NotImplementedException();
-            }
-            else if (e is ResumeElements.DataTimeSpan<string> dts)
-            {
-                //throw new NotImplementedException();
-            }
             else if (e is ResumeElements.Data<string> d)
                 Add(new IndexDataTextView() { Data = d });
         }

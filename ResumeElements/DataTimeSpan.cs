@@ -36,20 +36,31 @@ namespace ResumeElements
             }
         }
 
-        public string RenderTimeSpan()
+        /// <summary>
+        /// ["foreword","format","endword"]
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetDisplayFormatStructure()
         {
-            var res = "";
-
+            string[] tab = { "", "", "" };
+            
             var rank = DisplayFormat.IndexOf("$");
 
-            res = DisplayFormat.Substring(0, rank);
+            tab[0] = DisplayFormat.Substring(0, rank);
 
-            res += TimeSpan.ToString(GetDisplayFormat());
+            tab[1] = TimeSpan.ToString(GetDisplayFormat());
 
             rank = DisplayFormat.IndexOf(")$");
-            res += DisplayFormat.Substring(rank + 2);
+            tab[2] = DisplayFormat.Substring(rank + 2);
 
-            return res;
+            return tab;
+        }
+
+        public string RenderTimeSpan()
+        {
+            var res = GetDisplayFormatStructure();
+
+            return res[0] + res[1]+ res[2];
         }
 
         /// <summary>

@@ -49,43 +49,67 @@ namespace ResumeElements
             }
         }
 
-        public string RenderDates()
+        /// <summary>
+        /// Get display format structure as follows :
+        /// ["foreword","start"/"end","format","middleword"/"endword","start"/"end"/"","format"/"","endword"/""]
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetDisplayFormatStructure()
         {
-            var res = "";
+            string[] tab = { "", "", "", "", "", "", "" };
+            
             var temp = "";
-
 
             var rank = DisplayFormat.IndexOf("$");
 
-            res = DisplayFormat.Substring(0, rank);
+            tab[0] = DisplayFormat.Substring(0, rank);
 
             if (DisplayFormat[rank + 1] == '1')
-                res += StartTime.ToString(GetDisplayFormat(1));
-            else if (DisplayFormat[rank + 1] == '2')
-                res += EndTime.ToString(GetDisplayFormat(2));
-            
-            rank = DisplayFormat.IndexOf(")$");
-
-            if (DisplayFormat.Contains("$2"))
             {
-                temp = DisplayFormat.Substring(rank + 2);
-                rank = temp.IndexOf("$");
-                res += temp.Substring(0, rank);
+                tab[1] = "start";
+                tab[2] = StartTime.ToString(GetDisplayFormat(1));
+            }
+            else if (DisplayFormat[rank + 1] == '2')
+            {
+                tab[1] = "end";
+                tab[2] = EndTime.ToString(GetDisplayFormat(2));
+            }
 
+            rank = DisplayFormat.IndexOf(")$");
+            temp = DisplayFormat.Substring(rank + 2);
+
+            if (temp.Contains("$"))
+            {
+                rank = temp.IndexOf("$");
+                tab[3] = temp.Substring(0, rank);
+                
                 if (temp[rank + 1] == '1')
-                    res += StartTime.ToString(GetDisplayFormat(1));
+                {
+                    tab[4] = "start";
+                    tab[5] = StartTime.ToString(GetDisplayFormat(1));
+                }
                 else if (temp[rank + 1] == '2')
-                    res += EndTime.ToString(GetDisplayFormat(2));
+                {
+                    tab[4] = "end";
+                    tab[5] = EndTime.ToString(GetDisplayFormat(2));
+                }
 
                 rank = temp.IndexOf(")$");
-                res += temp.Substring(rank + 2);
+                tab[6] = temp.Substring(rank + 2);
             }
             else
             {
-                res += DisplayFormat.Substring(rank + 2);
+                tab[3] = temp;
             }
 
-            return res;
+            return tab;
+        }
+
+        public string RenderDates()
+        {
+            var res = GetDisplayFormatStructure();
+
+            return res[0] + res[2] + res[3] + res[5] + res[6];
         }
 
         /// <summary>
