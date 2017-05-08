@@ -22,7 +22,7 @@ namespace ResumeElements
         /// <param name="level"></param>
         /// <param name="description"></param>
         /// <param name="isDefault"></param>
-        public DataDated(string name, T value, DateTime start, DateTime end = default(DateTime), string displayFormat = "", double level = -1, string description = "", bool isDefault = true) : base(name, value, level, description, isDefault)
+        public DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isDefault = true) : base(name, value, level, description, isDefault)
         {
             StartTime = start;
             EndTime = end;
@@ -181,7 +181,7 @@ namespace ResumeElements
             var res = "$1(D)$";
 
             // If it hasn't finished
-            if (EndTime == default(DateTime))
+            if (EndTime == default(DateTimeOffset))
             {
                 res = "Depuis " + res;
             }
@@ -194,8 +194,8 @@ namespace ResumeElements
             return res;
         }
 
-        protected DateTime startTime;
-        public DateTime StartTime {
+        protected DateTimeOffset startTime;
+        public DateTimeOffset StartTime {
             get => startTime;
             set
             {
@@ -211,12 +211,12 @@ namespace ResumeElements
                 }
             }
         }
-        protected DateTime endTime;
+        protected DateTimeOffset endTime;
         /// <summary>
         /// If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.
         /// Also, EndTime cannot be prior to StartTime, in which case it is set to StartTime
         /// </summary>
-        public DateTime EndTime
+        public DateTimeOffset EndTime
         {
             get
             {
@@ -224,9 +224,9 @@ namespace ResumeElements
             }
             set
             {
-                if (value == default(DateTime))
+                if (value == default(DateTimeOffset))
                 {
-                    endTime = default(DateTime);
+                    endTime = default(DateTimeOffset);
                 }
                 else if (value < StartTime)
                 {
@@ -253,6 +253,7 @@ namespace ResumeElements
             {
                 StartTime = d.StartTime;
                 EndTime = d.EndTime;
+                DisplayFormat = d.DisplayFormat;
             }
             else
                 throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");

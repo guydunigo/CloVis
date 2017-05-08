@@ -42,11 +42,13 @@ namespace CloVis
 
             if (GetTemplateChild("DataView") is StackPanel sp)
                 sp.DoubleTapped += Data_DoubleTapped;
+            if (GetTemplateChild("EditBtn") is Button ebtn)
+                ebtn.Click += EditBtn_Click;
 
             if (GetTemplateChild("AcceptChanges") is Button btn)
                 btn.Click += AcceptChanges_Click;
-            //if (GetTemplateChild("ValueEdit") is TextBox tb)
-                KeyDown += AcceptChanges_KeyDown;
+
+            KeyDown += AcceptChanges_KeyDown;
 
             if (GetTemplateChild("DateFirstField") is ComboBox cb)
                 cb.SelectionChanged += DataFirst_SelectionChanged;
@@ -81,6 +83,44 @@ namespace CloVis
         {
             if (GetTemplateChild("ValueEdit") is TextBox tb)
                 Data.Value = tb.Text;
+            if (Data is DataDated<string> dd)
+            {
+                if (GetTemplateChild("DateFirstField") is ComboBox cb && GetTemplateChild("DateFirst") is DatePicker dp)
+                {
+                    if ((cb.SelectedItem as String) == (cb.Items[0] as string))
+                        dd.StartTime = dp.Date;
+                    else
+                        dd.EndTime = dp.Date;
+                }
+                if (GetTemplateChild("DateSecondField") is ComboBox cb1 && GetTemplateChild("DateSecond") is DatePicker dp1)
+                {
+                    if ((cb1.SelectedItem as String) == (cb1.Items[1] as string))
+                        dd.StartTime = dp1.Date;
+                    else
+                        dd.EndTime = dp1.Date;
+                }
+                if (GetTemplateChild("DateForeword") is TextBox fore &&
+                        GetTemplateChild("DateFirstField") is ComboBox first &&
+                        GetTemplateChild("DateFirstFormat") is TextBox fform &&
+                        GetTemplateChild("DateMiddleword") is TextBox mid &&
+                        GetTemplateChild("DateSecondField") is ComboBox second &&
+                        GetTemplateChild("DateSecondFormat") is TextBox sform &&
+                        GetTemplateChild("DateEndword") is TextBox end)
+                {
+                    var temp = fore.Text
+                        + "$" + ((first.SelectedItem as string) == (first.Items[0] as string) ? "1" : "2") + "("
+                        + fform.Text + ")$"
+                        + mid.Text;
+                    if (second.SelectedItem is string s && s != (first.Items[0] as string))
+                    {
+                        temp += "$" + ((second.SelectedItem as string) == (second.Items[1] as string) ? "1" : "2") + "("
+                            + sform.Text + ")$"
+                            + end.Text;
+                    }
+
+                    dd.DisplayFormat = temp;
+                }
+            }
 
             // Back to View mode :
             SwitchToViewData();
@@ -96,7 +136,7 @@ namespace CloVis
                 ds.Visibility = Visibility.Visible;
             if (instance.GetTemplateChild("DateSecondFormat") is TextBox form)
                 form.Visibility = Visibility.Visible;
-            if (instance.GetTemplateChild("DataSecondFormatName") is TextBlock txt)
+            if (instance.GetTemplateChild("DateSecondFormatName") is TextBlock txt)
                 txt.Visibility = Visibility.Visible;
             if (instance.GetTemplateChild("DateEndword") is TextBox end)
                 end.Visibility = Visibility.Visible;
@@ -191,6 +231,10 @@ namespace CloVis
         {
             SwitchToEditData();
         }
+        private void EditBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SwitchToEditData();
+        }
 
         private void AcceptChanges_Click(object sender, RoutedEventArgs e)
         {
@@ -208,11 +252,11 @@ namespace CloVis
             // Change the date in the first field :
             if (Data is DataDated<string> dd && GetTemplateChild("DateFirst") is DatePicker dp1)
             {
-                if (e.AddedItems.Contains("Début"))
+                if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
                 {
                     dp1.Date = dd.StartTime;
                 }
-                else if (e.AddedItems.Contains("Fin"))
+                else if (e.AddedItems.Contains((sender as ComboBox).Items[1]))
                 {
                     dp1.Date = dd.EndTime;
                 }
@@ -224,29 +268,23 @@ namespace CloVis
             if (Data is DataDated<string> dd)
             {
                 // Hide or show the last fields :
-                var visi = new Visibility();
-                if (e.RemovedItems.Contains("Pas de deuxième date"))
+                if (e.RemovedItems.Contains((sender as ComboBox).Items[0]))
                 {
-                    visi = Visibility.Visible;
+                    ShowSecondDate(this);
                 }
-                else if (e.AddedItems.Contains("Pas de deuxième date"))
+                else if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
                 {
-                    visi = Visibility.Collapsed;
+                    HideSecondDate(this);
                 }
-
-                if (GetTemplateChild("DateEndword") is TextBox tb)
-                    tb.Visibility = visi;
-                if (GetTemplateChild("DateSecond") is DatePicker dp)
-                    dp.Visibility = visi;
 
                 // Change the date in the second field :
                 if (GetTemplateChild("DateSecond") is DatePicker dp1)
                 {
-                    if (e.AddedItems.Contains("Début"))
+                    if (e.AddedItems.Contains((sender as ComboBox).Items[1]))
                     {
                         dp1.Date = dd.StartTime;
                     }
-                    else if (e.AddedItems.Contains("Fin"))
+                    else if (e.AddedItems.Contains((sender as ComboBox).Items[2]))
                     {
                         dp1.Date = dd.EndTime;
                     }

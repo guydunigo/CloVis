@@ -49,6 +49,13 @@
                             <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
                             <TextBlock Visibility="Collapsed" x:Name="TimeView" VerticalAlignment="Center" Margin="5,0" Text=""/>
                             <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text=""/>
+                            <Button x:Name="EditBtn" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button.Content>
+                                    <Viewbox Height="20" Width="30">
+                                        <SymbolIcon Symbol="Edit"/>
+                                    </Viewbox>
+                                </Button.Content>
+                            </Button>
                             <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                 <Button.Content>
                                     <Viewbox Height="20" Width="30">
@@ -67,10 +74,10 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                             <StackPanel Orientation="Horizontal">
-                                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
-                                <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,0" Text="{TemplateBinding Name}"/>
-                                <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
-                                <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,0" Text=""/>
+                                <CheckBox VerticalAlignment="Center" Margin="5,2" MinWidth="0"/>
+                                <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{TemplateBinding Name}"/>
+                                <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
+                                <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text=""/>
                                 <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                     <Button.Content>
                                         <Viewbox Height="20" Width="30">
@@ -113,7 +120,7 @@
                                     </ComboBox>
                                     <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2"/>
                                     <TextBox Visibility="Collapsed" x:Name="DateEndword" Text="" Margin="2" PlaceholderText="Some text"/>
-                                    <TextBlock Visibility="Collapsed" x:Name="DataSecondFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
+                                    <TextBlock Visibility="Collapsed" x:Name="DateSecondFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
                                     <TextBox Visibility="Collapsed" x:Name="DateSecondFormat" Margin="2"/>
                                 </StackPanel>
                             </StackPanel>

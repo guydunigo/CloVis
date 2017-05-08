@@ -131,6 +131,7 @@ namespace ResumeElements
             if (Index.Find(Name) is DataTimeSpan<T> d)
             {
                 TimeSpan = d.TimeSpan;
+                DisplayFormat = d.DisplayFormat;
             }
             else
                 throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
