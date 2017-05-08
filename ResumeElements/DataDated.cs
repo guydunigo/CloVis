@@ -29,7 +29,7 @@ namespace ResumeElements
             DisplayFormat = displayFormat;
         }
 
-        private string displayFormat;
+        protected string displayFormat;
         /// <summary>
         /// If there is two dates (beginning and ending) : "[words] $1(display format)$ [words] $2(display format)$ [word]" (the two dates can be switched)
         /// If there is just a single date or it is not finished : "[words] $1(display format)$ [words]"

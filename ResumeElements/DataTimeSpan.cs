@@ -12,26 +12,97 @@ namespace ResumeElements
         {
             TimeSpan = span;
 
-            if (displayFormat == "")
-                GenerateDisplayFormat();
-            //throw new NotImplementedException("DisplayFormat");
+            DisplayFormat = displayFormat;
         }
 
         public TimeSpan TimeSpan { get; set; }
 
+        protected string displayFormat;
         /// <summary>
+        /// Must follow this format : "[words] $(Display format) [words]"
+        /// 
         /// The timeSpan display format using the type described at this address :
         /// https://msdn.microsoft.com/en-us/library/ee372286(v=vs.110).aspx
         /// </summary>
-        public string DisplayFormat { get; set; }
+        public string DisplayFormat
+        {
+            get => displayFormat;
+            set
+            {
+                if (IsDisplayFormatGood(value))
+                    displayFormat = value;
+                else
+                    displayFormat = GenerateDisplayFormat();
+            }
+        }
+
+        public string RenderTimeSpan()
+        {
+            var res = "";
+
+            var rank = DisplayFormat.IndexOf("$");
+
+            res = DisplayFormat.Substring(0, rank);
+
+            res += TimeSpan.ToString(GetDisplayFormat());
+
+            rank = DisplayFormat.IndexOf(")$");
+            res += DisplayFormat.Substring(rank + 2);
+
+            return res;
+        }
 
         /// <summary>
-        /// Generate the format to display the date based on the given dates
+        /// Useful ?
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsDisplayFormatGood(string format)
+        {
+            var ts = new TimeSpan(2000, 12, 1);
+
+            if (format == "") return false;
+
+            if (format.Contains("$(") == false)
+                return false;
+            try
+            {
+                ts.ToString(GetDisplayFormatFrom(format));
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public string GetDisplayFormat()
+        {
+            return GetDisplayFormatFrom(DisplayFormat);
+        }
+
+        public static string GetDisplayFormatFrom(string format)
+        {
+            var res = "";
+            var rank = format.IndexOf("$(");
+            res = format.Substring(rank+2);
+            rank = res.IndexOf(")$");
+            res = res.Substring(0, rank);
+
+            return res;
+        }
+
+        /// <summary>
+        /// Generate the format to display the timespan based on the given one
         /// </summary>
         /// <returns></returns>
         public string GenerateDisplayFormat()
         {
-            throw new NotImplementedException();
+            return "Pendant $(%d)$ jours";
         }
 
         /// <summary>

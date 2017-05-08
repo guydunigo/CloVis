@@ -223,7 +223,7 @@ namespace CloVis
                 }
                 else if (d is DataTimeSpan<string> dts)
                 {
-                    text = dts.TimeSpan.ToString(dts.DisplayFormat);
+                    text = dts.RenderTimeSpan();
                 }
 
                 if (text != "")
