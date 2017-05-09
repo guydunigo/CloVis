@@ -85,7 +85,7 @@
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Paramètres</TextBlock>
                             </Grid>
                         </Button>
-                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,1,0,0" BorderBrush="White" Click="Help_Click">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="Help"/>
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Aide</TextBlock>
