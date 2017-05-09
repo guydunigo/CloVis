@@ -29,6 +29,8 @@ namespace ResumeElements
             Index.Root["Études"].Add(new DataDated<string>("Université de Ulm", "Université de Ulm", new DateTime(1992, 11, 14), new DateTime(1998, 11, 14), "De $1(yy)$ à $2(yy)$"));
             Index.Root["Diplômes"].Add(Index.Find("Université de Ulm"));
             Index.Root["Expériences professionnelles"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", "Ingénieur narcoleptiques", new TimeSpan(300,0,0,0), "Pendant $(%d)$ jours"));
+
+            new DataDated<string>("Life", "Life", new DateTime(2000, 01, 02), new DateTime(2222, 11, 22), "Jusque $2(y)$ et depuis $1(y)$");
         }
     }
 }

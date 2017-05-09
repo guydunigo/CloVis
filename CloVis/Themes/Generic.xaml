@@ -138,7 +138,7 @@
                                 <TextBox x:Name="TSEndword" Text="" Margin="2" PlaceholderText="Some text"/>
                             </StackPanel>
                         </StackPanel>
-                        <StackPanel x:Name="CategoriesStack" Margin="45,0,0,0" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0" Visibility="Collapsed" >
+                        <StackPanel x:Name="CategoriesStack" Margin="45,0,0,5" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0" Visibility="Collapsed" >
                             <ListView x:Name="Categories" SelectionMode="None" IsItemClickEnabled="True">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
@@ -188,7 +188,7 @@
                                 </Button.Flyout>
                             </Button>
                         </StackPanel>
-                        <ListView x:Name="SubList" Margin="30,0" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
+                        <ListView x:Name="SubList" Margin="30,5" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}" SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed">
 
                         </ListView>
                     </StackPanel>

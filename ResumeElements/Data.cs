@@ -3,13 +3,21 @@ using System.Collections.Generic;
 
 namespace ResumeElements
 {
+    internal class CategoriesComparer : IComparer<ElementList>
+    {
+        public int Compare(ElementList x, ElementList y)
+        {
+            return x.Name.CompareTo(y.Name);
+        }
+    }
+
     public abstract class Data: Element
     {
 		public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
             double Level = level;
-            categories = new List<ElementList>();
+            categories = new SortedSet<ElementList>(new CategoriesComparer());
 	        if (!isIndependant) Index.AddData(this);
         }
 
@@ -21,15 +29,15 @@ namespace ResumeElements
             else return null;
         }
 
-        protected List<ElementList> categories;
+        protected SortedSet<ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
         /// </summary>
-        public List<ElementList> Categories
+        public SortedSet<ElementList> Categories
         {
             get
             {
-                return new List<ElementList>(categories);
+                return new SortedSet<ElementList>(categories, new CategoriesComparer());
             }
         }
         /// <summary>

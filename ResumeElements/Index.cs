@@ -49,7 +49,7 @@ namespace ResumeElements
             var misc = new ElementList<Data>("Divers");
             foreach(Data d in DataIndex.Values)
             {
-                if (d.Categories.Count == 1 && d.Categories[0] == DataIndex)
+                if (d.Categories.Count == 1 && d.Categories.Contains(DataIndex))
                 {
                     misc.Add(d);
                 }
