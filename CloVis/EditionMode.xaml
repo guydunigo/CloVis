@@ -31,7 +31,7 @@
             <AppBarButton Icon="Upload"  Label="Exporter" Foreground="White"/>
             <AppBarSeparator Foreground="White"/>
             <AppBarButton Icon="Setting" Label="Paramètres" Foreground="White"/>
-            <AppBarButton Icon="Help" Label="Aide" Foreground="White"/>
+            <AppBarButton Icon="Help" Label="Aide" Foreground="White" Click="Help_Click"/>
             <AppBarSeparator Foreground="White"/>
             <AppBarButton Icon="Clear" Label="Retour à l'accueil" Foreground="White" Click="RetourAccueil_Click"/>
         </CommandBar>
