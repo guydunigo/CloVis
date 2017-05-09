@@ -49,14 +49,21 @@
                             <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
                             <TextBlock Visibility="Collapsed" x:Name="TimeView" VerticalAlignment="Center" Margin="5,0" Text=""/>
                             <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text=""/>
-                            <Button x:Name="EditBtn" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                            <Button x:Name="EditBtn" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                                 <Button.Content>
                                     <Viewbox Height="20" Width="30">
                                         <SymbolIcon Symbol="Edit"/>
                                     </Viewbox>
                                 </Button.Content>
                             </Button>
-                            <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                            <ToggleButton x:Name="ToggleCategories" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                                <ToggleButton.Content>
+                                    <Viewbox Height="20" Width="30">
+                                        <SymbolIcon Symbol="AllApps"/>
+                                    </Viewbox>
+                                </ToggleButton.Content>
+                            </ToggleButton>
+                            <Button BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                 <Button.Content>
                                     <Viewbox Height="20" Width="30">
                                         <SymbolIcon Symbol="More"/>
@@ -64,7 +71,7 @@
                                 </Button.Content>
                                 <Button.Flyout>
                                     <MenuFlyout>
-                                        <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                        <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
                                     </MenuFlyout>
                                 </Button.Flyout>
                             </Button>
@@ -78,14 +85,14 @@
                                 <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{TemplateBinding Name}"/>
                                 <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
                                 <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text=""/>
-                                <Button x:Name="AcceptChanges" VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                                <Button x:Name="AcceptChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                                     <Button.Content>
                                         <Viewbox Height="20" Width="30">
                                             <SymbolIcon Symbol="Accept"/>
                                         </Viewbox>
                                     </Button.Content>
                                 </Button>
-                                <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                                <Button VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                     <Button.Content>
                                         <Viewbox Height="20" Width="30">
                                             <SymbolIcon Symbol="More"/>
@@ -130,6 +137,24 @@
                                 <TextBox x:Name="TSMiddleword" Text="" PlaceholderText="Nombre de jours" Margin="2"/>
                                 <TextBox x:Name="TSEndword" Text="" Margin="2" PlaceholderText="Some text"/>
                             </StackPanel>
+                        </StackPanel>
+                        <StackPanel x:Name="CategoriesStack" Margin="45,0,0,0" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0" Visibility="Collapsed" >
+                            <ListView x:Name="Categories" SelectionMode="None" IsItemClickEnabled="True">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                                                <Button.Content>
+                                                    <Viewbox Height="20" Width="30">
+                                                        <SymbolIcon Symbol="Delete"/>
+                                                    </Viewbox>
+                                                </Button.Content>
+                                            </Button>
+                                            <TextBlock VerticalAlignment="Center" Margin="2"  Text="{Binding Name}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
                         </StackPanel>
                     </StackPanel>
                 </ControlTemplate>

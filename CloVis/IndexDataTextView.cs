@@ -54,6 +54,12 @@ namespace CloVis
                 cb.SelectionChanged += DataFirst_SelectionChanged;
             if (GetTemplateChild("DateSecondField") is ComboBox cb1)
                 cb1.SelectionChanged += DataSecond_SelectionChanged;
+
+            if (GetTemplateChild("ToggleCategories") is Windows.UI.Xaml.Controls.Primitives.ToggleButton tb)
+            {
+                tb.Checked += ToggleCategories_Checked;
+                tb.Unchecked += ToggleCategories_Unchecked;
+            }
         }
 
         public ResumeElements.Data<string> Data
@@ -171,7 +177,16 @@ namespace CloVis
             if (instance.GetTemplateChild("DateEndword") is TextBox end)
                 end.Visibility = Visibility.Collapsed;
         }
-
+        public void ShowCategories()
+        {
+            if (GetTemplateChild("CategoriesStack") is StackPanel sp)
+                sp.Visibility = Visibility.Visible;
+        }
+        public void HideCategories()
+        {
+            if (GetTemplateChild("CategoriesStack") is StackPanel sp)
+                sp.Visibility = Visibility.Collapsed;
+        }
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is IndexDataTextView instance && instance.Data != null)
@@ -245,6 +260,11 @@ namespace CloVis
                     if (instance.GetTemplateChild("TSEndword") is TextBox end)
                         end.Text = tab[2];
                 }
+                
+                if (instance.GetTemplateChild("Categories") is ListView lv)
+                {
+                    lv.ItemsSource = instance.Data.Categories;
+                }
             }
         }
 
@@ -311,6 +331,22 @@ namespace CloVis
                     }
                 }
             }
+        }
+        
+        private void ToggleCategories_Checked(object sender, RoutedEventArgs e)
+        {
+            ShowCategories();
+
+            if (GetTemplateChild("ToggleCategories") is Windows.UI.Xaml.Controls.Primitives.ToggleButton tb)
+                tb.IsChecked = true;
+        }
+
+        private void ToggleCategories_Unchecked(object sender, RoutedEventArgs e)
+        {
+            HideCategories();
+
+            if (GetTemplateChild("ToggleCategories") is Windows.UI.Xaml.Controls.Primitives.ToggleButton tb)
+                tb.IsChecked = false;
         }
     }
 }
