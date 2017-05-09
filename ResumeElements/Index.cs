@@ -15,7 +15,7 @@ namespace ResumeElements
         
         public static void AddData(Data d)
         {
-            DataIndex.Add(d);
+            DataIndex.Add(d, false);
         }
         public static void RemoveData(Data d)
         {
@@ -49,9 +49,9 @@ namespace ResumeElements
             var misc = new ElementList<Data>("Divers");
             foreach(Data d in DataIndex.Values)
             {
-                if (d.Categories.Count == 1 && d.Categories.Contains(DataIndex))
+                if (d.Categories.Count == 0)
                 {
-                    misc.Add(d);
+                    misc.Add(d, false);
                 }
             }
             return misc;

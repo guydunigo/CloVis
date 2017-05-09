@@ -85,6 +85,10 @@ namespace ResumeElements
         }
         public void Add(T value)
         {
+            Add(value, true);
+        }
+        public void Add(T value, bool addToElements = true)
+        {
             // Preventing self-containing lists
             if (value.Find(Name) != null)
             {
@@ -94,7 +98,8 @@ namespace ResumeElements
             {
                 if (Find(value.Name) == null)
                 {
-                    AddToElements(value);
+                    if (addToElements)
+                        AddToElements(value);
                     elements.Add(value.Name, value);
                 }
                 else
