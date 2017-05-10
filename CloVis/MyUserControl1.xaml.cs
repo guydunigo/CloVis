@@ -1,29 +1,98 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Navigation;
 using ResumeElements;
+using Resume;
 
-// The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
+// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace CloVis
 {
-    public sealed class IndexDataTextView : Control
+    public class IsTimeSpanToVisibilityConverter: IValueConverter
     {
-        public IndexDataTextView()
+        public object Convert(object value, Type targetType, object parameter, string language)
         {
-            this.DefaultStyleKey = typeof(IndexDataTextView);
+           if (value is string str && Index.Find(str) is DataTimeSpan<string> dts)
+                return Visibility.Visible;
+            else
+                return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class TimeSpanToTextConverter: IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string str && Index.Find(str) is DataTimeSpan<string> dts)
+                return dts.RenderTimeSpan() + ", ";
+            else
+                return "";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsDatedToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string str && Index.Find(str) is DataDated<string> dts)
+                return Visibility.Visible;
+            else
+                return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class DateToTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string str && Index.Find(str) is DataDated<string> dts)
+                return dts.RenderDates() + ", ";
+            else
+                return "";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public sealed partial class MyUserControl1 : UserControl
+    {
+        public MyUserControl1()
+        {
+            this.InitializeComponent();
             this.Loaded += OnLoaded;
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
+            /*
             OnDataChanged(this, null);
             if (Data is DataDated<string> dts)
             {
@@ -62,11 +131,11 @@ namespace CloVis
                 tb.Checked += ToggleCategories_Checked;
                 tb.Unchecked += ToggleCategories_Unchecked;
             }
-            
+
             if (GetTemplateChild("Categories") is ListView lv)
             {
             }
-
+            */
         }
 
         public ResumeElements.Data<string> Data
@@ -92,7 +161,7 @@ namespace CloVis
             if (GetTemplateChild("DataView") is StackPanel sp1)
                 sp1.Visibility = Visibility.Visible;
         }
-        public void AcceptChanges()
+        public void AcceptEditChanges()
         {
             if (GetTemplateChild("ValueEdit") is TextBox tb)
                 Data.Value = tb.Text;
@@ -142,7 +211,7 @@ namespace CloVis
                     {
                         dts.TimeSpan = new TimeSpan(int.Parse(tsmid.Text), 0, 0, 0);
                     }
-                    catch(FormatException)
+                    catch (FormatException)
                     {
                         // If it can't convert the Int, the user didn't enter a number so we don't updat ethe value.
                     }
@@ -162,12 +231,12 @@ namespace CloVis
 
             //throw new NotImplementedException("Save Index ?");
         }
-        public void CancelChanges()
+        public void CancelEditChanges()
         {
             SwitchToViewData();
             OnDataChanged(this, null);
         }
-        public static void ShowSecondDate(IndexDataTextView instance)
+        public static void ShowSecondDate(MyUserControl1 instance)
         {
             if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
                 ds.Visibility = Visibility.Visible;
@@ -178,7 +247,7 @@ namespace CloVis
             if (instance.GetTemplateChild("DateEndword") is TextBox end)
                 end.Visibility = Visibility.Visible;
         }
-        public static void HideSecondDate(IndexDataTextView instance)
+        public static void HideSecondDate(MyUserControl1 instance)
         {
             if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
                 ds.Visibility = Visibility.Collapsed;
@@ -205,7 +274,8 @@ namespace CloVis
         }
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is IndexDataTextView instance && instance.Data != null)
+            /*
+            if (d is MyUserControl1 instance && instance.Data != null)
             {
                 instance.DataContext = typeof(ResumeElements.Data<string>);
                 if (instance.GetTemplateChild("NameView") is TextBlock name)
@@ -276,12 +346,13 @@ namespace CloVis
                     if (instance.GetTemplateChild("TSEndword") is TextBox end)
                         end.Text = tab[2];
                 }
-                
+
                 if (instance.GetTemplateChild("Categories") is ListView lv)
                 {
                     lv.ItemsSource = instance.Data.Categories;
                 }
             }
+            */
         }
 
         private void Data_DoubleTapped(object sender, DoubleTappedRoutedEventArgs e)
@@ -296,18 +367,18 @@ namespace CloVis
 
         private void AcceptChanges_Click(object sender, RoutedEventArgs e)
         {
-            AcceptChanges();
+            AcceptEditChanges();
         }
         private void CancelChanges_Click(object sender, RoutedEventArgs e)
         {
-            CancelChanges();
+            CancelEditChanges();
         }
         private void AcceptChanges_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
-                AcceptChanges();
+                AcceptEditChanges();
             else if (e.Key == Windows.System.VirtualKey.Escape)
-                CancelChanges();
+                CancelEditChanges();
         }
 
         private void RemoveCategoryButton_Click(object sender, RoutedEventArgs e)
@@ -360,7 +431,7 @@ namespace CloVis
                 }
             }
         }
-        
+
         private void ToggleCategories_Checked(object sender, RoutedEventArgs e)
         {
             ShowCategories();

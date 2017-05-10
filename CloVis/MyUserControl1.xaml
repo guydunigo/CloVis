@@ -1,0 +1,135 @@
+﻿<UserControl
+    x:Class="CloVis.MyUserControl1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CloVis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <local:IsTimeSpanToVisibilityConverter x:Key="IsTimeSpanToVisibilityConverter"/>
+        <local:TimeSpanToTextConverter x:Key="TimeSpanToTextConverter"/>
+        <local:IsDatedToVisibilityConverter x:Key="IsDatedToVisibilityConverter"/>
+        <local:DateToTextConverter x:Key="DateToTextConverter"/>
+    </UserControl.Resources>
+    <Grid>
+
+        <StackPanel>
+            <StackPanel x:Name="DataView" Orientation="Horizontal" DataContext="{x:Bind Data}">
+                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
+                <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name, Mode=OneWay}"/>
+                <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" x:Name="TimeSpanView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name, Converter={StaticResource TimeSpanToTextConverter}}"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" x:Name="DateView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name, Converter={StaticResource DateToTextConverter}}"/>
+                <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Value}"/>
+                <Button x:Name="EditBtn" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                    <Button.Content>
+                        <SymbolIcon Symbol="Edit"/>
+                    </Button.Content>
+                </Button>
+                <ToggleButton x:Name="ToggleCategories" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                    <ToggleButton.Content>
+                        <SymbolIcon Symbol="AllApps"/>
+                    </ToggleButton.Content>
+                </ToggleButton>
+                <Button BorderThickness="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                    <Button.Content>
+                        <SymbolIcon Symbol="More"/>
+                    </Button.Content>
+                    <Button.Flyout>
+                        <MenuFlyout>
+                            <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                        </MenuFlyout>
+                    </Button.Flyout>
+                </Button>
+            </StackPanel>
+            <StackPanel Padding="0" Margin="0" Visibility="Collapsed"  x:Name="DataEdit"  DataContext="Data">
+                <StackPanel Orientation="Horizontal" Margin="2">
+                    <CheckBox VerticalAlignment="Center" Margin="5,2" MinWidth="0"/>
+                    <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Name}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
+                    <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text=""/>
+                    <Button x:Name="AcceptChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                        <Button.Content>
+                            <SymbolIcon Symbol="Accept"/>
+                        </Button.Content>
+                    </Button>
+                    <Button x:Name="CancelChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                        <Button.Content>
+                            <SymbolIcon Symbol="Cancel"/>
+                        </Button.Content>
+                    </Button>
+                    <Button VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
+                        <Button.Content>
+                            <SymbolIcon Symbol="More"/>
+                        </Button.Content>
+                        <Button.Flyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
+                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
+                                <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
+                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                            </MenuFlyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+                <StackPanel x:Name="DateEdit" Visibility="Collapsed" Margin="2">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="DateForeword" Text="" Margin="2" PlaceholderText="Some text"/>
+                        <ComboBox x:Name="DateFirstField" Margin="2">
+                            <x:String>D&#x00E9;but</x:String>
+                            <x:String>Fin</x:String>
+                        </ComboBox>
+                        <DatePicker x:Name="DateFirst" Margin="2"/>
+                        <TextBox x:Name="DateMiddleword" Margin="2" PlaceholderText="Some text"/>
+                        <TextBlock x:Name="DataFirstFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
+                        <TextBox x:Name="DateFirstFormat" Margin="2"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox x:Name="DateSecondField" Margin="2">
+                            <x:String>Pas de deuxi&#x00E8;me date</x:String>
+                            <x:String>D&#x00E9;but</x:String>
+                            <x:String>Fin</x:String>
+                        </ComboBox>
+                        <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2"/>
+                        <TextBox Visibility="Collapsed" x:Name="DateEndword" Text="" Margin="2" PlaceholderText="Some text"/>
+                        <TextBlock Visibility="Collapsed" x:Name="DateSecondFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
+                        <TextBox Visibility="Collapsed" x:Name="DateSecondFormat" Margin="2"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="TimeSpanEdit" Visibility="Collapsed" Orientation="Horizontal">
+                    <TextBox x:Name="TSForeword" Text="" Margin="2" PlaceholderText="Some text"/>
+                    <TextBox x:Name="TSMiddleword" Text="" PlaceholderText="Nombre de jours" Margin="2"/>
+                    <TextBox x:Name="TSEndword" Text="" Margin="2" PlaceholderText="Some text"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="CategoriesStack" Margin="45,0,0,5" Visibility="Visible" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Cat&#x00E9;gories" VerticalAlignment="Center" FontSize="20" Margin="10,0,5,5"/>
+                    <Button x:Name="AddCategoryBtn" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                        <Button.Content>
+                            <SymbolIcon Symbol="Add"/>
+                        </Button.Content>
+                    </Button>
+                </StackPanel>
+                <ListView x:Name="Categories" SelectionMode="None" CanDragItems="True" IsSwipeEnabled="True" IsItemClickEnabled="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center" Margin="5,2"  Text="{Binding Name}"/>
+                                <Button Click="RemoveCategoryButton_Click" x:Name="RemoveCategoryButton" Tag="{Binding Name}" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                                    <Button.Content>
+                                        <SymbolIcon Symbol="Delete"/>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>
