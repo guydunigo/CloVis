@@ -47,6 +47,8 @@ namespace CloVis
 
             if (GetTemplateChild("AcceptChanges") is Button btn)
                 btn.Click += AcceptChanges_Click;
+            if (GetTemplateChild("CancelChanges") is Button btnc)
+                btnc.Click += CancelChanges_Click;
 
             KeyDown += AcceptChanges_KeyDown;
 
@@ -154,6 +156,11 @@ namespace CloVis
             OnDataChanged(this, null);
 
             //throw new NotImplementedException("Save Index ?");
+        }
+        public void CancelChanges()
+        {
+            SwitchToViewData();
+            OnDataChanged(this, null);
         }
         public static void ShowSecondDate(IndexDataTextView instance)
         {
@@ -275,17 +282,24 @@ namespace CloVis
         private void EditBtn_Click(object sender, RoutedEventArgs e)
         {
             SwitchToEditData();
+            HideCategories();
         }
 
         private void AcceptChanges_Click(object sender, RoutedEventArgs e)
         {
             AcceptChanges();
         }
+        private void CancelChanges_Click(object sender, RoutedEventArgs e)
+        {
+            CancelChanges();
+        }
 
         private void AcceptChanges_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
                 AcceptChanges();
+            else if (e.Key == Windows.System.VirtualKey.Escape)
+                CancelChanges();
         }
 
         private void DataFirst_SelectionChanged(object sender, SelectionChangedEventArgs e)

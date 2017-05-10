@@ -92,6 +92,13 @@
                                         </Viewbox>
                                     </Button.Content>
                                 </Button>
+                                <Button x:Name="CancelChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
+                                    <Button.Content>
+                                        <Viewbox Height="20" Width="30">
+                                            <SymbolIcon Symbol="Cancel"/>
+                                        </Viewbox>
+                                    </Button.Content>
+                                </Button>
                                 <Button VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">
                                     <Button.Content>
                                         <Viewbox Height="20" Width="30">
