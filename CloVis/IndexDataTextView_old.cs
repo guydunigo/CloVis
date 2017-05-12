@@ -14,11 +14,11 @@ using ResumeElements;
 
 namespace CloVis
 {
-    public sealed class IndexDataTextView : Control
+    public sealed class IndexDataTextView_old : Control
     {
-        public IndexDataTextView()
+        public IndexDataTextView_old()
         {
-            this.DefaultStyleKey = typeof(IndexDataTextView);
+            this.DefaultStyleKey = typeof(IndexDataTextView_old);
             this.Loaded += OnLoaded;
         }
 
@@ -76,7 +76,7 @@ namespace CloVis
         }
 
         public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
+            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView_old), new PropertyMetadata(null, OnDataChanged));
 
         public void SwitchToEditData()
         {
@@ -167,7 +167,7 @@ namespace CloVis
             SwitchToViewData();
             OnDataChanged(this, null);
         }
-        public static void ShowSecondDate(IndexDataTextView instance)
+        public static void ShowSecondDate(IndexDataTextView_old instance)
         {
             if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
                 ds.Visibility = Visibility.Visible;
@@ -178,7 +178,7 @@ namespace CloVis
             if (instance.GetTemplateChild("DateEndword") is TextBox end)
                 end.Visibility = Visibility.Visible;
         }
-        public static void HideSecondDate(IndexDataTextView instance)
+        public static void HideSecondDate(IndexDataTextView_old instance)
         {
             if (instance.GetTemplateChild("DateSecond") is DatePicker ds)
                 ds.Visibility = Visibility.Collapsed;
@@ -205,7 +205,7 @@ namespace CloVis
         }
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is IndexDataTextView instance && instance.Data != null)
+            if (d is IndexDataTextView_old instance && instance.Data != null)
             {
                 instance.DataContext = typeof(ResumeElements.Data<string>);
                 if (instance.GetTemplateChild("NameView") is TextBlock name)

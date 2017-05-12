@@ -27,7 +27,7 @@ namespace CloVis
             this.InitializeComponent();
             this.Loaded += OnLoaded;
         }
-        private MyUserControl1 test;
+
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // List elements in hierarchy
@@ -38,19 +38,10 @@ namespace CloVis
             var divers = ResumeElements.Index.GetMiscellaneous();
             if (divers.Count > 0)
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = divers } });
-
-            test = new MyUserControl1() { Data = ResumeElements.Index.Find("Mél") as ResumeElements.Data<string> };
-            DataList.Items.Add(new ListViewItem() { Content = test });
             // List data from A to Z
             foreach (ResumeElements.Data d in ResumeElements.Index.DataIndex.Values)
                 if (d is ResumeElements.Data<string> el)
-                    DataList.Items.Add(new ListViewItem() { Content = new MyUserControl1() { Data = el } });
-                    //DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });
-        }
-
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            test.Data = ResumeElements.Index.Find("Nom") as ResumeElements.Data<string>;
+                    DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });
         }
     }
 }
