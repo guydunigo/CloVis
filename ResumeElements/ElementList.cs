@@ -163,22 +163,27 @@ namespace ResumeElements
             }
         }
 
+        protected bool CommonRemove(Element value)
+        {
+            if (value is T val && elements.ContainsValue(val))
+            {
+                RemoveFromElements(value);
+                return elements.Remove(value.Name);
+            }
+            else return false;
+        }
         /// <summary>
         /// Shouldn't be called as you can only add a T kind of value
         /// </summary>
         /// <param name="value"></param>
         public override void Remove(Element value)
         {
-            throw new ArgumentException("Value must be of type T");
+            //throw new ArgumentException("Value must be of type T");
+            CommonRemove(value);
         }
         public bool Remove(T value)
         {
-            if (elements.ContainsValue(value))
-            {
-                RemoveFromElements(value);
-                return elements.Remove(value.Name);
-            }
-            else return false;
+            return CommonRemove(value);
         }
 
         public bool Remove(KeyValuePair<string, T> item)
