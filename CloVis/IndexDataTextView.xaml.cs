@@ -36,22 +36,6 @@ namespace CloVis
             throw new NotImplementedException();
         }
     }
-    public class TimeSpanToTextConverter: IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value is string str && Index.Find(str) is DataTimeSpan<string> dts)
-                return dts.RenderTimeSpan() + ", ";
-            else
-                return "";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public class IsDatedToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
@@ -60,21 +44,6 @@ namespace CloVis
                 return Visibility.Visible;
             else
                 return Visibility.Collapsed;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public class DateToTextConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value is string str && Index.Find(str) is DataDated<string> dts)
-                return dts.RenderDates() + ", ";
-            else
-                return "";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -99,9 +68,55 @@ namespace CloVis
         }
     }
 
-    public sealed partial class MyUserControl1 : UserControl, INotifyPropertyChanged
+    public class TimeSpanDisplayFormatToTextConverter:IValueConverter
     {
-        public MyUserControl1()
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string s && parameter is string si && int.TryParse(si, out int i))
+                return (DataTimeSpan<string>.GetDisplayFormatStructure(s))[i];
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class TimeSpanValueToTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is TimeSpan ts)
+                return ts.Days;
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class DatedDisplayFormatToTextConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string s && parameter is string si && int.TryParse(si, out int i))
+                return (DataDated<string>.GetDisplayFormatStructure(s))[i];
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public sealed partial class IndexDataTextView : UserControl, INotifyPropertyChanged
+    {
+        public IndexDataTextView()
         {
             this.InitializeComponent();
             this.Loaded += OnLoaded;
@@ -166,8 +181,10 @@ namespace CloVis
         }
         private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is MyUserControl1 instance && instance.Data != null)
+            if (d is IndexDataTextView instance && instance.Data != null)
+            {
                 instance.NotifyPropertyChanged("Data");
+            }
             /*
             if (d is MyUserControl1 instance && instance.Data != null)
             {
@@ -250,7 +267,7 @@ namespace CloVis
         }
 
         public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
+            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView_old), new PropertyMetadata(null, OnDataChanged));
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -319,14 +336,8 @@ namespace CloVis
             }
             else if (Data is DataTimeSpan<string> dts)
             {
-                try
-                {
-                    dts.TimeSpan = new TimeSpan(int.Parse(TSMiddleword.Text), 0, 0, 0);
-                }
-                catch (FormatException)
-                {
-                    // If it can't convert the Int, the user didn't enter a number so we don't updat ethe value.
-                }
+                if (int.TryParse(TSMiddleword.Text, out int i))
+                    dts.TimeSpan = new TimeSpan(i, 0, 0, 0);
 
                 dts.DisplayFormat = TSForeword.Text + "$(" + dts.GetDisplayFormat() + ")$" + TSEndword.Text;
             }

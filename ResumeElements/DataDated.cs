@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace ResumeElements
     /// <summary>
     /// Specifies a timespan with set starting and ending dates
     /// </summary>
-    public class DataDated<T>: Data<T>
+    public class DataDated<T>: Data<T>, INotifyPropertyChanged
     {
         /// <summary>
         /// 
@@ -29,6 +30,11 @@ namespace ResumeElements
             DisplayFormat = displayFormat;
         }
 
+        public string RenderedDates
+        {
+            get => RenderDates();
+        }
+
         protected string displayFormat;
         /// <summary>
         /// If there is two dates (beginning and ending) : "[words] $1(display format)$ [words] $2(display format)$ [word]" (the two dates can be switched)
@@ -46,52 +52,49 @@ namespace ResumeElements
                     displayFormat = value;
                 else
                     displayFormat = GenerateDisplayFormat();
+                NotifyPropertyChanged("DisplayFormat");
+                NotifyPropertyChanged("RenderedDates");
             }
         }
 
-        /// <summary>
-        /// Get display format structure as follows :
-        /// ["foreword","start"/"end","format","middleword"/"endword","start"/"end"/"","format"/"","endword"/""]
-        /// </summary>
-        /// <returns></returns>
-        public string[] GetDisplayFormatStructure()
+        public static string[] GetDisplayFormatStructure(string displayFormat)
         {
             string[] tab = { "", "", "", "", "", "", "" };
-            
+
             var temp = "";
 
-            var rank = DisplayFormat.IndexOf("$");
+            var rank = displayFormat.IndexOf("$");
 
-            tab[0] = DisplayFormat.Substring(0, rank);
+            tab[0] = displayFormat.Substring(0, rank);
 
-            if (DisplayFormat[rank + 1] == '1')
+            if (displayFormat[rank + 1] == '1')
             {
                 tab[1] = "start";
-                tab[2] = GetDisplayFormat(1);
+                tab[2] = GetDisplayFormatFrom(displayFormat, 1);
             }
-            else if (DisplayFormat[rank + 1] == '2')
+            else if (displayFormat[rank + 1] == '2')
             {
                 tab[1] = "end";
-                tab[2] = GetDisplayFormat(2);
+                tab[2] = GetDisplayFormatFrom(displayFormat, 2);
             }
 
-            rank = DisplayFormat.IndexOf(")$");
-            temp = DisplayFormat.Substring(rank + 2);
+            rank = displayFormat.IndexOf(")$");
+            temp = displayFormat.Substring(rank + 2);
 
             if (temp.Contains("$"))
             {
                 rank = temp.IndexOf("$");
                 tab[3] = temp.Substring(0, rank);
-                
+
                 if (temp[rank + 1] == '1')
                 {
                     tab[4] = "start";
-                    tab[5] = GetDisplayFormat(1);
+                    tab[5] = GetDisplayFormatFrom(displayFormat, 1);
                 }
                 else if (temp[rank + 1] == '2')
                 {
                     tab[4] = "end";
-                    tab[5] = GetDisplayFormat(2);
+                    tab[5] = GetDisplayFormatFrom(displayFormat, 2);
                 }
 
                 rank = temp.IndexOf(")$");
@@ -103,6 +106,15 @@ namespace ResumeElements
             }
 
             return tab;
+        }
+        /// <summary>
+        /// Get display format structure as follows :
+        /// ["foreword","start"/"end","format","middleword"/"endword","start"/"end"/"","format"/"","endword"/""]
+        /// </summary>
+        /// <returns></returns>
+        public string[] GetDisplayFormatStructure()
+        {
+            return GetDisplayFormatStructure(DisplayFormat);
         }
 
         public string RenderDates()
@@ -209,6 +221,8 @@ namespace ResumeElements
                     startTime = value;
                     endTime = startTime + new TimeSpan(1, 0, 0, 0);
                 }
+                NotifyPropertyChanged("StartTime");
+                NotifyPropertyChanged("RenderedDates");
             }
         }
         protected DateTimeOffset endTime;
@@ -234,6 +248,8 @@ namespace ResumeElements
                 }
                 else
                     endTime = value;
+                NotifyPropertyChanged("EndTime");
+                NotifyPropertyChanged("RenderedDates");
             }
         }
 
