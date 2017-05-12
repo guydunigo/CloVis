@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 namespace ResumeElements
 {
     internal class CategoriesComparer : IComparer<ElementList>
@@ -11,7 +12,7 @@ namespace ResumeElements
         }
     }
 
-    public abstract class Data: Element
+    public abstract class Data: Element, INotifyPropertyChanged
     {
 		public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
@@ -21,7 +22,22 @@ namespace ResumeElements
 	        if (!isIndependant) Index.AddData(this);
         }
 
-        public string Description { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected string description;
+        public string Description
+        {
+            get => description;
+            set
+            {
+                description = value;
+                NotifyPropertyChanged("Description");
+            }
+        }
 
         public override Element Find(string name)
         {
@@ -50,6 +66,7 @@ namespace ResumeElements
             {
                 cat.Add(this);
                 categories.Add(cat);
+                NotifyPropertyChanged("Categories");
             }
         }
 
@@ -63,6 +80,7 @@ namespace ResumeElements
             {
                 cat.Remove(this);
                 categories.Remove(cat);
+                NotifyPropertyChanged("Categories");
             }
         }
         
@@ -73,7 +91,10 @@ namespace ResumeElements
         internal void AddToCategory(ElementList cat)
         {
             if (!categories.Contains(cat))
+            {
                 categories.Add(cat);
+                NotifyPropertyChanged("Categories");
+            }
         }
         /// <summary>
         /// Method used by ElementList.RemoveFromElement() (Not a big fan :/ )
@@ -82,7 +103,10 @@ namespace ResumeElements
         internal void RemoveFromCategory(ElementList cat)
         {
             if (categories.Contains(cat))
+            {
                 categories.Remove(cat);
+                NotifyPropertyChanged("Categories");
+            }
         }
 
         public void ClearCategories()
@@ -94,6 +118,7 @@ namespace ResumeElements
         }
 
         protected double level;
+
         /// <summary>
         /// Level value between 0 and 5
         /// If it is undefined, Level is -1
@@ -111,6 +136,7 @@ namespace ResumeElements
                     level = 5;
                 else if (value < 0)
                     level = 0;
+                NotifyPropertyChanged("Level");
             }
         }
     }
@@ -118,17 +144,26 @@ namespace ResumeElements
     /// 
     /// </summary>
     /// <typeparam name="T">Can be a string, or an image (ie. Data<string> or Data<int>)</typeparam>
-    public class Data<T> : Data
+    public class Data<T> : Data, INotifyPropertyChanged
     {
         public Data(string name, T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, level, description, isIndependant, isDefault)
         {
             Value = value;
         }
 
+        protected T value;
         /// <summary>
         /// Actual information (Text, image,time,number)
         /// </summary>
-        public T Value { get; set; }
+        public T Value
+        {
+            get => value;
+            set
+            {
+                this.value = value;
+                NotifyPropertyChanged("Value");
+            }
+        }
 
         /// <summary>
         /// Provides a deep copy of every Elements and sub-Elements.

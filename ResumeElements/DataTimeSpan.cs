@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public class DataTimeSpan<T>: Data<T>
+    public class DataTimeSpan<T>: Data<T>, INotifyPropertyChanged
     {
         public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
@@ -15,7 +17,22 @@ namespace ResumeElements
             DisplayFormat = displayFormat;
         }
 
-        public TimeSpan TimeSpan { get; set; }
+        public string RenderedTimeSpan
+        {
+            get => RenderTimeSpan();
+        }
+
+        private TimeSpan timespan;
+        public TimeSpan TimeSpan
+        {
+            get => timespan;
+            set
+            {
+                timespan = value;
+                NotifyPropertyChanged("TimeSpan");
+                NotifyPropertyChanged("RenderedTimeSpan");
+            }
+        }
 
         protected string displayFormat;
         /// <summary>
@@ -33,7 +50,25 @@ namespace ResumeElements
                     displayFormat = value;
                 else
                     displayFormat = GenerateDisplayFormat();
+                NotifyPropertyChanged("DisplayFormat");
+                NotifyPropertyChanged("RenderedTimeSpan");
             }
+        }
+
+        public static string[] GetDisplayFormatStructure(string displayFormat)
+        {
+            string[] tab = { "", "", "" };
+
+            var rank = displayFormat.IndexOf("$");
+
+            tab[0] = displayFormat.Substring(0, rank);
+
+            tab[1] = GetDisplayFormatFrom(displayFormat);
+
+            rank = displayFormat.IndexOf(")$");
+            tab[2] = displayFormat.Substring(rank + 2);
+
+            return tab;
         }
 
         /// <summary>
@@ -42,18 +77,7 @@ namespace ResumeElements
         /// <returns></returns>
         public string[] GetDisplayFormatStructure()
         {
-            string[] tab = { "", "", "" };
-            
-            var rank = DisplayFormat.IndexOf("$");
-
-            tab[0] = DisplayFormat.Substring(0, rank);
-
-            tab[1] = GetDisplayFormat();
-
-            rank = DisplayFormat.IndexOf(")$");
-            tab[2] = DisplayFormat.Substring(rank + 2);
-
-            return tab;
+            return GetDisplayFormatStructure(DisplayFormat);
         }
 
         public string RenderTimeSpan()
