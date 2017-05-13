@@ -22,11 +22,10 @@
         <local:SubElementTemplateSelector x:Key="SubElementTemplateSelector" TemplateForData="{StaticResource IndexDataTemplate}" TemplateForElementList="{StaticResource IndexElementListTemplate}"/>
     </UserControl.Resources>
     <Grid>
-        <StackPanel x:Name="ElementListStackPanel" DataContext="{x:Bind ElementList,Mode=OneWay}" DoubleTapped="ElementList_DoubleTapped">
-            <StackPanel x:Name="Head" Orientation="Horizontal">
+        <StackPanel x:Name="ElementListStackPanel" DataContext="{x:Bind ElementList,Mode=OneWay}">
+            <StackPanel x:Name="Head" Orientation="Horizontal" DoubleTapped="ElementList_DoubleTapped">
                 <SymbolIcon x:Name="AddSymbol" VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black"
                                     PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited" PointerPressed="SymbolIcon_PointerPressed"/>
-                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                 <TextBlock x:Name="Name" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name}"/>
                 <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>
                 <Button VerticalAlignment="Bottom" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisTransparentBlue}" Padding="5">

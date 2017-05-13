@@ -15,6 +15,7 @@ namespace ResumeElements
         }
         public abstract void Add(object item);
         public abstract void Remove(Element item);
+        public abstract void Clear();
         public abstract ICollection Values { get; }
         public abstract ICollection Keys { get; }
     }
@@ -216,7 +217,7 @@ namespace ResumeElements
             else return false;
         }
 
-        public void Clear()
+        public override void Clear()
         {
             foreach(T t in elements.Values)
             {

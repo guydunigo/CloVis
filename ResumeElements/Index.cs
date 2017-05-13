@@ -69,7 +69,7 @@ namespace ResumeElements
                 new Data<string>("Nom",""),
                 new Data<string>("Téléphone",""),
                 new Data<string>("Mél",""),
-		new Data<string>("Adresse",""),
+        new Data<string>("Adresse",""),
 
                 //...
             },
@@ -81,5 +81,40 @@ namespace ResumeElements
             new ElementList<Element>("Centres d'intérêts"),
             // Remplir
         };
+
+        public static ElementList FindParent(Element e)
+        {
+            Element prev = null, cur = Root;
+
+            while(cur != e)
+            {
+                prev = cur;
+                if (prev is ElementList i)
+                {
+                    foreach (Element el in i.Values)
+                    {
+                        cur = el.Find(e.Name);
+                        if (cur != null)
+                        {
+                            cur = el;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return prev as ElementList;
+        }
+
+        public static void Erase(ElementList e)
+        {
+            e.Clear();
+            FindParent(e).Remove(e);
+        }
+        public static void Erase(Data d)
+        {
+            d.ClearCategories();
+            FindParent(d).Remove(d);
+        }
     }
 }

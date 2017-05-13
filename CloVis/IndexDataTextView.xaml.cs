@@ -52,6 +52,21 @@ namespace CloVis
             throw new NotImplementedException();
         }
     }
+    public class IsSimpleToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string str && (Index.Find(str) is DataTimeSpan<string> dts || Index.Find(str) is DataDated<string> dd))
+                return Visibility.Collapsed;
+            else
+                return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class AddComaConverter : IValueConverter
     {

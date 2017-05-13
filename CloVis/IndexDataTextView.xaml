@@ -12,6 +12,7 @@
     <UserControl.Resources>
         <local:IsTimeSpanToVisibilityConverter x:Key="IsTimeSpanToVisibilityConverter"/>
         <local:IsDatedToVisibilityConverter x:Key="IsDatedToVisibilityConverter"/>
+        <local:IsSimpleToVisibilityConverter x:Key="IsSimpleToVisibilityConverter"/>
         <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <local:AddComaConverter x:Key="AddComaConverter"/>
         <local:TimeSpanDisplayFormatToTextConverter x:Key="TimeSpanDisplayFormatToTextConverter"/>
@@ -21,7 +22,6 @@
     <Grid>
         <StackPanel>
             <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
-                <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                 <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name}"/>
                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
                 <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedTimeSpan, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
@@ -50,7 +50,6 @@
             </StackPanel>
             <StackPanel DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Visibility="Collapsed"  x:Name="DataEdit" KeyDown="AcceptChanges_KeyDown">
                 <StackPanel Orientation="Horizontal" Margin="2">
-                    <CheckBox VerticalAlignment="Center" Margin="5,2" MinWidth="0"/>
                     <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Name}"/>
                     <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
                     <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Value, Mode=OneWay}"/>
@@ -70,9 +69,9 @@
                         </Button.Content>
                         <Button.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
-                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
-                                <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
+                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
+                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
+                                <MenuFlyoutSeparator Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}"/>
                                 <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
                             </MenuFlyout>
                         </Button.Flyout>
