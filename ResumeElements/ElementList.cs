@@ -179,9 +179,10 @@ namespace ResumeElements
             if (value is T val && elements.ContainsValue(val))
             {
                 RemoveFromElements(value);
+                var temp = elements.Remove(value.Name);
                 NotifyPropertyChanged("Values");
                 NotifyPropertyChanged("Keys");
-                return elements.Remove(value.Name);
+                return temp;
             }
             else return false;
         }

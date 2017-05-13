@@ -23,16 +23,14 @@ using System.Collections;
 
 namespace CloVis
 {
-    public class ElementListToObservableConverter : IValueConverter
+    public class CollectionToObservableConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            ObservableCollection<Element> temp = null;
-            if (value is ICollection<Element> ic)
-            {
-                temp = new ObservableCollection<Element>(ic);
-            }
-            return temp;
+            if (value is IEnumerable<Element> ic)
+                return new ObservableCollection<Element>(ic);
+            else
+                return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
@@ -40,14 +38,17 @@ namespace CloVis
             throw new NotImplementedException();
         }
     }
-    public class SubElementTemplateSelector: DataTemplateSelector
+    public class SubElementTemplateSelector : DataTemplateSelector
     {
-        public new DataTemplate SelectTemplate(object item, DependencyObject container)
-        {
-            FrameworkElement element = container as FrameworkElement;
+        public DataTemplate TemplateForData { get; set; }
+        public DataTemplate TemplateForElementList { get; set; }
 
+        protected override DataTemplate SelectTemplateCore(object item)
+        {
             if (item is Data<string> d)
-                return null;
+                return TemplateForData;
+            else if (item is ElementList el)
+                return TemplateForElementList;
 
             return null;
         }
@@ -65,10 +66,10 @@ namespace CloVis
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public ResumeElements.ElementList ElementList
+        
+        public ElementList ElementList
         {
-            get => (ResumeElements.ElementList)(GetValue(ElementListProperty));
+            get => (ElementList)(GetValue(ElementListProperty));
             set
             {
                 SetValue(ElementListProperty, value);
@@ -77,7 +78,7 @@ namespace CloVis
         }
 
         public static readonly DependencyProperty ElementListProperty =
-            DependencyProperty.Register("ElementList", typeof(ResumeElements.ElementList), typeof(IndexElementListView_old), new PropertyMetadata(null, OnElementListChanged));
+            DependencyProperty.Register("ElementList", typeof(ResumeElements.ElementList), typeof(IndexElementListView), new PropertyMetadata(null, OnElementListChanged));
 
         private static void OnElementListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

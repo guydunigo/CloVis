@@ -130,24 +130,6 @@ namespace CloVis
             throw new NotImplementedException();
         }
     }
-
-    public class ListToObvservableConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            ObservableCollection<ElementList> temp = null;
-            if (value is SortedSet<ElementList> ss)
-            {
-                temp = new ObservableCollection<ElementList>(ss);
-            }
-            return temp;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
     
     public sealed partial class IndexDataTextView : UserControl, INotifyPropertyChanged
     {
@@ -174,7 +156,7 @@ namespace CloVis
         }
 
         public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView_old), new PropertyMetadata(null, OnDataChanged));
+            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")

@@ -10,15 +10,16 @@
     d:DesignWidth="400">
 
     <UserControl.Resources>
-        <local:ElementListToObservableConverter x:Key="ElementListToObservableConverter"/>
-        <local:SubElementTemplateSelector x:Key="SubElementTemplateSelector"/>
-
         <DataTemplate x:Key="IndexDataTemplate">
             <local:IndexDataTextView Data="{Binding}"/>
         </DataTemplate>
         <DataTemplate x:Key="IndexElementListTemplate">
             <local:IndexElementListView ElementList="{Binding}"/>
         </DataTemplate>
+
+        <local:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
+
+        <local:SubElementTemplateSelector x:Key="SubElementTemplateSelector" TemplateForData="{StaticResource IndexDataTemplate}" TemplateForElementList="{StaticResource IndexElementListTemplate}"/>
     </UserControl.Resources>
     <Grid>
         <StackPanel x:Name="ElementListStackPanel" DataContext="{x:Bind ElementList,Mode=OneWay}" DoubleTapped="ElementList_DoubleTapped">
@@ -41,7 +42,7 @@
             </StackPanel>
             <ListView x:Name="SubList" Margin="30,5" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}"
                       SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed"
-                      ItemsSource="{Binding Values, Mode=OneWay}" ItemTemplateSelector="{StaticResource SubElementTemplateSelector}">
+                      ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}" ItemTemplateSelector="{StaticResource SubElementTemplateSelector}">
             </ListView>
         </StackPanel>
     </Grid>
