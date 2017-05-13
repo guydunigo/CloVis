@@ -13,11 +13,11 @@ using Windows.UI.Xaml.Media;
 
 namespace CloVis
 {
-    public sealed class IndexElementListView : Control
+    public sealed class IndexElementListView_old : Control
     {
-        public IndexElementListView()
+        public IndexElementListView_old()
         {
-            this.DefaultStyleKey = typeof(IndexElementListView);
+            this.DefaultStyleKey = typeof(IndexElementListView_old);
             this.Loaded += OnLoaded;
 
             elementsToAdd = new List<UIElement>();
@@ -58,11 +58,11 @@ namespace CloVis
         }
 
         public static readonly DependencyProperty ElementListProperty =
-            DependencyProperty.Register("ElementList", typeof(ResumeElements.ElementList), typeof(IndexElementListView), new PropertyMetadata(null, OnElementListChanged));
+            DependencyProperty.Register("ElementList", typeof(ResumeElements.ElementList), typeof(IndexElementListView_old), new PropertyMetadata(null, OnElementListChanged));
 
         private static void OnElementListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is IndexElementListView instance && instance.ElementList != null)
+            if (d is IndexElementListView_old instance && instance.ElementList != null)
             {
                 if (instance.GetTemplateChild("Name") is TextBlock tb)
                     tb.Text = instance.ElementList.Name;
@@ -105,7 +105,7 @@ namespace CloVis
         public void Add(ResumeElements.Element e)
         {
             if (e is ResumeElements.ElementList el)
-                Add(new IndexElementListView() { ElementList = el });
+                Add(new IndexElementListView_old() { ElementList = el });
             else if (e is ResumeElements.Data<string> d)
                 Add(new IndexDataTextView() { Data = d });
         }

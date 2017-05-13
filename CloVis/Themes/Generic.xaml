@@ -35,10 +35,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:IndexDataTextView" >
+    <Style TargetType="local:IndexDataTextView_old" >
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:IndexDataTextView">
+                <ControlTemplate TargetType="local:IndexDataTextView_old">
                     <StackPanel 
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
@@ -160,10 +160,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="local:IndexElementListView" >
+    <Style TargetType="local:IndexElementListView_old" >
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:IndexElementListView">
+                <ControlTemplate TargetType="local:IndexElementListView_old">
                     <StackPanel x:Name="ElementListStackPanel" DataContext="ElementList"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"

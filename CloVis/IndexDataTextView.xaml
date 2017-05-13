@@ -13,19 +13,19 @@
         <local:IsTimeSpanToVisibilityConverter x:Key="IsTimeSpanToVisibilityConverter"/>
         <local:IsDatedToVisibilityConverter x:Key="IsDatedToVisibilityConverter"/>
         <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <local:AddComaConverter x:Key="AddComaConverter"/>
         <local:TimeSpanDisplayFormatToTextConverter x:Key="TimeSpanDisplayFormatToTextConverter"/>
         <local:TimeSpanValueToTextConverter x:Key="TimeSpanValueToTextConverter"/>
         <local:DatedDisplayFormatToTextConverter x:Key="DatedDisplayFormatToTextConverter"/>
     </UserControl.Resources>
     <Grid>
-        <!--DataContext="{x:Bind Data,Mode=OneWay}"-->
         <StackPanel>
             <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
                 <CheckBox VerticalAlignment="Center" Margin="5,0" MinWidth="0"/>
                 <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name}"/>
                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
-                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedTimeSpan, Mode=OneWay}"/>
-                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" x:Name="DateView" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedDates, Mode=OneWay}"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedTimeSpan, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" x:Name="DateView" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedDates, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
                 <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Value, Mode=OneWay}"/>
                 <Button x:Name="EditBtn" Click="EditBtn_Click" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                     <Button.Content>
@@ -80,13 +80,13 @@
                 </StackPanel>
                 <StackPanel x:Name="DateEdit" Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" Margin="2">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="DateForeword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource DatedDisplayFormatToTextConverter}, ConverterParameter=0}"/>
+                        <TextBox x:Name="DateForeword" Margin="2" PlaceholderText="Du texte"/>
                         <ComboBox x:Name="DateFirstField" Margin="2" SelectionChanged="DateFirst_SelectionChanged">
                             <x:String>D&#x00E9;but</x:String>
                             <x:String>Fin</x:String>
                         </ComboBox>
                         <DatePicker x:Name="DateFirst" Margin="2"/>
-                        <TextBox x:Name="DateMiddleword" Margin="2" PlaceholderText="Du text" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource DatedDisplayFormatToTextConverter}, ConverterParameter=3}"/>
+                        <TextBox x:Name="DateMiddleword" Margin="2" PlaceholderText="Du texte"/>
                         <TextBlock x:Name="DateFirstFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
                         <TextBox x:Name="DateFirstFormat" Margin="2"/>
                     </StackPanel>
@@ -96,20 +96,20 @@
                             <x:String>D&#x00E9;but</x:String>
                             <x:String>Fin</x:String>
                         </ComboBox>
-                        <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2" />
-                        <TextBox Visibility="Collapsed" x:Name="DateEndword" Margin="2" PlaceholderText="Du text" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource DatedDisplayFormatToTextConverter}, ConverterParameter=6}"/>
+                        <DatePicker Visibility="Collapsed" x:Name="DateSecond" Margin="2"/>
+                        <TextBox Visibility="Collapsed" x:Name="DateEndword" Margin="2" PlaceholderText="Du texte"/>
                         <TextBlock Visibility="Collapsed" x:Name="DateSecondFormatName" VerticalAlignment="Center" Margin="2" Text="Format :"/>
                         <TextBox Visibility="Collapsed" x:Name="DateSecondFormat" Margin="2"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel x:Name="TimeSpanEdit" Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Orientation="Horizontal">
-                    <TextBox x:Name="TSForeword" Margin="2" PlaceholderText="Du text" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=0}"/>
-                    <TextBox x:Name="TSMiddleword" PlaceholderText="Nombre de jours" Margin="2" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanValueToTextConverter}}"/>
-                    <TextBox x:Name="TSEndword" Margin="2" PlaceholderText="Du text" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=2}"/>
+                    <TextBox x:Name="TSForeword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=0}"/>
+                    <TextBox x:Name="TSMiddleword" PlaceholderText="Nombre de jours" Margin="2" Text="{Binding TimeSpan, Mode=OneWay, Converter={StaticResource TimeSpanValueToTextConverter}}"/>
+                    <TextBox x:Name="TSEndword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=2}"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel x:Name="CategoriesStack" Margin="45,0,0,5" Visibility="{x:Bind ToggleCategories.IsChecked, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0" >
-                <StackPanel Orientation="Horizontal">
+            <StackPanel x:Name="CategoriesStack" Margin="45,0,0,5" Visibility="{x:Bind ToggleCategories.IsChecked, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <TextBlock Text="Cat&#x00E9;gories" VerticalAlignment="Center" FontSize="20" Margin="10,0,5,5"/>
                     <Button x:Name="AddCategoryBtn" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                         <Button.Content>

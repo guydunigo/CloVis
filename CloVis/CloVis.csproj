@@ -107,7 +107,10 @@
     </Compile>
     <Compile Include="FileManagement.cs" />
     <Compile Include="IndexDataTextView_old.cs" />
-    <Compile Include="IndexElementListView.cs" />
+    <Compile Include="IndexElementListView.xaml.cs">
+      <DependentUpon>IndexElementListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IndexElementListView_old.cs" />
     <Compile Include="IndexView.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -196,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IndexElementListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
