@@ -25,23 +25,6 @@ namespace CloVis
         public DetailsEdit()
         {
             this.InitializeComponent();
-            this.Loaded += OnLoaded;
-        }
-
-        private void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            // List elements in hierarchy
-            foreach(ResumeElements.ElementList el in ResumeElements.Index.Root.Values)
-                IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = el } });
-
-            // If some data is not listed anywhere, show the miscellaneous category
-            var divers = ResumeElements.Index.GetMiscellaneous();
-            if (divers.Count > 0)
-                IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = divers } });
-            // List data from A to Z
-            foreach (ResumeElements.Data d in ResumeElements.Index.DataIndex.Values)
-                if (d is ResumeElements.Data<string> el)
-                    DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });
         }
     }
 }

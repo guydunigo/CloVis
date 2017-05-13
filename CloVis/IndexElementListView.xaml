@@ -39,7 +39,7 @@
                     </Button.Flyout>
                 </Button>
             </StackPanel>
-            <ListView x:Name="SubList" Margin="30,5" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}"
+            <ListView x:Name="SubList" Margin="30,5,0,5" BorderThickness="0,1" BorderBrush="{ThemeResource CloVisBlue}"
                       SelectionMode="None" IsItemClickEnabled="True" Visibility="Collapsed"
                       ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}" ItemTemplateSelector="{StaticResource SubElementTemplateSelector}">
             </ListView>

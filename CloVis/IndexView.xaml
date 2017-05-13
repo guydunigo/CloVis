@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="CloVis.IndexView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CloVis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <UserControl.Resources>
+        <local:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
+    </UserControl.Resources>
+
+    <ScrollViewer HorizontalScrollMode="Auto" VerticalScrollMode="Auto">
+        <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Border BorderThickness="0,0,0,2" Margin="20,0" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
+                <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
+            </Border>
+            <Pivot Margin="5,0,0,0">
+                <PivotItem Header="Arbre de données">
+                    <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
+                </PivotItem>
+                <PivotItem Header="De A à Z">
+                    <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
+                </PivotItem>
+            </Pivot>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

@@ -70,21 +70,7 @@
                     </ListViewItem>
                 </ListView>
             </SplitView.Pane>
-            <ScrollViewer>
-                <StackPanel HorizontalAlignment="Stretch">
-                    <Border BorderThickness="0,0,0,2" Margin="20,0" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
-                        <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
-                    </Border>
-                    <Pivot Margin="5,0,0,0">
-                        <PivotItem Header="Données dans l'arborescence">
-                            <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
-                        </PivotItem>
-                        <PivotItem Header="Données de A à Z">
-                            <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
-                        </PivotItem>
-                    </Pivot>
-                </StackPanel>
-            </ScrollViewer>
+            <local:IndexView/>
         </SplitView>
     </Grid>
 </Page>

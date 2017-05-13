@@ -46,30 +46,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
-                        <ListView HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" IsMultiSelectCheckBoxEnabled="True" SelectionMode="Multiple" Foreground="White">
-                            <ListViewHeaderItem Foreground="White" Content="Coordonnées"/>
-                            <ListViewItem>
-                                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                    <TextBlock Foreground="White" Margin="20,0" Text="Nom :"/>
-                                    <TextBlock Foreground="White" Margin="5,0" Text="Roi des Francs"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem>
-                                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                    <TextBlock Foreground="White" Margin="20,0" Text="Prénom :"/>
-                                    <TextBlock Foreground="White" Margin="5,0" Text="Clovis"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewItem>
-                                <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
-                                    <TextBlock Foreground="White" Margin="20,0" Text="Mél : clovis@enib.fr"/>
-                                    <TextBlock Foreground="White" Margin="5,0" Text="à remplir"/>
-                                </StackPanel>
-                            </ListViewItem>
-                            <ListViewHeaderItem Foreground="White" Content="Diplômes"/>
-                            <ListViewHeaderItem Foreground="White" Content="Expérience professionnelle"/>
-                        </ListView>
+                        <local:IndexView/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
                         <ListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
