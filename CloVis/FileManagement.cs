@@ -16,12 +16,12 @@ namespace CloVis
         {
             // a faire
         }
-        public void create_File()
+        public void Create_File()
         {
             
-            String filename = "fond.xml";
+            //String filename = "fond.xml";
            
-            FileStream myFileStream = new FileStream(Path.GetFileName(filename), FileMode.OpenOrCreate);
+            //FileStream myFileStream = new FileStream(Path.GetFileName(filename), FileMode.OpenOrCreate);
 
             /*XmlWriter xmlWriter = XmlWriter.Create( new StringBuilder(filename));
 
