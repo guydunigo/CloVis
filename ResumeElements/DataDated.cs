@@ -221,6 +221,10 @@ namespace ResumeElements
                     startTime = value;
                     endTime = startTime + new TimeSpan(1, 0, 0, 0);
                 }
+                else
+                {
+                    startTime = value;
+                }
                 NotifyPropertyChanged("StartTime");
                 NotifyPropertyChanged("RenderedDates");
             }

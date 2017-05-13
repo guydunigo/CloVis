@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public abstract class ElementList : Element
+    public abstract class ElementList : Element, INotifyPropertyChanged
     {
         public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
@@ -30,13 +31,19 @@ namespace ResumeElements
         protected void RemoveFromElements(Element e)
         {
             if (e is Data temp)
+            {
                 temp.RemoveFromCategory(this);
+                NotifyPropertyChanged("Values");
+                NotifyPropertyChanged("Keys");
+            }
         }
         protected void AddToElements(Element e)
         {
             if (e is Data temp && !(temp.Categories.Contains(this)))
             {
                 temp.AddToCategory(this);
+                NotifyPropertyChanged("Values");
+                NotifyPropertyChanged("Keys");
             }
         }
 
@@ -55,6 +62,8 @@ namespace ResumeElements
                     RemoveFromElements(elements[key]);
                     AddToElements(value);
                     elements[key] = value;
+                    NotifyPropertyChanged("Values");
+                    NotifyPropertyChanged("Keys");
                 }
                 else throw new ArgumentException("The new value hasn't a name corresponding to the key"); // Or rename it ?
             }
@@ -101,6 +110,8 @@ namespace ResumeElements
                     if (addToElements)
                         AddToElements(value);
                     elements.Add(value.Name, value);
+                    NotifyPropertyChanged("Values");
+                    NotifyPropertyChanged("Keys");
                 }
                 else
                     throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
@@ -168,6 +179,8 @@ namespace ResumeElements
             if (value is T val && elements.ContainsValue(val))
             {
                 RemoveFromElements(value);
+                NotifyPropertyChanged("Values");
+                NotifyPropertyChanged("Keys");
                 return elements.Remove(value.Name);
             }
             else return false;
@@ -208,6 +221,8 @@ namespace ResumeElements
             {
                 RemoveFromElements(t);
             }
+            NotifyPropertyChanged("Values");
+            NotifyPropertyChanged("Keys");
             elements.Clear();
         }
 

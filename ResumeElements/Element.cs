@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public abstract class Element
+    public abstract class Element : INotifyPropertyChanged
     {
         /// <summary>
         /// 
@@ -18,6 +20,12 @@ namespace ResumeElements
             //throw new NotImplementedException("Check if name isn't already used");
             Name = name;
             IsDefault = isDefault;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public abstract Element Find(string name);

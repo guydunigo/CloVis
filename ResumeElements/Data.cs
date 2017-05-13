@@ -22,12 +22,6 @@ namespace ResumeElements
 	        if (!isIndependant) Index.AddData(this);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         protected string description;
         public string Description
         {
