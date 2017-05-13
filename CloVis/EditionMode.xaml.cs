@@ -109,9 +109,20 @@ namespace CloVis
         {
             this.Frame.Navigate(typeof(StartPage));
         }
+        private void Enregistrement(object sender, RoutedEventArgs e)
+        {
+            FileManagement file = new FileManagement();
+            file.Create_File();
+
+        }
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Help));
+        }
+
+        private void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
