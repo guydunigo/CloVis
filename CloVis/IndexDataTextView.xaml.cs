@@ -413,7 +413,7 @@ namespace CloVis
 
         private void AddDate_Click(object sender, RoutedEventArgs e)
         {
-            if (!(Data is DataDated<string>) || !(Data is DataTimeSpan<string>))
+            if (!(Data is DataDated<string>) && !(Data is DataTimeSpan<string>))
             {
                 Data = DataDated<string>.Replace(Data);
             }
@@ -421,7 +421,10 @@ namespace CloVis
 
         private void AddTimeSpan_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!(Data is DataDated<string>) && !(Data is DataTimeSpan<string>))
+            {
+                Data = DataTimeSpan<string>.Replace(Data);
+            }
         }
     }
 }

@@ -80,9 +80,9 @@
                         </Button.Flyout>
                     </Button>
                 </StackPanel>
-                <StackPanel x:Name="DateEdit" Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" Margin="2">
+                <StackPanel x:Name="DateEdit" Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" Margin="0,2">
                     <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="DateForeword" Margin="2" PlaceholderText="Du texte"/>
+                        <TextBox x:Name="DateForeword" Margin="0,2,2,2" PlaceholderText="Du texte"/>
                         <ComboBox x:Name="DateFirstField" Margin="2" SelectionChanged="DateFirst_SelectionChanged">
                             <x:String>D&#x00E9;but</x:String>
                             <x:String>Fin</x:String>
@@ -93,7 +93,7 @@
                         <TextBox x:Name="DateFirstFormat" Margin="2"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
-                        <ComboBox x:Name="DateSecondField" Margin="2" SelectionChanged="DateSecond_SelectionChanged">
+                        <ComboBox x:Name="DateSecondField" Margin="0,2,2,2" SelectionChanged="DateSecond_SelectionChanged">
                             <x:String>Pas de deuxi&#x00E8;me date</x:String>
                             <x:String>D&#x00E9;but</x:String>
                             <x:String>Fin</x:String>
@@ -104,8 +104,8 @@
                         <TextBox Visibility="Collapsed" x:Name="DateSecondFormat" Margin="2"/>
                     </StackPanel>
                 </StackPanel>
-                <StackPanel x:Name="TimeSpanEdit" Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Orientation="Horizontal">
-                    <TextBox x:Name="TSForeword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=0}"/>
+                <StackPanel x:Name="TimeSpanEdit" Margin="0,2" Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Orientation="Horizontal">
+                    <TextBox x:Name="TSForeword" Margin="0,2,2,2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=0}"/>
                     <TextBox x:Name="TSMiddleword" PlaceholderText="Nombre de jours" Margin="2" Text="{Binding TimeSpan, Mode=OneWay, Converter={StaticResource TimeSpanValueToTextConverter}}"/>
                     <TextBox x:Name="TSEndword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=2}"/>
                 </StackPanel>
