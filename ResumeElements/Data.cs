@@ -105,10 +105,13 @@ namespace ResumeElements
 
         public void ClearCategories()
         {
-            foreach(ElementList e in categories)
+            var copy = new List<ElementList>(categories);
+            foreach(ElementList e in copy)
             {
-                RemoveCategory(e);
+                e.Remove(this);
             }
+            categories.Clear();
+            NotifyPropertyChanged("Categories");
         }
 
         protected double level;

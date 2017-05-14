@@ -89,6 +89,9 @@ namespace ResumeElements
             while(cur != e)
             {
                 prev = cur;
+                if (prev == null)
+                    break;
+
                 if (prev is ElementList i)
                 {
                     foreach (Element el in i.Values)
@@ -114,7 +117,7 @@ namespace ResumeElements
         public static void Erase(Data d)
         {
             d.ClearCategories();
-            FindParent(d).Remove(d);
+            DataIndex.Remove(d);
         }
     }
 }
