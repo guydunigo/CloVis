@@ -13,11 +13,11 @@
         <local:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
     </UserControl.Resources>
 
-    <StackPanel>
+    <StackPanel Width="1000" MinWidth="1000">
         <Border BorderThickness="0,0,0,2" Margin="20,0" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
             <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
         </Border>
-        <Pivot Margin="5,0,0,0">
+        <Pivot Margin="5,0,0,0" Padding="0">
             <PivotItem Header="En arbre">
                 <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
             </PivotItem>

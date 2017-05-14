@@ -54,6 +54,22 @@ namespace CloVis
         }
     }
 
+    public class RootCategoryRemoveToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is string s && Index.Root.ContainsKey(s))
+                return Visibility.Collapsed;
+            else
+                return Visibility.Visible;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public sealed partial class IndexElementListView : UserControl, INotifyPropertyChanged
     {
         public IndexElementListView()
@@ -130,6 +146,14 @@ namespace CloVis
         private void SymbolIcon_PointerPressed(object sender, PointerRoutedEventArgs e)
         {
             OpenClose_ElementList();
+        }
+
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (!Index.Root.Contains(ElementList))
+            {
+                Index.Erase(ElementList);
+            }
         }
     }
 }

@@ -21,8 +21,8 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel>
-            <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
-                <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name}"/>
+            <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
+                <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="0" Text="{Binding Name}"/>
                 <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
                 <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedTimeSpan, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
                 <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" x:Name="DateView" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedDates, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
@@ -50,7 +50,7 @@
             </StackPanel>
             <StackPanel DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Visibility="Collapsed"  x:Name="DataEdit" KeyDown="AcceptChanges_KeyDown">
                 <StackPanel Orientation="Horizontal" Margin="2">
-                    <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Name}"/>
+                    <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="0,2" Text="{Binding Name}"/>
                     <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
                     <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Value, Mode=OneWay}"/>
                     <Button x:Name="AcceptChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5" Click="AcceptChanges_Click">

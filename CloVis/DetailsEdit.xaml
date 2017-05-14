@@ -70,7 +70,7 @@
                     </ListViewItem>
                 </ListView>
             </SplitView.Pane>
-            <ScrollViewer>
+            <ScrollViewer HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
                 <local:IndexView/>
             </ScrollViewer>
         </SplitView>
