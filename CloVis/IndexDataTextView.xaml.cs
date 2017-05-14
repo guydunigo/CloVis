@@ -169,7 +169,6 @@ namespace CloVis
                 instance.NotifyPropertyChanged("Data");
             }
         }
-
         public static readonly DependencyProperty DataProperty =
             DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
 

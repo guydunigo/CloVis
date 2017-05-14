@@ -66,7 +66,7 @@ namespace CloVis
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
         public ElementList ElementList
         {
             get => (ElementList)(GetValue(ElementListProperty));

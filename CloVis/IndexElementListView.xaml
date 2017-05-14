@@ -24,7 +24,7 @@
     <Grid>
         <StackPanel x:Name="ElementListStackPanel" DataContext="{x:Bind ElementList,Mode=OneWay}">
             <StackPanel x:Name="Head" Orientation="Horizontal" DoubleTapped="ElementList_DoubleTapped">
-                <SymbolIcon x:Name="AddSymbol" VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add" Foreground="Black"
+                <SymbolIcon x:Name="AddSymbol" VerticalAlignment="Center" Margin="5,0,10,0" Symbol="Add"
                                     PointerEntered="SymbolIcon_PointerEntered" PointerExited="SymbolIcon_PointerExited" PointerPressed="SymbolIcon_PointerPressed"/>
                 <TextBlock x:Name="Name" VerticalAlignment="Center" Margin="5,0" Text="{Binding Name}"/>
                 <SymbolIcon VerticalAlignment="Center" Margin="5,0" Symbol="More" Visibility="Collapsed"/>

@@ -42,12 +42,12 @@
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
                         <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ScrollViewer Margin="5" Background="White" Grid.Row="0">
                         <local:IndexView/>
-                    </StackPanel>
+                    </ScrollViewer>
                     <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
                         <ListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                             <ListViewHeaderItem Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">

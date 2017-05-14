@@ -70,7 +70,9 @@
                     </ListViewItem>
                 </ListView>
             </SplitView.Pane>
-            <local:IndexView/>
+            <ScrollViewer>
+                <local:IndexView/>
+            </ScrollViewer>
         </SplitView>
     </Grid>
 </Page>
