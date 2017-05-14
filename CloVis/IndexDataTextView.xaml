@@ -72,7 +72,7 @@
                                 <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
                                 <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
                                 <MenuFlyoutSeparator Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}"/>
-                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                                <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="RemoveBtn_Click"/>
                             </MenuFlyout>
                         </Button.Flyout>
                     </Button>
@@ -107,9 +107,9 @@
                     <TextBox x:Name="TSEndword" Margin="2" PlaceholderText="Du texte" Text="{Binding DisplayFormat, Mode=OneWay, Converter={StaticResource TimeSpanDisplayFormatToTextConverter}, ConverterParameter=2}"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel x:Name="CategoriesStack" Margin="45,0,0,5" Visibility="{x:Bind ToggleCategories.IsChecked, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0">
+            <StackPanel x:Name="CategoriesStack" Margin="5,0,0,5" Visibility="{x:Bind ToggleCategories.IsChecked, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" BorderBrush="{ThemeResource CloVisBlue}" BorderThickness="2,0,0,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                    <TextBlock Text="Cat&#x00E9;gories" VerticalAlignment="Center" FontSize="20" Margin="10,0,5,5"/>
+                    <TextBlock Text="Cat&#x00E9;gories" VerticalAlignment="Center" FontSize="18" Margin="10,0,5,5"/>
                     <Button x:Name="AddCategoryBtn" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                         <Button.Content>
                             <SymbolIcon Symbol="Add"/>
