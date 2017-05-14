@@ -25,10 +25,14 @@ namespace CloVis
             this.InitializeComponent();
             this.Loaded += OnLoaded;
 
+            this.DataContext = this;
+
             Root = Index.Root;
+            DataIndex = Index.DataIndex;
         }
 
         public ElementList Root { get; set; }
+        public ElementList DataIndex { get; set; }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -40,11 +44,12 @@ namespace CloVis
             var divers = ResumeElements.Index.GetMiscellaneous();
             if (divers.Count > 0)
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = divers } });
-
+            
+            /*
             // List data from A to Z
             foreach (ResumeElements.Data d in ResumeElements.Index.DataIndex.Values)
                 if (d is ResumeElements.Data<string> el)
-                    DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });
+                    DataList.Items.Add(new ListViewItem() { Content = new IndexDataTextView() { Data = el } });*/
         }
     }
 }

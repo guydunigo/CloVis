@@ -387,5 +387,10 @@ namespace CloVis
                 }
             }
         }
+
+        private void RemoveBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Index.Erase(Data);
+        }
     }
 }

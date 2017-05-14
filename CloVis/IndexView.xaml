@@ -22,7 +22,13 @@
                 <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
             </PivotItem>
             <PivotItem Header="De A à Z">
-                <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
+                <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True" DataContext="{Binding DataIndex, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:IndexDataTextView Data="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </PivotItem>
         </Pivot>
     </StackPanel>
