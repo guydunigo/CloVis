@@ -15,7 +15,30 @@
             <Paragraph>
                 Ce didacticiel vous permettra de prendre en main le logiciel.
             </Paragraph>
+            <Paragraph></Paragraph>
+            <Paragraph>
+                <Bold>I-Renseigner ses informations personelles</Bold>
+            </Paragraph>
+            <Paragraph>
+                Avant de créer votre premier CV, ou si vos informations ne sont pas à jour, vous pouvez les rentrer ou les modifier.
+                Voici comment accéder aux modifications de vos données :
+            </Paragraph>
+            <Paragraph>
+                Si vous vous situez sur la page de démarrage, cliquez sur <Italic><Bold>"Modifier vos données"</Bold></Italic>
+            </Paragraph>
+            <Paragraph>
+                Si vous avez un CV d'ouvert, cliquez sur <Italic><Bold>"Gérer les données"</Bold></Italic> dans la barre latérale gauche.
+            </Paragraph>
+            <Paragraph></Paragraph>
+            <Paragraph>
+                <Bold>II-Choisir un modèle/CV</Bold>
+            </Paragraph>
+            <Paragraph>Une fois vos informations personnelles rentrées, l'heure est venue de choisir un modèle qui vous convient, ou un CV déjà confectionné.</Paragraph>
+            
             
         </RichTextBlock>
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30">
+            J'ai compris
+        </Button>
     </Grid>
 </Page>
