@@ -14,7 +14,7 @@
         <local:IsDatedToVisibilityConverter x:Key="IsDatedToVisibilityConverter"/>
         <local:IsSimpleToVisibilityConverter x:Key="IsSimpleToVisibilityConverter"/>
         <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-        <local:AddComaConverter x:Key="AddComaConverter"/>
+        <local:AddSeparatorConverter x:Key="AddSeparatorConverter"/>
         <local:TimeSpanDisplayFormatToTextConverter x:Key="TimeSpanDisplayFormatToTextConverter"/>
         <local:TimeSpanValueToTextConverter x:Key="TimeSpanValueToTextConverter"/>
         <local:DatedDisplayFormatToTextConverter x:Key="DatedDisplayFormatToTextConverter"/>
@@ -22,11 +22,11 @@
     <Grid>
         <StackPanel>
             <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
-                <TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="0" Text="{Binding Name}"/>
-                <TextBlock VerticalAlignment="Center" Margin="5,0" Text=":"/>
-                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedTimeSpan, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
-                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" x:Name="DateView" VerticalAlignment="Center" Margin="5,0" Text="{Binding RenderedDates, Converter={StaticResource AddComaConverter}, Mode=OneWay}"/>
-                <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="5,0" Text="{Binding Value, Mode=OneWay}"/>
+                <!--<TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="0" Text="{Binding Name}"/>
+                <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text=":"/>-->
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{Binding RenderedTimeSpan, Mode=OneWay}"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" x:Name="DateView" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{Binding RenderedDates, Mode=OneWay}"/>
+                <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="0" Text="{Binding Value, Mode=OneWay}"/>
                 <Button x:Name="EditBtn" Click="EditBtn_Click" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                     <Button.Content>
                         <SymbolIcon Symbol="Edit"/>
@@ -49,10 +49,10 @@
                 </Button>
             </StackPanel>
             <StackPanel DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Visibility="Collapsed"  x:Name="DataEdit" KeyDown="AcceptChanges_KeyDown">
-                <StackPanel Orientation="Horizontal" Margin="2">
-                    <TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="0,2" Text="{Binding Name}"/>
-                    <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>
-                    <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="5,2" Text="{Binding Value, Mode=OneWay}"/>
+                <StackPanel Orientation="Horizontal" Margin="0,2">
+                    <!--<TextBlock x:Name="NameEdit" VerticalAlignment="Center" Margin="0,2" Text="{Binding Name}"/>
+                    <TextBlock VerticalAlignment="Center" Margin="5,2" Text=":"/>-->
+                    <TextBox x:Name="ValueEdit" VerticalAlignment="Center" Margin="0,2" Text="{Binding Value, Mode=OneWay}" PlaceholderText="{Binding Name}"/>
                     <Button x:Name="AcceptChanges" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="2,0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5" Click="AcceptChanges_Click">
                         <Button.Content>
                             <SymbolIcon Symbol="Accept"/>

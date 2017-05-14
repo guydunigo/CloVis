@@ -68,12 +68,12 @@ namespace CloVis
         }
     }
 
-    public class AddComaConverter : IValueConverter
+    public class AddSeparatorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is string s)
-                return s + ", ";
+                return " - " + s;
             else
                 return value;
         }
@@ -145,7 +145,7 @@ namespace CloVis
             throw new NotImplementedException();
         }
     }
-    
+
     public sealed partial class IndexDataTextView : UserControl, INotifyPropertyChanged
     {
         public IndexDataTextView()
@@ -166,6 +166,8 @@ namespace CloVis
         {
             if (d is IndexDataTextView instance && instance.Data != null)
             {
+                if (instance.Data.Value == "")
+                    instance.SwitchToEditData();
                 instance.NotifyPropertyChanged("Data");
             }
         }
@@ -231,61 +233,77 @@ namespace CloVis
         }
         public void AcceptEditChanges()
         {
-            Data.Value = ValueEdit.Text;
-            if (Data is DataDated<string> dd)
+            if (ValueEdit.Text != "")
             {
-                var temp = DateForeword.Text + "$";
-
-                if (DateFirstField.SelectedIndex == 0)
+                Data.Value = ValueEdit.Text;
+                if (Data is DataDated<string> dd)
                 {
-                    dd.StartTime = DateFirst.Date;
-                    temp += "1";
-                }
-                else
-                {
-                    dd.EndTime = DateFirst.Date;
-                    temp += "2";
-                }
+                    var temp = DateForeword.Text + "$";
 
-                temp += "(" + DateFirstFormat.Text + ")$" + DateMiddleword.Text;
-
-                if (DateSecondField.SelectedIndex != 0)
-                {
-                    temp += "$";
-                    if (DateSecondField.SelectedIndex == 1)
+                    if (DateFirstField.SelectedIndex == 0)
                     {
-                        dd.StartTime = DateSecond.Date;
+                        dd.StartTime = DateFirst.Date;
                         temp += "1";
                     }
                     else
                     {
-                        dd.EndTime = DateSecond.Date;
+                        dd.EndTime = DateFirst.Date;
                         temp += "2";
                     }
 
-                    temp += "(" + DateSecondFormat.Text + ")$" + DateEndword.Text;
+                    temp += "(" + DateFirstFormat.Text + ")$" + DateMiddleword.Text;
+
+                    if (DateSecondField.SelectedIndex != 0)
+                    {
+                        temp += "$";
+                        if (DateSecondField.SelectedIndex == 1)
+                        {
+                            dd.StartTime = DateSecond.Date;
+                            temp += "1";
+                        }
+                        else
+                        {
+                            dd.EndTime = DateSecond.Date;
+                            temp += "2";
+                        }
+
+                        temp += "(" + DateSecondFormat.Text + ")$" + DateEndword.Text;
+                    }
+
+                    dd.DisplayFormat = temp;
+                }
+                else if (Data is DataTimeSpan<string> dts)
+                {
+                    if (int.TryParse(TSMiddleword.Text, out int i))
+                        dts.TimeSpan = new TimeSpan(i, 0, 0, 0);
+
+                    dts.DisplayFormat = TSForeword.Text + "$(" + dts.GetDisplayFormat() + ")$" + TSEndword.Text;
                 }
 
-                dd.DisplayFormat = temp;
-            }
-            else if (Data is DataTimeSpan<string> dts)
-            {
-                if (int.TryParse(TSMiddleword.Text, out int i))
-                    dts.TimeSpan = new TimeSpan(i, 0, 0, 0);
+                // Back to View mode :
+                SwitchToViewData();
 
-                dts.DisplayFormat = TSForeword.Text + "$(" + dts.GetDisplayFormat() + ")$" + TSEndword.Text;
-            }
-            
-            // Back to View mode :
-            SwitchToViewData();
+                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Gray);
 
-            // Update values in the fields :
-            NotifyPropertyChanged("Data");
+                // Update values in the fields :
+                NotifyPropertyChanged("Data");
+            }
+            else
+                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
         }
         public void CancelEditChanges()
         {
-            SwitchToViewData();
-            NotifyPropertyChanged("Data");
+            if (Data.Value != "")
+            {
+                SwitchToViewData();
+
+                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Gray);
+
+                // Even if we didn't change anything, notify :
+                NotifyPropertyChanged("Data");
+            }
+            else
+                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
         }
         public void ShowSecondDate()
         {

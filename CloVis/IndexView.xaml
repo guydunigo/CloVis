@@ -19,10 +19,18 @@
         </Border>
         <Pivot Margin="5,0,0,0" Padding="0">
             <PivotItem Header="En arbre">
-                <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"/>
+                <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                          DataContext="{Binding Root, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <local:IndexElementListView ElementList="{Binding}"/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </PivotItem>
             <PivotItem Header="De A à Z">
-                <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True" DataContext="{Binding DataIndex, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                          DataContext="{Binding DataIndex, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <local:IndexDataTextView Data="{Binding}"/>

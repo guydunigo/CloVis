@@ -45,7 +45,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ScrollViewer Margin="5" Background="White" Grid.Row="0" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ScrollViewer Margin="2" Background="White" Grid.Row="0" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
                         <local:IndexView/>
                     </ScrollViewer>
                     <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
