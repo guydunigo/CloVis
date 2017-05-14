@@ -119,5 +119,30 @@ namespace ResumeElements
             (Index.Find("Divers") as ElementList).Remove(d);
             DataIndex.Remove(d);
         }
+
+        /// <summary>
+        /// Generate a valid, unused, name for an Element.
+        /// </summary>
+        /// <param name="baseValue">If given, the name will include this string.
+        /// If the Index doesn't contain baseValue, baseValue is returned</param>
+        /// <returns></returns>
+        public static string GetUnusedName(object baseValue = null)
+        {
+            string res = baseValue as string;
+            if (res == null || res == "")
+            {
+                for (int i = 0; i >= 0 && Index.Find(res) != null; i++)
+                    res = i.ToString();
+            }
+            else if (Index.Find(res) != null)
+            {
+                while (Index.Find(res) != null)
+                {
+                    res = "_" + res;
+                }
+            }
+
+            return res;
+        }
     }
 }

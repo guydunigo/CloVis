@@ -15,6 +15,20 @@ namespace ResumeElements
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="value"></param>
+        /// <param name="start"></param>
+        /// <param name="end">If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.</param>
+        /// <param name="displayFormat"></param>
+        /// <param name="level"></param>
+        /// <param name="description"></param>
+        /// <param name="isDefault"></param>
+        public DataDated(T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, description, isIndependant, isDefault)
+        {
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="start"></param>

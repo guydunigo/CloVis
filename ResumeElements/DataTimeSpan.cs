@@ -10,6 +10,10 @@ namespace ResumeElements
 {
     public class DataTimeSpan<T>: Data<T>, INotifyPropertyChanged
     {
+        public DataTimeSpan(T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, span, displayFormat, level, description, isIndependant, isDefault)
+        {
+        }
+
         public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
             TimeSpan = span;

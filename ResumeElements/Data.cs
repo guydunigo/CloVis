@@ -135,6 +135,10 @@ namespace ResumeElements
     /// <typeparam name="T">Can be a string, or an image (ie. Data<string> or Data<int>)</typeparam>
     public class Data<T> : Data, INotifyPropertyChanged
     {
+        public Data(T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, level, description, isIndependant, isDefault)
+        {
+        }
+
         public Data(string name, T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, level, description, isIndependant, isDefault)
         {
             Value = value;
