@@ -20,7 +20,7 @@ namespace ResumeElements
             double Level = level;
             categories = new SortedSet<ElementList>(new CategoriesComparer());
 
-            this.isIndependant = isIndependant;
+            this.IsIndependant = isIndependant;
 	        if (!isIndependant) Index.AddData(this);
         }
 
@@ -41,7 +41,7 @@ namespace ResumeElements
             else return null;
         }
 
-        protected bool isIndependant;
+        public bool IsIndependant { get; set; }
 
         protected SortedSet<ElementList> categories;
         /// <summary>
@@ -69,7 +69,7 @@ namespace ResumeElements
                 if (cat.Name != "Divers")
                     categories.Add(cat);
 
-                if (!isIndependant && categories.Count == 2)
+                if (!IsIndependant && categories.Count == 2)
                     (Index.Find("Divers") as ElementList).Remove(this);
 
                 NotifyPropertyChanged("Categories");
@@ -88,7 +88,7 @@ namespace ResumeElements
                     cat.Remove(this);
                 categories.Remove(cat);
 
-                if (!isIndependant && categories.Count == 0 && cat.Name != "Divers")
+                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers")
                     AddCategory(Index.Find("Divers") as ElementList);
 
                 NotifyPropertyChanged("Categories");
@@ -164,7 +164,13 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new Data<T>(Name, Value, Level, Description, true, true);
+            var temp = new Data<T>(Name, Value, Level, Description, true, true);
+            foreach(ElementList el in categories)
+            {
+                temp.AddCategory(el);
+            }
+
+            return temp;
         }
 
         public override void UpdateFromIndex()

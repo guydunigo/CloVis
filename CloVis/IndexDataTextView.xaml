@@ -43,6 +43,9 @@
                     </Button.Content>
                     <Button.Flyout>
                         <MenuFlyout>
+                            <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date" Click="AddDate_Click"/>
+                            <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée" Click="AddTimeSpan_Click"/>
+                            <MenuFlyoutSeparator Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}"/>
                             <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="RemoveBtn_Click"/>
                         </MenuFlyout>
                     </Button.Flyout>
@@ -69,8 +72,8 @@
                         </Button.Content>
                         <Button.Flyout>
                             <MenuFlyout>
-                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date"/>
-                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée"/>
+                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une date" Click="AddDate_Click"/>
+                                <MenuFlyoutItem Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" Text="Ajouter une durée" Click="AddTimeSpan_Click"/>
                                 <MenuFlyoutSeparator Visibility="{Binding Name, Converter={StaticResource IsSimpleToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}"/>
                                 <MenuFlyoutItem Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="RemoveBtn_Click"/>
                             </MenuFlyout>

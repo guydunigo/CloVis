@@ -292,5 +292,27 @@ namespace ResumeElements
             else
                 throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
+
+        public static DataDated<T> Replace(Data<T> data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")
+        {
+            // Mew mew (== Mewtwo)
+            var cats = data.Categories;
+
+            if (!data.IsIndependant)
+            {
+                Index.Erase(data);
+            }
+            data.ClearCategories();
+
+            var dest = new DataDated<T>(data.Name, data.Value, start, end, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
+
+            foreach(ElementList el in cats)
+            {
+                dest.AddCategory(el);
+            }
+
+            return dest;
+
+        }
     }
 }
