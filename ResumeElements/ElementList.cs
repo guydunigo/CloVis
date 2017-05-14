@@ -15,6 +15,7 @@ namespace ResumeElements
         }
         public abstract void Add(object item);
         public abstract void Remove(Element item);
+        public abstract bool ContainsKey(string e);
         public abstract void Clear();
         public abstract ICollection Values { get; }
         public abstract ICollection Keys { get; }
@@ -33,7 +34,7 @@ namespace ResumeElements
         {
             if (e is Data temp)
             {
-                temp.RemoveFromCategory(this);
+                temp.RemoveCategory(this);
                 NotifyPropertyChanged("Values");
                 NotifyPropertyChanged("Keys");
             }
@@ -42,7 +43,7 @@ namespace ResumeElements
         {
             if (e is Data temp && !(temp.Categories.Contains(this)))
             {
-                temp.AddToCategory(this);
+                temp.AddCategory(this);
                 NotifyPropertyChanged("Values");
                 NotifyPropertyChanged("Keys");
             }
@@ -108,9 +109,9 @@ namespace ResumeElements
             {
                 if (Find(value.Name) == null)
                 {
+                    elements.Add(value.Name, value);
                     if (addToElements)
                         AddToElements(value);
-                    elements.Add(value.Name, value);
                     NotifyPropertyChanged("Values");
                     NotifyPropertyChanged("Keys");
                 }
@@ -145,7 +146,7 @@ namespace ResumeElements
             return Contains(item.Value);
         }
 
-        public bool ContainsKey(string key)
+        public override bool ContainsKey(string key)
         {
             return elements.Keys.Contains(key);
         }
@@ -179,8 +180,8 @@ namespace ResumeElements
         {
             if (value is T val && elements.ContainsValue(val))
             {
-                RemoveFromElements(value);
                 var temp = elements.Remove(value.Name);
+                RemoveFromElements(value);
                 NotifyPropertyChanged("Values");
                 NotifyPropertyChanged("Keys");
                 return temp;
@@ -219,7 +220,8 @@ namespace ResumeElements
 
         public override void Clear()
         {
-            foreach(T t in elements.Values)
+            var copy = new List<T>(elements.Values);
+            foreach(T t in copy)
             {
                 RemoveFromElements(t);
             }

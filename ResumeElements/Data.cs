@@ -19,6 +19,8 @@ namespace ResumeElements
             Description = description;
             double Level = level;
             categories = new SortedSet<ElementList>(new CategoriesComparer());
+
+            this.isIndependant = isIndependant;
 	        if (!isIndependant) Index.AddData(this);
         }
 
@@ -39,6 +41,8 @@ namespace ResumeElements
             else return null;
         }
 
+        protected bool isIndependant;
+
         protected SortedSet<ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
@@ -58,8 +62,16 @@ namespace ResumeElements
         {
             if (!categories.Contains(cat))
             {
-                cat.Add(this);
-                categories.Add(cat);
+                if (!cat.ContainsKey(Name))
+                    cat.Add(this);
+
+                // The misc. category isn't to be listed in Categories
+                if (cat.Name != "Divers")
+                    categories.Add(cat);
+
+                if (!isIndependant && categories.Count == 2)
+                    (Index.Find("Divers") as ElementList).Remove(this);
+
                 NotifyPropertyChanged("Categories");
             }
         }
@@ -72,33 +84,13 @@ namespace ResumeElements
         {
             if (categories.Contains(cat))
             {
-                cat.Remove(this);
+                if (cat.ContainsKey(Name))
+                    cat.Remove(this);
                 categories.Remove(cat);
-                NotifyPropertyChanged("Categories");
-            }
-        }
-        
-        /// <summary>
-        /// Method used by ElementList.AddToElement() (Not a big fan :/ )
-        /// </summary>
-        /// <param name="cat"></param>
-        internal void AddToCategory(ElementList cat)
-        {
-            if (!categories.Contains(cat))
-            {
-                categories.Add(cat);
-                NotifyPropertyChanged("Categories");
-            }
-        }
-        /// <summary>
-        /// Method used by ElementList.RemoveFromElement() (Not a big fan :/ )
-        /// </summary>
-        /// <param name="cat"></param>
-        internal void RemoveFromCategory(ElementList cat)
-        {
-            if (categories.Contains(cat))
-            {
-                categories.Remove(cat);
+
+                if (!isIndependant && categories.Count == 0 && cat.Name != "Divers")
+                    AddCategory(Index.Find("Divers") as ElementList);
+
                 NotifyPropertyChanged("Categories");
             }
         }

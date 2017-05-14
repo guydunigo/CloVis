@@ -44,9 +44,9 @@ namespace ResumeElements
         /// Return a list of all pieces of Data unlisted in any categories other than the index
         /// </summary>
         /// <returns></returns>
-        public static ElementList<Data> GetMiscellaneous()
+        public static ElementList<Data> GetUnlistedData()
         {
-            var misc = new ElementList<Data>("Divers");
+            var misc = new ElementList<Data>("Non listés");
             foreach(Data d in DataIndex.Values)
             {
                 if (d.Categories.Count == 0)
@@ -56,8 +56,6 @@ namespace ResumeElements
             }
             return misc;
         }
-
-        // Child : update to mainIndex ?
 
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
@@ -79,6 +77,7 @@ namespace ResumeElements
             new ElementList<Element>("Études"),
             new ElementList<Element>("Expériences professionnelles"),
             new ElementList<Element>("Centres d'intérêts"),
+            new ElementList<Element>("Divers"),
             // Remplir
         };
 
@@ -117,6 +116,7 @@ namespace ResumeElements
         public static void Erase(Data d)
         {
             d.ClearCategories();
+            (Index.Find("Divers") as ElementList).Remove(d);
             DataIndex.Remove(d);
         }
     }
