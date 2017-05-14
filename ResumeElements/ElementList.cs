@@ -267,7 +267,9 @@ namespace ResumeElements
         public override Element Find(string name)
         {
             Element res = null;
-            if (elements.Keys.Contains(name))
+            if (Name == name)
+                return this;
+            else if (elements.Keys.Contains(name))
             {
                 return this[name];
             }

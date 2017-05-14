@@ -85,7 +85,7 @@ namespace ResumeElements
         public static ElementList FindParent(Element e)
         {
             Element prev = null, cur = Root;
-
+            
             while(cur != e)
             {
                 prev = cur;
