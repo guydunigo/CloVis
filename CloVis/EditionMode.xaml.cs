@@ -112,7 +112,7 @@ namespace CloVis
         private void Enregistrement(object sender, RoutedEventArgs e)
         {
             FileManagement file = new FileManagement();
-            file.Create_File();
+            file.Create_File(resume);
 
         }
         private void Help_Click(object sender, RoutedEventArgs e)

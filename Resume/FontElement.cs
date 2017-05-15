@@ -5,9 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
+using System.Xml.Serialization;
 
 namespace Resume
 {
+    
+   
     public class FontElement
     {
         public FontElement(string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false, string name = "")
@@ -26,7 +29,9 @@ namespace Resume
             UpperCase = upperCase;
         }
 
+
         public string Name { get; }
+
         public FontFamily Font { get; set; }
         public double FontSize { get; set; }
         public bool Italic { get; set; }

@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Resume
 {
+   
     public class Layout
     {
         public Layout()
         {
+           
             BackBoxes = new List<BoxBackground>();
             TextBoxes = new List<BoxText>();
         }
 
+        [XmlArrayAttribute("Boxes")]
         public List<BoxBackground> BackBoxes { get; set; }
+        
         public List<BoxText> TextBoxes { get; set; }
         // Element List + Index
 

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Windows.UI;
 
 namespace Resume
 {
+    
     public class BoxText: Box
     {
         public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "")//0 on the upper left corner - cm
@@ -15,6 +17,7 @@ namespace Resume
             DefaultElement = defaultElmt;
         }
 
+        [XmlElementAttribute(IsNullable = false)]
         /// <summary>
         /// Box depth position, determines whether an element is above another one or below.
         /// For background boxes, it is a number above 50.
