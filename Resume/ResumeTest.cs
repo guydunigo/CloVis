@@ -111,13 +111,13 @@ namespace Resume
                 new Data<string>("Adresse", "17 rue de la Réussite \n 75012 Paris", -1, "", true)
 			};
 
-            var objectif= new ElementList<Element>("Objectif")
+            var objectif = new ElementList<Element>("Objectif")
             {
                 new ElementList<Element>("Mon Objectif")
                 {
                     new Data<string>("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !", -1, "",true)
                 }
-            }
+            };
 
 			var competences = new ElementList<Element>("Compétences")
 			{
@@ -140,7 +140,7 @@ namespace Resume
 
 			var diplomes = new ElementList<Element>("Dynastie")
 			{
-				new DataDated<string>("Mérovingien", "Mérovingien", new DateTime(466,1,1), null, "Depuis $1(y)$",-1, "",true),
+				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(y)$",-1, "",true),
 				
 			};
 
