@@ -111,6 +111,7 @@
     <Compile Include="Box.cs" />
     <Compile Include="BoxBackground.cs" />
     <Compile Include="BoxText.cs" />
+    <Compile Include="FileManagement.cs" />
     <Compile Include="Fonts.cs" />
     <Compile Include="FontElement.cs" />
     <Compile Include="Layout.cs" />

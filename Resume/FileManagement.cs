@@ -9,16 +9,16 @@ using System.Security;
 using Windows.Storage;
 using System.Xml.Serialization;
 
-namespace CloVis
+namespace Resume
 {
-    [XmlRootAttribute("ResumeSaving", Namespace = "Boby", IsNullable = false), XmlInclude(typeof(Resume.Layout)), XmlInclude(typeof(Resume.Fonts)), XmlInclude(typeof(Resume.Resume))]
+   
     public class FileManagement
     {
         public FileManagement()
         {
             // a faire
         }
-        public async void Create_File(Resume.Resume resumetosave)
+        public async void Create_File(Resume resumetosave)
         {
 
             StorageFolder folder = null;
@@ -32,22 +32,21 @@ namespace CloVis
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
            
+            
             // Writes simply in the file :
-            file = await folder.CreateFileAsync("MacQueen.xml", CreationCollisionOption.OpenIfExists);
+            file = await folder.CreateFileAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists);
 
             // With streams (manage where to write, ...) :
-            using (var stream = await folder.OpenStreamForWriteAsync("MacQueen.xml", CreationCollisionOption.OpenIfExists))
+            using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists))
             {
 
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Async = true;
-                 XmlSerializer serial = new XmlSerializer(typeof(Resume.Resume));
-                using (XmlWriter writer = XmlWriter.Create(stream, settings))
-                {
 
-                    serial.Serialize(writer, resumetosave);
-                    await writer.FlushAsync(); // vide tout
-                }
+                XmlWriter writer = XmlWriter.Create(stream, settings);
+                
+                await writer.FlushAsync(); // vide tout
+                
             }
         }
     }

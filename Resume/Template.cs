@@ -8,7 +8,7 @@ namespace Resume
 {
     public class Template: Resume
     {
-        public Template() // Useless ?
+        public Template(string name): base(name) // Useless ?
         {
             //throw new NotImplementedException("Useless ?");
         }

@@ -105,7 +105,6 @@
     <Compile Include="Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FileManagement.cs" />
     <Compile Include="IndexElementListView.xaml.cs">
       <DependentUpon>IndexElementListView.xaml</DependentUpon>
     </Compile>
