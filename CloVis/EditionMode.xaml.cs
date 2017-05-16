@@ -105,9 +105,18 @@ namespace CloVis
             ZoomSlider.Value = WorkBench.ZoomFactor;
         }
 
-        private void RetourAccueil_Click(object sender, RoutedEventArgs e)
+        private void Retour_Click(object sender, RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(StartPage));
+            Frame root = Window.Current.Content as Frame;
+            if (root == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (root.CanGoBack)
+            {
+                root.GoBack();
+            }
         }
         private void Enregistrement(object sender, RoutedEventArgs e)
         {
