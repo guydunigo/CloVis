@@ -118,6 +118,15 @@
     <Compile Include="IndexDataTextView.xaml.cs">
       <DependentUpon>IndexDataTextView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewCategoryForm.xaml.cs">
+      <DependentUpon>NewCategoryForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewDataForm.xaml.cs">
+      <DependentUpon>NewDataForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NewImageForm.xaml.cs">
+      <DependentUpon>NewImageForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resume_Preview.cs" />
     <Compile Include="StartPage.xaml.cs">
@@ -215,6 +224,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="IndexDataTextView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewCategoryForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewDataForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewImageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

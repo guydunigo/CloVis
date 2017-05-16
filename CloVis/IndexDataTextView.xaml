@@ -24,9 +24,9 @@
             <StackPanel x:Name="DataView" DataContext="{x:Bind Data,Mode=OneWay}" Padding="0" Margin="0" Orientation="Horizontal" DoubleTapped="Data_DoubleTapped">
                 <!--<TextBlock x:Name="NameView" VerticalAlignment="Center" Margin="0" Text="{Binding Name}"/>
                 <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text=":"/>-->
-                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{Binding RenderedTimeSpan, Mode=OneWay}"/>
+                <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="0,0,5,0" Text="{Binding Value, Mode=OneWay}"/>
+                <TextBlock Visibility="{Binding Name, Converter={StaticResource IsTimeSpanToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" VerticalAlignment="Center" Margin="0" FontWeight="Medium" Text="{Binding RenderedTimeSpan, Mode=OneWay}"/>
                 <TextBlock Visibility="{Binding Name, Converter={StaticResource IsDatedToVisibilityConverter}}" Foreground="{ThemeResource CloVisBlue}" x:Name="DateView" VerticalAlignment="Center" Margin="0,0,5,0" FontWeight="Medium" Text="{Binding RenderedDates, Mode=OneWay}"/>
-                <TextBlock x:Name="ValueView" VerticalAlignment="Center" Margin="0" Text="{Binding Value, Mode=OneWay}"/>
                 <Button x:Name="EditBtn" Click="EditBtn_Click" VerticalAlignment="Center" BorderThickness="0" HorizontalAlignment="Right" Margin="3" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5">
                     <Button.Content>
                         <SymbolIcon Symbol="Edit"/>
