@@ -39,6 +39,10 @@ namespace CloVis
             {
                 root.GoBack();
             }
+            else
+            {
+                this.Frame.Navigate(typeof(StartPage));
+            }
         }
     }
 }
