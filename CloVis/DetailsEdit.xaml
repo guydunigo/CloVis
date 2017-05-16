@@ -11,7 +11,6 @@
         <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left">
             <SplitView.Pane>
                 <ListView>
-                    <ListViewHeaderItem Foreground="White" Content="Nouvelle catégorie"/>
                     <ListViewItem HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
                         <!--<StackPanel HorizontalAlignment="Stretch">
                             <TextBox Margin="0,5"  PlaceholderText="Nom" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
@@ -26,6 +25,7 @@
                                 </Grid>
                             </Button>
                         </StackPanel>-->
+                        <local:NewCategoryForm/>
                     </ListViewItem>
 
                     <ListViewHeaderItem Foreground="White" Content="Nouvelle donnée"/>
