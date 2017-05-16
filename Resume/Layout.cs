@@ -17,7 +17,6 @@ namespace Resume
             TextBoxes = new List<BoxText>();
         }
 
-        [XmlArrayAttribute("Boxes")]
         public List<BoxBackground> BackBoxes { get; set; }
         
         public List<BoxText> TextBoxes { get; set; }

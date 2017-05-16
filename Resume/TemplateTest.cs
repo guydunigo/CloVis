@@ -15,7 +15,7 @@ namespace Resume
         public static Template GetTemplate_1()
         {
 
-            var template = new Template();
+            var template = new Template("Temp1");
 
 
             var fonts = new Fonts("Polices_cv")
@@ -68,7 +68,7 @@ namespace Resume
 
         public static Template GetTemplate_2()
         {
-            var template = new Template();
+            var template = new Template("Temp2");
 
             var fonts = new Fonts("Polices_cv")
             {

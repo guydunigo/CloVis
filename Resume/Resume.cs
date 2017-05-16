@@ -10,29 +10,32 @@ using System.IO;
 
 namespace Resume
 {
-    [XmlRootAttribute("ResumeSaving", Namespace = "Boby", IsNullable = false), XmlInclude(typeof(Layout)), XmlInclude(typeof(Fonts))]
+   
     public class Resume
     {
-        public Resume()
+        public Resume(string name)
         {
+            Name = name;
+            FileManagement file = new FileManagement();
+            //if ((this.Name != null)) file.Create_File(this);
             // default ? Fonts, ...
         }
 
-        [XmlIgnore]
+
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes
         /// ! If you add an TextBox, you have to register its element to le elmts list.
         /// </summary>
         public Layout Layout { get; set; }
-        [XmlIgnore]
+       
         //[XmlAttribute("resume")]
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
         public Fonts Fonts { get; set; }
 
-        [XmlAttribute("resume")]
+      
         public string Name { get; set; }
 
         public void UpdateFromIndex()
@@ -48,7 +51,7 @@ namespace Resume
         /// </summary>
         public Resume Copy()
         {
-            return new Resume()
+            return new Resume(Name)
             {
                 Layout = Layout.Copy(),
                 Fonts = Fonts.Copy(),

@@ -17,7 +17,7 @@ namespace Resume
             DefaultElement = defaultElmt;
         }
 
-        [XmlElementAttribute(IsNullable = false)]
+
         /// <summary>
         /// Box depth position, determines whether an element is above another one or below.
         /// For background boxes, it is a number above 50.
