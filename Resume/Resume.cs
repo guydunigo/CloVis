@@ -17,8 +17,9 @@ namespace Resume
         {
             Name = name;
             FileManagement file = new FileManagement();
-            //if ((this.Name != null)) file.Create_File(this);
-            // default ? Fonts, ...
+            if (this is Template) this.Name = "";
+            if ((this.Name != "")) file.Create_File(this);
+  
         }
 
 

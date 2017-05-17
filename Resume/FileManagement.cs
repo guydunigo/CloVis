@@ -22,7 +22,7 @@ namespace Resume
         {
 
             StorageFolder folder = null;
-            StorageFile file = null;
+            
             try
             {
                 folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
@@ -32,11 +32,7 @@ namespace Resume
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
            
-            
-            // Writes simply in the file :
-            file = await folder.CreateFileAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists);
 
-            // With streams (manage where to write, ...) :
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists))
             {
 
@@ -44,9 +40,53 @@ namespace Resume
                 settings.Async = true;
 
                 XmlWriter writer = XmlWriter.Create(stream, settings);
+                await writer.WriteStartDocumentAsync();
+               
+
+                await writer.FlushAsync(); 
                 
-                await writer.FlushAsync(); // vide tout
+            }
+        }
+
+        public async void Save_File(Resume resumetosave)
+        {
+            StorageFolder folder = null;
+
+            try
+            {
+                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
+            }
+            catch (FileNotFoundException)
+            {
+                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
+            }
+
+            // creer le flux et le writer
+            using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists))
+            {
+                XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Async = true;
+                settings.Indent = true;
                 
+                settings.NewLineOnAttributes = true;
+                settings.OmitXmlDeclaration = true;
+                XmlWriter writer = XmlWriter.Create(stream, settings);
+
+
+                // écriture des donnees
+
+                await writer.WriteStartElementAsync("", "Resume_Name", "Resume");
+
+                await writer.WriteAttributeStringAsync("","Name","Cv_Name", resumetosave.Name);
+                await writer.WriteStartElementAsync("", "Layout", "Resume");
+                await writer.WriteEndElementAsync();
+                await writer.WriteEndElementAsync();
+                //await writer.WriteEndElementAsync();
+
+
+                //vider le writer, fin de la sauvegarde
+                await writer.WriteEndDocumentAsync();
+                await writer.FlushAsync();
             }
         }
     }

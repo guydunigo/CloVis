@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resume;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -120,8 +121,8 @@ namespace CloVis
         }
         private void Enregistrement(object sender, RoutedEventArgs e)
         {
-           // FileManagement file = new FileManagement();
-           // file.Create_File(resume);
+            FileManagement file = new FileManagement();
+            file.Save_File(resume);
 
         }
         private void Help_Click(object sender, RoutedEventArgs e)
