@@ -35,21 +35,20 @@ namespace Resume
 
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists))
             {
-
                 XmlWriterSettings settings = new XmlWriterSettings();
+                settings.Indent = true;
+                settings.NewLineOnAttributes = true;
                 settings.Async = true;
-
+            
                 XmlWriter writer = XmlWriter.Create(stream, settings);
                 await writer.WriteStartDocumentAsync();
-               
-
                 await writer.FlushAsync(); 
-                
             }
         }
 
         public async void Save_File(Resume resumetosave)
         {
+            // ouverture / recherche du dossier
             StorageFolder folder = null;
 
             try
@@ -61,9 +60,10 @@ namespace Resume
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
 
-            // creer le flux et le writer
+            // creer le flux , le writer et écriture des donnees
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".xml", CreationCollisionOption.OpenIfExists))
             {
+                //Settinges
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Async = true;
                 settings.Indent = true;
@@ -75,14 +75,72 @@ namespace Resume
 
                 // écriture des donnees
 
-                await writer.WriteStartElementAsync("", "Resume_Name", "Resume");
+                //resume (name)
+                string name = resumetosave.Name.Replace(" ", "");
+                await writer.WriteStartElementAsync("", name, "Resume");
 
-                await writer.WriteAttributeStringAsync("","Name","Cv_Name", resumetosave.Name);
+                //Layout
                 await writer.WriteStartElementAsync("", "Layout", "Resume");
-                await writer.WriteEndElementAsync();
-                await writer.WriteEndElementAsync();
-                //await writer.WriteEndElementAsync();
 
+                //BackBoxes
+                int num = 0;
+                foreach (var i in resumetosave.Layout.BackBoxes) {
+
+                    await writer.WriteStartElementAsync("", "BackBox" + num, "Resume");
+                    await writer.WriteElementStringAsync("", "x", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].X));
+                    await writer.WriteElementStringAsync("", "y", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Y));
+                    await writer.WriteElementStringAsync("", "z", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Z));
+
+                    await writer.WriteElementStringAsync("", "SizeX", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].SizeX));
+                    await writer.WriteElementStringAsync("", "SizeY", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].SizeY));
+
+                    await writer.WriteElementStringAsync("", "img", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Image));
+
+                    await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Angle));
+
+                    //couleurs
+                    await writer.WriteElementStringAsync("", "Color", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Color));
+                    await writer.WriteElementStringAsync("", "Color_Border", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderColor));
+
+                    await writer.WriteElementStringAsync("", "B.radius", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderRadius));
+
+                    await writer.WriteEndElementAsync();
+                    num += 1;
+                }
+
+                //TextesBoxes
+                int numT = 0;
+                foreach (var i in resumetosave.Layout.TextBoxes)
+                {
+
+                    await writer.WriteStartElementAsync("", "TextBox" + numT, "Resume");
+                    await writer.WriteElementStringAsync("", "x", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].X));
+                    await writer.WriteElementStringAsync("", "y", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Y));
+                    await writer.WriteElementStringAsync("", "z", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Z));
+
+                    await writer.WriteElementStringAsync("", "SizeX", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].SizeX));
+                    await writer.WriteElementStringAsync("", "SizeY", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].SizeY));
+
+                    await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Angle));
+
+                    
+                    await writer.WriteElementStringAsync("", "Default_Element", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].DefaultElement));
+
+                    //Element
+                    await writer.WriteElementStringAsync("", "Element_Name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                    await writer.WriteElementStringAsync("", "Element_Default", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.IsDefault));
+
+                    await writer.WriteEndElementAsync();
+                    numT += 1;
+                }
+                //Fin Layout
+                await writer.WriteEndElementAsync();
+
+                //Fonts
+
+
+                //Fin resume
+                await writer.WriteEndElementAsync();
 
                 //vider le writer, fin de la sauvegarde
                 await writer.WriteEndDocumentAsync();
@@ -92,31 +150,3 @@ namespace Resume
     }
 }
 
-/*  Sérialisation d'une collection ! 
-        private void SerializeCollection(string filename){
-        Employees Emps = new Employees();
-        // Note that only the collection is serialized -- not the 
-        // CollectionName or any other public property of the class.
-        Emps.CollectionName = "Employees";
-        Employee John100 = new Employee("John", "100xxx");
-        Emps.Add(John100);
-        XmlSerializer x = new XmlSerializer(typeof(Employees));
-        TextWriter writer = new StreamWriter(filename);
-        x.Serialize(writer, Emps);
-    }
-    */
-
-//await writer.WriteStartElementAsync("pf", "root", "http://ns");
-
-
-
-//await writer.WriteStartElementAsync(null, "sub", null);
-/* await writer.WriteAttributeStringAsync(null, "att", null, "val"); await writer.WriteStringAsync("text");
- await writer.WriteEndElementAsync(); */
-
-//await writer.WriteProcessingInstructionAsync("pName", "pValue"); // instruction simple
-
-// await writer.WriteCommentAsync("cValue"); // commentaire
-
-// await writer.WriteCDataAsync("cdata value");  Quelle utilité ?
-// await writer.WriteEndElementAsync();  fin de la "permiere " balise
