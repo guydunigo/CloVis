@@ -12,13 +12,9 @@ using System.Xml.Serialization;
 namespace Resume
 {
    
-    public class FileManagement
+    public static class FileManagement
     {
-        public FileManagement()
-        {
-            // a faire
-        }
-        public async void Create_File(Resume resumetosave)
+        public static async void Create_File(Resume resumetosave)
         {
 
             StorageFolder folder = null;
@@ -46,7 +42,7 @@ namespace Resume
             }
         }
 
-        public async void Save_File(Resume resumetosave)
+        public static async void Save_File(Resume resumetosave)
         {
             // ouverture / recherche du dossier
             StorageFolder folder = null;

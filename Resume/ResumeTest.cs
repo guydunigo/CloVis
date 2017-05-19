@@ -78,10 +78,9 @@ namespace Resume
             boite_de_langues.Element = langues;
             boite_de_diplomes.Element = diplomes;
 
-            CV = new Resume("CV 2")
+            CV = new Resume("CV 1")
             {
-                Fonts = fonts,
-               // Name = "CV 1"
+                Fonts = fonts
             };
             
             CV.Layout = new Layout();
@@ -184,10 +183,9 @@ namespace Resume
 			boite_de_langues.Element = langues;
 			boite_de_diplomes.Element = diplomes;
 
-			CV = new Resume("CV 1")
+			CV = new Resume("CV 2")
 			{
-				Fonts = fonts,
-				//Name = "CV 1"
+				Fonts = fonts
 			};
 
 			CV.Layout = new Layout();

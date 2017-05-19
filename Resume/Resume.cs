@@ -16,10 +16,7 @@ namespace Resume
         public Resume(string name)
         {
             Name = name;
-            FileManagement file = new FileManagement();
-            if (this is Template) this.Name = "";
-            if ((this.Name != "")) file.Create_File(this);
-  
+            if (!(this is Template)) FileManagement.Create_File(this);
         }
 
 
