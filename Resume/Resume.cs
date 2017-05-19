@@ -19,7 +19,6 @@ namespace Resume
             if (!(this is Template)) FileManagement.Create_File(this);
         }
 
-
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes

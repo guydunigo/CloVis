@@ -29,9 +29,34 @@ namespace CloVis
         private Resume.Resume resume;
         public Resume.Resume Resume { get => resume; set => resume = value; }
 
+        public bool IsModified { get; set; }
+
         public EditionMode()
         {
             this.InitializeComponent();
+            IsModified = false;
+
+            // Handle the back button use : (go back to start page)
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= (Application.Current as App).OnBackRequested;
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += EditionMode_BackRequested;
+        }
+
+        private async void EditionMode_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+
+            ClosingResult res = await PreventExitingWithoutSavingAsync();
+
+            if (res == ClosingResult.Close)
+            {
+                (Application.Current as App).OnBackRequested(null,null);
+            }
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += (Application.Current as App).OnBackRequested;
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= EditionMode_BackRequested;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -87,12 +112,14 @@ namespace CloVis
             this.Frame.Navigate(typeof(DetailsEdit));
         }
         
-        private void Actualiser_Click(object sender, RoutedEventArgs e)
+        private void Update_Click(object sender, RoutedEventArgs e)
         {
             resume.UpdateFromIndex();
 
             (CV.Child as Resume_Preview).Resume = null;
             (CV.Child as Resume_Preview).Resume = resume;
+
+            IsModified = true;
         }
 
         private void ZoomSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -106,25 +133,15 @@ namespace CloVis
             ZoomSlider.Value = WorkBench.ZoomFactor;
         }
 
-        private void Retour_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Frame root = Window.Current.Content as Frame;
-            if (root == null)
-                return;
-
-            // Navigate back if possible, and if the event has not 
-            // already been handled .
-            if (root.CanGoBack)
-            {
-                root.GoBack();
-            }
+            Back();
         }
-        private void Enregistrement(object sender, RoutedEventArgs e)
+        private void SaveResume_Click(object sender, RoutedEventArgs e)
         {
-            FileManagement file = new FileManagement();
-            file.Save_File(resume);
-
+            SaveResume();
         }
+
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Help));
@@ -133,6 +150,33 @@ namespace CloVis
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void SaveResume()
+        {
+            (Application.Current as App).SaveResume(resume);
+            IsModified = false;
+        }
+        public async void Back()
+        {
+            ClosingResult res = await PreventExitingWithoutSavingAsync();
+            // Navigate back if possible
+            if (res == ClosingResult.Close && Window.Current.Content is Frame root && root.CanGoBack)
+            {
+                root.GoBack();
+            }
+        }
+
+        private async System.Threading.Tasks.Task<ClosingResult> PreventExitingWithoutSavingAsync()
+        {
+            if (IsModified == true)
+            {
+                var temp = new PreventClosingWithoutSavingDialog();
+                await temp.ShowAsync();
+                return temp.Result;
+            }
+            else
+                return ClosingResult.Close;
         }
     }
 }

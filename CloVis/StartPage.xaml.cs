@@ -44,6 +44,10 @@ namespace CloVis
         {
             Resumes = ((App)(Application.Current)).Resumes;
             Templates = ((App)(Application.Current)).Templates;
+            foreach(Resume.Template t in Templates)
+            {
+                t.UpdateFromIndex();
+            }
             this.InitializeComponent();
         }
 
@@ -54,7 +58,15 @@ namespace CloVis
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Frame.Navigate(typeof(EditionMode), e.ClickedItem);
+            if (e.ClickedItem is Resume.Resume r)
+            {
+                this.Frame.Navigate(typeof(EditionMode), r.Copy());
+            }
+        }
+
+        private void Templates_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Resumes_ItemClick(sender, e);
         }
 
         private void StackPanel_PointerEntered(object sender, PointerRoutedEventArgs e)

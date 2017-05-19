@@ -52,7 +52,7 @@
 
 
         </RichTextBlock>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30" Click="Retour_Click">
+        <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="30" Click="Back_Click">
             J'ai compris
         </Button>
     </Grid>

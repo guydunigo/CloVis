@@ -231,7 +231,7 @@ namespace CloVis
             DataView.Visibility = Visibility.Visible;
             DataEdit.Visibility = Visibility.Collapsed;
         }
-        public void AcceptEditChanges()
+        public void AcceptEditChanges(object sender = null)
         {
             if (ValueEdit.Text != "")
             {
@@ -289,7 +289,16 @@ namespace CloVis
                 NotifyPropertyChanged("Data");
             }
             else
-                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+            {
+                ValueEdit.BorderBrush = Application.Current.Resources["CloVisOrange"] as Brush;
+                if (sender is FrameworkElement fe)
+                {
+                    var f = new Flyout()
+                    {
+
+                    };
+                }
+            }
         }
         public void CancelEditChanges()
         {

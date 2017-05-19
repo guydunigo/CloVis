@@ -23,7 +23,7 @@ namespace Resume
         /// <param name="img">Image.</param>
         /// <param name="angle">Angle: clockwise & degrees</param>
         public BoxBackground(double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0) //deg? trigo ?
-            : this(Colors.Transparent,Colors.Transparent , x, y, z, sizeX, sizeY, img, angle)
+            : this(Colors.OrangeRed,Colors.Transparent , x, y, z, sizeX, sizeY, img, angle, 0)
         {}
         public BoxBackground(Color color, Color borderColor, double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, Windows.UI.Xaml.Controls.Image img = null, double angle = 0, double borderRadius = 0)
             : base(x, y, z, sizeX, sizeY, angle)
@@ -58,7 +58,7 @@ namespace Resume
         /// <returns></returns>
         public BoxBackground Copy()
         {
-            return new BoxBackground(X, Y, Z, SizeX, SizeY, Image, Angle);
+            return new BoxBackground(Color, BorderColor, X, Y, Z, SizeX, SizeY, Image, Angle);
         }
     }
 }

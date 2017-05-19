@@ -1,0 +1,29 @@
+﻿<ContentDialog
+    x:Class="CloVis.PreventClosingWithoutSavingDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CloVis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="Attention !">
+
+    <StackPanel>
+        <TextBlock Margin="10,10,10,20" HorizontalAlignment="Stretch" TextWrapping="WrapWholeWords" TextAlignment="Justify">
+            <Run Foreground="OrangeRed">
+                Il y a des modifications non sauvegardées.
+            </Run><LineBreak/>Voulez-vous sauvegarder avant de retourner à l'accueil ?<LineBreak/>(toute modification non sauvegardée sera perdue)
+        </TextBlock>
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <Button Margin="10,0" Click="SaveResume_Click">
+                Enregistrer
+            </Button>
+            <Button Margin="10,0" Click="CancelExiting_Click">
+                Annuler
+            </Button>
+            <Button Margin="10, 0" Click="DiscardChanges_Click">
+                Quitter tout de même
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

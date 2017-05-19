@@ -78,20 +78,7 @@ namespace CloVis
             }
 
             // Handle the back button use : (go back to start page)
-            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += (s, eargs) =>
-            {
-                Frame root = Window.Current.Content as Frame;
-                if (root == null)
-                    return;
-
-                // Navigate back if possible, and if the event has not 
-                // already been handled .
-                if (root.CanGoBack && eargs.Handled == false)
-                {
-                    eargs.Handled = true;
-                    root.GoBack();
-                }
-            };
+            Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
             // Display it if needed
             rootFrame.Navigated += (sender, eargs) =>
             {
@@ -100,6 +87,18 @@ namespace CloVis
                 ((Frame)sender).CanGoBack ? Windows.UI.Core.AppViewBackButtonVisibility.Visible :
                 Windows.UI.Core.AppViewBackButtonVisibility.Collapsed;
             };
+        }
+
+        public void OnBackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+        {
+            Frame root = Window.Current.Content as Frame;
+            if (root == null)
+                return;
+            
+            if (root.CanGoBack)
+            {
+                root.GoBack();
+            }
         }
 
         /// <summary>
@@ -164,6 +163,37 @@ namespace CloVis
         public void LoadIndex()
         {
             IndexTest.FillIndex();
+        }
+
+        public void SaveResume(Resume.Resume cv)
+        {
+            //throw new NotImplementedException("Async ?")
+            //var file_saving = FileManagement.Save_File(cv);
+
+            FileManagement.Save_File(cv);
+            SaveResumeInResumes(cv);
+
+            //await file_saving;
+        }
+
+        public void SaveResumeInResumes(Resume.Resume cv)
+        {
+            var temp = FindResume(cv.Name);
+            if (temp != null)
+            {
+                Resumes.Remove(temp);
+                Resumes.Insert(0, cv);
+            }
+        }
+
+        public Resume.Resume FindResume(string name)
+        {
+            foreach(Resume.Resume r in Resumes)
+            {
+                if (r.Name == name)
+                    return r;
+            }
+            return null;
         }
 
         public void SaveResumes()

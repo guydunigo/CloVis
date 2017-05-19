@@ -38,7 +38,7 @@ namespace Resume
             {
                 tempTB.Add(b.Copy());
             }
-            
+
             return new Layout()
             {
                 BackBoxes = tempBB,

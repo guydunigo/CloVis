@@ -27,15 +27,10 @@ namespace CloVis
             this.InitializeComponent();
         }
 
-        private void Retour_Click(object sender, RoutedEventArgs e)
+        private void Back_Click(object sender, RoutedEventArgs e)
         {
-            Frame root = Window.Current.Content as Frame;
-            if (root == null)
-                return;
-
-            // Navigate back if possible, and if the event has not 
-            // already been handled .
-            if (root.CanGoBack)
+            // Navigate back if possible
+            if (Window.Current.Content is Frame root && root.CanGoBack)
             {
                 root.GoBack();
             }

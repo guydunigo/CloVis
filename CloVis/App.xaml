@@ -17,6 +17,7 @@
                     <SolidColorBrush x:Key="CloVisTransparentBlue" Color="{ThemeResource SystemAccentTransparentColor}"/>
                     <SolidColorBrush x:Key="CloVisLightBlue" Color="{ThemeResource SystemAccentColorLight}"/>
                     <SolidColorBrush x:Key="CloVisYellow" Color="{ThemeResource SystemAccentColorYellow}"/>
+                    <SolidColorBrush x:Key="CloVisOrange" Color="OrangeRed"/>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>

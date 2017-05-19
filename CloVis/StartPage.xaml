@@ -154,7 +154,7 @@
                     </GridViewItem>-->
                     </GridView>
                     <GridView Padding="5" Margin="0,5" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
-                              ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
+                              ItemClick="Templates_ItemClick" IsItemClickEnabled="True"
                               ItemsSource="{x:Bind Templates}" ItemTemplate="{StaticResource ResumePreviewTemplate}">
                         <GridView.Header>
                             <Border BorderThickness="0,0,0,1" Margin="0,0,0,5" BorderBrush="{ThemeResource CloVisBlue}">
