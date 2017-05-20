@@ -30,7 +30,7 @@
 
                     <ListViewHeaderItem Foreground="White" Content="Nouvelle donnée"/>
                     <ListViewItem HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <StackPanel HorizontalAlignment="Stretch">
+                        <!--<StackPanel HorizontalAlignment="Stretch">
                             <TextBox Margin="0,5" Background="White" PlaceholderText="Nom" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
                             <TextBox Margin="0,5" Background="White" PlaceholderText="Information" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
                             <TextBlock Text="Ajouter :" Foreground="White"/>
@@ -48,12 +48,13 @@
                                     <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
                                 </Grid>
                             </Button>
-                        </StackPanel>
+                        </StackPanel>-->
+                        <local:NewDataForm/>
                     </ListViewItem>
 
                     <ListViewHeaderItem Foreground="White" Content="Nouvelle image"/>
                     <ListViewItem HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <StackPanel HorizontalAlignment="Stretch">
+                       <!-- <StackPanel HorizontalAlignment="Stretch">
                             <TextBox Margin="0,5" Background="White" PlaceholderText="Url" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
                             <Button Margin="0,5" Background="White" Foreground="{ThemeResource CloVisBlue}" Content="Importer l'image"/>
                             <Button Grid.Row="1" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -66,7 +67,8 @@
                                     <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
                                 </Grid>
                             </Button>
-                        </StackPanel>
+                        </StackPanel>-->
+                        <local:NewImageForm/>
                     </ListViewItem>
                 </ListView>
             </SplitView.Pane>

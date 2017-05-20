@@ -55,12 +55,11 @@ namespace CloVis
 
         public static void DisplayFlyout(FrameworkElement source, UIElement elmt)
         {
-                var fo = new Flyout()
-                {
-                    Content = elmt
-                };
-
-                fo.ShowAt(source);
+            var fo = new Flyout()
+            {
+                Content = elmt
+            };
+            fo.ShowAt(source);
         }
 
         private void CatAdd_Click(object sender, RoutedEventArgs e)
