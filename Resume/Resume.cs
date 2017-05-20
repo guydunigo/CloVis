@@ -26,7 +26,6 @@ namespace Resume
         /// </summary>
         public Layout Layout { get; set; }
        
-        //[XmlAttribute("resume")]
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
