@@ -1,12 +1,13 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CloVis">
+    xmlns:local="using:CloVis"
+    xmlns:controls="using:CloVis.Controls">
 
-    <Style TargetType="local:Resume_Preview" >
+    <Style TargetType="controls:Resume_Preview" >
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="local:Resume_Preview">
+                <ControlTemplate TargetType="controls:Resume_Preview">
                     <ScrollViewer
                         VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled"
                                   HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Disabled"

@@ -29,8 +29,8 @@ namespace CloVis
             this.InitializeComponent();
             var resume1 = (Application.Current as App).Resumes[0];
             var resume2 = (Application.Current as App).Resumes[1];
-            vboxLeft.Child = new Resume_Preview() { Resume = resume1 };
-            vboxRight.Child = new Resume_Preview() { Resume = resume2 };
+            vboxLeft.Child = new Controls.Resume_Preview() { Resume = resume1 };
+            vboxRight.Child = new Controls.Resume_Preview() { Resume = resume2 };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

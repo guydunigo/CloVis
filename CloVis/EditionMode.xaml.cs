@@ -63,7 +63,7 @@ namespace CloVis
         {
             base.OnNavigatedTo(e);
             resume = (e.Parameter as Resume.Resume);
-            CV.Child = new Resume_Preview() { Resume = resume, BorderThickness=new Thickness(1), BorderBrush=Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
+            CV.Child = new Controls.Resume_Preview() { Resume = resume, BorderThickness=new Thickness(1), BorderBrush=Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
         }
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
@@ -116,8 +116,8 @@ namespace CloVis
         {
             resume.UpdateFromIndex();
 
-            (CV.Child as Resume_Preview).Resume = null;
-            (CV.Child as Resume_Preview).Resume = resume;
+            (CV.Child as Controls.Resume_Preview).Resume = null;
+            (CV.Child as Controls.Resume_Preview).Resume = resume;
 
             IsModified = true;
         }

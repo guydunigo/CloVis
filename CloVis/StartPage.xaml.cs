@@ -23,7 +23,7 @@ namespace CloVis
     /// </summary>
     public sealed partial class StartPage : Page
     {
-        private ObservableCollection<NavLink> topNavLinks = new ObservableCollection<NavLink>()
+        /*private ObservableCollection<NavLink> topNavLinks = new ObservableCollection<NavLink>()
         {
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.OpenFile , Label="Ouvrir / Importer", Tag="OpenFile" },
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Edit , Label="Modifiez vos données", Tag="DetailsEdit" },
@@ -36,7 +36,7 @@ namespace CloVis
             new NavLink() { Symbol= Windows.UI.Xaml.Controls.Symbol.Help , Label="Aide", Tag="Help" },
         };
         public ObservableCollection<NavLink> BottomNavLinks { get => bottomNavLinks; }
-
+        */
         public List<Resume.Resume> Resumes { get; set; }
         public List<Resume.Template> Templates { get; set; }
 
@@ -90,12 +90,5 @@ namespace CloVis
         {
             this.Frame.Navigate(typeof(Help));
         }
-    }
-
-    public class NavLink
-    {
-        public string Label { get; set; }
-        public Symbol Symbol { get; set; }
-        public string Tag { get; set; }
     }
 }

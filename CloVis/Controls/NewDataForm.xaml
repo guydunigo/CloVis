@@ -1,8 +1,9 @@
 ﻿<UserControl
-    x:Class="CloVis.NewCategoryForm"
+    x:Class="CloVis.Controls.NewDataForm"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CloVis"
+    xmlns:controls="using:CloVis.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -11,11 +12,26 @@
 
     <StackPanel HorizontalAlignment="Stretch" Padding="0,10">
         <Border BorderThickness="0,0,0,1" Margin="0,0,0,10" Padding="0,0,0,5" BorderBrush="White">
-            <TextBlock Foreground="White" FontSize="18" Text="Nouvelle Catégorie"/>
+            <TextBlock Foreground="White" FontSize="18" Text="Nouvelle donnée"/>
         </Border>
         <StackPanel x:Name="Fields">
-            <TextBox x:Name="CatName" Margin="0,0,0,10"  PlaceholderText="Nom de la catégorie" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="CatName_KeyDown"/>
-            <Button x:Name="CatAdd" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="CatAdd_Click" HorizontalAlignment="Right">
+            <TextBox x:Name="ElmtValue" Margin="0,0,0,10"  PlaceholderText="Information" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ElmtValue_KeyDown"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Height="Auto" VerticalAlignment="Center" Foreground="White" Margin="5,0,5,5">
+                    Ajouter 
+                </TextBlock>
+                <Button x:Name="DateBtn" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="AddDates_Click" HorizontalAlignment="Right" Margin="5,0,5,5">
+                    <Button.Content>
+                        Dates
+                    </Button.Content>
+                </Button>
+                <Button x:Name="TimeSpanBtn" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="AddTimeSpan_Click" HorizontalAlignment="Right" Margin="5,0,5,5">
+                    <Button.Content>
+                        Durée
+                    </Button.Content>
+                </Button>
+            </StackPanel>
+            <Button x:Name="ElmtAdd" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="ElmtAdd_Click" HorizontalAlignment="Right">
                 <Button.Content>
                     Ajouter
                 </Button.Content>
