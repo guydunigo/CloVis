@@ -32,12 +32,14 @@ namespace Resume
 
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.OpenIfExists))
             {
+
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
                 settings.NewLineOnAttributes = true;
                 settings.Async = true;
-            
                 XmlWriter writer = XmlWriter.Create(stream, settings);
+
+                
                 await writer.WriteStartDocumentAsync();
                 await writer.FlushAsync(); 
             }
@@ -65,17 +67,21 @@ namespace Resume
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Async = true;
                 settings.Indent = true;
-                
                 settings.NewLineOnAttributes = true;
                 settings.OmitXmlDeclaration = true;
                 XmlWriter writer = XmlWriter.Create(stream, settings);
 
 
+                XmlReaderSettings read_settings = new XmlReaderSettings();
+                read_settings.Async = true;
+                read_settings.IgnoreWhitespace = true;
+                XmlReader reader = XmlReader.Create(stream, read_settings);
+
                 // écriture des donnees
 
                 //resume (name)
                 string name = resumetosave.Name.Replace(" ", "");
-                await writer.WriteStartElementAsync("", name, "Resume");
+                if (reader.LocalName != name)await writer.WriteStartElementAsync("", name, "Resume");
 
                 //Layout
                 await writer.WriteStartElementAsync("", "Layout", "Resume");
@@ -326,6 +332,37 @@ namespace Resume
                 }
                 await writer.WriteEndElementAsync();
             }
+
+        }
+
+        public static async void Read_file(Resume resumetoread)
+        {
+            StorageFolder folder = null;
+
+            try
+            {
+                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
+            }
+            catch (FileNotFoundException)
+            {
+                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
+            }
+
+
+            using (var stream = await folder.OpenStreamForWriteAsync(resumetoread.Name + ".cv", CreationCollisionOption.OpenIfExists))
+            {
+
+                XmlReaderSettings read_settings = new XmlReaderSettings();
+                read_settings.Async = true;
+                read_settings.IgnoreWhitespace = true;
+                XmlReader reader = XmlReader.Create(stream, read_settings);
+
+
+
+
+            }
+
+
 
         }
     }
