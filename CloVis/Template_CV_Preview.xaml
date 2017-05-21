@@ -9,7 +9,11 @@
 
     <!--="{ThemeResource ApplicationPageBackgroundThemeBrush}"-->
     <Grid Background="WhiteSmoke">
-        <Viewbox x:Name="vbox">
-        </Viewbox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+         <Viewbox x:Name="vboxLeft" Grid.Column="0"/>
+        <Viewbox x:Name="vboxRight" Grid.Column="1"/>
     </Grid>
 </Page>

@@ -231,6 +231,26 @@ namespace CloVis
             DataView.Visibility = Visibility.Visible;
             DataEdit.Visibility = Visibility.Collapsed;
         }
+
+        public void AlertEmptyField(FrameworkElement fe)
+        {
+            ValueEdit.BorderBrush = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+
+            var fo = new Flyout()
+            {
+                Content = new TextBlock()
+                {
+                    Text = "Veuillez renseigner une valeur.",
+                    Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush
+                }
+            };
+            fo.ShowAt(fe);
+        }
+        public void ResetAlertEmptyField()
+        {
+            ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Gray);
+        }
+
         public void AcceptEditChanges(object sender = null)
         {
             if (ValueEdit.Text != "")
@@ -283,36 +303,29 @@ namespace CloVis
                 // Back to View mode :
                 SwitchToViewData();
 
-                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Gray);
+                ResetAlertEmptyField();
 
                 // Update values in the fields :
                 NotifyPropertyChanged("Data");
             }
-            else
+            else if (sender is FrameworkElement fe)
             {
-                ValueEdit.BorderBrush = Application.Current.Resources["CloVisOrange"] as Brush;
-                if (sender is FrameworkElement fe)
-                {
-                    var f = new Flyout()
-                    {
-
-                    };
-                }
+                AlertEmptyField(fe);
             }
         }
-        public void CancelEditChanges()
+        public void CancelEditChanges(object sender = null)
         {
             if (Data.Value != "")
             {
                 SwitchToViewData();
 
-                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Gray);
+                ResetAlertEmptyField();
 
                 // Even if we didn't change anything, notify :
                 NotifyPropertyChanged("Data");
             }
-            else
-                ValueEdit.BorderBrush = new SolidColorBrush(Windows.UI.Colors.Red);
+            else if (sender is FrameworkElement fe)
+                AlertEmptyField(fe);
         }
         public void ShowSecondDate()
         {
@@ -351,18 +364,18 @@ namespace CloVis
 
         private void AcceptChanges_Click(object sender, RoutedEventArgs e)
         {
-            AcceptEditChanges();
+            AcceptEditChanges(sender);
         }
         private void CancelChanges_Click(object sender, RoutedEventArgs e)
         {
-            CancelEditChanges();
+            CancelEditChanges(sender);
         }
         private void AcceptChanges_KeyDown(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
-                AcceptEditChanges();
+                AcceptEditChanges(sender);
             else if (e.Key == Windows.System.VirtualKey.Escape)
-                CancelEditChanges();
+                CancelEditChanges(sender);
         }
 
         private void RemoveCategoryButton_Click(object sender, RoutedEventArgs e)

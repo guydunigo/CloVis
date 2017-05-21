@@ -34,12 +34,12 @@ namespace CloVis
                 if (CatName.Text == "")
                 {
                     txt.Text = "Veuillez renseigner un nom.";
-                    txt.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+                    txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
                 }
                 else if (Index.Find(CatName.Text) != null)
                 {
                     txt.Text = "Ce nom est déjà utilisé";
-                    txt.Foreground = new SolidColorBrush(Windows.UI.Colors.Red);
+                    txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
                 }
                 else if (Index.Find("Divers") is ElementList el)
                 {
@@ -49,17 +49,12 @@ namespace CloVis
                     txt.Text = "Catégorie ajoutée à Divers.";
                 }
 
-                DisplayFlyout(fe, txt);
+                var fo = new Flyout()
+                {
+                    Content = txt
+                };
+                fo.ShowAt(fe);
             }
-        }
-
-        public static void DisplayFlyout(FrameworkElement source, UIElement elmt)
-        {
-            var fo = new Flyout()
-            {
-                Content = elmt
-            };
-            fo.ShowAt(source);
         }
 
         private void CatAdd_Click(object sender, RoutedEventArgs e)

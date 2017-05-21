@@ -27,13 +27,17 @@ namespace CloVis
         public Template_CV_Preview()
         {
             this.InitializeComponent();
+            var resume1 = (Application.Current as App).Resumes[0];
+            var resume2 = (Application.Current as App).Resumes[1];
+            vboxLeft.Child = new Resume_Preview() { Resume = resume1 };
+            vboxRight.Child = new Resume_Preview() { Resume = resume2 };
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var resume = (e.Parameter as Resume.Resume);
-            vbox.Child = new Resume_Preview() { Resume = resume };
+            //var resume = (e.Parameter as Resume.Resume);
+            //vboxLeft.Child = new Resume_Preview() { Resume = resume };
         }
     }
 }
