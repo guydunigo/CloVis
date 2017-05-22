@@ -12,14 +12,14 @@ using ResumeElements;
 
 namespace Resume
 {
-   
+
     public static class FileManagement
     {
         public static async void Create_File(Resume resumetosave)
         {
 
             StorageFolder folder = null;
-            
+
             try
             {
                 folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
@@ -28,7 +28,7 @@ namespace Resume
             {
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
-           
+
 
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.OpenIfExists))
             {
@@ -39,9 +39,9 @@ namespace Resume
                 settings.Async = true;
                 XmlWriter writer = XmlWriter.Create(stream, settings);
 
-                
+
                 await writer.WriteStartDocumentAsync();
-                await writer.FlushAsync(); 
+                await writer.FlushAsync();
             }
         }
 
@@ -81,14 +81,15 @@ namespace Resume
 
                 //resume (name)
                 string name = resumetosave.Name.Replace(" ", "");
-                if (reader.LocalName != name)await writer.WriteStartElementAsync("", name, "Resume");
+                if (reader.LocalName != name) await writer.WriteStartElementAsync("", name, "Resume");
 
                 //Layout
                 await writer.WriteStartElementAsync("", "Layout", "Resume");
 
                 //BackBoxes
                 int num = 0;
-                foreach (var i in resumetosave.Layout.BackBoxes) {
+                foreach (var i in resumetosave.Layout.BackBoxes)
+                {
 
                     await writer.WriteStartElementAsync("", "BackBox_" + num, "Resume");
 
@@ -120,7 +121,7 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "SizeY", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].SizeY));
                     await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Angle));
                     //Font
-                    Save_Font(resumetosave,writer,1,numT);
+                    Save_Font(resumetosave, writer, true, numT);
                     // await writer.WriteElementStringAsync("", "Default_Element", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].DefaultElement));
 
                     //element
@@ -131,14 +132,14 @@ namespace Resume
 
 
                     await writer.WriteEndElementAsync();
-                   // await writer.WriteEndElementAsync();
+                    // await writer.WriteEndElementAsync();
                     numT += 1;
                 }
                 //Fin Layout
                 await writer.WriteEndElementAsync();
 
                 //Fonts
-                Save_Font(resumetosave,writer, null,0);
+                Save_Font(resumetosave, writer, false, 0);
 
                 //Fin resume
                 await writer.WriteEndElementAsync();
@@ -151,45 +152,46 @@ namespace Resume
 
         public static async void Save_Font(Resume resumetosave, XmlWriter writer, bool Ft, int numT)
         {
-            if(Ft==null){
-            await writer.WriteStartElementAsync("",resumetosave.Fonts.Name,"Resume");
+            if (Ft == false)
+            {
+                await writer.WriteStartElementAsync("", resumetosave.Fonts.Name, "Resume");
                 int numF = 0;
-                foreach (var k in resumetosave.Fonts.List )
+                foreach (var k in resumetosave.Fonts.List)
                 {
-                    await writer.WriteStartElementAsync("","Font_"+numF,"Resume");
+                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
 
-                    await writer.WriteElementStringAsync("","Font_Name","Resume",Convert.ToString(k.Name));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("","Font_fontSize","Resume",Convert.ToString(k.FontSize));
-                    await writer.WriteElementStringAsync("","Font_Color","Resume",Convert.ToString(k.Color));
-                    await writer.WriteElementStringAsync("","Font_Italic","Resume",Convert.ToString(k.Italic));
-                    await writer.WriteElementStringAsync("","Font_Bold","Resume",Convert.ToString(k.Bold));
-                    await writer.WriteElementStringAsync("","Font_Underlined","Resume",Convert.ToString(k.Underlined));
-                    await writer.WriteElementStringAsync("","Font_UpperCase","Resume",Convert.ToString(k.UpperCase));
+                    await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
+                    await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
+                    await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
+                    await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
+                    await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
+                    await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
+                    await writer.WriteElementStringAsync("", "Font_UpperCase", "Resume", Convert.ToString(k.UpperCase));
                     await writer.WriteEndElementAsync();
-                    numF+=1;
+                    numF += 1;
                 }
 
                 await writer.WriteEndElementAsync();
             }
-            elseif (Ft==1)
+            else if(Ft == true)
             {
-                await writer.WriteStartElementAsync("",resumetosave.Layout.TextBoxes[numT].Fonts.Name,"Resume");
+                await writer.WriteStartElementAsync("", resumetosave.Layout.TextBoxes[numT].Fonts.Name, "Resume");
                 int numF = 0;
-                foreach (var k in resumetosave.Layout.TextBoxes[numT].Fonts.List )
+                foreach (var k in resumetosave.Layout.TextBoxes[numT].Fonts.List)
                 {
-                    await writer.WriteStartElementAsync("","Font_"+numF,"Resume");
+                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
 
-                    await writer.WriteElementStringAsync("","Font_Name","Resume",Convert.ToString(k.Name));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("","Font_fontSize","Resume",Convert.ToString(k.FontSize));
-                    await writer.WriteElementStringAsync("","Font_Color","Resume",Convert.ToString(k.Color));
-                    await writer.WriteElementStringAsync("","Font_Italic","Resume",Convert.ToString(k.Italic));
-                    await writer.WriteElementStringAsync("","Font_Bold","Resume",Convert.ToString(k.Bold));
-                    await writer.WriteElementStringAsync("","Font_Underlined","Resume",Convert.ToString(k.Underlined));
-                    await writer.WriteElementStringAsync("","Font_UpperCase","Resume",Convert.ToString(k.UpperCase));
+                    await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
+                    await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
+                    await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
+                    await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
+                    await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
+                    await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
+                    await writer.WriteElementStringAsync("", "Font_UpperCase", "Resume", Convert.ToString(k.UpperCase));
                     await writer.WriteEndElementAsync();
-                    numF+=1;
+                    numF += 1;
                 }
 
                 await writer.WriteEndElementAsync();
@@ -198,91 +200,91 @@ namespace Resume
 
         public static async void Save_Element(Resume resumetosave, XmlWriter writer, int numT)
         {
-                //Simple Element
-               
-                //Data
-                if (resumetosave.Layout.TextBoxes[numT].Element is Data data && !(resumetosave.Layout.TextBoxes[numT].Element is Data<string>))
+            //Simple Element
+
+            //Data
+            if (resumetosave.Layout.TextBoxes[numT].Element is Data data && !(resumetosave.Layout.TextBoxes[numT].Element is Data<string>))
+            {
+                await writer.WriteStartElementAsync("", "Data_Element", "Resume");
+
+                await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(data.Level));
+                await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(data.Name));
+                await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(data.Description));
+                await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(data.IsIndependant));
+                await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(data.IsDefault));
+                //liste des catégories associé a l'élément
+                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                int numcat = 0;
+                foreach (var cats in data.Categories)
                 {
-                    await writer.WriteStartElementAsync("", "Data_Element", "Resume");
-
-                    await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
-                    await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(data.Level));
-                    await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(data.Name));
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(data.Description));
-                    await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(data.IsIndependant));
-                    await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(data.IsDefault));
-                    //liste des catégories associé a l'élément
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
-                    int numcat = 0;
-                    foreach (var cats in data.Categories)
-                    {
-                        await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
-                        numcat += 1;
-                    }
-                    await writer.WriteEndElementAsync();
-
-
-                    await writer.WriteEndElementAsync();
+                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    numcat += 1;
                 }
+                await writer.WriteEndElementAsync();
 
-                //Data<string>
-                if (resumetosave.Layout.TextBoxes[numT].Element is Data<string> datestr)
+
+                await writer.WriteEndElementAsync();
+            }
+
+            //Data<string>
+            if (resumetosave.Layout.TextBoxes[numT].Element is Data<string> datestr)
+            {
+                var box = resumetosave.Layout.TextBoxes[numT];
+
+                await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
+                await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(box.Element.Name));
+
+                await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(datestr.Level));
+                await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(datestr.Name));
+                await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(datestr.Description));
+                await writer.WriteElementStringAsync("", "D_value", "Resume", datestr.Value);
+                await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
+                await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(datestr.IsDefault));
+                //liste des catégories associé a l'élément
+                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                int numcat = 0;
+                foreach (var cats in datestr.Categories)
                 {
-                    var box = resumetosave.Layout.TextBoxes[numT];
-
-                    await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
-                    await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(box.Element.Name));
-
-                    await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(datestr.Level));
-                    await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(datestr.Name));
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(datestr.Description));
-                    await writer.WriteElementStringAsync("", "D_value", "Resume", datestr.Value);
-                    await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
-                    await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(datestr.IsDefault));
-                    //liste des catégories associé a l'élément
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
-                    int numcat = 0;
-                    foreach (var cats in datestr.Categories)
-                    {
-                        await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
-                        numcat += 1;
-                    }
-                    await writer.WriteEndElementAsync();
-
-                    await writer.WriteEndElementAsync();
+                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    numcat += 1;
                 }
+                await writer.WriteEndElementAsync();
 
-                //DataDated<string>
-                if (resumetosave.Layout.TextBoxes[numT].Element is DataDated<string> dateD)
+                await writer.WriteEndElementAsync();
+            }
+
+            //DataDated<string>
+            if (resumetosave.Layout.TextBoxes[numT].Element is DataDated<string> dateD)
+            {
+
+                await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
+
+                await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(dateD.Level));
+                await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(dateD.Name));
+                await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(dateD.Description));
+                await writer.WriteElementStringAsync("", "D_value", "Resume", dateD.Value);
+                await writer.WriteElementStringAsync("", "D_start", "Resume", Convert.ToString(dateD.StartTime));
+                await writer.WriteElementStringAsync("", "D_end", "Resume", Convert.ToString(dateD.EndTime));
+                await writer.WriteElementStringAsync("", "D_Format", "Resume", Convert.ToString(dateD.DisplayFormat));
+                await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(dateD.IsIndependant));
+                await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(dateD.IsDefault));
+                //liste des catégories associé a l'élément
+                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                int numcat = 0;
+                foreach (var cats in dateD.Categories)
                 {
-
-                    await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
-
-                    await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
-                    await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(dateD.Level));
-                    await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(dateD.Name));
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(dateD.Description));
-                    await writer.WriteElementStringAsync("", "D_value", "Resume", dateD.Value);
-                    await writer.WriteElementStringAsync("", "D_start", "Resume", Convert.ToString(dateD.StartTime));
-                    await writer.WriteElementStringAsync("", "D_end", "Resume", Convert.ToString(dateD.EndTime));
-                    await writer.WriteElementStringAsync("", "D_Format", "Resume", Convert.ToString(dateD.DisplayFormat));
-                    await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(dateD.IsIndependant));
-                    await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(dateD.IsDefault));
-                    //liste des catégories associé a l'élément
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
-                    int numcat = 0;
-                    foreach (var cats in dateD.Categories)
-                    {
-                        await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
-                        numcat += 1;
-                    }
-                    await writer.WriteEndElementAsync();
-
-
-                    await writer.WriteEndElementAsync();
+                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    numcat += 1;
                 }
-                //  await writer.WriteElementStringAsync("", "Element_Default", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.IsDefault));
-            
+                await writer.WriteEndElementAsync();
+
+
+                await writer.WriteEndElementAsync();
+            }
+            //  await writer.WriteElementStringAsync("", "Element_Default", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.IsDefault));
+
         }
 
         public static async void Save_ElementList(Resume resumetosave, XmlWriter writer, int numT)
@@ -385,9 +387,11 @@ namespace Resume
 
         }
 
-        public static async void Read_file(string filename)
+        public static async Task<Resume> Read_file(string filename)
         {
             StorageFolder folder = null;
+
+            Resume resumetoread = new Resume(filename,true);
 
             try
             {
@@ -398,8 +402,6 @@ namespace Resume
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
 
-            Resume resumetoread = new Resume(filename);
-
             using (var stream = await folder.OpenStreamForWriteAsync(filename + ".cv", CreationCollisionOption.OpenIfExists))
             {
 
@@ -408,17 +410,18 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
-                while (reader.Read())
-                {
+               // while (reader.Read())
+               // {
                     reader.ReadStartElement("Layout");
                     string firstelement = reader.ReadElementContentAsString();
                     if (firstelement.Contains("BackBox"))
                     {
-                        int x = Convert.ToInt(reader.ReadElementString());
+                        int x = int.Parse(reader.ReadElementContentAsString());
                     }
-                }
-         }
+                //}
+            }
 
+            return resumetoread;
         }
     }
 }

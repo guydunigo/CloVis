@@ -128,7 +128,7 @@ namespace CloVis
         public List<Resume.Resume> Resumes { get; set; }
         public List<Resume.Template> Templates { get; set; }
 
-        public void LoadResumes()
+        public async void LoadResumes()
         {
             // async ?
             Resumes = new List<Resume.Resume>
@@ -136,6 +136,9 @@ namespace CloVis
                 ResumeTest.GetResumeTest(),
                 ResumeTest.GetResumeTest2()
             };
+
+            var temp = await FileManagement.Read_file("CV_test");
+            Resumes.Add(temp);
         }
 
         public void LoadTemplates()

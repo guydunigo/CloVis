@@ -13,12 +13,11 @@ namespace Resume
    
     public class Resume
     {
-        public Resume(string name)
+        public Resume(string name, bool saveInFile = false)
         {
             Name = name;
-            if (!(this is Template)) FileManagement.Create_File(this);
+            if (saveInFile && !(this is Template)) FileManagement.Create_File(this);
         }
-
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes
