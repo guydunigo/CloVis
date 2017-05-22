@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -149,9 +149,14 @@ namespace Resume
 				new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
 			};
 
+            var fonts1 = new Fonts("obj")
+            {
+                new FontElement("Garamond", 5, new Color() { R = 168, G = 215, B = 203, A = 255 },false, false, false, true),
+            };
+
             var boite_de_nom = new BoxText(90, 15, 60, 40, 20, 0, "nom");
             var boite_de_titre = new BoxText(80, 28, 60, 40, 10, 0, "titre");
-            var boite_d_obj = new BoxText(15, 50, 60, 70, 40, 0, "obj");
+            var boite_d_obj = new BoxText(15, 50, 60, 70, 40, 0, "obj", fonts1);
 			
 			var boite_de_coordonnees = new BoxText(140, 50, 60, 80, 60, 0, "Coordonnées");
 			var boite_de_competences = new BoxText(20, 95, 60, 40, 50, 0, "Diplomatie");
