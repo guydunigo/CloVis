@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -139,7 +139,7 @@ namespace Resume
 
 			var diplomes = new ElementList<Element>("Dynastie")
 			{
-				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(Y)$",-1, "",true),
+				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(YYY)$",-1, "",true),
 				
 			};
 
@@ -151,13 +151,13 @@ namespace Resume
 				new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
 			};
 
-            var boite_de_nom = new BoxText(85, 15, 60, 40, 20, 0, "nom");
-            var boite_de_titre = new BoxText(75, 28, 60, 40, 10, 0, "titre");
-            var boite_d_obj = new BoxText(15, 50, 60, 70, 20, 0, "obj");
+            var boite_de_nom = new BoxText(90, 15, 60, 40, 20, 0, "nom");
+            var boite_de_titre = new BoxText(80, 28, 60, 40, 10, 0, "titre");
+            var boite_d_obj = new BoxText(15, 50, 60, 70, 40, 0, "obj");
 			
-			var boite_de_coordonnees = new BoxText(140, 50, 60, 40, 60, 0, "Coordonnées");
+			var boite_de_coordonnees = new BoxText(140, 50, 60, 80, 60, 0, "Coordonnées");
 			var boite_de_competences = new BoxText(20, 95, 60, 40, 50, 0, "Diplomatie");
-			var boite_de_langues = new BoxText(140, 95, 60, 40, 50, 0, "Langues");
+			var boite_de_langues = new BoxText(140, 95, 60, 80, 50, 0, "Langues");
 			var boite_de_diplomes = new BoxText(15, 160, 60, 150, 15, 0, "Dynastie");
 
 			var fond = new BoxBackground(0, 90, 100, 210, 50)
