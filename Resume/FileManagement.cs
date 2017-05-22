@@ -191,7 +191,7 @@ namespace Resume
                     await writer.WriteEndElementAsync();
                     numF+=1;
                 }
-                
+
                 await writer.WriteEndElementAsync();
             }
         }
@@ -385,7 +385,7 @@ namespace Resume
 
         }
 
-        public static async void Read_file(Resume resumetoread)
+        public static async void Read_file(string filename)
         {
             StorageFolder folder = null;
 
@@ -398,8 +398,9 @@ namespace Resume
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
 
+            Resume resumetoread = new Resume(filename);
 
-            using (var stream = await folder.OpenStreamForWriteAsync(resumetoread.Name + ".cv", CreationCollisionOption.OpenIfExists))
+            using (var stream = await folder.OpenStreamForWriteAsync(filename + ".cv", CreationCollisionOption.OpenIfExists))
             {
 
                 XmlReaderSettings read_settings = new XmlReaderSettings();
@@ -407,12 +408,16 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
-
-
-
-            }
-
-
+                while (reader.Read())
+                {
+                    reader.ReadStartElement("Layout");
+                    string firstelement = reader.ReadElementContentAsString();
+                    if (firstelement.Contains("BackBox"))
+                    {
+                        int x = Convert.ToInt(reader.ReadElementString());
+                    }
+                }
+         }
 
         }
     }
