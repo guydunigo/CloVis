@@ -137,6 +137,19 @@ namespace Resume
 
                 //Fonts
 
+                await writer.WriteStartElementAsync("",resumetosave.Fonts.Name,"Resume");
+                int numF = 0;
+                foreach (var k in resumetosave.Fonts.List )
+                {
+                    await write.WriteStartElementAsync("","Font_"+numF,"Resume");
+
+                    await write.WriteElementStringAsync("","Font_Name","Resume",k[numF].fontFamilyName);
+
+                    await write.WriteEndElementAsync();
+
+                }
+
+                await writer.WriteEndElementAsync();
                 //Fin resume
                 await writer.WriteEndElementAsync();
 
