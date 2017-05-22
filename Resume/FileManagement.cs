@@ -147,10 +147,10 @@ namespace Resume
                     await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
                     await writer.WriteElementStringAsync("","Font_fontSize","Resume",Convert.ToString(k.FontSize));
                     await writer.WriteElementStringAsync("","Font_Color","Resume",Convert.ToString(k.Color));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("","Font_Italic","Resume",Convert.ToString(k.Italic));
+                    await writer.WriteElementStringAsync("","Font_Bold","Resume",Convert.ToString(k.Bold));
+                    await writer.WriteElementStringAsync("","Font_Underlined","Resume",Convert.ToString(k.Underlined));
+                    await writer.WriteElementStringAsync("","Font_UpperCase","Resume",Convert.ToString(k.UpperCase));
                     await writer.WriteEndElementAsync();
                     numF+=1;
                 }
