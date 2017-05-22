@@ -1,4 +1,4 @@
-﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -145,8 +145,8 @@ namespace Resume
 
 			var fonts = new Fonts("Polices_cv")
 			{
-				new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true), //ARGB 0 on voit rien, 255 opaque
-                new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, true),
+				new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 255, A = 255 },false, false, false, true), //ARGB 0 on voit rien, 255 opaque
+                new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, false),
 				new FontElement("Garamond", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
 				new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
 			};
