@@ -11,12 +11,17 @@ namespace Resume
     
     public class BoxText: Box
     {
-        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "")//0 on the upper left corner - cm
+        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "", Fonts fonts = null)//0 on the upper left corner - cm
             : base(x, y, z, sizeX, sizeY, angle)
         {
             DefaultElement = defaultElmt;
+            Fonts = fonts;
         }
 
+        /// <summary>
+        /// Used to define a boxwise font. Set to null if the default Resume font is used.
+        /// </summary>
+        public Fonts Fonts { get; set; }
 
         /// <summary>
         /// Box depth position, determines whether an element is above another one or below.
