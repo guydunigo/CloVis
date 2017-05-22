@@ -103,11 +103,9 @@ namespace Resume
             var titre = new Data<string>("Titre", "Roi des Francs", -1, "", true);
             var coordonnees = new ElementList<Element>("Coordonnées")
             {
-                nom,
-                titre,
 				new Data<string>("Téléphone", "+33660606060", -1, "", true),
 				new Data<string>("Mél", "clovis@enib.fr", -1, "", true),
-                new Data<string>("Adresse", "17 rue de la Réussite \n 75012 Paris", -1, "", true)
+                new Data<string>("Adresse", "17 rue de la Réussite\n75012 Paris", -1, "", true)
 			};
 
             var objectif = new ElementList<Element>("Objectif")
