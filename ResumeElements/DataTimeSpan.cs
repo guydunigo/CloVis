@@ -53,7 +53,7 @@ namespace ResumeElements
                 if (IsDisplayFormatGood(value))
                     displayFormat = value;
                 else
-                    displayFormat = GenerateDisplayFormat();
+                    displayFormat = GenerateDefaultDisplayFormat();
                 NotifyPropertyChanged("DisplayFormat");
                 NotifyPropertyChanged("RenderedTimeSpan");
             }
@@ -139,7 +139,7 @@ namespace ResumeElements
         /// Generate the format to display the timespan based on the given one
         /// </summary>
         /// <returns></returns>
-        public string GenerateDisplayFormat()
+        public string GenerateDefaultDisplayFormat()
         {
             return "Pendant $(%d)$ jours";
         }
@@ -184,6 +184,11 @@ namespace ResumeElements
             }
 
             return dest;
+        }
+
+        public static string GenerateDisplayFormat(string start, string end, string format = "%d")
+        {
+            return start + "$(" + format + ")$" + end;
         }
     }
 }

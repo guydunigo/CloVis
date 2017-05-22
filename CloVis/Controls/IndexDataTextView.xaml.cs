@@ -173,7 +173,7 @@ namespace CloVis.Controls
                     if (int.TryParse(TSMiddleword.Text, out int i))
                         dts.TimeSpan = new TimeSpan(i, 0, 0, 0);
 
-                    dts.DisplayFormat = TSForeword.Text + "$(" + dts.GetDisplayFormat() + ")$" + TSEndword.Text;
+                    dts.DisplayFormat = DataTimeSpan<string>.GenerateDisplayFormat(TSForeword.Text, TSEndword.Text, dts.GetDisplayFormat());
                 }
 
                 // Back to View mode :

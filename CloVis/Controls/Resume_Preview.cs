@@ -181,9 +181,8 @@ namespace CloVis.Controls
                 var LayersNumber = 3;
 
                 RenderElement(box, fonts, element, LayersNumber);
-
-                if (fonts.TextAlignment != null)
-                    box.TextAlignment = fonts.TextAlignment;
+                
+                box.TextAlignment = fonts.TextAlignment;
             }
             else if (fonts == null) throw new NullReferenceException("Fonts is null !");
             else if (element == null) throw new NullReferenceException("No element given.");

@@ -65,7 +65,7 @@ namespace ResumeElements
                 if (IsDisplayFormatGood(value))
                     displayFormat = value;
                 else
-                    displayFormat = GenerateDisplayFormat();
+                    displayFormat = GenerateDefaultDisplayFormat();
                 NotifyPropertyChanged("DisplayFormat");
                 NotifyPropertyChanged("RenderedDates");
             }
@@ -202,7 +202,7 @@ namespace ResumeElements
         /// Generate the format to display the date based on the given dates
         /// </summary>
         /// <returns></returns>
-        public string GenerateDisplayFormat()
+        public string GenerateDefaultDisplayFormat()
         {
             var res = "$1(D)$";
 
@@ -312,6 +312,27 @@ namespace ResumeElements
             }
 
             return dest;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="first">Foreword</param>
+        /// <param name="firstStartEnd">1 : start date, 2 : end date</param>
+        /// <param name="firstFormat"></param>
+        /// <param name="middle"></param>
+        /// <param name="secondStartEnd">0 : disable the following args and the display of the second date, 1 start & 2 end</param>
+        /// <param name="secondFormat"></param>
+        /// <param name="end"></param>
+        /// <returns></returns>
+        public static string GenerateDisplayFormat(string first, int firstStartEnd, string firstFormat, string middle, int secondStartEnd = 0, string secondFormat = "y", string end = "")
+        {
+            string temp = first + "$" + ((firstStartEnd == 1 || firstStartEnd == 2) ? firstStartEnd.ToString() : "1") + "(" + firstFormat + ")$" + middle;
+
+            if (secondStartEnd > 0)
+                temp +=  "$" + ((secondStartEnd == 1 || secondStartEnd == 2) ? secondStartEnd.ToString() : "2") + ")$" + end;
+
+            return temp;
         }
     }
 }

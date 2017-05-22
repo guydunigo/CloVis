@@ -9,7 +9,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Left">
+        <SplitView DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="360" PanePlacement="Left">
             <SplitView.Pane>
                 <ListView>
                     <ListViewItem HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">

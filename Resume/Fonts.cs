@@ -15,7 +15,7 @@ namespace Resume
         {
             Name = name;
             List = new List<FontElement>();
-            TextAlignment = TextAlignment;
+            TextAlignment = textAlignment;
         }
 
         public FontElement this[int index] { get => List[index]; set => List[index] = value; }

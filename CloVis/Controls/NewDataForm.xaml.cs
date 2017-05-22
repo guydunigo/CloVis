@@ -23,6 +23,12 @@ namespace CloVis.Controls
         public NewDataForm()
         {
             this.InitializeComponent();
+            this.Loaded += NewDataForm_Loaded;
+        }
+
+        private void NewDataForm_Loaded(object sender, RoutedEventArgs e)
+        {
+            HideSecondDate();
         }
 
         public void Validate(object sender)
@@ -41,10 +47,20 @@ namespace CloVis.Controls
             }
             else if (Index.Find("Divers") is ElementList el)
             {
-                el.Add(new Data<string>(ElmtValue.Text));
+                if (DateBtn.IsChecked == true)
+                    el.Add(new DataDated<string>(ElmtValue.Text, DateFirst.Date, DateSecond.Date,
+                        DataDated<string>.GenerateDisplayFormat(DateForeword.Text, DateFirstField.SelectedIndex + 1, DateFirstFormat.Text, DateMiddleword.Text, DateSecondField.SelectedIndex, DateSecondFormat.Text, DateEndword.Text)));
+                else if (TimeSpanBtn.IsChecked == true)
+                {
+                    el.Add(new DataTimeSpan<string>(ElmtValue.Text, new TimeSpan(int.Parse(TSMiddleword.Text), 0, 0, 0), DataTimeSpan<string>.GenerateDisplayFormat(TSForeword.Text, TSEndword.Text)));
+                }
+                else
+                    el.Add(new Data<string>(ElmtValue.Text));
                 ElmtValue.Text = "";
+                DateBtn.IsChecked = false;
+                TimeSpanBtn.IsChecked = false;
 
-                txt.Text = "Catégorie ajoutée à Divers.";
+                txt.Text = "Donnée ajoutée à Divers.";
             }
 
             var fo = new Flyout()
@@ -96,19 +112,21 @@ namespace CloVis.Controls
         }
         public void HideSecondDate()
         {
-            DateSecond.Visibility = Visibility.Collapsed;
-            DateSecondFormat.Visibility = Visibility.Collapsed;
-            DateSecondFormatName.Visibility = Visibility.Collapsed;
-            DateEndword.Visibility = Visibility.Collapsed;
+            if (DateSecond != null && DateSecondFormat != null && DateSecondFormatName != null && DateEndword != null)
+            {
+                DateSecond.Visibility = Visibility.Collapsed;
+                DateSecondFormat.Visibility = Visibility.Collapsed;
+                DateSecondFormatName.Visibility = Visibility.Collapsed;
+                DateEndword.Visibility = Visibility.Collapsed;
+            }
         }
         
         public void DateTimeSpanToggle_Checked(object sender, RoutedEventArgs e)
         {
-            DateBtn.IsChecked = false;
-            TimeSpanBtn.IsChecked = false;
-
-            if (sender is ToggleButton tb)
-                tb.IsChecked = true;
+            if (sender == DateBtn)
+                TimeSpanBtn.IsChecked = false;
+            else if (sender == TimeSpanBtn)
+                DateBtn.IsChecked = false;
         }
     }
 }

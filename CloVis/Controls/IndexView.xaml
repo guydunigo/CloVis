@@ -22,7 +22,7 @@
         <Pivot Margin="5,0,0,0" Padding="0">
             <PivotItem Header="En arbre">
                 <ListView x:Name="IndexList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
-                          DataContext="{Binding Root, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                          DataContext="{Binding Root, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <controls:IndexElementListView ElementList="{Binding}"/>
