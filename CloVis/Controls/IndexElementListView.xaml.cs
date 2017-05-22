@@ -23,53 +23,6 @@ using System.Collections;
 
 namespace CloVis.Controls
 {
-    public class CollectionToObservableConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value is IEnumerable<Element> ic)
-                return new ObservableCollection<Element>(ic);
-            else
-                return null;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public class SubElementTemplateSelector : DataTemplateSelector
-    {
-        public DataTemplate TemplateForData { get; set; }
-        public DataTemplate TemplateForElementList { get; set; }
-
-        protected override DataTemplate SelectTemplateCore(object item)
-        {
-            if (item is Data<string> d)
-                return TemplateForData;
-            else if (item is ElementList el)
-                return TemplateForElementList;
-
-            return null;
-        }
-    }
-
-    public class RootCategoryRemoveToVisibilityConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            if (value is string s && Index.Root.ContainsKey(s))
-                return Visibility.Collapsed;
-            else
-                return Visibility.Visible;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, string language)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     public sealed partial class IndexElementListView : UserControl, INotifyPropertyChanged
     {
         public IndexElementListView()

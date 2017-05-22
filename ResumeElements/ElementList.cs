@@ -23,11 +23,11 @@ namespace ResumeElements
 
     public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string,T> where T : Element
     {
-        protected SortedDictionary<string,T> elements;
+        protected Dictionary<string,T> elements;
 
         public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
-            elements = new SortedDictionary<string, T>();
+            elements = new Dictionary<string, T>();
         }
 
         protected void RemoveFromElements(Element e)

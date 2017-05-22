@@ -74,5 +74,41 @@ namespace CloVis.Controls
         {
             Validate(sender);
         }
+
+        private void DateSecond_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+                // Hide or show the last fields :
+                if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
+                {
+                    HideSecondDate();
+                }
+                else
+                {
+                    ShowSecondDate();
+                }
+        }
+        public void ShowSecondDate()
+        {
+            DateSecond.Visibility = Visibility.Visible;
+            DateSecondFormat.Visibility = Visibility.Visible;
+            DateSecondFormatName.Visibility = Visibility.Visible;
+            DateEndword.Visibility = Visibility.Visible;
+        }
+        public void HideSecondDate()
+        {
+            DateSecond.Visibility = Visibility.Collapsed;
+            DateSecondFormat.Visibility = Visibility.Collapsed;
+            DateSecondFormatName.Visibility = Visibility.Collapsed;
+            DateEndword.Visibility = Visibility.Collapsed;
+        }
+        
+        public void DateTimeSpanToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            DateBtn.IsChecked = false;
+            TimeSpanBtn.IsChecked = false;
+
+            if (sender is ToggleButton tb)
+                tb.IsChecked = true;
+        }
     }
 }
