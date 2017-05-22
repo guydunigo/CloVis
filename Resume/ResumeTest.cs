@@ -149,9 +149,9 @@ namespace Resume
 				new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
 			};
 
-            var fonts1 = new Fonts("obj")
+            var fonts1 = new Fonts("obj", Windows.UI.Xaml.TextAlignment.Justify)
             {
-                new FontElement("Garamond", 5, new Color() { R = 168, G = 215, B = 203, A = 255 },false, false, false, true),
+                new FontElement("Garamond", 5, new Color() { R = 168, G = 215, B = 203, A = 255 },false, false, false, false),
             };
 
             var boite_de_nom = new BoxText(90, 15, 60, 40, 20, 0, "nom");

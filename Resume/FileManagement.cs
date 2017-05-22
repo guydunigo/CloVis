@@ -61,7 +61,7 @@ namespace Resume
             }
 
             // creer le flux , le writer et écriture des donnees
-            using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.OpenIfExists))
+            using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.ReplaceExisting))
             {
                 //Settinges
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -174,7 +174,7 @@ namespace Resume
 
                 await writer.WriteEndElementAsync();
             }
-            else if(Ft == true)
+            else if(Ft == true && resumetosave.Layout.TextBoxes[numT].Fonts != null)
             {
                 await writer.WriteStartElementAsync("", resumetosave.Layout.TextBoxes[numT].Fonts.Name, "Resume");
                 int numF = 0;
@@ -402,7 +402,7 @@ namespace Resume
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
             }
 
-            using (var stream = await folder.OpenStreamForWriteAsync(filename + ".cv", CreationCollisionOption.OpenIfExists))
+            using (var stream = await folder.OpenStreamForReadAsync(filename + ".cv"))
             {
 
                 XmlReaderSettings read_settings = new XmlReaderSettings();
@@ -410,15 +410,15 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
-               // while (reader.Read())
-               // {
+                while (reader.Read())
+                {
                     reader.ReadStartElement("Layout");
                     string firstelement = reader.ReadElementContentAsString();
                     if (firstelement.Contains("BackBox"))
                     {
                         int x = int.Parse(reader.ReadElementContentAsString());
                     }
-                //}
+                }
             }
 
             return resumetoread;

@@ -174,12 +174,16 @@ namespace CloVis.Controls
         private static RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
+
             if (element != null && fonts != null)
             {
                 //throw new NotImplementedException("Generate rich text up to how many layers ? and shift (tab) ? Carriage return ? Dots for enum ?");
                 var LayersNumber = 3;
 
                 RenderElement(box, fonts, element, LayersNumber);
+
+                if (fonts.TextAlignment != null)
+                    box.TextAlignment = fonts.TextAlignment;
             }
             else if (fonts == null) throw new NullReferenceException("Fonts is null !");
             else if (element == null) throw new NullReferenceException("No element given.");

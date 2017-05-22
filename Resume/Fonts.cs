@@ -4,20 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.Xaml;
 
 namespace Resume
 {
     public class Fonts: ICollection<FontElement>, IList<FontElement>, IEnumerable<FontElement>
     {
-        public Fonts(string name)
+        public Fonts(string name, TextAlignment textAlignment = TextAlignment.Left)
         {
             Name = name;
             List = new List<FontElement>();
+            TextAlignment = TextAlignment;
         }
 
         public FontElement this[int index] { get => List[index]; set => List[index] = value; }
 
         public string Name { get; set; }
+        public TextAlignment TextAlignment { get; set; }
 
         /// <summary>
         /// The Default is the last element in the list. If the list is empty, return a basic black test.
@@ -108,7 +112,7 @@ namespace Resume
         /// <returns></returns>
         public Fonts Copy()
         {
-            var temp = new Fonts(Name);
+            var temp = new Fonts(Name, TextAlignment);
             foreach(FontElement e in List)
             {
                 temp.List.Add(e.Copy());
