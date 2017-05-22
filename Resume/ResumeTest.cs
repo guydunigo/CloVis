@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -137,7 +137,7 @@ namespace Resume
 
 			var diplomes = new ElementList<Element>("Dynastie")
 			{
-				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(YYY)$",-1, "",true),
+				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
 				
 			};
 
