@@ -97,7 +97,7 @@ namespace CloVis.Controls
                 foreach (BoxText b in Resume.Layout.TextBoxes)
                 {
                     if (b.Element != null)
-                        tempText = RenderTextBox(b.Element, Resume.Fonts);
+                        tempText = RenderTextBox(b.Element, b.Fonts ?? Resume.Fonts);
                     else
                     {
                         tempText = new RichTextBlock();

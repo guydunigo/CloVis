@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <controls:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
+        <controls:CollectionToSortedObservableConverter x:Key="CollectionToSortedObservableConverter"/>
     </UserControl.Resources>
 
     <StackPanel Width="1000" MinWidth="1000">
@@ -31,7 +32,7 @@
             </PivotItem>
             <PivotItem Header="De A à Z">
                 <ListView x:Name="DataList" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
-                          DataContext="{Binding DataIndex, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                          DataContext="{Binding DataIndex, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <controls:IndexDataTextView Data="{Binding}"/>
