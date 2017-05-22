@@ -141,12 +141,18 @@ namespace Resume
                 int numF = 0;
                 foreach (var k in resumetosave.Fonts.List )
                 {
-                    await write.WriteStartElementAsync("","Font_"+numF,"Resume");
+                    await writer.WriteStartElementAsync("","Font_"+numF,"Resume");
 
-                    await write.WriteElementStringAsync("","Font_Name","Resume",k[numF].fontFamilyName);
-
-                    await write.WriteEndElementAsync();
-
+                    await writer.WriteElementStringAsync("","Font_Name","Resume",Convert.ToString(k.Name));
+                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("","Font_fontSize","Resume",Convert.ToString(k.FontSize));
+                    await writer.WriteElementStringAsync("","Font_Color","Resume",Convert.ToString(k.Color));
+                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("","Font_font","Resume",Convert.ToString(k.Font));
+                    await writer.WriteEndElementAsync();
+                    numF+=1;
                 }
 
                 await writer.WriteEndElementAsync();
