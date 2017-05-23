@@ -121,7 +121,7 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "SizeY", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].SizeY));
                     await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Angle));
                     //Font
-                    Save_Font(resumetosave, writer, true, numT);
+                    Save_Font(resumetosave.Layout.TextBoxes[numT], writer);
                     // await writer.WriteElementStringAsync("", "Default_Element", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].DefaultElement));
 
                     //element
@@ -139,7 +139,7 @@ namespace Resume
                 await writer.WriteEndElementAsync();
 
                 //Fonts
-                Save_Font(resumetosave, writer, false, 0);
+                Save_Font(resumetosave, writer);
 
                 //Fin resume
                 await writer.WriteEndElementAsync();
@@ -149,17 +149,41 @@ namespace Resume
                 await writer.FlushAsync();
             }
         }
-
-        public static async void Save_Font(Resume resumetosave, XmlWriter writer, bool Ft, int numT)
+        public static async void Save_Font(BoxText box, XmlWriter writer)
         {
-            if (Ft == false)
+         if( box.Fonts != null)
             {
+                await writer.WriteStartElementAsync("", box.Fonts.Name, "Resume");
+                await writer.WriteElementStringAsync("", "Font_Alignment","Resume",Convert.ToString(box.Fonts.TextAlignment));
+                int numF = 0;
+                foreach (var k in box.Fonts.List)
+                {
+                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
+
+                    await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
+                    await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
+                    await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
+                    await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
+                    await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
+                    await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
+                    await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
+                    await writer.WriteElementStringAsync("", "Font_UpperCase", "Resume", Convert.ToString(k.UpperCase));
+                    await writer.WriteEndElementAsync();
+                    numF += 1;
+                }
+
+                await writer.WriteEndElementAsync();
+            }
+
+        }
+        public static async void Save_Font(Resume resumetosave, XmlWriter writer)
+        {
                 await writer.WriteStartElementAsync("", resumetosave.Fonts.Name, "Resume");
+                await writer.WriteElementStringAsync("", "Font_Alignment","Resume",Convert.ToString(resumetosave.Fonts.TextAlignment));
                 int numF = 0;
                 foreach (var k in resumetosave.Fonts.List)
                 {
                     await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
-
                     await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
                     await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
                     await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
@@ -171,31 +195,7 @@ namespace Resume
                     await writer.WriteEndElementAsync();
                     numF += 1;
                 }
-
                 await writer.WriteEndElementAsync();
-            }
-            else if(Ft == true && resumetosave.Layout.TextBoxes[numT].Fonts != null)
-            {
-                await writer.WriteStartElementAsync("", resumetosave.Layout.TextBoxes[numT].Fonts.Name, "Resume");
-                int numF = 0;
-                foreach (var k in resumetosave.Layout.TextBoxes[numT].Fonts.List)
-                {
-                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
-
-                    await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
-                    await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
-                    await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
-                    await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
-                    await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
-                    await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
-                    await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
-                    await writer.WriteElementStringAsync("", "Font_UpperCase", "Resume", Convert.ToString(k.UpperCase));
-                    await writer.WriteEndElementAsync();
-                    numF += 1;
-                }
-
-                await writer.WriteEndElementAsync();
-            }
         }
 
         public static async void Save_Element(Resume resumetosave, XmlWriter writer, int numT)
