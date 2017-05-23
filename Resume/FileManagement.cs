@@ -91,7 +91,7 @@ namespace Resume
                 foreach (var i in resumetosave.Layout.BackBoxes)
                 {
 
-                    await writer.WriteStartElementAsync("", "BackBox_" + num, "Resume");
+                    await writer.WriteStartElementAsync("", "BackBox", "Resume");
 
                     await writer.WriteElementStringAsync("", "x", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].X));
                     await writer.WriteElementStringAsync("", "y", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Y));
@@ -112,7 +112,7 @@ namespace Resume
                 int numT = 0;
                 foreach (var i in resumetosave.Layout.TextBoxes)
                 {
-                    await writer.WriteStartElementAsync("", "TextBox_" + numT, "Resume");
+                    await writer.WriteStartElementAsync("", "TextBox", "Resume");
 
                     await writer.WriteElementStringAsync("", "x", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].X));
                     await writer.WriteElementStringAsync("", "y", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Y));
@@ -158,7 +158,7 @@ namespace Resume
                 int numF = 0;
                 foreach (var k in box.Fonts.List)
                 {
-                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
+                    await writer.WriteStartElementAsync("", "Font", "Resume");
 
                     await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
                     await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
@@ -183,7 +183,7 @@ namespace Resume
                 int numF = 0;
                 foreach (var k in resumetosave.Fonts.List)
                 {
-                    await writer.WriteStartElementAsync("", "Font_" + numF, "Resume");
+                    await writer.WriteStartElementAsync("", "Font", "Resume");
                     await writer.WriteElementStringAsync("", "Font_Name", "Resume", Convert.ToString(k.Name));
                     await writer.WriteElementStringAsync("", "Font_font", "Resume", Convert.ToString(k.Font));
                     await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
@@ -218,7 +218,7 @@ namespace Resume
                 int numcat = 0;
                 foreach (var cats in data.Categories)
                 {
-                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
                     numcat += 1;
                 }
                 await writer.WriteEndElementAsync();
@@ -299,7 +299,7 @@ namespace Resume
                 foreach (var j in list.Values)
                 {
 
-                    await writer.WriteStartElementAsync("", "Element_" + numj, "Resume");
+                    await writer.WriteStartElementAsync("", "Element", "Resume");
                     await writer.WriteElementStringAsync("", "List_Name", "Resume", list.Name);
                     await writer.WriteElementStringAsync("", "List_Default", "Resume", Convert.ToString(list.IsDefault));
                     await writer.WriteElementStringAsync("", "List_ReadOnly", "Resume", Convert.ToString(list.IsReadOnly));
@@ -320,7 +320,7 @@ namespace Resume
                         int numcat = 0;
                         foreach (var cats in Ldata.Categories)
                         {
-                            await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                            await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
                             numcat += 1;
                         }
                         await writer.WriteEndElementAsync();
@@ -344,7 +344,7 @@ namespace Resume
                         int numcat = 0;
                         foreach (var cats in dstr.Categories)
                         {
-                            await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                            await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
                             numcat += 1;
                         }
                         await writer.WriteEndElementAsync();
@@ -372,7 +372,7 @@ namespace Resume
                         int numcat = 0;
                         foreach (var cats in ddstr.Categories)
                         {
-                            await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                            await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
                             numcat += 1;
                         }
                         await writer.WriteEndElementAsync();
