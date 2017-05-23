@@ -83,13 +83,10 @@ namespace Resume
                 read_settings.Async = true;
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
-                
-                while(reader.Read()){
-                    if(reader.NodeType != XmlNodeType.XmlDeclaration){
-                        await writer.WriteStartDocumentAsync();
-                        await writer.FlushAsync();
-                    }
-                }
+
+                await writer.WriteStartDocumentAsync();
+                      
+
 
                 // écriture des donnees
 
