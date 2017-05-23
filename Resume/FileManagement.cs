@@ -128,7 +128,7 @@ namespace Resume
                     Save_Element(resumetosave, writer, numT);
 
                     //elementList
-                    Save_ElementList(resumetosave, writer, numT);
+                    Save_ElementList(resumetosave.Layout.TextBoxes[numT], writer, numT);
 
 
                     await writer.WriteEndElementAsync();
@@ -287,13 +287,13 @@ namespace Resume
 
         }
 
-        public static async void Save_ElementList(Resume resumetosave, XmlWriter writer, int numT)
+        public static async void Save_ElementList(BoxText box, XmlWriter writer, int numT)
         {
             //ElementList
-            if (resumetosave.Layout.TextBoxes[numT].Element is ElementList<Element> list)
+            if (box.Element is ElementList<Element> list)
             {
                 await writer.WriteStartElementAsync("", "ElementList", "Resume");
-                await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(box.Element.Name));
 
                 int numj = 0;
                 foreach (var j in list.Values)
@@ -308,7 +308,7 @@ namespace Resume
                     {
                         await writer.WriteStartElementAsync("", "Data_Element", "Resume");
 
-                        await writer.WriteElementStringAsync("", "E_name", "Resume", resumetosave.Layout.TextBoxes[numT].Element.Name);
+                        await writer.WriteElementStringAsync("", "E_name", "Resume", box.Element.Name);
                         await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(Ldata.Level));
                         await writer.WriteElementStringAsync("", "D_name", "Resume", Ldata.Name);
                         await writer.WriteElementStringAsync("", "D_decription", "Resume", Ldata.Description);
@@ -331,7 +331,7 @@ namespace Resume
                     if (j is Data<string> dstr)
                     {
                         await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
-                        await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                        await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(box.Element.Name));
                         await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(dstr.Level));
                         await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(dstr.Name));
                         await writer.WriteElementStringAsync("", "D_decription", "Resume", dstr.Description);
@@ -357,7 +357,7 @@ namespace Resume
                     {
                         await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
 
-                        await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Element.Name));
+                        await writer.WriteElementStringAsync("", "E_name", "Resume", Convert.ToString(box.Element.Name));
                         await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(ddstr.Level));
                         await writer.WriteElementStringAsync("", "D_name", "Resume", Convert.ToString(ddstr.Name));
                         await writer.WriteElementStringAsync("", "D_decription", "Resume", Convert.ToString(ddstr.Description));
