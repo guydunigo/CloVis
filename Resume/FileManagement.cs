@@ -1,4 +1,5 @@
-﻿using System;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -73,17 +74,22 @@ namespace Resume
             {
                 //Settinges
                 XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Async = true;
                 settings.Indent = true;
                 settings.NewLineOnAttributes = true;
-                settings.OmitXmlDeclaration = true;
+                settings.Async = true;
                 XmlWriter writer = XmlWriter.Create(stream, settings);
-
 
                 XmlReaderSettings read_settings = new XmlReaderSettings();
                 read_settings.Async = true;
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
+                
+                while(reader.Read()){
+                    if(reader.NodeType != XmlNodeType.XmlDeclaration){
+                        await writer.WriteStartDocumentAsync();
+                        await writer.FlushAsync();
+                    }
+                }
 
                 // écriture des donnees
 
