@@ -377,6 +377,7 @@ namespace Resume
                         }
                         await writer.WriteEndElementAsync();
 
+                        
                         await writer.WriteEndElementAsync();
                     }
                     await writer.WriteEndElementAsync();
@@ -409,15 +410,18 @@ namespace Resume
                 read_settings.Async = true;
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
-
+                
+                string box = "";
+                string balise = "";
+                int x = 0;
+                int y = 0;
+                int z = 0;
+                resumetoread.Layout = new Layout();
+                
                 while (reader.Read())
                 {
-                    string box = "";
-                    string balise = "";
-                    int x = 0;
-                    int y = 0;
-                    int z = 0;
-                    switch (reader.NodeType)
+
+                   switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
                             if(reader.Name=="BackBox" || reader.Name=="TextBox") box=reader.Name;
@@ -426,6 +430,8 @@ namespace Resume
                         case XmlNodeType.Text:
                             if (box=="TextBox") 
                             { if (balise=="x") x=int.Parse(reader.Value); 
+                             if (balise=="y") y=int.Parse(reader.Value);
+                             if (balise=="z") z=int.Parse(reader.Value);
 
                             }
                             break;
