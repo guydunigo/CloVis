@@ -412,11 +412,23 @@ namespace Resume
 
                 while (reader.Read())
                 {
-                    reader.ReadStartElement("Layout");
-                    string firstelement = reader.ReadElementContentAsString();
-                    if (firstelement.Contains("BackBox"))
+                    switch(reader.NodeType.)
                     {
-                        int x = int.Parse(reader.ReadElementContentAsString());
+                        string box =  "";
+                        string balise = "";
+                        int x=0;
+                        int y=0;
+                        int z=0;
+                        case XmlNodeType.Element:
+                            if(reader.Name=="BackBox" || reader.Name=="TextBox") box=reader.Name;
+                            else balise=reader.Name;
+                            break;
+                        case XmlNodeType.Text:
+                            if (box=="TextBox") 
+                            { if (balise=="x") x=reader.Value; 
+
+                            }
+                            break;
                     }
                 }
             }
