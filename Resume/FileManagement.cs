@@ -391,7 +391,7 @@ namespace Resume
         {
             StorageFolder folder = null;
 
-            Resume resumetoread = new Resume(filename,true);
+            Resume resumetoread = new Resume(filename,false);
 
             try
             {
@@ -412,20 +412,20 @@ namespace Resume
 
                 while (reader.Read())
                 {
-                    switch(reader.NodeType.)
+                    string box = "";
+                    string balise = "";
+                    int x = 0;
+                    int y = 0;
+                    int z = 0;
+                    switch (reader.NodeType)
                     {
-                        string box =  "";
-                        string balise = "";
-                        int x=0;
-                        int y=0;
-                        int z=0;
                         case XmlNodeType.Element:
                             if(reader.Name=="BackBox" || reader.Name=="TextBox") box=reader.Name;
                             else balise=reader.Name;
                             break;
                         case XmlNodeType.Text:
                             if (box=="TextBox") 
-                            { if (balise=="x") x=reader.Value; 
+                            { if (balise=="x") x=int.Parse(reader.Value); 
 
                             }
                             break;
