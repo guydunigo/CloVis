@@ -39,9 +39,17 @@ namespace Resume
                 settings.Async = true;
                 XmlWriter writer = XmlWriter.Create(stream, settings);
 
-
-                await writer.WriteStartDocumentAsync();
-                await writer.FlushAsync();
+                XmlReaderSettings read_settings = new XmlReaderSettings();
+                read_settings.Async = true;
+                read_settings.IgnoreWhitespace = true;
+                XmlReader reader = XmlReader.Create(stream, read_settings);
+                
+                while(reader.Read()){
+                    if(reader.NodeType != XmlNodeType.XmlDeclaration){
+                        await writer.WriteStartDocumentAsync();
+                        await writer.FlushAsync();
+                    }
+                }
             }
         }
 
