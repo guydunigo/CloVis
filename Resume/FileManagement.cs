@@ -413,7 +413,7 @@ namespace Resume
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
                 double[] D_level = new double[10];
                 byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
-                int liste = 0, elem = 0, dts = 0, dde = 0; dt = 0;
+                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0;
 
                 var nv = new ElementList<Element>("");
 
