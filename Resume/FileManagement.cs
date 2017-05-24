@@ -65,7 +65,8 @@ namespace Resume
             // creer le flux , le writer et écriture des donnees
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.ReplaceExisting))
             {
-                //Settinges
+                
+                //Settings
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
                 settings.NewLineOnAttributes = true;
@@ -77,9 +78,9 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
+                // effacer tout le fichier !! A FAIRE
+
                 await writer.WriteStartDocumentAsync();
-
-
 
                 // écriture des donnees
 
@@ -174,7 +175,7 @@ namespace Resume
         }
         public static async void Save_Font(Resume resumetosave, XmlWriter writer)
         {
-            await writer.WriteStartElementAsync("", resumetosave.Fonts.Name, "Resume");
+            await writer.WriteStartElementAsync("", "Fonts", "Resume");
             await writer.WriteElementStringAsync("", "Font_Alignment", "Resume", Convert.ToString(resumetosave.Fonts.TextAlignment));
             int numF = 0;
             foreach (var k in resumetosave.Fonts.List)
@@ -209,11 +210,11 @@ namespace Resume
                 await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(data.IsIndependant));
                 await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(data.IsDefault));
                 //liste des catégories associé a l'élément
-                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                await writer.WriteStartElementAsync("", "D_categories", "Resume");
                 int numcat = 0;
                 foreach (var cats in data.Categories)
                 {
-                    await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
+                    await writer.WriteElementStringAsync("", "categorie", "Resume", cats.Name);
                     numcat += 1;
                 }
                 await writer.WriteEndElementAsync();
@@ -235,11 +236,11 @@ namespace Resume
                 await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
                 await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(datestr.IsDefault));
                 //liste des catégories associé a l'élément
-                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                await writer.WriteStartElementAsync("", "D_categories", "Resume");
                 int numcat = 0;
                 foreach (var cats in datestr.Categories)
                 {
-                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    await writer.WriteElementStringAsync("", "categorie" + numcat, "Resume", cats.Name);
                     numcat += 1;
                 }
                 await writer.WriteEndElementAsync();
@@ -263,11 +264,11 @@ namespace Resume
                 await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(dateD.IsIndependant));
                 await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(dateD.IsDefault));
                 //liste des catégories associé a l'élément
-                await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                await writer.WriteStartElementAsync("", "D_categories", "Resume");
                 int numcat = 0;
                 foreach (var cats in dateD.Categories)
                 {
-                    await writer.WriteElementStringAsync("", "catergorie" + numcat, "Resume", cats.Name);
+                    await writer.WriteElementStringAsync("", "categorie" + numcat, "Resume", cats.Name);
                     numcat += 1;
                 }
                 await writer.WriteEndElementAsync();
@@ -309,11 +310,11 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(Ldata.IsIndependant));
                     await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(Ldata.IsDefault));
                     //liste des catégories associé a l'élément de la liste
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                    await writer.WriteStartElementAsync("", "D_categories", "Resume");
                     int numcat = 0;
                     foreach (var cats in Ldata.Categories)
                     {
-                        await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
+                        await writer.WriteElementStringAsync("", "categorie", "Resume", cats.Name);
                         numcat += 1;
                     }
                     await writer.WriteEndElementAsync();
@@ -412,7 +413,7 @@ namespace Resume
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
                 double[] D_level = new double[10];
                 byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
-                int liste = 0, elem = 0, dts = 0;
+                int liste = 0, elem = 0, dts = 0, dde = 0; dt = 0;
 
                 var nv = new ElementList<Element>("");
 
@@ -430,6 +431,8 @@ namespace Resume
                                 if (reader.Name == "ElementList") liste += 1;
                                 if (reader.Name == "Element") elem += 1;
                                 if (reader.Name == "DataString_Element") dts += 1;
+                                if (reader.Name == "DataDated_Element") dde += 1;
+                                if (reader.Name == "Data_Element") dt +=1;
                                 else balise = reader.Name;
                                 break;
                             }
@@ -470,6 +473,15 @@ namespace Resume
                                             if (balise == "D_default") D_def[dts] = bool.Parse(reader.Value);
                                             if (balise == "D_categories") categorie[dts] = reader.Value;
                                         }
+
+                                        if (dde >=1)
+                                        {
+                                            //COMPLETER
+                                        }
+                                        if (dt >=1)
+                                        {
+                                            // completer
+                                        }
                                     }
                                 }
                                 if (liste >= 1)
@@ -487,6 +499,14 @@ namespace Resume
 
                                     if (elem >= 1) // si un element
                                     {
+                                        if (dde >=1) // si c'est un data dated 
+                                        {
+                                            // completer
+                                        }
+                                        if (dt>=1) // si c'est un data
+                                        {
+                                            //completer
+                                        }
                                         if (dts >= 1) // si c'est un data string
                                         {
                                             if (balise == "D_level") D_level[dts] = double.Parse(reader.Value);
@@ -514,6 +534,15 @@ namespace Resume
                                 if (liste>= 1 && reader.Name == "ElementList") // si c'est une liste imbriquée -- BEUG
                                 {
                                     nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+
+                                    while (dde >=1) 
+                                    {
+                                        // completer
+                                    }
+                                    while (dt >=1)
+                                    {
+                                        //completer
+                                    }
 
                                     while (dts >= 1 /*&& elem >= 1*/)
                                     {
@@ -544,6 +573,14 @@ namespace Resume
                                     else
                                     {
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        while (dde >=1 && elem >=1) 
+                                        {
+                                            // completer
+                                        }
+                                        while (dt>=1 && elem >=1)
+                                        {
+                                            //completer
+                                        }
                                         while (dts >= 1 && elem >= 1)
                                         {
                                             nv.Add(new Data<string>(D_value[dts], D_level[dts], D_description[dts], D_dependant[dts], D_def[dts]));
@@ -563,6 +600,14 @@ namespace Resume
                                 }
                                 if (liste == 0 && reader.Name == "DataString_Element") // fonctionne
                                 {
+                                    if (dde == 1 && elem == 0)
+                                    {
+                                        // completer
+                                    }
+                                    if (dt ==1 && elem ==0)
+                                    {
+                                        //completer
+                                    }
                                     if (dts == 1 && elem == 0)
                                     {
                                         dts = 0;
