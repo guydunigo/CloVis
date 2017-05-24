@@ -52,7 +52,6 @@
                         <controls:NewDataForm/>
                     </ListViewItem>
 
-                    <ListViewHeaderItem Foreground="White" Content="Nouvelle image"/>
                     <ListViewItem HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
                        <!-- <StackPanel HorizontalAlignment="Stretch">
                             <TextBox Margin="0,5" Background="White" PlaceholderText="Url" Foreground="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>

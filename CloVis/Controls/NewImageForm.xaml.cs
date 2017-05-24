@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ResumeElements;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,46 @@ namespace CloVis.Controls
         public NewImageForm()
         {
             this.InitializeComponent();
+        }
+
+        public void Validate(object sender)
+        {
+            TextBlock txt = new TextBlock();
+
+            if (ImgName.Text == "")
+            {
+                txt.Text = "Veuillez renseigner un nom.";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else if (Index.Find(ImgName.Text) != null)
+            {
+                txt.Text = "Ce nom est déjà utilisé";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else
+            {
+                //Index.Images.Add(new ElementList<Element>(ImgName.Text));
+                ImgName.Text = "";
+
+                txt.Text = "Image ajoutée à Images.";
+            }
+
+            var fo = new Flyout()
+            {
+                Content = txt
+            };
+            fo.ShowAt(ImgName);
+        }
+
+        private void ImgAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Validate(sender);
+        }
+
+        private void ImgName_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+                Validate(sender);
         }
     }
 }
