@@ -10,7 +10,17 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-
-    </Grid>
+    <StackPanel HorizontalAlignment="Stretch" Padding="0,10">
+        <Border BorderThickness="0,0,0,1" Margin="0,0,0,10" Padding="0,0,0,5" BorderBrush="White">
+            <TextBlock Foreground="White" FontSize="18" Text="Nouvelle Catégorie"/>
+        </Border>
+        <StackPanel x:Name="Fields">
+            <TextBox x:Name="ImgName" Margin="0,0,0,10"  PlaceholderText="Nom de l'image" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ImgName_KeyDown"/>
+            <Button x:Name="ImgAdd" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="ImgAdd_Click" HorizontalAlignment="Right">
+                <Button.Content>
+                    Ajouter
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </StackPanel>
 </UserControl>
