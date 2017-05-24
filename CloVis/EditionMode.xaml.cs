@@ -147,6 +147,11 @@ namespace CloVis
             this.Frame.Navigate(typeof(Help));
         }
 
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(ExportToPdf));
+        }
+
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
 
