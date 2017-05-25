@@ -137,8 +137,8 @@ namespace CloVis
                 ResumeTest.GetResumeTest2()
             };
 
-          // var temp = await FileManagement.Read_file("CV_test");
-          // Resumes.Add(temp);
+           var temp = await FileManagement.Read_file("CV_test");
+           Resumes.Add(temp);
         }
 
         public void LoadTemplates()
