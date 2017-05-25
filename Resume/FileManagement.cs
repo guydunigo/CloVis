@@ -43,7 +43,7 @@ namespace Resume
 
                 await writer.WriteStartDocumentAsync();
                 await writer.FlushAsync();
-                 
+
             }
         }
 
@@ -65,7 +65,7 @@ namespace Resume
             // creer le flux , le writer et écriture des donnees
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.ReplaceExisting))
             {
-                
+
                 //Settings
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
@@ -403,20 +403,33 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
+
+                //mise en forme  
+                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0;
                 string box = "";
                 string balise = "";
-                string[] D_format = new string[10], D_name = new string[10], D_description = new string[10], D_value = new string[10];
-                string[] L_Name = {"", "", "",""};
-                bool[] D_dependant = new bool[10], D_def = new bool[10], L_def = new bool[10], L_ReadOnly = new bool[10];
-                string[] categorie = new string[10];
-
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
-                double[] D_level = new double[10];
                 byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
-                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0;
+                //data 
+
+                // data string 
+
+                string[] DS_format = new string[10], DS_name = new string[10], DS_description = new string[10], DS_value = new string[10];
+                double[] DS_level = new double[10];
+                bool[] DS_dependant = new bool[10], DS_def = new bool[10];
+                string[] DS_categorie = new string[10];
+
+                //liste 
+                bool[] L_def = new bool[10], L_ReadOnly = new bool[10];
+                string[] L_Name = { "", "", "", "" };
 
                 var nv = new ElementList<Element>("");
 
+                //datadated
+
+
+
+                //début lecture
                 resumetoread.Layout = new Layout();
                 resumetoread.Fonts = new Fonts("Polices_cv");
 
@@ -432,7 +445,7 @@ namespace Resume
                                 if (reader.Name == "Element") elem += 1;
                                 if (reader.Name == "DataString_Element") dts += 1;
                                 if (reader.Name == "DataDated_Element") dde += 1;
-                                if (reader.Name == "Data_Element") dt +=1;
+                                if (reader.Name == "Data_Element") dt += 1;
                                 else balise = reader.Name;
                                 break;
                             }
@@ -459,65 +472,31 @@ namespace Resume
                                     if (balise == "Color_Border_B") Color_Border_B = byte.Parse(reader.Value);
 
                                 }
-                                if (liste >= 0)
+                                if (dts >= 1) // si c'est un data string
                                 {
-                                    if (elem >= 0)
-                                    {
-                                        if (dts >= 1) // si c'est un data string
-                                        {
-                                            if (balise == "D_level") D_level[dts] = double.Parse(reader.Value);
-                                            if (balise == "D_name") D_name[dts] = reader.Value;
-                                            if (balise == "D_description") D_description[dts] = reader.Value;
-                                            if (balise == "D_value") D_value[dts] = reader.Value;
-                                            if (balise == "D_dependant") D_dependant[dts] = bool.Parse(reader.Value);
-                                            if (balise == "D_default") D_def[dts] = bool.Parse(reader.Value);
-                                            if (balise == "D_categories") categorie[dts] = reader.Value;
-                                        }
-
-                                        if (dde >=1)
-                                        {
-                                            //COMPLETER
-                                        }
-                                        if (dt >=1)
-                                        {
-                                            // completer
-                                        }
-                                    }
+                                    if (balise == "D_level") DS_level[dts] = double.Parse(reader.Value);
+                                    if (balise == "D_name") DS_name[dts] = reader.Value;
+                                    if (balise == "D_description") DS_description[dts] = reader.Value;
+                                    if (balise == "D_value") DS_value[dts] = reader.Value;
+                                    if (balise == "D_dependant") DS_dependant[dts] = bool.Parse(reader.Value);
+                                    if (balise == "D_default") DS_def[dts] = bool.Parse(reader.Value);
+                                    if (balise == "D_categories") DS_categorie[dts] = reader.Value;
                                 }
+
+                                if (dde >= 1)
+                                {
+                                    //COMPLETER
+                                }
+                                if (dt >= 1)
+                                {
+                                    // completer
+                                }
+                                
                                 if (liste >= 1)
                                 {
-                                    if (balise == "List_Name")
-                                    {
-                                        L_Name[liste] = reader.Value;
-                                        
-                                    }
-                                    if (balise == "List_Default")
-                                    {
-                                        L_def[liste] = bool.Parse(reader.Value);
-                                    }
+                                    if (balise == "List_Name") L_Name[liste] = reader.Value;
+                                    if (balise == "List_Default") L_def[liste] = bool.Parse(reader.Value);
                                     if (balise == "List_ReadOnly") L_ReadOnly[liste] = bool.Parse(reader.Value);
-
-                                    if (elem >= 1) // si un element
-                                    {
-                                        if (dde >=1) // si c'est un data dated 
-                                        {
-                                            // completer
-                                        }
-                                        if (dt>=1) // si c'est un data
-                                        {
-                                            //completer
-                                        }
-                                        if (dts >= 1) // si c'est un data string
-                                        {
-                                            if (balise == "D_level") D_level[dts] = double.Parse(reader.Value);
-                                            if (balise == "D_name")  D_name[dts] = reader.Value;
-                                            if (balise == "D_description") D_description[dts] = reader.Value;
-                                            if (balise == "D_value") D_value[dts] = reader.Value;
-                                            if (balise == "D_dependant") D_dependant[dts] = bool.Parse(reader.Value);
-                                            if (balise == "D_default") D_def[dts] = bool.Parse(reader.Value);
-                                            if (balise == "D_categories") categorie[dts] = reader.Value;
-                                        }
-                                    }
                                 }
 
                                 break;
@@ -528,35 +507,47 @@ namespace Resume
                                 {
                                     resumetoread.Layout.AddBackBox(new BoxBackground(new Color() { A = Color_A, R = Color_R, G = Color_G, B = Color_B }, new Color() { A = Color_Border_A, R = Color_Border_R, G = Color_Border_G, B = Color_Border_B }, x, y, z, SizeX, SizeY, null, angle));
                                     box = "";
-                                    x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; D_level[elem] = 0;
+                                    x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
                                     Color_A = 0; Color_R = 0; Color_G = 0; Color_B = 0; Color_Border_A = 0; Color_Border_R = 0; Color_Border_G = 0; Color_Border_B = 0;
                                 }
-                                if (liste>= 1 && reader.Name == "ElementList") // si c'est une liste imbriquée -- BEUG
+                                if (liste > 1 && reader.Name == "ElementList") // si c'est une liste imbriquée -- BEUG
                                 {
-                                    nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                    if (nv.Name != "")
+                                    {
+                                        var souslist = nv;
+                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
+                                        nv.Add(souslist);
+                                       // bnv.Element = nv;
+                                        L_Name[liste] = ""; L_def[liste] = false;
+                                    }
 
-                                    while (dde >=1) 
+                                    else nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // on crée la nouvelle liste
+
+                                    while (dde >= 1)
                                     {
                                         // completer
+                                        dde -= 1;
                                     }
-                                    while (dt >=1)
+                                    while (dt >= 1)
                                     {
                                         //completer
+                                        dt -= 1;
                                     }
 
-                                    while (dts >= 1 /*&& elem >= 1*/)
+                                    while (dts >= 1 )
                                     {
-                                        nv.Add(new Data<string>(D_value[dts], D_level[dts], D_description[dts], D_dependant[dts], D_def[dts]));
-                                        D_format[dts] = ""; D_name[dts] = ""; D_description[dts] = ""; D_value[dts] = ""; D_dependant[dts] = false; D_def[dts] = false;
-                                        categorie[dts] = "";
+                                        nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
+                                        DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false;
+                                        DS_categorie[dts] = "";
                                         elem -= 1; dts -= 1;
                                     }
                                     //réinitialisation 
                                     box = "";
                                     L_Name[liste] = ""; L_def[liste] = false;
                                     L_ReadOnly[liste] = false;
+                                   
                                     //décrémenter les listes
-                                     liste -= 1;
+                                    liste -= 1;
                                 }
                                 if (liste == 1 && reader.Name == "ElementList")
                                 {
@@ -567,36 +558,62 @@ namespace Resume
                                         var souslist = nv;
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
+
+
+                                        while (dde >= 1 && elem >= 1)
+                                        {
+                                            // completer
+                                            dde -= 1;
+                                        }
+                                        while (dt >= 1 && elem >= 1)
+                                        {
+                                            //completer
+                                            dt -= 1;
+                                        }
+                                        while (dts >= 1 && elem >= 1)
+                                        {
+                                            nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
+                                            DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0;
+                                            DS_categorie[dts] = "";
+                                            elem -= 1; dts -= 1;
+                                        }
+
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
+                                        nv = new ElementList<Element>("");
                                     }
                                     else
                                     {
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
-                                        while (dde >=1 && elem >=1) 
+                                        while (dde >= 1 && elem >= 1)
                                         {
                                             // completer
+                                            dde -= 1;
                                         }
-                                        while (dt>=1 && elem >=1)
+                                        while (dt >= 1 && elem >= 1)
                                         {
                                             //completer
+                                            dt -= 1;
                                         }
                                         while (dts >= 1 && elem >= 1)
                                         {
-                                            nv.Add(new Data<string>(D_value[dts], D_level[dts], D_description[dts], D_dependant[dts], D_def[dts]));
-                                            D_format[dts] = ""; D_name[dts] = ""; D_description[dts] = ""; D_value[dts] = ""; D_dependant[dts] = false; D_def[dts] = false; D_level[dts] = 0;
-                                            categorie[dts] = "";
+                                            nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
+                                            DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0;
+                                            DS_categorie[dts] = "";
                                             elem -= 1; dts -= 1;
                                         }
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
-                                        L_ReadOnly[liste] = false; 
+                                        L_ReadOnly[liste] = false;
                                         bnv.Element = nv;
+                                        nv = new ElementList<Element>("");
+                                       
                                     }
                                     resumetoread.Layout.AddTextBox(bnv);
-                                    x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;  
+                                    x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
                                     liste -= 1; elem -= 1;
                                     box = "";
+
                                 }
                                 if (liste == 0 && reader.Name == "DataString_Element") // fonctionne
                                 {
@@ -604,23 +621,23 @@ namespace Resume
                                     {
                                         // completer
                                     }
-                                    if (dt ==1 && elem ==0)
+                                    if (dt == 1 && elem == 0)
                                     {
                                         //completer
                                     }
                                     if (dts == 1 && elem == 0)
                                     {
                                         dts = 0;
-                                        var nvdt = new Data<string>(D_value[dts], D_level[dts], D_description[dts], D_dependant[dts], D_def[dts]);
-                                        var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, D_name[dts]);
+                                        var nvdt = new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
+                                        var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
                                         bnv.Element = nvdt;
                                         resumetoread.Layout.AddTextBox(bnv);
 
                                         //réinitialisation
                                         box = "";
-                                        D_name[dts] = ""; D_description[dts] = ""; D_value[dts] = "";
-                                        D_dependant[dts] = false; D_def[dts] = false;
-                                        x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; D_level[dts] = 0;
+                                        DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = "";
+                                        DS_dependant[dts] = false; DS_def[dts] = false;
+                                        x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DS_level[dts] = 0;
                                     }
                                 }
                                 break;
