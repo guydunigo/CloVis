@@ -24,10 +24,25 @@ namespace ResumeElements
     /// </summary>
     public class DataImage:Data<string>, INotifyPropertyChanged
     {
-        public DataImage(string name, StorageFile source, string description = "") :
-            base(name, -1, description, true, false)
+        /// <summary>
+        /// If you use this constructor, there must be an existing image named
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        public DataImage(string name):base(name, -1, "", true, false)
         {
-            ImportImage(source, name);
+            LoadImage();
+            Index.AddImage(this);
+        }
+
+        public DataImage(string name, StorageFile source) :
+            base(name, -1, "", true, false)
+        {
+            var temp = source.Name.Split('.');
+
+            ImportImage(source, name + "." + temp[temp.Length-1]);
+            Index.AddImage(this);
+            // + with resume/template
         }
 
         protected BitmapImage image;
@@ -55,10 +70,13 @@ namespace ResumeElements
                 image = new BitmapImage();
                 FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
                 image.SetSource(stream);
+
+                NotifyPropertyChanged("Image");
             }
             else
                 throw new FileNotFoundException("The current file was not defined and therefore cannot be loaded.");
         }
+
         public async Task<StorageFile> GetImageFile()
         {
             var imgFold = await GetImageFolder();
@@ -82,6 +100,10 @@ namespace ResumeElements
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(name);
             }
             return folder;
+        }
+        public async static Task<StorageFile> GetImageDefault()
+        {
+            return await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/StoreLogo.png"));
         }
 
         public async void ImportImage(StorageFile file, string desiredName)
@@ -110,10 +132,10 @@ namespace ResumeElements
 
         public async void RenameImageFile(string newName)
         {
-            if (newName != "" && (await GetImageFile() != null))
+            var imgFile = await GetImageFile();
+            if (newName != "" && (imgFile != null))
             {
                 var imgFold = await GetImageFolder();
-                var imgFile = await GetImageFile();
                 if (await imgFold.TryGetItemAsync(newName) == null)
                 {
                     await imgFile.RenameAsync(newName);
@@ -154,6 +176,23 @@ namespace ResumeElements
             }
             else
                 throw new FileNotFoundException("The current file was not defined and therefore cannot be replaced.");
+        }
+
+        public async void Remove()
+        {
+            var imgFile = await GetImageFile();
+            if (imgFile != null)
+            {
+                await imgFile.DeleteAsync();
+                Index.Images.Remove(this);
+            }
+        }
+
+        public static async Task<bool> IsImageFilePresent(string name)
+        {
+            var imgFold = await GetImageFolder();
+
+            return (await imgFold.TryGetItemAsync(name) != null);
         }
     }
 }

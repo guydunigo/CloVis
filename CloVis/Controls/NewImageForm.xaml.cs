@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -20,12 +22,14 @@ namespace CloVis.Controls
 {
     public sealed partial class NewImageForm : UserControl
     {
+        public StorageFile Img { get; set; }
+
         public NewImageForm()
         {
             this.InitializeComponent();
         }
 
-        public void Validate(object sender)
+        public async void Validate(object sender)
         {
             TextBlock txt = new TextBlock();
 
@@ -36,12 +40,22 @@ namespace CloVis.Controls
             }
             else if (Index.Find(ImgName.Text) != null)
             {
-                txt.Text = "Ce nom est déjà utilisé";
+                txt.Text = "Ce nom est déjà utilisé pour un autre élément.";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else if (Img == null)
+            {
+                txt.Text = "Veuillez selectionner une image.";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else if (await DataImage.IsImageFilePresent(ImgName.Text))
+            {
+                txt.Text = "Il existe déjà une image portant ce nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
             else
             {
-                //Index.Images.Add(new ElementList<Element>(ImgName.Text));
+                new DataImage(ImgName.Text, Img);
                 ImgName.Text = "";
 
                 txt.Text = "Image ajoutée à Images.";
@@ -63,6 +77,26 @@ namespace CloVis.Controls
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
                 Validate(sender);
+        }
+
+        private async void PickImg_Click(object sender, RoutedEventArgs e)
+        {
+            FileOpenPicker openPicker = new FileOpenPicker()
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".bmp");
+            var temp = await openPicker.PickSingleFileAsync();
+
+            if(temp != null)
+            {
+                Img = temp;
+                ImgFileName.Text = Img.Name;
+            }
         }
     }
 }

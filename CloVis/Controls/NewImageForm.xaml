@@ -15,7 +15,19 @@
             <TextBlock Foreground="White" FontSize="18" Text="Nouvelle Catégorie"/>
         </Border>
         <StackPanel x:Name="Fields">
-            <TextBox x:Name="ImgName" Margin="0,0,0,10"  PlaceholderText="Nom de l'image" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ImgName_KeyDown"/>
+            <TextBox x:Name="ImgName" Margin="0,0,0,10" PlaceholderText="Nom de l'image" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ImgName_KeyDown"/>
+            <Grid Margin="0,0,0,10" HorizontalAlignment="Stretch" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="PickImg" Grid.Column="0" Foreground="White" Background="Gray" HorizontalAlignment="Right" Click="PickImg_Click">
+                    <SymbolIcon Symbol="OpenFile"/>
+                </Button>
+                <TextBlock Grid.Column="2" x:Name="ImgFileName" Foreground="Gray"
+                               VerticalAlignment="Center" HorizontalAlignment="Stretch" Width="Auto" MinWidth="100"/>
+            </Grid>
             <Button x:Name="ImgAdd" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="ImgAdd_Click" HorizontalAlignment="Right">
                 <Button.Content>
                     Ajouter

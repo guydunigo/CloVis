@@ -33,10 +33,31 @@ namespace ResumeElements
                 RemoveData(t);
             }
         }
+        public static void AddImage(DataImage d)
+        {
+            Images.Add(d, false);
+        }
+        public static void RemoveImage(DataImage d)
+        {
+            if (Images.Contains(d))
+            {
+                Images.Remove(d);
+                d.ClearCategories();
+            }
+        }
+        public static void RemoveImage(string name)
+        {
+            if (Images.Find(name) is DataImage t)
+            {
+                RemoveImage(t);
+            }
+        }
 
         public static Element Find(string name)
         {
             var temp = DataIndex.Find(name);
+            if (temp != null) return temp;
+            temp = Images.Find(name);
             if (temp != null) return temp;
             return Root.Find(name);
         }
