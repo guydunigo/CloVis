@@ -12,7 +12,8 @@ namespace ResumeElements
     public static class Index
     {
         public static ElementList<Data> DataIndex { get; } = new ElementList<Data>("Index");
-        
+        public static ElementList<DataImage> Images { get; } = new ElementList<DataImage>("Images");
+
         public static void AddData(Data d)
         {
             DataIndex.Add(d, false);

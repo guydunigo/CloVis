@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Data.cs" />
     <Compile Include="DataDated.cs" />
+    <Compile Include="DataImage.cs" />
     <Compile Include="DataTimeSpan.cs" />
     <Compile Include="ElementList.cs" />
     <Compile Include="Element.cs" />
