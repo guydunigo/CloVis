@@ -31,50 +31,29 @@ namespace ResumeElements
         /// <param name="description"></param>
         public DataImage(string name):base(name, -1, "", true, false)
         {
-            LoadImage();
             Index.AddImage(this);
         }
 
-        public DataImage(string name, StorageFile source) :
-            base(name, -1, "", true, false)
-        {
-            var temp = source.Name.Split('.');
+        public DataImage(StorageFile source):this(source.Name,source)
+        { }
 
-            ImportImage(source, name + "." + temp[temp.Length-1]);
-            Index.AddImage(this);
+        public DataImage(string name, StorageFile source) :
+            this(name)
+        {
+            ImportImage(source, name + "." + GetExtension(source));
             // + with resume/template
         }
 
-        protected BitmapImage image;
-        public BitmapImage Image
+        public static async Task<BitmapImage> LoadImage(string name)
         {
-            get => image;
-        }
+            var img = new BitmapImage();
+            var imgFold = await GetImageFolder();
+            var imgFile = await imgFold.GetFileAsync(name);
 
-        public override string Value
-        {
-            get => value;
-            set
-            {
+            FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
+            img.SetSource(stream);
 
-            }
-        }
-
-        public async void LoadImage()
-        {
-            var imgFile = await GetImageFile();
-            if (imgFile != null)
-            {
-                var imgFold = await GetImageFolder();
-
-                image = new BitmapImage();
-                FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
-                image.SetSource(stream);
-
-                NotifyPropertyChanged("Image");
-            }
-            else
-                throw new FileNotFoundException("The current file was not defined and therefore cannot be loaded.");
+            return img;
         }
 
         public async Task<StorageFile> GetImageFile()
@@ -117,7 +96,6 @@ namespace ResumeElements
                 throw new FileAlreadyExistsException("An image already exists with that name");
 
             value = copiedFile.Name;
-            LoadImage();
         }
 
         public override Element Copy()
@@ -193,6 +171,12 @@ namespace ResumeElements
             var imgFold = await GetImageFolder();
 
             return (await imgFold.TryGetItemAsync(name) != null);
+        }
+
+        public static string GetExtension(StorageFile sf)
+        {
+            var temp = sf.Name.Split('.');
+            return temp[temp.Length - 1];
         }
     }
 }

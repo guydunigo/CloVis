@@ -48,7 +48,7 @@ namespace CloVis.Controls
                 txt.Text = "Veuillez selectionner une image.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (await DataImage.IsImageFilePresent(ImgName.Text))
+            else if (await DataImage.IsImageFilePresent(ImgName.Text + "." + DataImage.GetExtension(Img)))
             {
                 txt.Text = "Il existe déjà une image portant ce nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;

@@ -148,7 +148,7 @@ namespace ResumeElements
         /// <summary>
         /// Actual information (Text, image,time,number)
         /// </summary>
-        public virtual T Value
+        public T Value
         {
             get => value;
             set

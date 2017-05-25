@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Resume;
 using ResumeElements;
+using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace CloVis
 {
@@ -165,7 +167,18 @@ namespace CloVis
 
         public void LoadIndex()
         {
+            LoadImages();
             IndexTest.FillIndex();
+        }
+
+        public async void LoadImages()
+        {
+            var imgFold = await DataImage.GetImageFolder();
+            var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
+            foreach(StorageFile f in imgs)
+            {
+                new DataImage(f.Name);
+            }
         }
 
         public void SaveResume(Resume.Resume cv)
