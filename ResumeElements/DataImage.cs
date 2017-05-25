@@ -3,40 +3,68 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 
 namespace ResumeElements
 {
+    public class FileAlreadyExistsException : Exception
+    {
+        public FileAlreadyExistsException() : base()
+        { }
+
+        public FileAlreadyExistsException(string message):base(message)
+        { }
+    }
+
     /// <summary>
     /// DataImages value is the file's name located
     /// </summary>
     public class DataImage:Data<string>, INotifyPropertyChanged
     {
-        public DataImage(string name, string description = "") : base(name, -1, description, true, false)
+        public DataImage(string name, StorageFile source, string description = "") :
+            base(name, -1, description, true, false)
         {
-
+            ImportImage(source, name);
         }
 
         protected BitmapImage image;
         public BitmapImage Image
         {
             get => image;
+        }
+
+        public override string Value
+        {
+            get => value;
             set
             {
-                ChangeImage(value);
+
             }
         }
 
-        public async void ChangeImage(BitmapImage img)
+        public async void LoadImage()
+        {
+            var imgFile = await GetImageFile();
+            if (imgFile != null)
+            {
+                var imgFold = await GetImageFolder();
+
+                image = new BitmapImage();
+                FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
+                image.SetSource(stream);
+            }
+            else
+                throw new FileNotFoundException("The current file was not defined and therefore cannot be loaded.");
+        }
+        public async Task<StorageFile> GetImageFile()
         {
             var imgFold = await GetImageFolder();
-            var temp = await imgFold.GetFileAsync(value);
+            var imfFile = await imgFold.GetFileAsync(value);
 
-            img = new BitmapImage();
-
-            image = img;
+            return imfFile;
         }
 
         public async static Task<StorageFolder> GetImageFolder()
@@ -54,6 +82,78 @@ namespace ResumeElements
                 folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(name);
             }
             return folder;
+        }
+
+        public async void ImportImage(StorageFile file, string desiredName)
+        {
+            var imgFold = await GetImageFolder();
+            StorageFile copiedFile = null;
+
+            if (await imgFold.TryGetItemAsync(desiredName) == null)
+                copiedFile = await file.CopyAsync(imgFold, desiredName);
+            else
+                throw new FileAlreadyExistsException("An image already exists with that name");
+
+            value = copiedFile.Name;
+            LoadImage();
+        }
+
+        public override Element Copy()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void UpdateFromIndex()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async void RenameImageFile(string newName)
+        {
+            if (newName != "" && (await GetImageFile() != null))
+            {
+                var imgFold = await GetImageFolder();
+                var imgFile = await GetImageFile();
+                if (await imgFold.TryGetItemAsync(newName) == null)
+                {
+                    await imgFile.RenameAsync(newName);
+                    value = newName;
+                }
+                else
+                    throw new FileAlreadyExistsException("An image already exists with that name");
+            }
+            else
+                throw new FileNotFoundException("The current file was not defined and therefore cannot be renamed.");
+        }
+
+        public async void ReplaceImageFile(StorageFile newFile)
+        {
+            var imgFile = await GetImageFile();
+            if (imgFile != null)
+            {
+                var imgFold = await GetImageFolder();
+                var tempFold = ApplicationData.Current.TemporaryFolder;
+                if (newFile != null)
+                {
+                    // Ensure the previous file will be kept if there is an error importing the file
+                    await imgFile.MoveAsync(tempFold);
+
+                    try
+                    {
+                        ImportImage(newFile, value);
+                    }
+                    catch (Exception e)
+                    {
+                        await imgFile.MoveAsync(imgFold, value, NameCollisionOption.ReplaceExisting);
+
+                        throw e;
+                    }
+
+                    await imgFile.DeleteAsync();
+                }
+            }
+            else
+                throw new FileNotFoundException("The current file was not defined and therefore cannot be replaced.");
         }
     }
 }
