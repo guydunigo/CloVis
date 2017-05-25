@@ -40,6 +40,16 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </PivotItem>
+            <PivotItem Header="Images">
+                <ListView x:Name="Images" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                          DataContext="{Binding Images, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <controls:IndexDataImageView/>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </PivotItem>
         </Pivot>
     </StackPanel>
 </UserControl>

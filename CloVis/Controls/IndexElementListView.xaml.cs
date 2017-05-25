@@ -108,5 +108,11 @@ namespace CloVis.Controls
                 Index.Erase(ElementList);
             }
         }
+
+        private void SubList_DragItemsCompleted(ListViewBase sender, DragItemsCompletedEventArgs args)
+        {
+            var temp = args.Items[0];
+            var t1 = args.DropResult;
+        }
     }
 }

@@ -97,6 +97,9 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Converters.cs" />
+    <Compile Include="Controls\IndexDataImageView.xaml.cs">
+      <DependentUpon>IndexDataImageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetailsEdit.xaml.cs">
       <DependentUpon>DetailsEdit.xaml</DependentUpon>
     </Compile>
@@ -203,6 +206,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\IndexDataImageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DetailsEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
