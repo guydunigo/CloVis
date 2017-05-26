@@ -29,10 +29,12 @@ namespace CloVis.Controls
 
             Root = Index.Root;
             DataIndex = Index.DataIndex;
+            Images = Index.Images;
         }
 
         public ElementList Root { get; set; }
         public ElementList DataIndex { get; set; }
+        public ElementList Images { get; set; }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {

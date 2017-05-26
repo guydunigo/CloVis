@@ -2,14 +2,35 @@
     x:Class="CloVis.Controls.IndexDataImageView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CloVis.Controls"
+    xmlns:controls="using:CloVis.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-
+    <Grid DataContext="{x:Bind Image,Mode=OneWay}" Margin="5" Padding="1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Viewbox MaxWidth="200" MaxHeight="200" Grid.Row="0">
+            <Image x:Name="Img"/>
+        </Viewbox>
+        <TextBlock Grid.Row="1" Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Value, Mode=OneWay}" Margin="5"/>
+        <Button x:Name="Btn" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0" BorderThickness="0" Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Padding="5" Visibility="Visible" >
+            <ContentControl>
+                <Viewbox Height="20" Width="30">
+                    <SymbolIcon  Symbol="More"/>
+                </Viewbox>
+            </ContentControl>
+            <Button.Flyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="Delete_Click"/>
+                    <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
+                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Renommer" Click="Rename_Click"/>
+                </MenuFlyout>
+            </Button.Flyout>
+        </Button>
     </Grid>
 </UserControl>

@@ -44,7 +44,7 @@ namespace ResumeElements
             // + with resume/template
         }
 
-        public static async Task<BitmapImage> LoadImage(string name)
+        public static async Task<BitmapSource> GetImageSource(string name)
         {
             var img = new BitmapImage();
             var imgFold = await GetImageFolder();
@@ -66,8 +66,7 @@ namespace ResumeElements
 
         public async static Task<StorageFolder> GetImageFolder()
         {
-            //var bas = new Uri("ms-appdata:///local/images");
-            var name = "images";
+            var name = "Images";
 
             StorageFolder folder;
             try

@@ -41,14 +41,14 @@
                 </ListView>
             </PivotItem>
             <PivotItem Header="Images">
-                <ListView x:Name="Images" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                <GridView x:Name="Images" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
                           DataContext="{Binding Images, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
-                    <ListView.ItemTemplate>
+                    <GridView.ItemTemplate>
                         <DataTemplate>
-                            <controls:IndexDataImageView/>
+                            <controls:IndexDataImageView Image="{Binding}"/>
                         </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                    </GridView.ItemTemplate>
+                </GridView>
             </PivotItem>
         </Pivot>
     </StackPanel>
