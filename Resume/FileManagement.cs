@@ -80,8 +80,7 @@ namespace Resume
                 read_settings.IgnoreWhitespace = true;
                 XmlReader reader = XmlReader.Create(stream, read_settings);
 
-                // effacer tout le fichier !! A FAIRE
-
+              
                 await writer.WriteStartDocumentAsync();
 
                 // écriture des donnees
@@ -452,6 +451,13 @@ namespace Resume
                 byte[] Ft_color_a = new byte[10], Ft_color_r = new byte[10], Ft_color_g = new byte[10], Ft_color_b = new byte[10];
                 bool[] Ft_italic = new bool[10], Ft_bold = new bool[10], Ft_underlined = new bool[10], Ft_uppercase = new bool[10];
 
+                // fonts d'une boite
+                int Ft_text = 0, ft_text=0;
+                Windows.UI.Xaml.TextAlignment Fts_text_alignment = new Windows.UI.Xaml.TextAlignment();
+                string[] Ft_text_name = new string[10], Ft_text_source = new string[10];
+                double[] Ft_text_size = new double[10];
+                byte[] Ft_text_color_a = new byte[10], Ft_text_color_r = new byte[10], Ft_text_color_g = new byte[10], Ft_text_color_b = new byte[10];
+                bool[] Ft_text_italic = new bool[10], Ft_text_bold = new bool[10], Ft_text_underlined = new bool[10], Ft_text_uppercase = new bool[10];
 
                 //début lecture
                 resumetoread.Layout = new Layout();
@@ -464,18 +470,44 @@ namespace Resume
                     {
                         case XmlNodeType.Element:
                             {
-                                if (reader.Name == "BackBox" || reader.Name == "TextBox" || (reader.Name == "Fonts" && elem ==0)) box = reader.Name;
+                                if (reader.Name == "BackBox" || reader.Name == "TextBox" || (reader.Name == "Fonts" && box != "TextBox")) box = reader.Name;
                                 if (reader.Name == "ElementList") liste += 1;
                                 if (reader.Name == "Element") elem += 1;
                                 if (reader.Name == "DataString_Element") dts += 1;
                                 if (reader.Name == "DataDated_Element") dde += 1;
                                 if (reader.Name == "Data_Element") dt += 1;
-                                if (reader.Name == "Font" && elem == 0) ft += 1;
+                                if (reader.Name == "Font" && box != "TextBox") ft += 1;
+                                if (reader.Name == "Font" && box == "TextBox") ft_text += 1;
+                                if (reader.Name == "Fonts" && box == "TextBox") Ft_text = 1;
                                 else balise = reader.Name;
                                 break;
                             }
                         case XmlNodeType.Text:
                             {
+                                if (Ft_text == 1)
+                                {
+                                    if (balise == "Font_Alignment")
+                                    {
+                                        if (reader.Value == "Left") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Left;
+                                        if (reader.Value == "Right") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Right;
+                                        if (reader.Value == "Justify") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Justify;
+                                    }
+                                }
+                                if (ft_text >= 1)
+                                {
+                                    if (balise == "Font_Name") Ft_text_name[ft] = reader.Value;
+                                    if (balise == "Font_font") Ft_text_source[ft] = reader.Value;
+                                    if (balise == "Font_fontSize") Ft_text_size[ft] = double.Parse(reader.Value);
+                                    if (balise == "Font_Color_A") Ft_text_color_a[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_R") Ft_text_color_r[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_G") Ft_text_color_g[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_B") Ft_text_color_b[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Italic") Ft_text_italic[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Bold") Ft_text_bold[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Underlined") Ft_text_underlined[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_UpperCase") Ft_text_uppercase[ft] = bool.Parse(reader.Value);
+                                }
+
                                 if (box == "Fonts")
                                 {
                                     if (balise == "Font_Alignment")
@@ -571,9 +603,15 @@ namespace Resume
 
                                     for(int i=1; i<=ft; i++)
                                     {
-                                        //pbs !
-                                      // resumetoread.Fonts.List.Add(new FontElement( "Tahoma", Ft_size[ft], new Color() {A= Ft_color_a[ft], R= Ft_color_r[ft], G=Ft_color_g[ft], B=Ft_color_b[ft] }, Ft_italic[ft], Ft_bold[ft], Ft_underlined[ft], Ft_uppercase[ft], Ft_name[ft]));
-                                       
+                                        //pbs !( source a changer)
+                                      // resumetoread.Fonts.List.Add(new FontElement( Ft_source[i], Ft_size[i], new Color() {A= Ft_color_a[i], R= Ft_color_r[i], G=Ft_color_g[i], B=Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
+
+                                        Ft_name[i] = "";
+                                        Ft_size[i] = 0;
+                                        Ft_color_a[i] = 0;
+                                        Ft_color_r[i] = 0; Ft_color_g[i]=0; Ft_color_b[i] = 0;
+                                        Ft_italic[i] = false; Ft_bold[i] = false; Ft_underlined[i] = false; Ft_uppercase[i] = false;
+                                        Ft_source[i] = "";
                                     }
                                     ft = 0;
                                 }
@@ -672,7 +710,7 @@ namespace Resume
                                             }
                                             dts = 0;
                                         }
-
+                                        
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         nv = new ElementList<Element>("");
@@ -709,7 +747,22 @@ namespace Resume
                                             }
                                             dts = 0;
                                         }
-
+                                        if(ft_text >= 1)
+                                        {
+                                            bnv.Fonts = new Fonts("Polices_boite", Fts_text_alignment);
+                                            for (int i = 1; i <= ft_text; i++)
+                                            {
+                                                //pbs !
+                                               // bnv.Fonts.List.Add(new FontElement(Ft_text_source[i], Ft_text_size[i], new Color() { A = Ft_text_color_a[i], R = Ft_text_color_r[i], G = Ft_text_color_g[i], B = Ft_text_color_b[i] }, Ft_text_italic[i], Ft_text_bold[i], Ft_text_underlined[i], Ft_text_uppercase[i], Ft_text_name[i]));
+                                                Ft_text_name[i] = "";
+                                                Ft_text_size[i] = 0;
+                                                Ft_text_color_a[i] = 0;
+                                                Ft_text_color_r[i] = 0; Ft_text_color_g[i] = 0; Ft_text_color_b[i] = 0;
+                                                Ft_text_italic[i] = false; Ft_text_bold[i] = false; Ft_text_underlined[i] = false; Ft_text_uppercase[i] = false;
+                                                Ft_text_source[i] = "";
+                                            }
+                                            ft_text = 0;
+                                        }
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
