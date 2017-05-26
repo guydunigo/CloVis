@@ -173,12 +173,7 @@ namespace CloVis
 
         public async void LoadImages()
         {
-            var imgFold = await DataImage.GetImageFolder();
-            var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
-            foreach(StorageFile f in imgs)
-            {
-                new DataImage(f.Name);
-            }
+            Index.ReloadImages();
         }
 
         public void SaveResume(Resume.Resume cv)
