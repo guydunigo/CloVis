@@ -153,7 +153,7 @@ namespace Resume
                 await writer.WriteStartElementAsync("", "Data_Element", "Resume");
                 await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(data.Level));
                 await writer.WriteElementStringAsync("", "D_name", "Resume", data.Name);
-                await writer.WriteElementStringAsync("", "D_decription", "Resume", data.Description);
+                await writer.WriteElementStringAsync("", "D_description", "Resume", data.Description);
                 await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(data.IsIndependant));
                 await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(data.IsDefault));
                 await writer.WriteStartElementAsync("", "D_categories", "Resume");
@@ -172,7 +172,7 @@ namespace Resume
                 await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
                 await writer.WriteElementStringAsync("", "DS_level", "Resume", Convert.ToString(datestr.Level));
                 await writer.WriteElementStringAsync("", "DS_name", "Resume", datestr.Name);
-                await writer.WriteElementStringAsync("", "DS_decription", "Resume", datestr.Description);
+                await writer.WriteElementStringAsync("", "DS_description", "Resume", datestr.Description);
                 await writer.WriteElementStringAsync("", "DS_value", "Resume", datestr.Value);
                 await writer.WriteElementStringAsync("", "DS_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
                 await writer.WriteElementStringAsync("", "DS_default", "Resume", Convert.ToString(datestr.IsDefault));
@@ -191,7 +191,7 @@ namespace Resume
                 await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
                 await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(dateD.Level));
                 await writer.WriteElementStringAsync("", "DD_name", "Resume", dateD.Name);
-                await writer.WriteElementStringAsync("", "DD_decription", "Resume", dateD.Description);
+                await writer.WriteElementStringAsync("", "DD_description", "Resume", dateD.Description);
                 await writer.WriteElementStringAsync("", "DD_value", "Resume", dateD.Value);
                 await writer.WriteElementStringAsync("", "DD_start", "Resume", Convert.ToString(dateD.StartTime));
                 await writer.WriteElementStringAsync("", "DD_end", "Resume", Convert.ToString(dateD.EndTime));
@@ -226,7 +226,7 @@ namespace Resume
                     await writer.WriteStartElementAsync("", "Data_Element", "Resume");
                     await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(Ldata.Level));
                     await writer.WriteElementStringAsync("", "D_name", "Resume", Ldata.Name);
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", Ldata.Description);
+                    await writer.WriteElementStringAsync("", "D_description", "Resume", Ldata.Description);
                     await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(Ldata.IsIndependant));
                     await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(Ldata.IsDefault));
                     await writer.WriteStartElementAsync("", "D_categories", "Resume");
@@ -244,7 +244,7 @@ namespace Resume
                     await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
                     await writer.WriteElementStringAsync("", "DS_level", "Resume", Convert.ToString(dstr.Level));
                     await writer.WriteElementStringAsync("", "DS_name", "Resume", dstr.Name);
-                    await writer.WriteElementStringAsync("", "DS_decription", "Resume", dstr.Description);
+                    await writer.WriteElementStringAsync("", "DS_description", "Resume", dstr.Description);
                     await writer.WriteElementStringAsync("", "DS_value", "Resume", dstr.Value);
                     await writer.WriteElementStringAsync("", "DS_dependant", "Resume", Convert.ToString(dstr.IsIndependant));
                     await writer.WriteElementStringAsync("", "DS_default", "Resume", Convert.ToString(dstr.IsDefault));
@@ -264,7 +264,7 @@ namespace Resume
                     await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
                     await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(ddstr.Level));
                     await writer.WriteElementStringAsync("", "DD_name", "Resume", ddstr.Name);
-                    await writer.WriteElementStringAsync("", "DD_decription", "Resume", ddstr.Description);
+                    await writer.WriteElementStringAsync("", "DD_description", "Resume", ddstr.Description);
                     await writer.WriteElementStringAsync("", "DD_value", "Resume", ddstr.Value);
                     await writer.WriteElementStringAsync("", "DD_start", "Resume", Convert.ToString(ddstr.StartTime));
                     await writer.WriteElementStringAsync("", "DD_end", "Resume", Convert.ToString(ddstr.EndTime));
