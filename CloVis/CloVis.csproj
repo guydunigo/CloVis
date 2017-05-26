@@ -192,6 +192,9 @@
     <Content Include="CV_Examples\CV_Example_4.png" />
     <Content Include="CV_Examples\CV_Example_5.png" />
     <Content Include="CV_Examples\CV_Example_6.png" />
+    <Content Include="Images\profile.png" />
+    <Content Include="TutorialPictures\PageCV.png" />
+    <Content Include="TutorialPictures\startpage.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

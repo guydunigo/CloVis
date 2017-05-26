@@ -71,10 +71,10 @@
         </Button>
 
         <Viewbox MaxWidth="400" VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Image Source="/Images/StartPage.png"/>
+            <Image Source="/TutorialPictures/StartPage.png"/>
         </Viewbox>
         <Viewbox MaxWidth="400" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Image Source="/Images/PageCV.png"/>
+            <Image Source="/TutorialPictures/PageCV.png"/>
         </Viewbox>
     </Grid>
 </Page>
