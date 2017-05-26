@@ -48,7 +48,7 @@ namespace CloVis.Controls
                 txt.Text = "Veuillez selectionner une image.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (await DataImage.IsImageFilePresent(ImgName.Text + "." + DataImage.GetExtension(Img)))
+            else if (await DataImage.IsImageFilePresent(ImgName.Text))
             {
                 txt.Text = "Il existe déjà une image portant ce nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
@@ -81,16 +81,7 @@ namespace CloVis.Controls
 
         private async void PickImg_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker openPicker = new FileOpenPicker()
-            {
-                ViewMode = PickerViewMode.Thumbnail,
-                SuggestedStartLocation = PickerLocationId.PicturesLibrary
-            };
-            openPicker.FileTypeFilter.Add(".jpg");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".bmp");
-            var temp = await openPicker.PickSingleFileAsync();
+            var temp = await DataImage.GetImagePicker().PickSingleFileAsync();
 
             if(temp != null)
             {

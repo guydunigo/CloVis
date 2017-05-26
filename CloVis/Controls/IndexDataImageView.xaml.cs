@@ -56,14 +56,47 @@ namespace CloVis.Controls
             DependencyProperty.Register("Image", typeof(DataImage), typeof(IndexDataImageView), new PropertyMetadata(null,OnImageChanged));
         
 
-        public void Delete_Click(object sender, RoutedEventArgs e)
+        public async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            Image.Remove();
+            var temp = await Image.Remove();
+            if (temp == RemoveOutput.RestoredToDefault)
+            {
+                Img.Source = await DataImage.GetImageSource(Image.Value);
+                NotifyPropertyChanged("Img");
+                var f = new Flyout()
+                {
+                    Content = new TextBlock() { Text = "Cette image a été réinitialisée à celle fournie avec l'application." }
+                };
+                f.ShowAt(this);
+            }
+            else if (temp == RemoveOutput.NothingDone)
+            {
+                var f = new Flyout()
+                {
+                    Content = new TextBlock() {
+                        Text = "Cette image fait partie de l'application et ne peut être supprimée.",
+                        Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush
+                    }
+                };
+                f.ShowAt(this);
+            }
         }
 
         public void Rename_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
+        }
+
+        public async void Replace_Click(object sender, RoutedEventArgs e)
+        {
+            var temp = await DataImage.GetImagePicker().PickSingleFileAsync();
+
+            if (temp != null)
+            {
+                await Image.ReplaceImageFile(temp);
+                Img.Source = await DataImage.GetImageSource(Image.Value);
+                NotifyPropertyChanged("Img");
+            }
         }
     }
 }

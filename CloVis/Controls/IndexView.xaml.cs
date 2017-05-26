@@ -49,5 +49,10 @@ namespace CloVis.Controls
                 IndexList.Items.Add(new ListViewItem() { Content = new IndexElementListView() { ElementList = unlisted } });
                 */
         }
+
+        private void ReloadImages_Click(object sender, RoutedEventArgs e)
+        {
+            Index.ReloadImages();
+        }
     }
 }

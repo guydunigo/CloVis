@@ -41,14 +41,22 @@
                 </ListView>
             </PivotItem>
             <PivotItem Header="Images">
-                <GridView x:Name="Imgs" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                <StackPanel>
+                    <Button x:Name="ReloadImages" Click="ReloadImages_Click" Foreground="White" Background="{ThemeResource CloVisBlue}" BorderBrush="Transparent">
+                        <StackPanel Orientation="Horizontal">
+                            <SymbolIcon Symbol="Refresh"/>
+                            <TextBlock VerticalAlignment="Center" Margin="5,0,0,0" Text="Recharger les images"/>
+                        </StackPanel>
+                    </Button>
+                    <GridView x:Name="Imgs" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
                           DataContext="{Binding Images, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <controls:IndexDataImageView Image="{Binding}"/>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:IndexDataImageView Image="{Binding}"/>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                </StackPanel>
             </PivotItem>
         </Pivot>
     </StackPanel>

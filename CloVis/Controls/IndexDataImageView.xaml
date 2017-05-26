@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Viewbox MaxWidth="200" MaxHeight="200" Grid.Row="0">
+        <Viewbox MaxHeight="100" Grid.Row="0">
             <Image x:Name="Img"/>
         </Viewbox>
         <TextBlock Grid.Row="1" Foreground="{ThemeResource CloVisBlue}" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Value, Mode=OneWay}" Margin="5"/>
@@ -29,6 +29,7 @@
                     <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="Delete_Click"/>
                     <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
                     <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Renommer" Click="Rename_Click"/>
+                    <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Changer l'image" Click="Replace_Click"/>
                 </MenuFlyout>
             </Button.Flyout>
         </Button>
