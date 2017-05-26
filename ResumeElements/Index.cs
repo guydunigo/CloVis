@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace ResumeElements
 {
@@ -13,6 +14,23 @@ namespace ResumeElements
     {
         public static ElementList<Data> DataIndex { get; } = new ElementList<Data>("Index");
         public static ElementList<DataImage> Images { get; } = new ElementList<DataImage>("Images");
+
+        public static async void ReloadImages()
+        {
+            Index.Images.Clear();
+
+            var imgFolds = await DataImage.GetImageFoldersList();
+            foreach (StorageFolder imgFold in imgFolds)
+            {
+                var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
+                foreach (StorageFile f in imgs)
+                {
+                    var temp = DataImage.GetNameWithoutExtension(f.Name);
+                    if (!Index.Images.ContainsKey(temp))
+                        new DataImage(temp);
+                }
+            }
+        }
 
         public static void AddData(Data d)
         {

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
@@ -17,6 +18,13 @@ namespace ResumeElements
 
         public FileAlreadyExistsException(string message):base(message)
         { }
+    }
+
+    public enum RemoveOutput
+    {
+        NothingDone,
+        RestoredToDefault,
+        RemovedFromIndex
     }
 
     /// <summary>
@@ -146,13 +154,30 @@ namespace ResumeElements
             return await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/StoreLogo.png"));
         }
 
+        public static FileOpenPicker GetImagePicker()
+        {
+            FileOpenPicker openPicker = new FileOpenPicker()
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.PicturesLibrary
+            };
+            openPicker.FileTypeFilter.Add(".jpg");
+            openPicker.FileTypeFilter.Add(".png");
+            openPicker.FileTypeFilter.Add(".jpeg");
+            openPicker.FileTypeFilter.Add(".bmp");
+
+            return openPicker;
+        }
+
         public async void ImportImage(StorageFile file, string desiredName)
         {
             var imgFold = await GetLocalImageFolder();
             StorageFile copiedFile = null;
 
             if (!await IsImageFilePresent(desiredName, imgFold))
-                copiedFile = await file.CopyAsync(imgFold, desiredName);
+            {
+                copiedFile = await file.CopyAsync(imgFold, desiredName + "." + GetExtension(file.Name));
+            }
             else
                 throw new FileAlreadyExistsException("An image already exists with that name");
             
@@ -169,7 +194,7 @@ namespace ResumeElements
             throw new NotImplementedException();
         }
 
-        public async void ReplaceImageFile(StorageFile newFile)
+        public async Task ReplaceImageFile(StorageFile newFile)
         {
             var imgFile = await GetImageFile();
             // If the file was not found in the local folder, check app folder and copy it in the local folder :
@@ -211,14 +236,29 @@ namespace ResumeElements
             }
         }
 
-        public async void Remove()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public async Task<RemoveOutput> Remove()
         {
+            var res = RemoveOutput.NothingDone;
+
             var imgFile = await GetImageFile();
             if (imgFile != null)
             {
                 await imgFile.DeleteAsync();
+                res = RemoveOutput.RestoredToDefault;
             }
-            Index.Images.Remove(this);
+
+            // If it is not a default picture
+            if ((await GetImageFileFrom(value, await GetAppImageFolder())) == null)
+            {
+                Index.Images.Remove(this);
+                res = RemoveOutput.RemovedFromIndex;
+            }
+
+            return res;
         }
 
         public static async Task<bool> IsImageFilePresent(string name, StorageFolder sf = null)
