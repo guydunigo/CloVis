@@ -40,15 +40,15 @@ namespace ResumeElements
         public DataImage(string name, StorageFile source) :
             this(name)
         {
-            ImportImage(source, name + "." + GetExtension(source));
+            ImportImage(source, name);
             // + with resume/template
         }
 
         public static async Task<BitmapSource> GetImageSource(string name)
         {
             var img = new BitmapImage();
-            var imgFold = await GetImageFolder();
-            var imgFile = await imgFold.GetFileAsync(name);
+
+            StorageFile imgFile = await GetImageFileFromEverywhereOrDefault(name);
 
             FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
             img.SetSource(stream);
@@ -56,15 +56,77 @@ namespace ResumeElements
             return img;
         }
 
-        public async Task<StorageFile> GetImageFile()
+        public static async Task<StorageFile> GetImageFileFromEverywhereOrDefault(string name)
         {
-            var imgFold = await GetImageFolder();
-            var imfFile = await imgFold.GetFileAsync(value);
+            StorageFile imgFile = await GetImageFileFromEverywhere(name);
 
-            return imfFile;
+            if (imgFile == null)
+                imgFile = await GetImageDefault();
+
+            return imgFile;
         }
 
-        public async static Task<StorageFolder> GetImageFolder()
+        public static async Task<StorageFile> GetImageFileFromEverywhere(string name)
+        {
+            var imgFolds = await GetImageFoldersList();
+            StorageFile imgFile = null;
+
+            foreach (StorageFolder imgFold in imgFolds)
+            {
+                imgFile = await GetImageFileFrom(name, imgFold);
+
+                if (imgFile != null)
+                    break;
+            }
+
+            return imgFile;
+        }
+
+        public static async Task<StorageFile> GetImageFileFrom(string name, StorageFolder imgFold = null)
+        {
+            StorageFile imgFile = null;
+
+            if (imgFold == null)
+                imgFold = await GetLocalImageFolder();
+
+            var nameCut = GetNameWithoutExtension(name);
+
+            var files = await imgFold.GetFilesAsync();
+
+            foreach (StorageFile f in files)
+            {
+                if (GetNameWithoutExtension(f.Name) == nameCut)
+                {
+                    imgFile = f;
+                    break;
+                }
+            }
+
+            return imgFile;
+        }
+
+        public async Task<StorageFile> GetImageFile()
+        {
+            return await GetImageFileFrom(value);
+        }
+
+        public async static Task<StorageFolder[]> GetImageFoldersList()
+        {
+            StorageFolder[] res = new StorageFolder[]
+            {
+                await GetLocalImageFolder(),
+                await GetAppImageFolder()
+            };
+
+            return res;
+        }
+
+        public async static Task<StorageFolder> GetAppImageFolder()
+        {
+            StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            return await appFolder.GetFolderAsync("Images");
+        }
+        public async static Task<StorageFolder> GetLocalImageFolder()
         {
             var name = "Images";
 
@@ -86,15 +148,15 @@ namespace ResumeElements
 
         public async void ImportImage(StorageFile file, string desiredName)
         {
-            var imgFold = await GetImageFolder();
+            var imgFold = await GetLocalImageFolder();
             StorageFile copiedFile = null;
 
-            if (await imgFold.TryGetItemAsync(desiredName) == null)
+            if (!await IsImageFilePresent(desiredName, imgFold))
                 copiedFile = await file.CopyAsync(imgFold, desiredName);
             else
                 throw new FileAlreadyExistsException("An image already exists with that name");
-
-            value = copiedFile.Name;
+            
+            value = GetNameWithoutExtension(copiedFile.Name);
         }
 
         public override Element Copy()
@@ -107,30 +169,26 @@ namespace ResumeElements
             throw new NotImplementedException();
         }
 
-        public async void RenameImageFile(string newName)
-        {
-            var imgFile = await GetImageFile();
-            if (newName != "" && (imgFile != null))
-            {
-                var imgFold = await GetImageFolder();
-                if (await imgFold.TryGetItemAsync(newName) == null)
-                {
-                    await imgFile.RenameAsync(newName);
-                    value = newName;
-                }
-                else
-                    throw new FileAlreadyExistsException("An image already exists with that name");
-            }
-            else
-                throw new FileNotFoundException("The current file was not defined and therefore cannot be renamed.");
-        }
-
         public async void ReplaceImageFile(StorageFile newFile)
         {
             var imgFile = await GetImageFile();
+            // If the file was not found in the local folder, check app folder and copy it in the local folder :
+            if (imgFile == null)
+            {
+                var appFold = await GetAppImageFolder();
+                imgFile = await GetImageFileFrom(value, appFold);
+                if (imgFile == null)
+                    throw new FileNotFoundException("The current file was not defined and therefore cannot be replaced.");
+                else
+                {
+                    var imgFold = await GetLocalImageFolder();
+                    imgFile = await imgFile.CopyAsync(imgFold);
+                }
+            }
+
             if (imgFile != null)
             {
-                var imgFold = await GetImageFolder();
+                var imgFold = await GetLocalImageFolder();
                 var tempFold = ApplicationData.Current.TemporaryFolder;
                 if (newFile != null)
                 {
@@ -151,8 +209,6 @@ namespace ResumeElements
                     await imgFile.DeleteAsync();
                 }
             }
-            else
-                throw new FileNotFoundException("The current file was not defined and therefore cannot be replaced.");
         }
 
         public async void Remove()
@@ -161,21 +217,45 @@ namespace ResumeElements
             if (imgFile != null)
             {
                 await imgFile.DeleteAsync();
-                Index.Images.Remove(this);
             }
+            Index.Images.Remove(this);
         }
 
-        public static async Task<bool> IsImageFilePresent(string name)
+        public static async Task<bool> IsImageFilePresent(string name, StorageFolder sf = null)
         {
-            var imgFold = await GetImageFolder();
+            if (sf == null)
+                sf = await GetLocalImageFolder();
 
-            return (await imgFold.TryGetItemAsync(name) != null);
+            var nameCut = GetNameWithoutExtension(name);
+
+            var files = await sf.GetFilesAsync();
+            var res = false;
+
+            foreach(StorageFile f in files)
+            {
+                if (GetNameWithoutExtension(f.Name) == nameCut)
+                {
+                    res = true;
+                    break;
+                }
+            }
+
+            return res;
         }
 
+        public static string GetNameWithoutExtension(string name)
+        {
+            var ext = GetExtension(name);
+            return name.Replace("." + ext, "").ToLower();
+        }
+        public static string GetExtension(string name)
+        {
+            var temp = name.Split('.');
+            return temp[temp.Length - 1];
+        }
         public static string GetExtension(StorageFile sf)
         {
-            var temp = sf.Name.Split('.');
-            return temp[temp.Length - 1];
+            return GetExtension(sf.Name);
         }
     }
 }
