@@ -41,7 +41,7 @@
                 </ListView>
             </PivotItem>
             <PivotItem Header="Images">
-                <GridView x:Name="Images" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
+                <GridView x:Name="Imgs" HorizontalAlignment="Stretch" Padding="5" SelectionMode="None" IsItemClickEnabled="True"
                           DataContext="{Binding Images, Mode=OneWay}" ItemsSource="{Binding Values, Converter={StaticResource CollectionToSortedObservableConverter}, Mode=OneWay}">
                     <GridView.ItemTemplate>
                         <DataTemplate>

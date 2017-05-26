@@ -58,7 +58,7 @@ namespace CloVis.Controls
 
         public void Delete_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Image.Remove();
         }
 
         public void Rename_Click(object sender, RoutedEventArgs e)
