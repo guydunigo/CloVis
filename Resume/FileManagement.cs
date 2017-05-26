@@ -11,6 +11,8 @@ using Windows.Storage;
 using System.Xml.Serialization;
 using ResumeElements;
 using Windows.UI;
+using Windows.UI.Xaml.Media;
+
 
 namespace Resume
 {
@@ -160,7 +162,12 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "Font_Name", "Resume", k.Name);
                     await writer.WriteElementStringAsync("", "Font_font", "Resume", k.Font.Source);
                     await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
-                    await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
+
+                    await writer.WriteElementStringAsync("", "Font_Color_A", "Resume", Convert.ToString(k.Color.A));
+                    await writer.WriteElementStringAsync("", "Font_Color_R", "Resume", Convert.ToString(k.Color.R));
+                    await writer.WriteElementStringAsync("", "Font_Color_G", "Resume", Convert.ToString(k.Color.G));
+                    await writer.WriteElementStringAsync("", "Font_Color_B", "Resume", Convert.ToString(k.Color.B));
+
                     await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
                     await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
                     await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
@@ -184,7 +191,12 @@ namespace Resume
                 await writer.WriteElementStringAsync("", "Font_Name", "Resume", k.Name);
                 await writer.WriteElementStringAsync("", "Font_font", "Resume", k.Font.Source);
                 await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
-                await writer.WriteElementStringAsync("", "Font_Color", "Resume", Convert.ToString(k.Color));
+
+                await writer.WriteElementStringAsync("", "Font_Color_A", "Resume", Convert.ToString(k.Color.A));
+                await writer.WriteElementStringAsync("", "Font_Color_R", "Resume", Convert.ToString(k.Color.R));
+                await writer.WriteElementStringAsync("", "Font_Color_G", "Resume", Convert.ToString(k.Color.G));
+                await writer.WriteElementStringAsync("", "Font_Color_B", "Resume", Convert.ToString(k.Color.B));
+
                 await writer.WriteElementStringAsync("", "Font_Italic", "Resume", Convert.ToString(k.Italic));
                 await writer.WriteElementStringAsync("", "Font_Bold", "Resume", Convert.ToString(k.Bold));
                 await writer.WriteElementStringAsync("", "Font_Underlined", "Resume", Convert.ToString(k.Underlined));
@@ -405,7 +417,7 @@ namespace Resume
 
 
                 //mise en forme  
-                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0;
+                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0, ft = 0;
                 string box = "";
                 string balise = "";
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
@@ -433,10 +445,17 @@ namespace Resume
                 DateTime[] DD_start = new DateTime[10], DD_end = new DateTime[10];
                 for (int i = 0; i < 10; i++) { DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); }
 
+                //fonts générales
+                Windows.UI.Xaml.TextAlignment Fts_alignment = new Windows.UI.Xaml.TextAlignment();
+                string[] Ft_name = new string[10], Ft_source = new string[10];
+                double[] Ft_size = new double[10];
+                byte[] Ft_color_a = new byte[10], Ft_color_r = new byte[10], Ft_color_g = new byte[10], Ft_color_b = new byte[10];
+                bool[] Ft_italic = new bool[10], Ft_bold = new bool[10], Ft_underlined = new bool[10], Ft_uppercase = new bool[10];
+
 
                 //début lecture
                 resumetoread.Layout = new Layout();
-                resumetoread.Fonts = new Fonts("Polices_cv");
+                
 
                 while (reader.Read())
                 {
@@ -445,17 +464,43 @@ namespace Resume
                     {
                         case XmlNodeType.Element:
                             {
-                                if (reader.Name == "BackBox" || reader.Name == "TextBox") box = reader.Name;
+                                if (reader.Name == "BackBox" || reader.Name == "TextBox" || (reader.Name == "Fonts" && elem ==0)) box = reader.Name;
                                 if (reader.Name == "ElementList") liste += 1;
                                 if (reader.Name == "Element") elem += 1;
                                 if (reader.Name == "DataString_Element") dts += 1;
                                 if (reader.Name == "DataDated_Element") dde += 1;
                                 if (reader.Name == "Data_Element") dt += 1;
+                                if (reader.Name == "Font" && elem == 0) ft += 1;
                                 else balise = reader.Name;
                                 break;
                             }
                         case XmlNodeType.Text:
                             {
+                                if (box == "Fonts")
+                                {
+                                    if (balise == "Font_Alignment")
+                                    {
+                                        if (reader.Value == "Left") Fts_alignment = Windows.UI.Xaml.TextAlignment.Left;
+                                        if (reader.Value == "Right") Fts_alignment = Windows.UI.Xaml.TextAlignment.Right;
+                                        if (reader.Value == "Justify") Fts_alignment = Windows.UI.Xaml.TextAlignment.Justify;
+                                    }
+                                }
+
+                                if (ft >= 1)
+                                {
+                                    if (balise == "Font_Name") Ft_name[ft] = reader.Value;
+                                    if (balise == "Font_font") Ft_source[ft] = reader.Value;
+                                    if (balise == "Font_fontSize") Ft_size[ft] = double.Parse(reader.Value);
+                                    if (balise == "Font_Color_A") Ft_color_a[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_R") Ft_color_r[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_G") Ft_color_g[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_B") Ft_color_b[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Italic") Ft_italic[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Bold") Ft_bold[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Underlined") Ft_underlined[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_UpperCase") Ft_uppercase[ft] = bool.Parse(reader.Value);
+                                }
+
                                 if (box == "TextBox" || box == "BackBox")
                                 {
                                     if (balise == "x") x = double.Parse(reader.Value);
@@ -518,6 +563,20 @@ namespace Resume
                             }
                         case XmlNodeType.EndElement: // prend n'importe quel end !! 
                             {
+
+                                if (box == "Fonts" && reader.Name == "Fonts")
+                                {
+                                    resumetoread.Fonts = new Fonts("Polices_cv", Fts_alignment);
+                                   // resumetoread.Fonts.TextAlignment = Fts_alignment;
+
+                                    for(int i=1; i<=ft; i++)
+                                    {
+                                        //pbs !
+                                      // resumetoread.Fonts.List.Add(new FontElement( "Tahoma", Ft_size[ft], new Color() {A= Ft_color_a[ft], R= Ft_color_r[ft], G=Ft_color_g[ft], B=Ft_color_b[ft] }, Ft_italic[ft], Ft_bold[ft], Ft_underlined[ft], Ft_uppercase[ft], Ft_name[ft]));
+                                       
+                                    }
+                                    ft = 0;
+                                }
                                 if (box == "BackBox" && reader.Name == "BackBox") // fonctionne
                                 {
                                     resumetoread.Layout.AddBackBox(new BoxBackground(new Color() { A = Color_A, R = Color_R, G = Color_G, B = Color_B }, new Color() { A = Color_Border_A, R = Color_Border_R, G = Color_Border_G, B = Color_Border_B }, x, y, z, SizeX, SizeY, null, angle));
