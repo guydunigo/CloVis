@@ -268,7 +268,11 @@ namespace ResumeElements
         /// <returns>The first Element matching the given name or null if not found.</returns>
         public override Element Find(string name)
         {
+            T[] es = new T[elements.Count];
+            elements.Values.CopyTo(es, 0);
+
             Element res = null;
+
             if (Name == name)
                 return this;
             else if (elements.Keys.Contains(name))
@@ -276,7 +280,7 @@ namespace ResumeElements
                 return this[name];
             }
             else
-                foreach(Element e in elements.Values)
+                foreach(Element e in es)
                 {
                     res = e.Find(name);
                     if (res != null) return res;
