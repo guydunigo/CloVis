@@ -229,14 +229,14 @@ namespace Resume
                 var box = resumetosave.Layout.TextBoxes[numT];
 
                 await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
-                await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(datestr.Level));
-                await writer.WriteElementStringAsync("", "D_name", "Resume", datestr.Name);
-                await writer.WriteElementStringAsync("", "D_decription", "Resume", datestr.Description);
-                await writer.WriteElementStringAsync("", "D_value", "Resume", datestr.Value);
-                await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
-                await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(datestr.IsDefault));
+                await writer.WriteElementStringAsync("", "DS_level", "Resume", Convert.ToString(datestr.Level));
+                await writer.WriteElementStringAsync("", "DS_name", "Resume", datestr.Name);
+                await writer.WriteElementStringAsync("", "DS_decription", "Resume", datestr.Description);
+                await writer.WriteElementStringAsync("", "DS_value", "Resume", datestr.Value);
+                await writer.WriteElementStringAsync("", "DS_dependant", "Resume", Convert.ToString(datestr.IsIndependant));
+                await writer.WriteElementStringAsync("", "DS_default", "Resume", Convert.ToString(datestr.IsDefault));
                 //liste des catégories associé a l'élément
-                await writer.WriteStartElementAsync("", "D_categories", "Resume");
+                await writer.WriteStartElementAsync("", "DS_categories", "Resume");
                 int numcat = 0;
                 foreach (var cats in datestr.Categories)
                 {
@@ -254,17 +254,17 @@ namespace Resume
 
                 await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
 
-                await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(dateD.Level));
-                await writer.WriteElementStringAsync("", "D_name", "Resume", dateD.Name);
-                await writer.WriteElementStringAsync("", "D_decription", "Resume", dateD.Description);
-                await writer.WriteElementStringAsync("", "D_value", "Resume", dateD.Value);
-                await writer.WriteElementStringAsync("", "D_start", "Resume", Convert.ToString(dateD.StartTime));
-                await writer.WriteElementStringAsync("", "D_end", "Resume", Convert.ToString(dateD.EndTime));
-                await writer.WriteElementStringAsync("", "D_Format", "Resume", dateD.DisplayFormat);
-                await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(dateD.IsIndependant));
-                await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(dateD.IsDefault));
+                await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(dateD.Level));
+                await writer.WriteElementStringAsync("", "DD_name", "Resume", dateD.Name);
+                await writer.WriteElementStringAsync("", "DD_decription", "Resume", dateD.Description);
+                await writer.WriteElementStringAsync("", "DD_value", "Resume", dateD.Value);
+                await writer.WriteElementStringAsync("", "DD_start", "Resume", Convert.ToString(dateD.StartTime));
+                await writer.WriteElementStringAsync("", "DD_end", "Resume", Convert.ToString(dateD.EndTime));
+                await writer.WriteElementStringAsync("", "DD_Format", "Resume", dateD.DisplayFormat);
+                await writer.WriteElementStringAsync("", "DD_dependant", "Resume", Convert.ToString(dateD.IsIndependant));
+                await writer.WriteElementStringAsync("", "DD_default", "Resume", Convert.ToString(dateD.IsDefault));
                 //liste des catégories associé a l'élément
-                await writer.WriteStartElementAsync("", "D_categories", "Resume");
+                await writer.WriteStartElementAsync("", "DD_categories", "Resume");
                 int numcat = 0;
                 foreach (var cats in dateD.Categories)
                 {
@@ -325,19 +325,19 @@ namespace Resume
                 if (j is Data<string> dstr)
                 {
                     await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
-                    await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(dstr.Level));
-                    await writer.WriteElementStringAsync("", "D_name", "Resume", dstr.Name);
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", dstr.Description);
-                    await writer.WriteElementStringAsync("", "D_value", "Resume", dstr.Value);
-                    await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(dstr.IsIndependant));
-                    await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(dstr.IsDefault));
+                    await writer.WriteElementStringAsync("", "DS_level", "Resume", Convert.ToString(dstr.Level));
+                    await writer.WriteElementStringAsync("", "DS_name", "Resume", dstr.Name);
+                    await writer.WriteElementStringAsync("", "DS_decription", "Resume", dstr.Description);
+                    await writer.WriteElementStringAsync("", "DS_value", "Resume", dstr.Value);
+                    await writer.WriteElementStringAsync("", "DS_dependant", "Resume", Convert.ToString(dstr.IsIndependant));
+                    await writer.WriteElementStringAsync("", "DS_default", "Resume", Convert.ToString(dstr.IsDefault));
 
                     //liste des catégories associé a l'élément de la liste
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                    await writer.WriteStartElementAsync("", "DS_categories", "Resume");
                     int numcat = 0;
                     foreach (var cats in dstr.Categories)
                     {
-                        await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
+                        await writer.WriteElementStringAsync("", "categorie", "Resume", cats.Name);
                         numcat += 1;
                     }
                     await writer.WriteEndElementAsync();
@@ -350,21 +350,21 @@ namespace Resume
                 {
                     await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
 
-                    await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(ddstr.Level));
-                    await writer.WriteElementStringAsync("", "D_name", "Resume", ddstr.Name);
-                    await writer.WriteElementStringAsync("", "D_decription", "Resume", ddstr.Description);
-                    await writer.WriteElementStringAsync("", "D_value", "Resume", ddstr.Value);
-                    await writer.WriteElementStringAsync("", "D_start", "Resume", Convert.ToString(ddstr.StartTime));
-                    await writer.WriteElementStringAsync("", "D_end", "Resume", Convert.ToString(ddstr.EndTime));
-                    await writer.WriteElementStringAsync("", "D_Format", "Resume", ddstr.DisplayFormat);
-                    await writer.WriteElementStringAsync("", "D_dependant", "Resume", Convert.ToString(ddstr.IsIndependant));
-                    await writer.WriteElementStringAsync("", "D_default", "Resume", Convert.ToString(ddstr.IsDefault));
+                    await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(ddstr.Level));
+                    await writer.WriteElementStringAsync("", "DD_name", "Resume", ddstr.Name);
+                    await writer.WriteElementStringAsync("", "DD_decription", "Resume", ddstr.Description);
+                    await writer.WriteElementStringAsync("", "DD_value", "Resume", ddstr.Value);
+                    await writer.WriteElementStringAsync("", "DD_start", "Resume", Convert.ToString(ddstr.StartTime));
+                    await writer.WriteElementStringAsync("", "DD_end", "Resume", Convert.ToString(ddstr.EndTime));
+                    await writer.WriteElementStringAsync("", "DD_Format", "Resume", ddstr.DisplayFormat);
+                    await writer.WriteElementStringAsync("", "DD_dependant", "Resume", Convert.ToString(ddstr.IsIndependant));
+                    await writer.WriteElementStringAsync("", "DD_default", "Resume", Convert.ToString(ddstr.IsDefault));
                     //liste des catégories associé a l'élément de la liste
-                    await writer.WriteStartElementAsync("", "D_catergories", "Resume");
+                    await writer.WriteStartElementAsync("", "DD_categories", "Resume");
                     int numcat = 0;
                     foreach (var cats in ddstr.Categories)
                     {
-                        await writer.WriteElementStringAsync("", "catergorie", "Resume", cats.Name);
+                        await writer.WriteElementStringAsync("", "categorie", "Resume", cats.Name);
                         numcat += 1;
                     }
                     await writer.WriteEndElementAsync();
@@ -414,19 +414,24 @@ namespace Resume
 
                 // data string 
 
-                string[] DS_format = new string[10], DS_name = new string[10], DS_description = new string[10], DS_value = new string[10];
+                string[] DS_name = new string[10], DS_description = new string[10], DS_value = new string[10];
                 double[] DS_level = new double[10];
                 bool[] DS_dependant = new bool[10], DS_def = new bool[10];
                 string[] DS_categorie = new string[10];
 
                 //liste 
                 bool[] L_def = new bool[10], L_ReadOnly = new bool[10];
-                string[] L_Name = { "", "", "", "" };
+                string[] L_Name = new string[10];
 
                 var nv = new ElementList<Element>("");
 
                 //datadated
-
+                string[] DD_format = new string[10], DD_name = new string[10], DD_description = new string[10], DD_value = new string[10];
+                double[] DD_level = new double[10];
+                bool[] DD_dependant = new bool[10], DD_def = new bool[10];
+                string[] DD_categorie = new string[10];
+                DateTime[] DD_start = new DateTime[10], DD_end = new DateTime[10];
+                for (int i = 0; i < 10; i++) { DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); }
 
 
                 //début lecture
@@ -474,24 +479,34 @@ namespace Resume
                                 }
                                 if (dts >= 1) // si c'est un data string
                                 {
-                                    if (balise == "D_level") DS_level[dts] = double.Parse(reader.Value);
-                                    if (balise == "D_name") DS_name[dts] = reader.Value;
-                                    if (balise == "D_description") DS_description[dts] = reader.Value;
-                                    if (balise == "D_value") DS_value[dts] = reader.Value;
-                                    if (balise == "D_dependant") DS_dependant[dts] = bool.Parse(reader.Value);
-                                    if (balise == "D_default") DS_def[dts] = bool.Parse(reader.Value);
-                                    if (balise == "D_categories") DS_categorie[dts] = reader.Value;
+                                    if (balise == "DS_level") DS_level[dts] = double.Parse(reader.Value);
+                                    if (balise == "DS_name") DS_name[dts] = reader.Value;
+                                    if (balise == "DS_description") DS_description[dts] = reader.Value;
+                                    if (balise == "DS_value") DS_value[dts] = reader.Value;
+                                    if (balise == "DS_dependant") DS_dependant[dts] = bool.Parse(reader.Value);
+                                    if (balise == "DS_default") DS_def[dts] = bool.Parse(reader.Value);
+                                    if (balise == "DS_categories") DS_categorie[dts] = reader.Value;
                                 }
 
                                 if (dde >= 1)
                                 {
-                                    //COMPLETER
+                                    if (balise == "DD_level") DD_level[dde] = double.Parse(reader.Value);
+                                    if (balise == "Dd_name") DD_name[dde] = reader.Value;
+                                    if (balise == "DD_description") DD_description[dde] = reader.Value;
+                                    if (balise == "DD_value") DD_value[dde] = reader.Value;
+                                    if (balise == "DD_dependant") DD_dependant[dde] = bool.Parse(reader.Value);
+                                    if (balise == "DD_default") DD_def[dde] = bool.Parse(reader.Value);
+                                    if (balise == "DD_categories") DD_categorie[dde] = reader.Value;
+                                    if (balise == "DD_Format") DD_format[dde] = reader.Value;
+                                    if (balise == "DD_start") DD_start[dde] = Convert.ToDateTime(reader.Value);
+                                    if (balise == "DD_end") DD_end[dde] = Convert.ToDateTime(reader.Value);
+
                                 }
                                 if (dt >= 1)
                                 {
                                     // completer
                                 }
-                                
+
                                 if (liste >= 1)
                                 {
                                     if (balise == "List_Name") L_Name[liste] = reader.Value;
@@ -517,37 +532,46 @@ namespace Resume
                                         var souslist = nv;
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
-                                       // bnv.Element = nv;
+                                        // bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
                                     }
 
                                     else nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // on crée la nouvelle liste
 
-                                    while (dde >= 1)
+
+                                    for (int i = 1; i <= dde; i++)
                                     {
-                                        // completer
-                                        dde -= 1;
+                                        nv.Add(new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]));
+                                        DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
+                                        DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
+                                       
                                     }
+                                    dde = 0;
+
                                     while (dt >= 1)
                                     {
                                         //completer
+                                        elem -= 1;
                                         dt -= 1;
                                     }
 
-                                    while (dts >= 1 )
+                                    for (int i = 1; i <= dts; i++)
                                     {
-                                        nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
-                                        DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false;
-                                        DS_categorie[dts] = "";
-                                        elem -= 1; dts -= 1;
+                                        nv.Add(new Data<string>(DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]));
+                                        DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                        DS_categorie[i] = "";
+                                        elem -= 1;
                                     }
+                                    dts = 0;
+
                                     //réinitialisation 
                                     box = "";
                                     L_Name[liste] = ""; L_def[liste] = false;
                                     L_ReadOnly[liste] = false;
-                                   
+
                                     //décrémenter les listes
-                                    liste -= 1;
+                                    liste -= 1; elem -= 1;
+                                    break;
                                 }
                                 if (liste == 1 && reader.Name == "ElementList")
                                 {
@@ -559,23 +583,35 @@ namespace Resume
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
 
-
                                         while (dde >= 1 && elem >= 1)
                                         {
-                                            // completer
-                                            dde -= 1;
+                                            for (int i = 1; i <= dde; i++)
+                                            {
+                                                nv.Add(new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]));
+                                                DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
+                                                DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
+
+                                            }
+                                            dde = 0;
                                         }
+
                                         while (dt >= 1 && elem >= 1)
                                         {
                                             //completer
+                                            elem -= 1;
                                             dt -= 1;
                                         }
+
                                         while (dts >= 1 && elem >= 1)
                                         {
-                                            nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
-                                            DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0;
-                                            DS_categorie[dts] = "";
-                                            elem -= 1; dts -= 1;
+                                            for (int i = 1; i <= dts; i++)
+                                            {
+                                                nv.Add(new Data<string>(DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]));
+                                                DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                                DS_categorie[i] = "";
+                                                elem -= 1;
+                                            }
+                                            dts = 0;
                                         }
 
                                         bnv.Element = nv;
@@ -585,33 +621,46 @@ namespace Resume
                                     else
                                     {
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+
                                         while (dde >= 1 && elem >= 1)
                                         {
-                                            // completer
-                                            dde -= 1;
+                                            for (int i = 1; i <= dde; i++)
+                                            {
+                                                nv.Add(new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]));
+                                                DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
+                                                DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
+                                                elem -= 1;
+                                            }
+                                            dde = 0;
                                         }
+
                                         while (dt >= 1 && elem >= 1)
                                         {
                                             //completer
-                                            dt -= 1;
+                                            dt -= 1; elem -= 1;
                                         }
                                         while (dts >= 1 && elem >= 1)
                                         {
-                                            nv.Add(new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]));
-                                            DS_format[dts] = ""; DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0;
-                                            DS_categorie[dts] = "";
-                                            elem -= 1; dts -= 1;
+                                            for (int i = 1; i <= dts; i++)
+                                            {
+                                                nv.Add(new Data<string>(DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]));
+                                                DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                                DS_categorie[i] = "";
+                                                elem -= 1;
+                                            }
+                                            dts = 0;
                                         }
+
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
                                         bnv.Element = nv;
                                         nv = new ElementList<Element>("");
-                                       
+
                                     }
                                     resumetoread.Layout.AddTextBox(bnv);
                                     x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
-                                    liste -= 1; elem -= 1;
+                                    liste -= 1;
                                     box = "";
 
                                 }
@@ -619,7 +668,17 @@ namespace Resume
                                 {
                                     if (dde == 1 && elem == 0)
                                     {
-                                        // completer
+                                        var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
+                                        var nvdd = new DataDated<string>(DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
+
+
+                                        DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = "";
+                                        DD_dependant[dde] = false; DD_def[dde] = false;
+                                        DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
+                                        DD_categorie[dde] = "";
+                                        box = "";
+                                        x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
+                                        dde = 0;
                                     }
                                     if (dt == 1 && elem == 0)
                                     {
@@ -627,16 +686,16 @@ namespace Resume
                                     }
                                     if (dts == 1 && elem == 0)
                                     {
-                                        dts = 0;
+
                                         var nvdt = new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
                                         bnv.Element = nvdt;
                                         resumetoread.Layout.AddTextBox(bnv);
-
+                                        dts = 0;
+                                        DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0;
+                                        DS_categorie[dts] = "";
                                         //réinitialisation
                                         box = "";
-                                        DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = "";
-                                        DS_dependant[dts] = false; DS_def[dts] = false;
                                         x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DS_level[dts] = 0;
                                     }
                                 }
