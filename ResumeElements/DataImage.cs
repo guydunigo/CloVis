@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
@@ -37,9 +38,10 @@ namespace ResumeElements
         /// </summary>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        public DataImage(string name):base(name, -1, "", true, false)
+        public DataImage(string name, bool isIndependant = false):base(name, -1, "", true, false)
         {
-            Index.AddImage(this);
+            if (!isIndependant)
+                Index.AddImage(this);
         }
 
         public DataImage(StorageFile source):this(source.Name,source)
@@ -52,11 +54,15 @@ namespace ResumeElements
             // + with resume/template
         }
 
-        public static async Task<BitmapSource> GetImageSource(string name)
+        public static async Task<BitmapSource> GetImageSource(string name, StorageFolder supplementaryFolder)
+        {
+            return await GetImageSource(name, new StorageFolder[] { supplementaryFolder });
+        }
+        public static async Task<BitmapSource> GetImageSource(string name, StorageFolder[] supplementaryFolders = null)
         {
             var img = new BitmapImage();
 
-            StorageFile imgFile = await GetImageFileFromEverywhereOrDefault(name);
+            StorageFile imgFile = await GetImageFileFromEverywhereOrDefault(name, supplementaryFolders);
 
             FileRandomAccessStream stream = (FileRandomAccessStream)(await imgFile.OpenAsync(FileAccessMode.Read));
             img.SetSource(stream);
@@ -64,9 +70,13 @@ namespace ResumeElements
             return img;
         }
 
-        public static async Task<StorageFile> GetImageFileFromEverywhereOrDefault(string name)
+        public static async Task<StorageFile> GetImageFileFromEverywhereOrDefault(string name, StorageFolder supplementaryFolder)
         {
-            StorageFile imgFile = await GetImageFileFromEverywhere(name);
+            return await GetImageFileFromEverywhereOrDefault(name, new StorageFolder[] { supplementaryFolder });
+        }
+        public static async Task<StorageFile> GetImageFileFromEverywhereOrDefault(string name, StorageFolder[] supplementaryFolders = null)
+        {
+            StorageFile imgFile = await GetImageFileFromEverywhere(name, supplementaryFolders);
 
             if (imgFile == null)
                 imgFile = await GetImageDefault();
@@ -74,9 +84,14 @@ namespace ResumeElements
             return imgFile;
         }
 
-        public static async Task<StorageFile> GetImageFileFromEverywhere(string name)
+        public static async Task<StorageFile> GetImageFileFromEverywhere(string name, StorageFolder supplementaryFolder)
         {
-            var imgFolds = await GetImageFoldersList();
+            return await GetImageFileFromEverywhere(name, new StorageFolder[] { supplementaryFolder });
+        }
+        public static async Task<StorageFile> GetImageFileFromEverywhere(string name, StorageFolder[] supplementaryFolders = null)
+        {
+            var imgFolds = await GetImageFoldersList(supplementaryFolders);
+
             StorageFile imgFile = null;
 
             foreach (StorageFolder imgFold in imgFolds)
@@ -118,13 +133,26 @@ namespace ResumeElements
             return await GetImageFileFrom(value);
         }
 
-        public async static Task<StorageFolder[]> GetImageFoldersList()
+        public async static Task<StorageFolder[]> GetImageFoldersList(StorageFolder supplementaryFolder)
         {
-            StorageFolder[] res = new StorageFolder[]
-            {
-                await GetLocalImageFolder(),
-                await GetAppImageFolder()
-            };
+            return await GetImageFoldersList(new StorageFolder[] { supplementaryFolder });
+        }
+
+        public async static Task<StorageFolder[]> GetImageFoldersList(StorageFolder[] supplementaryFolders = null)
+        {
+            List<StorageFolder> folds = null;
+
+            if (supplementaryFolders == null)
+                folds = new List<StorageFolder>();
+            else
+                folds = new List<StorageFolder>(supplementaryFolders);
+
+            folds.Add(await GetLocalImageFolder());
+            folds.Add(await GetAppImageFolder());
+
+            StorageFolder[] res = new StorageFolder[folds.Count];
+
+            folds.CopyTo(res);
 
             return res;
         }
@@ -149,6 +177,7 @@ namespace ResumeElements
             }
             return folder;
         }
+
         public async static Task<StorageFile> GetImageDefault()
         {
             return await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///Assets/StoreLogo.png"));

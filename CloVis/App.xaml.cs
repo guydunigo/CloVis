@@ -171,7 +171,7 @@ namespace CloVis
             IndexTest.FillIndex();
         }
 
-        public async void LoadImages()
+        public void LoadImages()
         {
             Index.ReloadImages();
         }
