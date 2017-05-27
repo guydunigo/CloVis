@@ -15,17 +15,25 @@ namespace Resume
 {
     public static class FileManagement
     {
-        public static async void Save_File(Resume resumetosave)
+        public async static Task<StorageFolder> GetLocalResumeFolder()
         {
-            StorageFolder folder = null;
+            var name = "CVs_Clovis";
+            StorageFolder folder;
             try
             {
-                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
+                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(name);
             }
             catch (FileNotFoundException)
             {
-                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
+                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(name);
             }
+            return folder;
+        }
+
+        public static async void Save_File(Resume resumetosave)
+        {
+            StorageFolder folder = await  GetLocalResumeFolder();
+
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.ReplaceExisting))
             {
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -289,16 +297,9 @@ namespace Resume
 
         public static async Task<Resume> Read_file(string filename)
         {
-            StorageFolder folder = null;
+            StorageFolder folder = await GetLocalResumeFolder();
             Resume resumetoread = new Resume(filename);
-            try
-            {
-                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync("CVs_CloVis");
-            }
-            catch (FileNotFoundException)
-            {
-                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync("CVs_CloVis");
-            }
+
             using (var stream = await folder.OpenStreamForReadAsync(filename + ".cv"))
             {
                 XmlReaderSettings read_settings = new XmlReaderSettings();
