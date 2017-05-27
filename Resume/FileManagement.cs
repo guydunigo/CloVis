@@ -513,9 +513,9 @@ namespace Resume
                                         L_Name[liste] = ""; L_def[liste] = false;
                                     }
                                     else nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
-                                    dde = creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def,DD_categorie,ddcatnum, DD_name);
+                                    dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def,DD_categorie,ddcatnum, DD_name);
                                     while (dt >= 1) { elem -= 1; dt -= 1; }
-                                    elem = creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
+                                    elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
                                     dts = 0; box = ""; L_Name[liste] = ""; L_def[liste] = false; L_ReadOnly[liste] = false;
                                     liste -= 1; elem -= 1;
                                     break;
@@ -528,14 +528,14 @@ namespace Resume
                                         var souslist = nv;
                                         nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
-                                        while (dde >= 1 && elem >= 1) { dde = creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name); }
+                                        while (dde >= 1 && elem >= 1) { dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name); }
                                         while (dt >= 1 && elem >= 1) { elem -= 1; dt -= 1; }
                                         while (dts >= 1 && elem >= 1)
                                         {
-                                            elem = creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
+                                            elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
                                             dts = 0;
                                         }
-                                        if (ft_text >= 1) ft_text = creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
+                                        if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         nv = new ElementList<Element>("");
@@ -571,7 +571,7 @@ namespace Resume
                                             }
                                             dts = 0;
                                         }
-                                        if (ft_text >= 1) ft_text = creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
+                                        if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
                                            
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
@@ -623,7 +623,7 @@ namespace Resume
             return resumetoread;
         }
 
-        private static int creation_BoxFonts(BoxText bnv, int ft_text, TextAlignment Fts_text_alignment, string[] Ft_text_source, double[] Ft_text_size, byte[] Ft_text_color_a, byte[] Ft_text_color_r, byte[] Ft_text_color_g, byte[] Ft_text_color_b, bool[] Ft_text_italic, bool[] Ft_text_bold, bool[] Ft_text_underlined, bool[] Ft_text_uppercase, string[] Ft_text_name)
+        private static int Creation_BoxFonts(BoxText bnv, int ft_text, TextAlignment Fts_text_alignment, string[] Ft_text_source, double[] Ft_text_size, byte[] Ft_text_color_a, byte[] Ft_text_color_r, byte[] Ft_text_color_g, byte[] Ft_text_color_b, bool[] Ft_text_italic, bool[] Ft_text_bold, bool[] Ft_text_underlined, bool[] Ft_text_uppercase, string[] Ft_text_name)
         {
             bnv.Fonts = new Fonts("Polices_boite", Fts_text_alignment);
             for (int i = 1; i <= ft_text; i++)
@@ -639,7 +639,7 @@ namespace Resume
              return 0;
         }
 
-        private static int creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie,int dscatnum, string[] DS_name, int elem)
+        private static int Creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie,int dscatnum, string[] DS_name, int elem)
         {
             for (int i = 1; i <= dts; i++)
             {
@@ -657,7 +657,7 @@ namespace Resume
             return elem;
         }
 
-        private static int creation_DDE(Resume resumetoread, ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie,int ddcatnum, string[] DD_name)
+        private static int Creation_DDE(Resume resumetoread, ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie,int ddcatnum, string[] DD_name)
         {
             for (int i = 1; i <= dde; i++)
             {
