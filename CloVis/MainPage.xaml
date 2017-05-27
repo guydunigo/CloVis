@@ -14,6 +14,5 @@
             <Button Margin="20" Content="Details Edit" Tag="DetailsEdit" Click="DetailsEdit_Click"/>
             <Button Margin="20" Content="Preview CV" Tag="Template_CV_Preview" Click="Template_CV_Preview_Click"/>
         </StackPanel>
-
     </Grid>
 </Page>

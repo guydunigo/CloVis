@@ -58,19 +58,19 @@ namespace Resume
             var boite_de_competences = new BoxText(0, 150, 60, 105, 60, 0, "Compétences");
             var boite_de_diplomes = new BoxText(105, 222.5, 60, 105, 72.5, 0, "Diplômes");
             
-            var fond = new BoxBackground(0, 70, 100, 210, 60)
+            var fond = new BoxBackground(0, 70, 10, 210, 60)
             {
-                Color = new Color() { A = 140, G = 255 } //verte un peu transparente
+                Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
-			var fond2 = new BoxBackground(115, 150, 100, 160, 73,null,-40)
+			var fond2 = new BoxBackground(115, 150, 30, 160, 73, -40)
 			{
-				Color = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
+				Fill = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
 			}; //boite de fond
 
-            var fond3 = new BoxBackground(-15, -4, 100, 700, 65, null, 50)
+            var fond3 = new BoxBackground(-15, -4, 50, 700, 65, 50)
 			{
-				Color = new Color() { A = 255, B = 200, G = 200, R = 255}
+				Fill = new Color() { A = 255, B = 200, G = 200, R = 255}
 			};
 
 			boite_de_competences.Element = competences;
@@ -163,10 +163,16 @@ namespace Resume
 			var boite_de_langues = new BoxText(140, 95, 60, 80, 50, 0, "Langues");
 			var boite_de_diplomes = new BoxText(15, 160, 60, 150, 15, 0, "Dynastie");
 
-			var fond = new BoxBackground(0, 90, 100, 210, 50)
+			var fond = new BoxBackground(0, 90, 10, 210, 50)
 			{
-				Color = new Color() { A = 140, G = 255 } //verte un peu transparente
+				Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
 			}; //boite de fond
+
+            var img = new DataImage("CV 2_-_profil", true);
+            var photo = new BoxBackground(105 - 50 / 2, 90 + 5,50, 40, 40, 0, BoxBackgroundShape.Ellipse)
+            {
+                Image = img
+            };
 
             /*var fond2 = new BoxBackground(115, 150, 100, 160, 73, null, -40)
 			{
@@ -193,6 +199,7 @@ namespace Resume
 
 			CV.Layout = new Layout();
 			CV.Layout.AddBackBox(fond);
+            CV.Layout.AddBackBox(photo);
             //CV.Layout.AddBackBox(fond2);
             //CV.Layout.AddBackBox(fond3);
 
