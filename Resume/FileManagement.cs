@@ -9,7 +9,7 @@ using System.IO;
 using Windows.Storage;
 using ResumeElements;
 using Windows.UI;
-
+using Windows.UI.Xaml;
 
 namespace Resume
 {
@@ -112,7 +112,7 @@ namespace Resume
                 {
                     await writer.WriteStartElementAsync("", "Font", "Resume");
                     await writer.WriteElementStringAsync("", "Font_Name", "Resume", k.Name);
-                    await writer.WriteElementStringAsync("", "Font_font", "Resume", k.Font.Source);
+                    await writer.WriteElementStringAsync("", "Font_font", "Resume", k.FontName);
                     await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
                     await writer.WriteElementStringAsync("", "Font_Color_A", "Resume", Convert.ToString(k.Color.A));
                     await writer.WriteElementStringAsync("", "Font_Color_R", "Resume", Convert.ToString(k.Color.R));
@@ -138,7 +138,7 @@ namespace Resume
             {
                 await writer.WriteStartElementAsync("", "Font", "Resume");
                 await writer.WriteElementStringAsync("", "Font_Name", "Resume", k.Name);
-                await writer.WriteElementStringAsync("", "Font_font", "Resume", k.Font.Source);
+                await writer.WriteElementStringAsync("", "Font_font", "Resume", k.FontName);
                 await writer.WriteElementStringAsync("", "Font_fontSize", "Resume", Convert.ToString(k.FontSize));
                 await writer.WriteElementStringAsync("", "Font_Color_A", "Resume", Convert.ToString(k.Color.A));
                 await writer.WriteElementStringAsync("", "Font_Color_R", "Resume", Convert.ToString(k.Color.R));
@@ -367,7 +367,10 @@ namespace Resume
                                 if (reader.Name == "DataDated_Element") dde += 1;
                                 if (reader.Name == "Data_Element") dt += 1;
                                 if (reader.Name == "Font" && box != "TextBox") ft += 1;
-                                if (reader.Name == "Font" && box == "TextBox") ft_text += 1;
+                                if (reader.Name == "Font" && box == "TextBox")
+                                {
+                                    ft_text += 1;
+                                }
                                 if (reader.Name == "Fonts" && box == "TextBox") Ft_text = 1;
                                 else balise = reader.Name;
                                 break;
@@ -385,17 +388,20 @@ namespace Resume
                                 }
                                 if (ft_text >= 1)
                                 {
-                                    if (balise == "Font_Name") Ft_text_name[ft] = reader.Value;
-                                    if (balise == "Font_font") Ft_text_source[ft] = reader.Value;
-                                    if (balise == "Font_fontSize") Ft_text_size[ft] = double.Parse(reader.Value);
-                                    if (balise == "Font_Color_A") Ft_text_color_a[ft] = byte.Parse(reader.Value);
-                                    if (balise == "Font_Color_R") Ft_text_color_r[ft] = byte.Parse(reader.Value);
-                                    if (balise == "Font_Color_G") Ft_text_color_g[ft] = byte.Parse(reader.Value);
-                                    if (balise == "Font_Color_B") Ft_text_color_b[ft] = byte.Parse(reader.Value);
-                                    if (balise == "Font_Italic") Ft_text_italic[ft] = bool.Parse(reader.Value);
-                                    if (balise == "Font_Bold") Ft_text_bold[ft] = bool.Parse(reader.Value);
-                                    if (balise == "Font_Underlined") Ft_text_underlined[ft] = bool.Parse(reader.Value);
-                                    if (balise == "Font_UpperCase") Ft_text_uppercase[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Name") Ft_text_name[ft_text] = reader.Value;
+                                    if (balise == "Font_font")
+                                    {
+                                        Ft_text_source[ft_text] = reader.Value;
+                                    }
+                                    if (balise == "Font_fontSize") Ft_text_size[ft_text] = double.Parse(reader.Value);
+                                    if (balise == "Font_Color_A") Ft_text_color_a[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_R") Ft_text_color_r[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_G") Ft_text_color_g[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_B") Ft_text_color_b[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Italic") Ft_text_italic[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Bold") Ft_text_bold[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Underlined") Ft_text_underlined[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_UpperCase") Ft_text_uppercase[ft_text] = bool.Parse(reader.Value);
                                 }
                                 if (box == "Fonts")
                                 {
@@ -481,7 +487,7 @@ namespace Resume
                                     for (int i = 1; i <= ft; i++)
                                     {
                                         //pbs !( source a changer)
-                                        // resumetoread.Fonts.List.Add(new FontElement( Ft_source[i], Ft_size[i], new Color() {A= Ft_color_a[i], R= Ft_color_r[i], G=Ft_color_g[i], B=Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
+                                        resumetoread.Fonts.List.Add(new FontElement( Ft_source[i], Ft_size[i], new Color() {A= Ft_color_a[i], R= Ft_color_r[i], G=Ft_color_g[i], B=Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
                                         Ft_name[i] = "";
                                         Ft_size[i] = 0;
                                         Ft_color_a[i] = 0;
@@ -529,6 +535,7 @@ namespace Resume
                                             elem = creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
                                             dts = 0;
                                         }
+                                        if (ft_text >= 1) ft_text = creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         nv = new ElementList<Element>("");
@@ -564,22 +571,8 @@ namespace Resume
                                             }
                                             dts = 0;
                                         }
-                                        if (ft_text >= 1)
-                                        {
-                                            bnv.Fonts = new Fonts("Polices_boite", Fts_text_alignment);
-                                            for (int i = 1; i <= ft_text; i++)
-                                            {
-                                                //pbs !
-                                                // bnv.Fonts.List.Add(new FontElement(Ft_text_source[i], Ft_text_size[i], new Color() { A = Ft_text_color_a[i], R = Ft_text_color_r[i], G = Ft_text_color_g[i], B = Ft_text_color_b[i] }, Ft_text_italic[i], Ft_text_bold[i], Ft_text_underlined[i], Ft_text_uppercase[i], Ft_text_name[i]));
-                                                Ft_text_name[i] = "";
-                                                Ft_text_size[i] = 0;
-                                                Ft_text_color_a[i] = 0;
-                                                Ft_text_color_r[i] = 0; Ft_text_color_g[i] = 0; Ft_text_color_b[i] = 0;
-                                                Ft_text_italic[i] = false; Ft_text_bold[i] = false; Ft_text_underlined[i] = false; Ft_text_uppercase[i] = false;
-                                                Ft_text_source[i] = "";
-                                            }
-                                            ft_text = 0;
-                                        }
+                                        if (ft_text >= 1) ft_text = creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
+                                           
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
@@ -628,6 +621,22 @@ namespace Resume
             }
 
             return resumetoread;
+        }
+
+        private static int creation_BoxFonts(BoxText bnv, int ft_text, TextAlignment Fts_text_alignment, string[] Ft_text_source, double[] Ft_text_size, byte[] Ft_text_color_a, byte[] Ft_text_color_r, byte[] Ft_text_color_g, byte[] Ft_text_color_b, bool[] Ft_text_italic, bool[] Ft_text_bold, bool[] Ft_text_underlined, bool[] Ft_text_uppercase, string[] Ft_text_name)
+        {
+            bnv.Fonts = new Fonts("Polices_boite", Fts_text_alignment);
+            for (int i = 1; i <= ft_text; i++)
+            {
+                bnv.Fonts.List.Add(new FontElement(Ft_text_source[i], Ft_text_size[i], new Color() { A = Ft_text_color_a[i], R = Ft_text_color_r[i], G = Ft_text_color_g[i], B = Ft_text_color_b[i] }, Ft_text_italic[i], Ft_text_bold[i], Ft_text_underlined[i], Ft_text_uppercase[i], Ft_text_name[i]));
+                Ft_text_name[i] = "";
+                Ft_text_size[i] = 0;
+                Ft_text_color_a[i] = 0;
+                Ft_text_color_r[i] = 0; Ft_text_color_g[i] = 0; Ft_text_color_b[i] = 0;
+                Ft_text_italic[i] = false; Ft_text_bold[i] = false; Ft_text_underlined[i] = false; Ft_text_uppercase[i] = false;
+                Ft_text_source[i] = "";
+            }
+             return 0;
         }
 
         private static int creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie,int dscatnum, string[] DS_name, int elem)

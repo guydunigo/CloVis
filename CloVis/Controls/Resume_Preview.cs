@@ -141,7 +141,7 @@ namespace CloVis.Controls
             if (font != null)
             {
                 tempText.Foreground = new SolidColorBrush(font.Color);
-                tempText.FontFamily = font.Font;
+                tempText.FontFamily = new FontFamily(font.FontName);
                 tempText.FontSize = font.FontSize;
                 if (font.UpperCase) tempText.Text = tempText.Text.ToUpper();
                 if (font.Underlined)
