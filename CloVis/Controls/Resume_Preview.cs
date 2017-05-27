@@ -24,7 +24,7 @@ namespace CloVis.Controls
         public Resume_Preview()
         {
             this.DefaultStyleKey = typeof(Resume_Preview);
-            //this.Loaded += OnLoaded;
+            this.Loaded += OnLoaded;
 
             elementsToAdd = new SortedList<double, UIElement>();
         }
@@ -49,9 +49,8 @@ namespace CloVis.Controls
             {
                 instance.elementsToAdd.Clear();
                 await instance.RenderBackgroundBoxes();
-                var temp = instance.elementsToAdd;
                 instance.RenderTextBoxes();
-                temp = instance.elementsToAdd;
+
                 // If element is already loaded, reload it :
                 if (instance.GetTemplateChild("Resume") != null)
                 {

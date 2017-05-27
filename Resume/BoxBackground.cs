@@ -62,8 +62,8 @@ namespace Resume
                 Image = Image,
                 Fill = Fill,
                 Stroke = Stroke,
-                BorderRadius = BorderRadius,
-                StrokeThickness = StrokeThickness
+                StrokeThickness = StrokeThickness,
+                BorderRadius = BorderRadius
             };
         }
     }
