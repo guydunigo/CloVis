@@ -63,16 +63,22 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "z", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Z));
                     await writer.WriteElementStringAsync("", "SizeX", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].SizeX));
                     await writer.WriteElementStringAsync("", "SizeY", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].SizeY));
-                    await writer.WriteElementStringAsync("", "img", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Image));
+                    if (resumetosave.Layout.BackBoxes[num].Image != null)
+                    {
+                        await writer.WriteElementStringAsync("", "img_name", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Image.Name));
+                        await writer.WriteElementStringAsync("", "img_dependant", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Image.IsIndependant));
+                    }
                     await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Angle));
-                    await writer.WriteElementStringAsync("", "Color_A", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Color.A));
-                    await writer.WriteElementStringAsync("", "Color_R", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Color.R));
-                    await writer.WriteElementStringAsync("", "Color_G", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Color.G));
-                    await writer.WriteElementStringAsync("", "Color_B", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Color.B));
-                    await writer.WriteElementStringAsync("", "Border_Color_A", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderColor.A));
-                    await writer.WriteElementStringAsync("", "Border_Color_R", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderColor.R));
-                    await writer.WriteElementStringAsync("", "Border_Color_G", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderColor.G));
-                    await writer.WriteElementStringAsync("", "Border_Color_B", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderColor.B));
+                    await writer.WriteElementStringAsync("","Shape","Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Shape));
+                    await writer.WriteElementStringAsync("", "Color_A", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.A));
+                    await writer.WriteElementStringAsync("", "Color_R", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.R));
+                    await writer.WriteElementStringAsync("", "Color_G", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.G));
+                    await writer.WriteElementStringAsync("", "Color_B", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.B));
+                    await writer.WriteElementStringAsync("", "StrokeThikness", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].StrokeThickness));
+                    await writer.WriteElementStringAsync("", "Border_Color_A", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Stroke.A));
+                    await writer.WriteElementStringAsync("", "Border_Color_R", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Stroke.R));
+                    await writer.WriteElementStringAsync("", "Border_Color_G", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Stroke.G));
+                    await writer.WriteElementStringAsync("", "Border_Color_B", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Stroke.B));
                     await writer.WriteElementStringAsync("", "Border_radius", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].BorderRadius));
                     await writer.WriteEndElementAsync();
                     num += 1;
@@ -312,6 +318,10 @@ namespace Resume
                 int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0, ft = 0;
                 string box = "";
                 string balise = "";
+                BoxBackgroundShape Shape = BoxBackgroundShape.Rectangle;
+                string Img_name = "";
+                bool Img_dep = false;
+                double strokethikness =0 ;
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
                 byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
                 //data 
@@ -437,6 +447,14 @@ namespace Resume
                                 }
                                 if (box == "BackBox")
                                 {
+                                    if (balise == "Shape")
+                                    {
+                                        if (reader.Value == "Rectangle") Shape = BoxBackgroundShape.Rectangle;
+                                        else Shape = BoxBackgroundShape.Ellipse;
+                                    }
+                                    if (balise == "img_name") Img_name = reader.Value;
+                                    if (balise == "img_dependant") Img_dep = bool.Parse(reader.Value);
+                                    if (balise == "StrokeThikness") strokethikness = double.Parse(reader.Value);
                                     if (balise == "Color_A") Color_A = byte.Parse(reader.Value);
                                     if (balise == "Color_R") Color_R = byte.Parse(reader.Value);
                                     if (balise == "Color_G") Color_G = byte.Parse(reader.Value);
@@ -499,8 +517,19 @@ namespace Resume
                                 }
                                 if (box == "BackBox" && reader.Name == "BackBox")
                                 {
-                                    resumetoread.Layout.AddBackBox(new BoxBackground(new Color() { A = Color_A, R = Color_R, G = Color_G, B = Color_B }, new Color() { A = Color_Border_A, R = Color_Border_R, G = Color_Border_G, B = Color_Border_B }, x, y, z, SizeX, SizeY, null, angle));
-                                    box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
+                                    var backbox = new BoxBackground(x, y, z, SizeX, SizeY, angle, Shape)
+                                    {
+                                        Fill = new Color() { A = Color_A, B = Color_B, R = Color_R, G = Color_G },
+                                        Stroke = new Color() { A = Color_Border_A, B = Color_Border_B, R = Color_Border_R, G = Color_Border_G },
+                                        StrokeThickness = strokethikness
+                                    };
+                                    if (Img_name != "")
+                                    {
+                                        backbox.Image = new DataImage(Img_name, Img_dep);
+                                    }
+                                    resumetoread.Layout.AddBackBox(backbox);
+                                    Shape = BoxBackgroundShape.Rectangle; Img_name = ""; Img_dep = false; strokethikness = 0;
+                                    box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; 
                                     Color_A = 0; Color_R = 0; Color_G = 0; Color_B = 0; Color_Border_A = 0; Color_Border_R = 0; Color_Border_G = 0; Color_Border_B = 0;
                                 }
                                 if (liste > 1 && reader.Name == "ElementList")
