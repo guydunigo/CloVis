@@ -47,30 +47,11 @@ namespace Resume
         }
 
         /// <summary>
-        /// Create a new BackBox and add it to Layout
-        /// </summary>
-        public void AddBackBox(double x=0, double y=0, double z=10, double SizeX=10, double SizeY=10,Windows.UI.Xaml.Controls.Image img=null)
-        {
-            var box = new BoxBackground(x, y, z, SizeX, SizeY, img);
-            BackBoxes.Add(box);
-        }
-
-        /// <summary>
         /// Add a previously created BackBox to Layout
         /// </summary>
         public void AddBackBox(BoxBackground box)
         {
             BackBoxes.Add(box);
-        }
-
-
-        /// <summary>
-        /// Create a new TextBox and add it to Layout
-        /// </summary>
-        public void AddTextBox(double x=0, double y=0, double z=60, double SizeX=10, double SizeY=10, double o=0, string defaultElmt="")
-        {
-            var box = new BoxText(x,y,z,SizeX,SizeY,o,defaultElmt);
-            TextBoxes.Add(box);
         }
 
         /// <summary>

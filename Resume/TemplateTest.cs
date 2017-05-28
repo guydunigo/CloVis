@@ -32,19 +32,19 @@ namespace Resume
             var boite_langues = new BoxText(5, 200, 10, 70, 50, 0, "Langues");
             var boite_diplomes = new BoxText(75, 130, 20, 130, 50, 0, "Diplômes");
 
-            var fond = new BoxBackground(0, 0, 20, 70, 300, null, 0)
+            var fond = new BoxBackground(0, 0, 20, 70, 300, 0)
             {
-                Color = new Color() { A = 50, B = 120, G = 130 } // fond peu transparent qui se trouve sous la boite contact
+                Fill = new Color() { A = 50, B = 120, G = 130 } // fond peu transparent qui se trouve sous la boite contact
             };
 
             var fond2 = new BoxBackground(65, 0, 40, 150, 300)
             {
-                Color = new Color() { A = 200, R = 50, G = 120, B = 120 }
+                Fill = new Color() { A = 200, R = 50, G = 120, B = 120 }
             };
 
-            var fond3 = new BoxBackground(120, 100, 20, 70, 70, null, 20)
+            var fond3 = new BoxBackground(120, 100, 20, 70, 70, 20)
             {
-                Color = new Color() { A = 200, R=255}
+                Fill = new Color() { A = 200, R=255}
             };
 
             template.Layout = new Layout();
@@ -62,10 +62,6 @@ namespace Resume
             return template;
         }
 
-
-
-
-
         public static Template GetTemplate_2()
         {
             var template = new Template("Temp2");
@@ -82,14 +78,14 @@ namespace Resume
             var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
             
-            var fond = new BoxBackground(0, 100, 50, 210, 190, null, 0)
+            var fond = new BoxBackground(0, 100, 50, 210, 190, 0)
             { 
-                Color = new Color() { A = 200, R = 255, G = 255, B=51} // fond jaune
+                Fill = new Color() { A = 200, R = 255, G = 255, B=51} // fond jaune
             };
 
             var fond2 = new BoxBackground(0, 0, 40, 210, 100)
             {
-                Color = new Color() { A = 150, R = 255, G = 130 } //fond orange
+                Fill = new Color() { A = 150, R = 255, G = 130 } //fond orange
             };
 
             template.Layout = new Layout();

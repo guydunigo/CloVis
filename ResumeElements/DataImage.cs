@@ -205,7 +205,7 @@ namespace ResumeElements
 
             if (!await IsImageFilePresent(desiredName, imgFold))
             {
-                copiedFile = await file.CopyAsync(imgFold, desiredName + "." + GetExtension(file.Name));
+                copiedFile = await file.CopyAsync(imgFold, desiredName + file.FileType);
             }
             else
                 throw new FileAlreadyExistsException("An image already exists with that name");
@@ -264,11 +264,7 @@ namespace ResumeElements
                 }
             }
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+        
         public async Task<RemoveOutput> Remove()
         {
             var res = RemoveOutput.NothingDone;
@@ -321,10 +317,6 @@ namespace ResumeElements
         {
             var temp = name.Split('.');
             return temp[temp.Length - 1];
-        }
-        public static string GetExtension(StorageFile sf)
-        {
-            return GetExtension(sf.Name);
         }
     }
 }

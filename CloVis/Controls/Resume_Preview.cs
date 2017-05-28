@@ -10,6 +10,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Resume;
 using ResumeElements;
+using Windows.UI.Xaml.Shapes;
+using System.Threading.Tasks;
+using System.Collections;
+using Windows.Foundation;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -22,10 +26,10 @@ namespace CloVis.Controls
             this.DefaultStyleKey = typeof(Resume_Preview);
             this.Loaded += OnLoaded;
 
-            elementsToAdd = new List<UIElement>();
+            elementsToAdd = new SortedList<double, UIElement>();
         }
 
-        private List<UIElement> elementsToAdd;
+        private SortedList<double,UIElement> elementsToAdd;
 
         public Resume.Resume Resume
         {
@@ -39,15 +43,19 @@ namespace CloVis.Controls
         public static readonly DependencyProperty ResumeProperty =
             DependencyProperty.Register("Resume", typeof(Resume.Resume), typeof(Resume_Preview), new PropertyMetadata(null, OnResumeChanged));
 
-        private static void OnResumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static async void OnResumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is Resume_Preview instance && instance.Resume != null)
             {
                 instance.elementsToAdd.Clear();
-                instance.RenderBackgroundBoxes();
+                await instance.RenderBackgroundBoxes();
                 instance.RenderTextBoxes();
+
                 // If element is already loaded, reload it :
-                if (instance.GetTemplateChild("Resume") != null) instance.OnLoaded(null, null);
+                if (instance.GetTemplateChild("Resume") != null)
+                {
+                    instance.OnLoaded(null, null);
+                }
             }
         }
 
@@ -55,35 +63,72 @@ namespace CloVis.Controls
         {
             (GetTemplateChild("Resume") as Grid).Children.Clear();
 
-            foreach (UIElement el in elementsToAdd)
+            foreach (UIElement el in elementsToAdd.Values)
             {
                 (GetTemplateChild("Resume") as Grid).Children.Add(el);
             }
         }
 
-        private void RenderBackgroundBoxes()
+        private async Task<Brush> GetBackgroundBoxFillBrush(BoxBackground b)
+        {
+            if (b.Image != null)
+            {
+                var cv_template_Folds = await FileManagement.GetLocalResumeFolder();
+                //throw new NotImplementedException("other folders ...");
+                return new ImageBrush() {
+                    ImageSource = await DataImage.GetImageSource(b.Image.Value, cv_template_Folds)
+                };
+            }
+            else
+            {
+                return new SolidColorBrush(b.Fill);
+            }
+        }
+
+        private void AddToElementsToAdd(double z, UIElement elmt)
+        {
+            while (elementsToAdd.Keys.Contains(z))
+                z++;
+            elementsToAdd.Add(z, elmt);
+        }
+
+        private async Task RenderBackgroundBoxes()
         {
             if (Resume != null)
             {
+                Shape shape = null;
+
                 foreach (BoxBackground b in Resume.Layout.BackBoxes)
                 {
-                    elementsToAdd.Add(new Windows.UI.Xaml.Shapes.Rectangle()
+                    switch (b.Shape)
                     {
-                        Width = b.SizeX,
-                        Height = b.SizeY,
-                        HorizontalAlignment = HorizontalAlignment.Left,
-                        VerticalAlignment = VerticalAlignment.Top,
-                        Margin = new Thickness() { Left = b.X, Top = b.Y },
-                        Fill = new SolidColorBrush(b.Color),
-                        RadiusX = b.BorderRadius,
-                        RadiusY = b.BorderRadius,
-                        StrokeThickness = 2,
-                        Stroke = new SolidColorBrush(b.BorderColor),
-                        RenderTransform = new RotateTransform()
-                        {
-                            Angle = b.Angle
-                        },
-                    });
+                        case BoxBackgroundShape.Ellipse:
+                            shape = new Ellipse();
+                            break;
+                        case BoxBackgroundShape.Rectangle:
+                        default:
+                            shape = new Windows.UI.Xaml.Shapes.Rectangle()
+                            {
+                                RadiusX = b.BorderRadius,
+                                RadiusY = b.BorderRadius,
+                            };
+                            break;
+                    }
+
+                    shape.Width = b.SizeX;
+                    shape.Height = b.SizeY;
+                    shape.HorizontalAlignment = HorizontalAlignment.Left;
+                    shape.VerticalAlignment = VerticalAlignment.Top;
+                    shape.Margin = new Thickness() { Left = b.X, Top = b.Y };
+                    shape.StrokeThickness = b.StrokeThickness;
+                    shape.Stroke = new SolidColorBrush(b.Stroke);
+                    shape.Fill = await GetBackgroundBoxFillBrush(b);
+                    shape.RenderTransform = new RotateTransform()
+                    {
+                        Angle = b.Angle
+                    };
+
+                    AddToElementsToAdd(b.Z, shape);
                 }
             }
         }
@@ -129,7 +174,7 @@ namespace CloVis.Controls
                         Angle = b.Angle
                     };
                     // throw new NotImplementedException("Z index");
-                    elementsToAdd.Add(tempText);
+                    AddToElementsToAdd(b.Z, tempText);
                 }
             }
         }
