@@ -31,6 +31,23 @@ namespace CloVis.Controls
 
         private SortedList<double,UIElement> elementsToAdd;
 
+        public bool IsTextSelectionEnable
+        {
+            get => (bool)(GetValue(IsTextSelectionEnableProperty));
+            set
+            {
+                SetValue(IsTextSelectionEnableProperty, value);
+            }
+        }
+
+        public static readonly DependencyProperty IsTextSelectionEnableProperty =
+            DependencyProperty.Register("IsTextSelectionEnable", typeof(bool), typeof(Resume_Preview), new PropertyMetadata(true, OnIsTextSelectionEnableChanged));
+
+        private static void OnIsTextSelectionEnableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            OnResumeChanged(d, e);
+        }
+
         public Resume.Resume Resume
         {
             get => (Resume.Resume)(GetValue(ResumeProperty));
@@ -179,7 +196,7 @@ namespace CloVis.Controls
             }
         }
 
-        private static Inline RenderText(string text, FontElement font)
+        private Inline RenderText(string text, FontElement font)
         {
             var tempText = new Run() { Text = text };
             Inline res = tempText;
@@ -216,7 +233,7 @@ namespace CloVis.Controls
             return res;
         }
 
-        private static RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
+        private RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
 
@@ -232,10 +249,11 @@ namespace CloVis.Controls
             else if (fonts == null) throw new NullReferenceException("Fonts is null !");
             else if (element == null) throw new NullReferenceException("No element given.");
 
+            box.IsTextSelectionEnabled = IsTextSelectionEnable;
             return box;
         }
 
-        private static void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
+        private void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
         {
             Paragraph para = null;
 
