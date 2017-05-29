@@ -21,6 +21,14 @@
                 </Viewbox>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ElementListView">
+            <TextBlock VerticalAlignment="Center" Foreground="White" Text="{Binding Name}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="DataView">
+            <TextBlock VerticalAlignment="Center" Foreground="White" Text="{Binding Value}"/>
+        </DataTemplate>
+        <controls:SubElementTemplateSelector x:Key="SubElementTemplateSelector" TemplateForData="{StaticResource DataView}" TemplateForElementList="{StaticResource ElementListView}"/>
+        <controls:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
     </Page.Resources>
 
     <Page.TopAppBar>
@@ -43,17 +51,47 @@
             <SplitView.Pane>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <ScrollViewer Margin="2" Background="White" Grid.Row="0" HorizontalScrollMode="Auto" HorizontalScrollBarVisibility="Auto">
-                        <controls:IndexView/>
-                    </ScrollViewer>
+                    <StackPanel Grid.Row="0" Padding="2">
+                        <Border BorderThickness="0,0,0,1" Margin="20,0,10,10" Padding="0,5" BorderBrush="White">
+                            <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Foreground="White" Text="Vos données"/>
+                        </Border>
+                        <Button x:Name="BackInListHistoryBtn" Visibility="Collapsed" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Click="BackInListHistoryBtn_Click">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <SymbolIcon HorizontalAlignment="Left" Symbol="Back" Grid.Column="0"/>
+                                <TextBlock Margin="10,0" HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Left" Grid.Column="1">Précedent</TextBlock>
+                            </Grid>
+                        </Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="45"/>
+                            </Grid.ColumnDefinitions>
+                            <ListView Grid.Column="0" x:Name="Elements" IsItemClickEnabled="True" SelectionMode="Multiple"
+                                  SelectionChanged="Elements_SelectionChanged"
+                                  ItemsSource="{x:Bind CurrentList, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}"  ItemTemplateSelector="{StaticResource SubElementTemplateSelector}"/>
+                            <ListView Grid.Column="1" x:Name="EnterInLists" IsItemClickEnabled="True" SelectionMode="None"
+                                  ItemClick="EnterInLists_ItemClick"
+                                  ItemsSource="{x:Bind CurrentList, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <SymbolIcon Symbol="Forward" Foreground="White"/>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </StackPanel>
                     <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
-                        <ListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+                        <!--<ListView HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
                             <ListViewHeaderItem Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
                                 <Grid>
-                                    <Grid.ColumnDefinitions>
+                                    <<Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
@@ -81,7 +119,8 @@
                                     <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Nouvelle image</TextBlock>
                                 </Grid>
                             </ListViewHeaderItem>
-                        </ListView>
+                        </ListView>-->
+                        <Border Margin="10,5" BorderThickness="0,1,0,0" BorderBrush="White" HorizontalAlignment="Stretch"/>
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" Click="DetailsButton_Click">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -95,7 +134,7 @@
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>
-            <SplitView x:Name="RightPane" DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Right">
+            <SplitView x:Name="RightPane" DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="False" OpenPaneLength="300" PanePlacement="Right">
                 <SplitView.Pane>
                     <Grid Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>

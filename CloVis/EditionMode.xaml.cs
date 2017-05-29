@@ -1,8 +1,11 @@
 ﻿using Resume;
+using ResumeElements;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -21,24 +24,77 @@ namespace CloVis
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class EditionMode : Page
+    public sealed partial class EditionMode : Page, INotifyPropertyChanged
     {
         public List<Resume.Resume> Resumes { get => ((App)(Application.Current)).Resumes; }
         public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
+
+        public Stack<ResumeElements.ElementList> ListsHistory { get; set; }
+        public ResumeElements.ElementList CurrentList
+        {
+            get => ListsHistory.Peek();
+        }
+        public void AddToListsHistory(ElementList el)
+        {
+            ListsHistory.Push(el);
+            if (ListsHistory.Count > 1)
+                BackInListHistoryBtn.Visibility = Visibility.Visible;
+
+            NotifyPropertyChanged("CurrentList");
+            NotifyPropertyChanged("ListsHistory");
+        }
+
+        public ElementList RemoveLastInListsHistory()
+        {
+            ElementList res = null;
+
+            if (ListsHistory.Count > 1)
+                res = ListsHistory.Pop();
+            else
+            {
+                BackInListHistoryBtn.Visibility = Visibility.Collapsed;
+                res = ListsHistory.Peek();
+            }
+
+            NotifyPropertyChanged("CurrentList");
+            NotifyPropertyChanged("ListsHistory");
+
+            return res;
+        }
 
         private Resume.Resume resume;
         public Resume.Resume Resume { get => resume; set => resume = value; }
 
         public bool IsModified { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public EditionMode()
         {
             this.InitializeComponent();
             IsModified = false;
-
+            ListsHistory = new Stack<ElementList>();
+            AddToListsHistory(Index.Root);
             // Handle the back button use : (go back to start page)
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= (Application.Current as App).OnBackRequested;
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += EditionMode_BackRequested;
+            PropertyChanged += EditionMode_PropertyChanged;
+        }
+
+        private void EditionMode_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case "CurrentList":
+                    break;
+                default:
+                    break;
+            }
+            //throw new NotImplementedException();
         }
 
         private async void EditionMode_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
@@ -182,6 +238,22 @@ namespace CloVis
             }
             else
                 return ClosingResult.Close;
+        }
+
+        private void BackInListHistoryBtn_Click(object sender, RoutedEventArgs e)
+        {
+            RemoveLastInListsHistory();
+        }
+
+        private void Elements_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //throw new NotImplementedException();
+        }
+
+        private void EnterInLists_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is ElementList el)
+                AddToListsHistory(el);
         }
     }
 }
