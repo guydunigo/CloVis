@@ -21,7 +21,7 @@ namespace Resume
             var templates = await GetTemplateFoldersList();
             var temp = new List<StorageFolder>(resumes);
 
-            foreach(StorageFolder sf in templates)
+            foreach (StorageFolder sf in templates)
             {
                 temp.Add(sf);
             }
@@ -90,7 +90,7 @@ namespace Resume
 
         public static async void Save_File(Resume resumetosave)
         {
-            StorageFolder folder = await  GetLocalResumeFolder();
+            StorageFolder folder = await GetLocalResumeFolder();
 
             using (var stream = await folder.OpenStreamForWriteAsync(resumetosave.Name + ".cv", CreationCollisionOption.ReplaceExisting))
             {
@@ -127,7 +127,7 @@ namespace Resume
                         await writer.WriteElementStringAsync("", "img_dependant", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Image.IsIndependant));
                     }
                     await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Angle));
-                    await writer.WriteElementStringAsync("","Shape","Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Shape));
+                    await writer.WriteElementStringAsync("", "Shape", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Shape));
                     await writer.WriteElementStringAsync("", "Color_A", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.A));
                     await writer.WriteElementStringAsync("", "Color_R", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.R));
                     await writer.WriteElementStringAsync("", "Color_G", "Resume", Convert.ToString(resumetosave.Layout.BackBoxes[num].Fill.G));
@@ -160,7 +160,7 @@ namespace Resume
                 }
                 await writer.WriteEndElementAsync();
                 Save_Font(resumetosave, writer);
-                await writer.WriteEndElementAsync(); 
+                await writer.WriteEndElementAsync();
                 await writer.WriteEndDocumentAsync();
                 await writer.FlushAsync();
             }
@@ -292,7 +292,7 @@ namespace Resume
             foreach (var j in list.Values)
             {
                 await writer.WriteStartElementAsync("", "Element", "Resume");
-                if (j is ElementList<Element> sous_list)  Save_ElementList(sous_list, writer, numT);
+                if (j is ElementList<Element> sous_list) Save_ElementList(sous_list, writer, numT);
                 if (j is Data Ldata && !(j is Data<string>))
                 {
                     await writer.WriteStartElementAsync("", "Data_Element", "Resume");
@@ -361,7 +361,7 @@ namespace Resume
 
         public static async Task<Resume> Read_file(string filename, StorageFolder folder)
         {
-          //  StorageFolder folder = await GetLocalResumeFolder();
+            //  StorageFolder folder = await GetLocalResumeFolder();
             Resume resumetoread = new Resume(filename);
 
             using (var stream = await folder.OpenStreamForReadAsync(filename + ".cv"))
@@ -379,7 +379,7 @@ namespace Resume
                 BoxBackgroundShape Shape = BoxBackgroundShape.Rectangle;
                 string Img_name = "";
                 bool Img_dep = false;
-                double strokethikness =0 ;
+                double strokethikness = 0;
                 double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
                 byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
                 //data 
@@ -388,7 +388,7 @@ namespace Resume
                 string[] DS_name = new string[10], DS_description = new string[10], DS_value = new string[10];
                 double[] DS_level = new double[10];
                 bool[] DS_dependant = new bool[10], DS_def = new bool[10];
-                string[,] DS_categorie = new string[10,10];
+                string[,] DS_categorie = new string[10, 10];
                 int dscatnum = 0;
 
                 //liste 
@@ -400,7 +400,7 @@ namespace Resume
                 string[] DD_format = new string[10], DD_name = new string[10], DD_description = new string[10], DD_value = new string[10];
                 double[] DD_level = new double[10];
                 bool[] DD_dependant = new bool[10], DD_def = new bool[10];
-                string[,] DD_categorie = new string[10,10];
+                string[,] DD_categorie = new string[10, 10];
                 DateTime[] DD_start = new DateTime[10], DD_end = new DateTime[10];
                 for (int i = 0; i < 10; i++) { DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); }
                 int ddcatnum = 0;
@@ -420,6 +420,7 @@ namespace Resume
                 byte[] Ft_text_color_a = new byte[10], Ft_text_color_r = new byte[10], Ft_text_color_g = new byte[10], Ft_text_color_b = new byte[10];
                 bool[] Ft_text_italic = new bool[10], Ft_text_bold = new bool[10], Ft_text_underlined = new bool[10], Ft_text_uppercase = new bool[10];
 
+                for (int i = 0; i < 10; i++) { DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; L_Name[i] = ""; DD_format[i] = ""; DD_name[i] = ""; DD_description[i] = ""; DD_value[i] = ""; Ft_name[i] = ""; Ft_source[i] = ""; Ft_text_name[i] = ""; Ft_text_source[i] = ""; }
                 //---------début lecture
                 resumetoread.Layout = new Layout();
                 while (reader.Read())
@@ -541,7 +542,7 @@ namespace Resume
                                     if (balise == "DD_value") DD_value[dde] = reader.Value;
                                     if (balise == "DD_dependant") DD_dependant[dde] = bool.Parse(reader.Value);
                                     if (balise == "DD_default") DD_def[dde] = bool.Parse(reader.Value);
-                                    if (balise == "DD_categorie") { ddcatnum += 1; DD_categorie[dde, ddcatnum] = reader.Value;  }
+                                    if (balise == "DD_categorie") { ddcatnum += 1; DD_categorie[dde, ddcatnum] = reader.Value; }
                                     if (balise == "DD_Format") DD_format[dde] = reader.Value;
                                     if (balise == "DD_start") DD_start[dde] = Convert.ToDateTime(reader.Value);
                                     if (balise == "DD_end") DD_end[dde] = Convert.ToDateTime(reader.Value);
@@ -563,7 +564,7 @@ namespace Resume
                                     for (int i = 1; i <= ft; i++)
                                     {
                                         //pbs !( source a changer)
-                                        resumetoread.Fonts.List.Add(new FontElement( Ft_source[i], Ft_size[i], new Color() {A= Ft_color_a[i], R= Ft_color_r[i], G=Ft_color_g[i], B=Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
+                                        resumetoread.Fonts.List.Add(new FontElement(Ft_source[i], Ft_size[i], new Color() { A = Ft_color_a[i], R = Ft_color_r[i], G = Ft_color_g[i], B = Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
                                         Ft_name[i] = "";
                                         Ft_size[i] = 0;
                                         Ft_color_a[i] = 0;
@@ -587,7 +588,7 @@ namespace Resume
                                     }
                                     resumetoread.Layout.AddBackBox(backbox);
                                     Shape = BoxBackgroundShape.Rectangle; Img_name = ""; Img_dep = false; strokethikness = 0;
-                                    box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; 
+                                    box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
                                     Color_A = 0; Color_R = 0; Color_G = 0; Color_B = 0; Color_Border_A = 0; Color_Border_R = 0; Color_Border_G = 0; Color_Border_B = 0;
                                 }
                                 if (liste > 1 && reader.Name == "ElementList")
@@ -600,9 +601,9 @@ namespace Resume
                                         L_Name[liste] = ""; L_def[liste] = false;
                                     }
                                     else nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
-                                    dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def,DD_categorie,ddcatnum, DD_name);
+                                    dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name);
                                     while (dt >= 1) { elem -= 1; dt -= 1; }
-                                    elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
+                                    elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
                                     dts = 0; box = ""; L_Name[liste] = ""; L_def[liste] = false; L_ReadOnly[liste] = false;
                                     liste -= 1; elem -= 1;
                                     break;
@@ -619,7 +620,7 @@ namespace Resume
                                         while (dt >= 1 && elem >= 1) { elem -= 1; dt -= 1; }
                                         while (dts >= 1 && elem >= 1)
                                         {
-                                            elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie,dscatnum, DS_name, elem);
+                                            elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
                                             dts = 0;
                                         }
                                         if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
@@ -646,12 +647,12 @@ namespace Resume
                                         {
                                             for (int i = 1; i <= dts; i++)
                                             {
-                                                var datastr =new Data<string>(DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                                                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
                                                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
                                                 for (int j = 1; j <= dscatnum; j++)
                                                 {
                                                     datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
-                                                    DS_categorie[i,j] = "";
+                                                    DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datastr);
                                                 elem -= 1;
@@ -659,7 +660,7 @@ namespace Resume
                                             dts = 0;
                                         }
                                         if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
-                                           
+
                                         //réinitialisation 
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
@@ -680,24 +681,24 @@ namespace Resume
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
                                         var nvdd = new DataDated<string>(DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
                                         DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = ""; DD_dependant[dde] = false; DD_def[dde] = false; DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
-                                        DD_categorie[dde,1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
+                                        DD_categorie[dde, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
                                         dde = 0;
                                     }
                                     if (dt == 1 && elem == 0) { }
                                     if (dts == 1 && elem == 0)
                                     {
-                                        var nvdt = new Data<string>(DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
+                                        var nvdt = new Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
                                         for (int j = 1; j <= dscatnum; j++)
                                         {
                                             nvdt.AddCategory(new ElementList<Element>(DS_categorie[1, j]));
                                             DS_categorie[1, j] = "";
                                         }
-                                        
+
                                         bnv.Element = nvdt;
                                         resumetoread.Layout.AddTextBox(bnv);
                                         DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0; DS_level[dts] = 0;
-                                        DS_categorie[dts,1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
+                                        DS_categorie[dts, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
                                         dts = 0;
                                     }
                                 }
@@ -723,17 +724,17 @@ namespace Resume
                 Ft_text_italic[i] = false; Ft_text_bold[i] = false; Ft_text_underlined[i] = false; Ft_text_uppercase[i] = false;
                 Ft_text_source[i] = "";
             }
-             return 0;
+            return 0;
         }
 
-        private static int Creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie,int dscatnum, string[] DS_name, int elem)
+        private static int Creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie, int dscatnum, string[] DS_name, int elem)
         {
             for (int i = 1; i <= dts; i++)
             {
-                var datastr =new Data<string>(DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
-                
-               for (int j = 1; j <= dscatnum; j++)
+
+                for (int j = 1; j <= dscatnum; j++)
                 {
                     datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
                     DS_categorie[i, j] = "";
@@ -744,11 +745,11 @@ namespace Resume
             return elem;
         }
 
-        private static int Creation_DDE(Resume resumetoread, ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie,int ddcatnum, string[] DD_name)
+        private static int Creation_DDE(Resume resumetoread, ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie, int ddcatnum, string[] DD_name)
         {
             for (int i = 1; i <= dde; i++)
             {
-                var datadd =new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                var datadd = new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
                 for (int j = 1; j <= ddcatnum; j++)
