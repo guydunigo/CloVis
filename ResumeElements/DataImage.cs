@@ -159,7 +159,7 @@ namespace ResumeElements
 
         public async static Task<StorageFolder> GetAppImageFolder()
         {
-            StorageFolder appFolder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Resources");
             return await appFolder.GetFolderAsync("Images");
         }
         public async static Task<StorageFolder> GetLocalImageFolder()

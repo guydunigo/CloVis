@@ -15,9 +15,67 @@ namespace Resume
 {
     public static class FileManagement
     {
+        public async static Task<StorageFolder[]> GetResumeTemplateFoldersList()
+        {
+            var resumes = await GetResumeFoldersList();
+            var templates = await GetTemplateFoldersList();
+            var temp = new List<StorageFolder>(resumes);
+
+            foreach(StorageFolder sf in templates)
+            {
+                temp.Add(sf);
+            }
+
+            var res = new StorageFolder[temp.Count];
+
+            temp.CopyTo(res);
+
+            return res;
+        }
+
+        public async static Task<StorageFolder[]> GetTemplateFoldersList()
+        {
+            return new StorageFolder[]
+            {
+                await GetLocalTemplateFolder(),
+                await GetAppTemplateFolder()
+            };
+        }
+        public async static Task<StorageFolder> GetAppTemplateFolder()
+        {
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Resources");
+            return await appFolder.GetFolderAsync("Templates");
+        }
+        public async static Task<StorageFolder> GetLocalTemplateFolder()
+        {
+            var name = "Templates";
+            StorageFolder folder;
+            try
+            {
+                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(name);
+            }
+            catch (FileNotFoundException)
+            {
+                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(name);
+            }
+            return folder;
+        }
+        public async static Task<StorageFolder[]> GetResumeFoldersList()
+        {
+            return new StorageFolder[]
+            {
+                await GetLocalResumeFolder(),
+                await GetAppResumeFolder()
+            };
+        }
+        public async static Task<StorageFolder> GetAppResumeFolder()
+        {
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Resources");
+            return await appFolder.GetFolderAsync("Resumes");
+        }
         public async static Task<StorageFolder> GetLocalResumeFolder()
         {
-            var name = "CVs_Clovis";
+            var name = "Resumes";
             StorageFolder folder;
             try
             {

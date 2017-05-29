@@ -192,7 +192,9 @@
     <Content Include="CV_Examples\CV_Example_4.png" />
     <Content Include="CV_Examples\CV_Example_5.png" />
     <Content Include="CV_Examples\CV_Example_6.png" />
-    <Content Include="Images\profile.png" />
+    <Content Include="Resources\Images\profile.png" />
+    <Content Include="Resources\Resumes\CV 2_-_profil.png" />
+    <Content Include="Resources\Templates\Template 0_-_fond.png" />
     <Content Include="TutorialPictures\PageCV.png" />
     <Content Include="TutorialPictures\startpage.png" />
     <Content Include="Properties\Default.rd.xml" />

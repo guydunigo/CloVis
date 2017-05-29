@@ -90,7 +90,7 @@ namespace CloVis.Controls
         {
             if (b.Image != null)
             {
-                var cv_template_Folds = await FileManagement.GetLocalResumeFolder();
+                var cv_template_Folds = await FileManagement.GetResumeTemplateFoldersList();
                 //throw new NotImplementedException("other folders ...");
                 return new ImageBrush() {
                     ImageSource = await DataImage.GetImageSource(b.Image.Value, cv_template_Folds)
