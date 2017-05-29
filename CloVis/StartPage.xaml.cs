@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resume;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -6,6 +7,8 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -89,6 +92,41 @@ namespace CloVis
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Help));
+        }
+
+        private async void Open_Import(object sender, RoutedEventArgs e)
+        {
+
+            FileOpenPicker openPicker = new FileOpenPicker()
+            {
+                ViewMode = PickerViewMode.Thumbnail,
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+
+            openPicker.FileTypeFilter.Add(".cv");
+            var ImportCV = await openPicker.PickSingleFileAsync();
+            
+            if (ImportCV != null)
+            {
+                StorageFolder folder = await FileManagement.GetLocalResumeFolder();
+                await ImportCV.CopyAsync(folder, ImportCV.Name, NameCollisionOption.ReplaceExisting);
+
+                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name));
+
+                bool exist = false;
+                foreach (Resume.Resume r in Resumes)
+                {
+                    if (r.Name == cv.Name)
+                    {
+                        Resumes.Remove(r);
+                        Resumes.Insert(0, cv);
+                        break;
+                        exist = true;
+                    }
+                }
+                if (!exist) Resumes.Add(cv);
+            }
+                       
         }
     }
 }

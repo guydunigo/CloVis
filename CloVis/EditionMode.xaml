@@ -280,13 +280,13 @@
                     <Button x:Name="LeftButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="LeftButtonClick">
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon x:Name="LeftButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
-                            <TextBlock x:Name="LeftButtonText" Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
+                            <!--<TextBlock x:Name="LeftButtonText" Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
                         </StackPanel>
                     </Button>
                     <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>
-                            <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="OpenPane"/>
+                            <!--<TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
+                            <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="ClosePane"/>
                         </StackPanel>
                     </Button>
                 </Grid>

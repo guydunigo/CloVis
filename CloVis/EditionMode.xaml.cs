@@ -136,13 +136,13 @@ namespace CloVis
             if (LeftPane.IsPaneOpen)
             {
             LeftPane.IsPaneOpen = false;
-            LeftButtonText.Text = "augmenter";
+           // LeftButtonText.Text = "augmenter";
             LeftButtonIcon.Symbol = Symbol.OpenPane;
             }
             else
             {
             LeftPane.IsPaneOpen = true;
-            LeftButtonText.Text = "réduire";
+            //LeftButtonText.Text = "réduire";
             LeftButtonIcon.Symbol = Symbol.ClosePane;
             }
 
@@ -152,13 +152,13 @@ namespace CloVis
             if (RightPane.IsPaneOpen)
             {
             RightPane.IsPaneOpen = false;
-            RightButtonText.Text = "augmenter";
+            //RightButtonText.Text = "augmenter";
             RightButtonIcon.Symbol = Symbol.ClosePane;
             }
             else
             {
             RightPane.IsPaneOpen = true;
-            RightButtonText.Text = "réduire";
+           // RightButtonText.Text = "réduire";
             RightButtonIcon.Symbol = Symbol.OpenPane;
             }
         }

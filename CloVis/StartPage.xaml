@@ -66,7 +66,7 @@
                               ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"/>
                               <!--ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"--> 
                     <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White">
+                        <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White" Click="Open_Import">
                             <Grid>
                                 <SymbolIcon HorizontalAlignment="Left" Symbol="OpenFile"/>
                                 <TextBlock Margin="5,0" HorizontalAlignment="Stretch" TextAlignment="Right">Ouvrir / Importer</TextBlock>
