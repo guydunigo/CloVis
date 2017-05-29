@@ -149,6 +149,21 @@ namespace CloVis.Controls
             throw new NotImplementedException();
         }
     }
+    public class ResumeCollectionToObservableConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is IEnumerable<Resume.Resume> ic)
+                return new ObservableCollection<Resume.Resume>(ic);
+            else
+                return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     internal class ElementComparer : IComparer<Element>
     {
