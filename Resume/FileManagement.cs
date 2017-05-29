@@ -359,9 +359,9 @@ namespace Resume
             await writer.WriteEndElementAsync();
         }
 
-        public static async Task<Resume> Read_file(string filename)
+        public static async Task<Resume> Read_file(string filename, StorageFolder folder)
         {
-            StorageFolder folder = await GetLocalResumeFolder();
+          //  StorageFolder folder = await GetLocalResumeFolder();
             Resume resumetoread = new Resume(filename);
 
             using (var stream = await folder.OpenStreamForReadAsync(filename + ".cv"))

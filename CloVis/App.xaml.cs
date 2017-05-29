@@ -96,7 +96,7 @@ namespace CloVis
             Frame root = Window.Current.Content as Frame;
             if (root == null)
                 return;
-            
+
             if (root.CanGoBack)
             {
                 root.GoBack();
@@ -126,7 +126,7 @@ namespace CloVis
             //TODO: enregistrez l'état de l'application et arrêtez toute activité en arrière-plan
             deferral.Complete();
         }
-        
+
         public List<Resume.Resume> Resumes { get; set; }
         public List<Resume.Template> Templates { get; set; }
 
@@ -135,12 +135,27 @@ namespace CloVis
             // async ?
             Resumes = new List<Resume.Resume>
             {
-                ResumeTest.GetResumeTest(),
-                ResumeTest.GetResumeTest2()
+               // ResumeTest.GetResumeTest(),
+               // ResumeTest.GetResumeTest2()
             };
 
-           var temp = await FileManagement.Read_file("CV_test");
-           Resumes.Add(temp);
+            //charger les cv déjà remplis
+            var storagelist = await FileManagement.GetResumeFoldersList();
+            foreach (var stlist in storagelist)
+            {
+                var files = await stlist.GetFilesAsync();
+                foreach (var file in files)
+                {
+                    if (Path.GetExtension(file.Name) == ".cv")
+                    {
+                        var temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Resumes.Add(temp);
+                    }
+                }
+            }
+
+            // var temp = await FileManagement.Read_file("CV_test");
+            // Resumes.Add(temp);
         }
 
         public void LoadTemplates()
@@ -152,7 +167,7 @@ namespace CloVis
             Templates.Add(TemplateTest.GetTemplate_2());
 
             // Fill templates with defaults informations
-            foreach(Template e in Templates)
+            foreach (Template e in Templates)
             {
                 e.UpdateFromIndex();
                 if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
@@ -180,7 +195,12 @@ namespace CloVis
         {
             //throw new NotImplementedException("Async ?")
             //var file_saving = FileManagement.Save_File(cv);
-
+            
+            if (cv is Template temp) // si on met nos infos dedans ça deviens un cv remplis : il faut demander un nom !!!
+            {
+                Templates.Remove(temp);
+                Resumes.Add(cv);
+            }
             FileManagement.Save_File(cv);
             SaveResumeInResumes(cv);
 
@@ -189,6 +209,7 @@ namespace CloVis
 
         public void SaveResumeInResumes(Resume.Resume cv)
         {
+            if (cv is Template) cv.UpdateFromIndex();
             var temp = FindResume(cv.Name);
             if (temp != null)
             {
@@ -199,7 +220,7 @@ namespace CloVis
 
         public Resume.Resume FindResume(string name)
         {
-            foreach(Resume.Resume r in Resumes)
+            foreach (Resume.Resume r in Resumes)
             {
                 if (r.Name == name)
                     return r;

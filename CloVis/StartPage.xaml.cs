@@ -111,7 +111,7 @@ namespace CloVis
                 StorageFolder folder = await FileManagement.GetLocalResumeFolder();
                 await ImportCV.CopyAsync(folder, ImportCV.Name, NameCollisionOption.ReplaceExisting);
 
-                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name));
+                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name),folder);
 
                 bool exist = false;
                 foreach (Resume.Resume r in Resumes)
