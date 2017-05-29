@@ -58,7 +58,6 @@ namespace Resume
             template.Layout.AddBackBox(fond);
             template.Layout.AddBackBox(fond2);
             template.Layout.AddBackBox(fond3);
-            template.Layout.AddBackBox(bg);
 
             return template;
         }
