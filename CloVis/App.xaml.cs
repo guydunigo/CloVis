@@ -159,13 +159,15 @@ namespace CloVis
             // Resumes.Add(temp);
         }
 
-        public async void LoadTemplates()
+        public async Task LoadTemplates()
         {
-            Templates = new List<Template>();
-            // async ?
+            Templates = new List<Template>
+            {
+                // async ?
 
-            Templates.Add(TemplateTest.GetTemplate_1());
-            Templates.Add(TemplateTest.GetTemplate_2());
+                TemplateTest.GetTemplate_1(),
+                TemplateTest.GetTemplate_2()
+            };
 
             // Fill templates with defaults informations
             foreach (Template e in Templates)
@@ -192,7 +194,7 @@ namespace CloVis
         public async Task LoadContent()
         {
             await LoadResumes();
-            LoadTemplates();
+            await LoadTemplates();
         }
 
         public void LoadIndex()
