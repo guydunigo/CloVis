@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<CV2 xmlns="Resume">
+<CV1 xmlns="Resume">
   <Layout>
     <BackBox>
       <x>0</x>
-      <y>90</y>
+      <y>70</y>
       <z>10</z>
       <SizeX>210</SizeX>
-      <SizeY>50</SizeY>
+      <SizeY>60</SizeY>
       <angle>0</angle>
       <Shape>Rectangle</Shape>
       <Color_A>140</Color_A>
@@ -21,19 +21,36 @@
       <Border_radius>0</Border_radius>
     </BackBox>
     <BackBox>
-      <x>80</x>
-      <y>95</y>
+      <x>115</x>
+      <y>150</y>
+      <z>30</z>
+      <SizeX>160</SizeX>
+      <SizeY>73</SizeY>
+      <angle>-40</angle>
+      <Shape>Rectangle</Shape>
+      <Color_A>190</Color_A>
+      <Color_R>0</Color_R>
+      <Color_G>255</Color_G>
+      <Color_B>170</Color_B>
+      <StrokeThikness>0</StrokeThikness>
+      <Border_Color_A>0</Border_Color_A>
+      <Border_Color_R>255</Border_Color_R>
+      <Border_Color_G>255</Border_Color_G>
+      <Border_Color_B>255</Border_Color_B>
+      <Border_radius>0</Border_radius>
+    </BackBox>
+    <BackBox>
+      <x>-15</x>
+      <y>-4</y>
       <z>50</z>
-      <SizeX>40</SizeX>
-      <SizeY>40</SizeY>
-      <img_name>CV 2_-_profil</img_name>
-      <img_dependant>True</img_dependant>
-      <angle>0</angle>
-      <Shape>Ellipse</Shape>
+      <SizeX>700</SizeX>
+      <SizeY>65</SizeY>
+      <angle>50</angle>
+      <Shape>Rectangle</Shape>
       <Color_A>255</Color_A>
       <Color_R>255</Color_R>
-      <Color_G>165</Color_G>
-      <Color_B>0</Color_B>
+      <Color_G>200</Color_G>
+      <Color_B>200</Color_B>
       <StrokeThikness>0</StrokeThikness>
       <Border_Color_A>0</Border_Color_A>
       <Border_Color_R>255</Border_Color_R>
@@ -42,94 +59,11 @@
       <Border_radius>0</Border_radius>
     </BackBox>
     <TextBox>
-      <x>15</x>
-      <y>50</y>
+      <x>0</x>
+      <y>150</y>
       <z>60</z>
-      <SizeX>70</SizeX>
-      <SizeY>40</SizeY>
-      <angle>0</angle>
-      <Fonts>
-        <Font_Alignment>Justify</Font_Alignment>
-        <Font>
-          <Font_Name />
-          <Font_font>Garamond</Font_font>
-          <Font_fontSize>5</Font_fontSize>
-          <Font_Color_A>255</Font_Color_A>
-          <Font_Color_R>168</Font_Color_R>
-          <Font_Color_G>215</Font_Color_G>
-          <Font_Color_B>203</Font_Color_B>
-          <Font_Italic>False</Font_Italic>
-          <Font_Bold>False</Font_Bold>
-          <Font_Underlined>False</Font_Underlined>
-          <Font_UpperCase>False</Font_UpperCase>
-        </Font>
-      </Fonts>
-      <ElementList>
-        <List_Name>Objectif</List_Name>
-        <List_Default>True</List_Default>
-        <List_ReadOnly>False</List_ReadOnly>
-        <Element>
-          <ElementList>
-            <List_Name>Mon Objectif</List_Name>
-            <List_Default>True</List_Default>
-            <List_ReadOnly>False</List_ReadOnly>
-            <Element>
-              <DataString_Element>
-                <DS_level>0</DS_level>
-                <DS_name>obj</DS_name>
-                <DS_description />
-                <DS_value>Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !</DS_value>
-                <DS_dependant>True</DS_dependant>
-                <DS_default>True</DS_default>
-                <DS_categories>
-                  <categorie>Mon Objectif</categorie>
-                </DS_categories>
-              </DataString_Element>
-            </Element>
-          </ElementList>
-        </Element>
-      </ElementList>
-    </TextBox>
-    <TextBox>
-      <x>90</x>
-      <y>15</y>
-      <z>60</z>
-      <SizeX>40</SizeX>
-      <SizeY>20</SizeY>
-      <angle>0</angle>
-      <DataString_Element>
-        <DS_level>0</DS_level>
-        <DS_name>Nom</DS_name>
-        <DS_description />
-        <DS_value>Clovis</DS_value>
-        <DS_dependant>True</DS_dependant>
-        <DS_default>True</DS_default>
-        <DS_categories />
-      </DataString_Element>
-    </TextBox>
-    <TextBox>
-      <x>80</x>
-      <y>28</y>
-      <z>60</z>
-      <SizeX>40</SizeX>
-      <SizeY>10</SizeY>
-      <angle>0</angle>
-      <DataString_Element>
-        <DS_level>0</DS_level>
-        <DS_name>Titre</DS_name>
-        <DS_description />
-        <DS_value>Roi des Francs</DS_value>
-        <DS_dependant>True</DS_dependant>
-        <DS_default>True</DS_default>
-        <DS_categories />
-      </DataString_Element>
-    </TextBox>
-    <TextBox>
-      <x>20</x>
-      <y>95</y>
-      <z>60</z>
-      <SizeX>40</SizeX>
-      <SizeY>50</SizeY>
+      <SizeX>105</SizeX>
+      <SizeY>60</SizeY>
       <angle>0</angle>
       <ElementList>
         <List_Name>Compétences</List_Name>
@@ -137,76 +71,89 @@
         <List_ReadOnly>False</List_ReadOnly>
         <Element>
           <ElementList>
-            <List_Name>Diplomatie</List_Name>
+            <List_Name>Informatique</List_Name>
             <List_Default>True</List_Default>
             <List_ReadOnly>False</List_ReadOnly>
             <Element>
               <DataString_Element>
                 <DS_level>0</DS_level>
-                <DS_name>Politique</DS_name>
+                <DS_name>C</DS_name>
                 <DS_description />
-                <DS_value>Politique</DS_value>
+                <DS_value>C</DS_value>
                 <DS_dependant>True</DS_dependant>
                 <DS_default>True</DS_default>
                 <DS_categories>
-                  <categorie>Diplomatie</categorie>
+                  <categorie>Informatique</categorie>
                 </DS_categories>
               </DataString_Element>
             </Element>
             <Element>
               <DataString_Element>
                 <DS_level>0</DS_level>
-                <DS_name>Assassinat</DS_name>
+                <DS_name>C++</DS_name>
                 <DS_description />
-                <DS_value>Assassinat</DS_value>
+                <DS_value>C++</DS_value>
                 <DS_dependant>True</DS_dependant>
                 <DS_default>True</DS_default>
                 <DS_categories>
-                  <categorie>Diplomatie</categorie>
+                  <categorie>Informatique</categorie>
                 </DS_categories>
               </DataString_Element>
             </Element>
             <Element>
               <DataString_Element>
                 <DS_level>0</DS_level>
-                <DS_name>Mariage</DS_name>
+                <DS_name>Java</DS_name>
                 <DS_description />
-                <DS_value>Mariage</DS_value>
+                <DS_value>java</DS_value>
                 <DS_dependant>True</DS_dependant>
                 <DS_default>True</DS_default>
                 <DS_categories>
-                  <categorie>Diplomatie</categorie>
-                </DS_categories>
-              </DataString_Element>
-            </Element>
-            <Element>
-              <DataString_Element>
-                <DS_level>0</DS_level>
-                <DS_name>Soudoiement</DS_name>
-                <DS_description />
-                <DS_value>Soudoiement</DS_value>
-                <DS_dependant>True</DS_dependant>
-                <DS_default>True</DS_default>
-                <DS_categories>
-                  <categorie>Diplomatie</categorie>
+                  <categorie>Informatique</categorie>
                 </DS_categories>
               </DataString_Element>
             </Element>
           </ElementList>
         </Element>
+        <Element>
+          <DataString_Element>
+            <DS_level>0</DS_level>
+            <DS_name>Business process</DS_name>
+            <DS_description />
+            <DS_value>Business Process</DS_value>
+            <DS_dependant>True</DS_dependant>
+            <DS_default>True</DS_default>
+            <DS_categories>
+              <categorie>Compétences</categorie>
+            </DS_categories>
+          </DataString_Element>
+        </Element>
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>140</x>
-      <y>50</y>
-      <z>60</z>
-      <SizeX>80</SizeX>
-      <SizeY>60</SizeY>
+      <x>0</x>
+      <y>0</y>
+      <z>51</z>
+      <SizeX>210</SizeX>
+      <SizeY>40</SizeY>
       <angle>0</angle>
       <ElementList>
         <List_Name>Coordonnées</List_Name>
         <List_Default>True</List_Default>
         <List_ReadOnly>False</List_ReadOnly>
+        <Element>
+          <DataString_Element>
+            <DS_level>0</DS_level>
+            <DS_name>Nom</DS_name>
+            <DS_description />
+            <DS_value>Clovis</DS_value>
+            <DS_dependant>True</DS_dependant>
+            <DS_default>True</DS_default>
+            <DS_categories>
+              <categorie>Coordonnées</categorie>
+            </DS_categories>
+          </DataString_Element>
+        </Element>
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
@@ -225,21 +172,7 @@
             <DS_level>0</DS_level>
             <DS_name>Mél</DS_name>
             <DS_description />
-            <DS_value>clovis@enib.fr</DS_value>
-            <DS_dependant>True</DS_dependant>
-            <DS_default>True</DS_default>
-            <DS_categories>
-              <categorie>Coordonnées</categorie>
-            </DS_categories>
-          </DataString_Element>
-        </Element>
-        <Element>
-          <DataString_Element>
-            <DS_level>0</DS_level>
-            <DS_name>Adresse</DS_name>
-            <DS_description />
-            <DS_value>17 rue de la Réussite
-75012 Paris</DS_value>
+            <DS_value>gloubiboulga@enib.fr</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
@@ -250,11 +183,11 @@
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>140</x>
-      <y>95</y>
+      <x>105</x>
+      <y>150</y>
       <z>60</z>
-      <SizeX>80</SizeX>
-      <SizeY>50</SizeY>
+      <SizeX>105</SizeX>
+      <SizeY>72,5</SizeY>
       <angle>0</angle>
       <ElementList>
         <List_Name>Langues</List_Name>
@@ -263,9 +196,9 @@
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
-            <DS_name>Francique</DS_name>
+            <DS_name>Anglais</DS_name>
             <DS_description />
-            <DS_value>Francique</DS_value>
+            <DS_value>anglais</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
@@ -276,9 +209,9 @@
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
-            <DS_name>Français moderne</DS_name>
+            <DS_name>Allemand</DS_name>
             <DS_description />
-            <DS_value>Français moderne</DS_value>
+            <DS_value>allemand</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
@@ -289,9 +222,9 @@
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
-            <DS_name>Allemand moderne</DS_name>
+            <DS_name>Chinois</DS_name>
             <DS_description />
-            <DS_value>Allemand moderne</DS_value>
+            <DS_value>chinois</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
@@ -302,40 +235,67 @@
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>15</x>
-      <y>160</y>
+      <x>105</x>
+      <y>222,5</y>
       <z>60</z>
-      <SizeX>150</SizeX>
-      <SizeY>15</SizeY>
+      <SizeX>105</SizeX>
+      <SizeY>72,5</SizeY>
       <angle>0</angle>
       <ElementList>
-        <List_Name>Dynastie</List_Name>
+        <List_Name>Diplômes</List_Name>
         <List_Default>True</List_Default>
         <List_ReadOnly>False</List_ReadOnly>
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
-            <DS_name>Mérovingien</DS_name>
+            <DS_name>Flying Spaghetti Monster degree</DS_name>
             <DS_description />
-            <DS_value>Mérovingien</DS_value>
+            <DS_value>Flying Spaghetti Monster degree</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
-              <categorie>Dynastie</categorie>
+              <categorie>Diplômes</categorie>
             </DS_categories>
           </DataString_Element>
           <DataDated_Element>
             <DD_level>0</DD_level>
-            <DD_name>Mérovingien</DD_name>
+            <DD_name>Flying Spaghetti Monster degree</DD_name>
             <DD_description />
-            <DD_value>Mérovingien</DD_value>
-            <DD_start>01/01/0466 00:00:00 +01:00</DD_start>
-            <DD_end>01/01/0001 00:00:00 +00:00</DD_end>
-            <DD_Format>Depuis $1(yyy)$</DD_Format>
+            <DD_value>Flying Spaghetti Monster degree</DD_value>
+            <DD_start>24/12/2017 00:00:00 +01:00</DD_start>
+            <DD_end>24/12/2017 00:00:00 +01:00</DD_end>
+            <DD_Format>Le $1(d)$</DD_Format>
             <DD_dependant>True</DD_dependant>
             <DD_default>True</DD_default>
             <DD_categories>
-              <categorie>Dynastie</categorie>
+              <categorie>Diplômes</categorie>
+            </DD_categories>
+          </DataDated_Element>
+        </Element>
+        <Element>
+          <DataString_Element>
+            <DS_level>0</DS_level>
+            <DS_name>Bac</DS_name>
+            <DS_description />
+            <DS_value>bac</DS_value>
+            <DS_dependant>True</DS_dependant>
+            <DS_default>True</DS_default>
+            <DS_categories>
+              <categorie>Diplômes</categorie>
+            </DS_categories>
+          </DataString_Element>
+          <DataDated_Element>
+            <DD_level>0</DD_level>
+            <DD_name>Bac</DD_name>
+            <DD_description />
+            <DD_value>bac</DD_value>
+            <DD_start>14/11/1992 00:00:00 +01:00</DD_start>
+            <DD_end>14/11/1992 00:00:00 +01:00</DD_end>
+            <DD_Format>Le $1(D)$</DD_Format>
+            <DD_dependant>True</DD_dependant>
+            <DD_default>True</DD_default>
+            <DD_categories>
+              <categorie>Diplômes</categorie>
             </DD_categories>
           </DataDated_Element>
         </Element>
@@ -346,21 +306,21 @@
     <Font_Alignment>Left</Font_Alignment>
     <Font>
       <Font_Name />
-      <Font_font>Garamond</Font_font>
-      <Font_fontSize>5</Font_fontSize>
+      <Font_font>Tahoma</Font_font>
+      <Font_fontSize>7</Font_fontSize>
       <Font_Color_A>255</Font_Color_A>
       <Font_Color_R>0</Font_Color_R>
       <Font_Color_G>0</Font_Color_G>
       <Font_Color_B>255</Font_Color_B>
-      <Font_Italic>False</Font_Italic>
-      <Font_Bold>False</Font_Bold>
-      <Font_Underlined>False</Font_Underlined>
+      <Font_Italic>True</Font_Italic>
+      <Font_Bold>True</Font_Bold>
+      <Font_Underlined>True</Font_Underlined>
       <Font_UpperCase>True</Font_UpperCase>
     </Font>
     <Font>
       <Font_Name />
-      <Font_font>Garamond</Font_font>
-      <Font_fontSize>5</Font_fontSize>
+      <Font_font>Tahoma</Font_font>
+      <Font_fontSize>6</Font_fontSize>
       <Font_Color_A>255</Font_Color_A>
       <Font_Color_R>0</Font_Color_R>
       <Font_Color_G>0</Font_Color_G>
@@ -368,11 +328,11 @@
       <Font_Italic>False</Font_Italic>
       <Font_Bold>True</Font_Bold>
       <Font_Underlined>False</Font_Underlined>
-      <Font_UpperCase>False</Font_UpperCase>
+      <Font_UpperCase>True</Font_UpperCase>
     </Font>
     <Font>
       <Font_Name />
-      <Font_font>Garamond</Font_font>
+      <Font_font>Tahoma</Font_font>
       <Font_fontSize>5</Font_fontSize>
       <Font_Color_A>255</Font_Color_A>
       <Font_Color_R>100</Font_Color_R>
@@ -397,4 +357,4 @@
       <Font_UpperCase>False</Font_UpperCase>
     </Font>
   </Fonts>
-</CV2>
+</CV1>

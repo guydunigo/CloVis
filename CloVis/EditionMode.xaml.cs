@@ -173,6 +173,9 @@ namespace CloVis
 
             (CV.Child as Controls.Resume_Preview).Resume = null;
             (CV.Child as Controls.Resume_Preview).Resume = resume;
+
+            ListsHistory.Clear();
+            AddToListsHistory(Index.Root);
         }
 
         private void ZoomSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
