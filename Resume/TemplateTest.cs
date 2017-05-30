@@ -129,9 +129,7 @@ namespace Resume
             template.Layout.AddTextBox(boite_profession);
             template.Layout.AddTextBox(boite_competences);
             template.Layout.AddBackBox(fond);
-
-
-
+            
             return template;
         }
     }
