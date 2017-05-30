@@ -169,12 +169,6 @@ namespace CloVis
                 TemplateTest.GetTemplate_2()
             };
 
-            // Fill templates with defaults informations
-            foreach (Template e in Templates)
-            {
-                e.UpdateFromIndex();
-                if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
-            }
             //chargement des templates stockés dans les fichiers
             var storagelist = await FileManagement.GetTemplateFoldersList();
             foreach (var stlist in storagelist)
@@ -188,6 +182,13 @@ namespace CloVis
                         Templates.Add(temp as Template);
                     }
                 }
+            }
+
+            // Fill templates with defaults informations
+            foreach (Template e in Templates)
+            {
+                e.UpdateFromIndex();
+                if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
             }
         }
 
