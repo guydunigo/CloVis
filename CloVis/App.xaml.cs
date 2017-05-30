@@ -32,9 +32,6 @@ namespace CloVis
         /// </summary>
         public App()
         {
-            LoadIndex();
-            LoadContent();
-
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }
@@ -44,8 +41,12 @@ namespace CloVis
         /// seront utilisés par exemple au moment du lancement de l'application pour l'ouverture d'un fichier spécifique.
         /// </summary>
         /// <param name="e">Détails concernant la requête et le processus de lancement.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            // Done here (not in the constructor) because of Async problems
+            LoadIndex();
+            await LoadContent();
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // Ne répétez pas l'initialisation de l'application lorsque la fenêtre comporte déjà du contenu,
@@ -130,7 +131,7 @@ namespace CloVis
         public List<Resume.Resume> Resumes { get; set; }
         public List<Resume.Template> Templates { get; set; }
 
-        public async void LoadResumes()
+        public async Task LoadResumes()
         {
             // async ?
             Resumes = new List<Resume.Resume>
@@ -138,7 +139,7 @@ namespace CloVis
                // ResumeTest.GetResumeTest(),
                // ResumeTest.GetResumeTest2()
             };
-
+            
             //charger les cv déjà remplis
             var storagelist = await FileManagement.GetResumeFoldersList();
             foreach (var stlist in storagelist)
@@ -172,11 +173,25 @@ namespace CloVis
                 e.UpdateFromIndex();
                 if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
             }
+            //chargement des templates stockés dans les fichiers
+            var storagelist = await FileManagement.GetTemplateFoldersList();
+            foreach (var stlist in storagelist)
+            {
+                var files = await stlist.GetFilesAsync();
+                foreach (var file in files)
+                {
+                    if (Path.GetExtension(file.Name) == ".cv")
+                    {
+                        var temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Templates.Add(temp);
+                    }
+                }
+            }
         }
 
-        public void LoadContent()
+        public async Task LoadContent()
         {
-            LoadResumes();
+            await LoadResumes();
             LoadTemplates();
         }
 
