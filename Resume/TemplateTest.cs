@@ -106,19 +106,16 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 9,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, true, true, false),    //italic, gras, souligné
-                new FontElement("Times New Roman", 7, new Color() { R = 0, G = 0, B = 150, A = 255 },true, true, false, true),
-                new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 0, A = 255 },true, false, false, false),
-                new FontElement("Tahoma", 4, new Color() { R = 170, G = 0, B = 0, A = 190 },false, false, true, false)
+                new FontElement("Colibri", 3,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var boite_diplomes = new BoxText(170, 8, 20, 64, 193, 0, "Diplômes");
-            var boite_coordonnées = new BoxText(52, 134, 20, 52, 67, 10, "Coordonnées");
-            var boite_langues = new BoxText(113, 150, 10, 28, 24, 0, "Langues");
-            var boite_nom = new BoxText(12, 64, 20, 15, 81, 0, "Nom");
-            var boite_profession = new BoxText(33, 64, 0, 6, 81, 0, "Profession");
-            var boite_competences = new BoxText(112,8,0,28,22,0,"Compétences");
-            var fond = new BoxBackground(0, 0, 0, 297, 210, 0)
+            var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
+            var boite_coordonnées = new BoxText(134, 52, 20, 67, 52, 0, "Coordonnées");
+            var boite_langues = new BoxText(150, 113, 10, 24, 28, 0, "Langues");
+            var boite_nom = new BoxText(64, 12, 20, 81, 15, 0, "Nom");
+            var boite_profession = new BoxText(64, 33, 0, 81, 6, 0, "Profession");
+            var boite_competences = new BoxText(8,112,0,22,28,0,"Compétences");
+            var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
                 Image = new DataImage("Temp2_-_fond", true)
             };
