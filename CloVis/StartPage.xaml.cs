@@ -126,7 +126,7 @@ namespace CloVis
                 }
                 if (!exist) Resumes.Add(cv);
             }
-                       
+            Window.Current.Content = new StartPage();        
         }
     }
 }

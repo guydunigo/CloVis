@@ -213,11 +213,6 @@ namespace CloVis
             //throw new NotImplementedException("Async ?")
             //var file_saving = FileManagement.Save_File(cv);
             
-            if (cv is Template temp) // si on met nos infos dedans ça deviens un cv remplis : il faut demander un nom !!!
-            {
-                Templates.Remove(temp);
-                Resumes.Add(cv);
-            }
             FileManagement.Save_File(cv);
             SaveResumeInResumes(cv);
 
@@ -226,7 +221,6 @@ namespace CloVis
 
         public void SaveResumeInResumes(Resume.Resume cv)
         {
-            if (cv is Template) cv.UpdateFromIndex();
             var temp = FindResume(cv.Name);
             if (temp != null)
             {
