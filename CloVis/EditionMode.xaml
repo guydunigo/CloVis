@@ -285,8 +285,8 @@
                     </Button>
                     <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
                         <StackPanel Orientation="Horizontal">
-                            <!--<TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
                             <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="ClosePane"/>
+                            <!--<TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
                         </StackPanel>
                     </Button>
                 </Grid>

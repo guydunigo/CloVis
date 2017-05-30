@@ -7,16 +7,19 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Data.Pdf;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Graphics.Imaging;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-
 // Pour plus d'informations sur le modèle d'élément Page vierge, consultez la page https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace CloVis
@@ -105,7 +108,7 @@ namespace CloVis
 
             if (res == ClosingResult.Close)
             {
-                (Application.Current as App).OnBackRequested(null,null);
+                (Application.Current as App).OnBackRequested(null, null);
             }
         }
 
@@ -119,7 +122,7 @@ namespace CloVis
         {
             base.OnNavigatedTo(e);
             resume = (e.Parameter as Resume.Resume);
-            CV.Child = new Controls.Resume_Preview() { Resume = resume, BorderThickness=new Thickness(1), BorderBrush=Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
+            CV.Child = new Controls.Resume_Preview() { Resume = resume, BorderThickness = new Thickness(1), BorderBrush = Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
         }
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
@@ -135,15 +138,15 @@ namespace CloVis
         {
             if (LeftPane.IsPaneOpen)
             {
-            LeftPane.IsPaneOpen = false;
-           // LeftButtonText.Text = "augmenter";
-            LeftButtonIcon.Symbol = Symbol.OpenPane;
+                LeftPane.IsPaneOpen = false;
+                // LeftButtonText.Text = "augmenter";
+                LeftButtonIcon.Symbol = Symbol.OpenPane;
             }
             else
             {
-            LeftPane.IsPaneOpen = true;
-            //LeftButtonText.Text = "réduire";
-            LeftButtonIcon.Symbol = Symbol.ClosePane;
+                LeftPane.IsPaneOpen = true;
+                //LeftButtonText.Text = "réduire";
+                LeftButtonIcon.Symbol = Symbol.ClosePane;
             }
 
         }
@@ -151,15 +154,15 @@ namespace CloVis
         {
             if (RightPane.IsPaneOpen)
             {
-            RightPane.IsPaneOpen = false;
-            //RightButtonText.Text = "augmenter";
-            RightButtonIcon.Symbol = Symbol.ClosePane;
+                RightPane.IsPaneOpen = false;
+                //RightButtonText.Text = "augmenter";
+                RightButtonIcon.Symbol = Symbol.ClosePane;
             }
             else
             {
-            RightPane.IsPaneOpen = true;
-           // RightButtonText.Text = "réduire";
-            RightButtonIcon.Symbol = Symbol.OpenPane;
+                RightPane.IsPaneOpen = true;
+                // RightButtonText.Text = "réduire";
+                RightButtonIcon.Symbol = Symbol.OpenPane;
             }
         }
 
@@ -167,7 +170,7 @@ namespace CloVis
         {
             this.Frame.Navigate(typeof(DetailsEdit));
         }
-        
+
         private void Update_Click(object sender, RoutedEventArgs e)
         {
             resume.UpdateFromIndex();
@@ -203,15 +206,37 @@ namespace CloVis
             this.Frame.Navigate(typeof(Help));
         }
 
-        private void Export_Click(object sender, RoutedEventArgs e)
+        private async void Export_Click(object sender, RoutedEventArgs e)
         {
             //this.Frame.Navigate(typeof(ExportToPdf));
+
+            /* // essai écriture en pdf, jpg, début Bitmap ok mais suite : pas les usings correspondants
+            var name = "Resumes";
+            StorageFolder folder;
+            try
+            {
+                folder = await ApplicationData.Current.LocalFolder.GetFolderAsync(name);
+            }
+            catch (FileNotFoundException)
+            {
+                folder = await ApplicationData.Current.LocalFolder.CreateFolderAsync(name);
+            }
+           
+            RenderTargetBitmap rendertarget = new RenderTargetBitmap();
+            await rendertarget.RenderAsync(this);
+            var pixelBuffer = await rendertarget.GetPixelsAsync();
+            using (var stream = new Windows.Storage.Streams.InMemoryRandomAccessStream())
+            {
+                var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, stream);
+                encoder.SetPixelData(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore, (uint)rendertarget.PixelWidth, (uint)rendertarget.PixelHeight, 96d, 96d, pixelBuffer.ToArray());
+
+                await encoder.FlushAsync();
+                //Load and draw the Bitmap image in png
+
+            }
+            */
         }
 
-        private void AppBarButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         public void SaveResume()
         {
