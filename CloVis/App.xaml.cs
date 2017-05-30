@@ -139,7 +139,7 @@ namespace CloVis
                // ResumeTest.GetResumeTest(),
                // ResumeTest.GetResumeTest2()
             };
-
+            
             //charger les cv déjà remplis
             var storagelist = await FileManagement.GetResumeFoldersList();
             foreach (var stlist in storagelist)
@@ -172,6 +172,20 @@ namespace CloVis
             {
                 e.UpdateFromIndex();
                 if (e.Fonts == null) e.Fonts = Fonts.GetDefault();
+            }
+            //chargement des templates stockés dans les fichiers
+            var storagelist = await FileManagement.GetTemplateFoldersList();
+            foreach (var stlist in storagelist)
+            {
+                var files = await stlist.GetFilesAsync();
+                foreach (var file in files)
+                {
+                    if (Path.GetExtension(file.Name) == ".cv")
+                    {
+                        var temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Templates.Add(temp);
+                    }
+                }
             }
         }
 
