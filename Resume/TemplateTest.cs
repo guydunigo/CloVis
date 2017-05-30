@@ -112,10 +112,12 @@ namespace Resume
                 new FontElement("Tahoma", 4, new Color() { R = 170, G = 0, B = 0, A = 190 },false, false, true, false)
             };
 
-            var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "Diplômes");
-            var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
-            var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
-
+            var boite_diplomes = new BoxText(170, 8, 20, 64, 193, 0, "Diplômes");
+            var boite_coordonnées = new BoxText(52, 134, 20, 52, 67, 10, "Coordonnées");
+            var boite_langues = new BoxText(113, 150, 10, 28, 24, 0, "Langues");
+            var boite_nom = new BoxText(12, 64, 20, 15, 81, 0, "Nom");
+            var boite_profession = new BoxText(33, 64, 0, 6, 81, 0, "Profession");
+            var boite_competences = new BoxText(112,8,0,28,22,0,"Compétences");
             var fond = new BoxBackground(0, 0, 0, 297, 210, 0)
             {
                 Fill = new Color() { A = 200, R = 255, G = 255, B = 51 } // fond jaune
@@ -128,6 +130,9 @@ namespace Resume
             template.Layout.AddTextBox(boite_coordonnées);
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddTextBox(boite_langues);
+            template.Layout.AddTextBox(boite_nom);
+            template.Layout.AddTextBox(boite_profession);
+            template.Layout.AddTextBox(boite_competences);
             template.Layout.AddBackBox(fond);
 
 
