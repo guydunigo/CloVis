@@ -635,10 +635,19 @@ namespace Resume
                                         {
                                             for (int i = 1; i <= dde; i++)
                                             {
-                                                nv.Add(new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]));
+                                                var datadd = new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                                                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                                                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
-                                                elem -= 1;
+
+                                                DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                                for (int j = 1; j <= dscatnum; j++)
+                                                {
+                                                    datadd.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    DS_categorie[i, j] = "";
+                                                }
+                                                nv.Add(datadd);
+                                                //elem -= 1;
+                                                dts -= 1;
                                             }
                                             dde = 0;
                                         }
