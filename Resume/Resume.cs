@@ -61,7 +61,8 @@ namespace Resume
 
                 foreach (BoxText bt in Layout.TextBoxes)
                 {
-                    res.Add(bt.Element);
+                    if (bt.Element != null)
+                        res.Add(bt.Element);
                 }
 
                 return res;

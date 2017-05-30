@@ -21,9 +21,9 @@ namespace ResumeElements
         public abstract ICollection Keys { get; }
     }
 
-    public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string,T> where T : Element
+    public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string, T> where T : Element
     {
-        protected Dictionary<string,T> elements;
+        protected Dictionary<string, T> elements;
 
         public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
@@ -52,7 +52,7 @@ namespace ResumeElements
         public override ICollection Keys => elements.Keys;
 
         public override ICollection Values => elements.Values;
-        
+
         public T this[string key]
         {
             get => elements[key];
@@ -71,7 +71,9 @@ namespace ResumeElements
             }
         }
 
-        T IDictionary<string, T>.this[string key] { get => this[key];
+        T IDictionary<string, T>.this[string key]
+        {
+            get => this[key];
             set => this[key] = value;
         }
 
@@ -105,19 +107,16 @@ namespace ResumeElements
             {
                 throw new ArgumentException("A list can't contain itself or another list containing it.");
             }
-            else
+            else if (/*Find(value.Name) == null*/ !ContainsKey(value.Name))
             {
-                if (Find(value.Name) == null)
-                {
-                    elements.Add(value.Name, value);
-                    if (addToElements)
-                        AddToElements(value);
-                    NotifyPropertyChanged("Values");
-                    NotifyPropertyChanged("Keys");
-                }
-                else
-                    throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
+                elements.Add(value.Name, value);
+                if (addToElements)
+                    AddToElements(value);
+                NotifyPropertyChanged("Values");
+                NotifyPropertyChanged("Keys");
             }
+            else // Removing a security, don't do stupid things (like loopholes, ;) ) !
+                throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
         }
         public void Add(string key, T value)
         {
@@ -169,7 +168,7 @@ namespace ResumeElements
             else if (array == null) throw new ArgumentNullException("Undefined array");
 
             int i = 0;
-            foreach(string s in elements.Keys)
+            foreach (string s in elements.Keys)
             {
                 array[index + i] = new KeyValuePair<string, T>(s, elements[s]);
                 i++;
@@ -221,7 +220,7 @@ namespace ResumeElements
         public override void Clear()
         {
             var copy = new List<T>(elements.Values);
-            foreach(T t in copy)
+            foreach (T t in copy)
             {
                 RemoveFromElements(t);
             }
@@ -280,7 +279,7 @@ namespace ResumeElements
                 return this[name];
             }
             else
-                foreach(Element e in es)
+                foreach (Element e in es)
                 {
                     res = e.Find(name);
                     if (res != null) return res;
@@ -295,7 +294,7 @@ namespace ResumeElements
         public override Element Copy()
         {
             var temp = new ElementList<T>(Name, true);
-            foreach(T e in elements.Values)
+            foreach (T e in elements.Values)
             {
                 temp.Add(e.Copy());
             }
@@ -308,7 +307,7 @@ namespace ResumeElements
             var temp = Index.Find(Name);
             if (temp is ElementList<T> l)
             {
-                foreach(T t in elements.Values)
+                foreach (T t in elements.Values)
                 {
                     t.UpdateFromIndex();
                 }
