@@ -106,7 +106,7 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 3,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
             var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
@@ -117,7 +117,7 @@ namespace Resume
             var boite_competences = new BoxText(8,112,0,22,28,0,"Compétences");
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Image = new DataImage("Temp2_-_fond", true)
+                Image = new DataImage("CV_Example_1_empty.png", true)
             };
 
             template.Layout = new Layout();
