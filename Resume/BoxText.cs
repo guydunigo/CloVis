@@ -40,7 +40,7 @@ namespace Resume
         /// <returns></returns>
         public BoxText Copy()
         {
-            return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement, Fonts?.Copy()) { Element = Element.Copy() };
+            return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement, Fonts?.Copy()) { Element = Element?.Copy() };
         }
 
         public void UpdateFromIndex()
