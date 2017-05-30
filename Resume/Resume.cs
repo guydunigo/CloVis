@@ -52,5 +52,20 @@ namespace Resume
                 Name = Name
             };
         }
+
+        public ElementList LocalIndex
+        {
+            get
+            {
+                var res = new ElementList<Element>("Root");
+
+                foreach (BoxText bt in Layout.TextBoxes)
+                {
+                    res.Add(bt.Element);
+                }
+
+                return res;
+            }
+        }
     }
 }

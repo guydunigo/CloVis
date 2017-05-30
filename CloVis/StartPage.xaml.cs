@@ -120,8 +120,8 @@ namespace CloVis
                     {
                         Resumes.Remove(r);
                         Resumes.Insert(0, cv);
-                        break;
                         exist = true;
+                        break;
                     }
                 }
                 if (!exist) Resumes.Add(cv);

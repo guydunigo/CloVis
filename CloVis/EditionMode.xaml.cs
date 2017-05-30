@@ -85,19 +85,6 @@ namespace CloVis
             // Handle the back button use : (go back to start page)
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= (Application.Current as App).OnBackRequested;
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += EditionMode_BackRequested;
-            PropertyChanged += EditionMode_PropertyChanged;
-        }
-
-        private void EditionMode_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "CurrentList":
-                    break;
-                default:
-                    break;
-            }
-            //throw new NotImplementedException();
         }
 
         private async void EditionMode_BackRequested(object sender, Windows.UI.Core.BackRequestedEventArgs e)
@@ -175,10 +162,17 @@ namespace CloVis
         {
             resume.UpdateFromIndex();
 
-            (CV.Child as Controls.Resume_Preview).Resume = null;
-            (CV.Child as Controls.Resume_Preview).Resume = resume;
+            ReloadCV();
 
             IsModified = true;
+        }
+
+        public void ReloadCV()
+        {
+            var temp = resume;
+
+            (CV.Child as Controls.Resume_Preview).Resume = null;
+            (CV.Child as Controls.Resume_Preview).Resume = resume;
         }
 
         private void ZoomSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -270,15 +264,34 @@ namespace CloVis
             RemoveLastInListsHistory();
         }
 
-        private void Elements_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
-
         private void EnterInLists_ItemClick(object sender, ItemClickEventArgs e)
         {
             if (e.ClickedItem is ElementList el)
                 AddToListsHistory(el);
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox c)
+            {
+                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && !parent.ContainsKey(c.Tag as string) && Index.Find(c.Tag as string) is Element elmt)
+                {
+                    parent.Add(elmt.Copy());
+                    ReloadCV();
+                }
+            }
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox c)
+            {
+                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && parent.ContainsKey(c.Tag as string))
+                {
+                    parent.Remove(parent.Find(c.Tag as string));
+                    ReloadCV();
+                }
+            }
         }
     }
 }

@@ -22,13 +22,36 @@
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ElementListView">
-            <TextBlock VerticalAlignment="Center" Foreground="White" Text="{Binding Name}"/>
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0" Tag="{Binding Name}" IsChecked="{Binding Name, Converter={StaticResource IsElmtNameInCVToBoolConverter}, Mode=OneTime}"
+                          Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="White" Text="{Binding Name}"/>
+                <!--<SymbolIcon Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="White" Symbol="Forward"/>-->
+            </Grid>
         </DataTemplate>
         <DataTemplate x:Key="DataView">
-            <TextBlock VerticalAlignment="Center" Foreground="White" Text="{Binding Value}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="35"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Grid.Column="0" Tag="{Binding Name}" IsChecked="{Binding Name, Converter={StaticResource IsElmtNameInCVToBoolConverter}, Mode=OneTime}"
+                          Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="White" Text="{Binding Value}"/>
+            </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="ElementListArrow">
+            <SymbolIcon Symbol="Forward" Foreground="White"/>
+        </DataTemplate>
+        <DataTemplate x:Key="DataNoArrow"/>
         <controls:SubElementTemplateSelector x:Key="SubElementTemplateSelector" TemplateForData="{StaticResource DataView}" TemplateForElementList="{StaticResource ElementListView}"/>
+        <controls:SubElementTemplateSelector x:Key="ArrowOrNotArrow" TemplateForData="{StaticResource DataNoArrow}" TemplateForElementList="{StaticResource ElementListArrow}"/>
         <controls:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
+        <controls:IsElmtNameInCVToBoolConverter x:Key="IsElmtNameInCVToBoolConverter"/>
     </Page.Resources>
 
     <Page.TopAppBar>
@@ -73,18 +96,12 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="45"/>
                             </Grid.ColumnDefinitions>
-                            <ListView Grid.Column="0" x:Name="Elements" IsItemClickEnabled="True" SelectionMode="Multiple"
-                                  SelectionChanged="Elements_SelectionChanged"
+                            <ListView Grid.Column="0" Grid.ColumnSpan="2" x:Name="Elements" IsItemClickEnabled="True" SelectionMode="None"
+                                  ItemClick="EnterInLists_ItemClick"
                                   ItemsSource="{x:Bind CurrentList, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}"  ItemTemplateSelector="{StaticResource SubElementTemplateSelector}"/>
                             <ListView Grid.Column="1" x:Name="EnterInLists" IsItemClickEnabled="True" SelectionMode="None"
                                   ItemClick="EnterInLists_ItemClick"
-                                  ItemsSource="{x:Bind CurrentList, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <SymbolIcon Symbol="Forward" Foreground="White"/>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                  ItemsSource="{x:Bind CurrentList, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}" ItemTemplateSelector="{StaticResource ArrowOrNotArrow}"/>
                         </Grid>
                     </StackPanel>
                     <StackPanel Grid.Row="1" VerticalAlignment="Bottom">
@@ -285,8 +302,8 @@
                     </Button>
                     <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
                         <StackPanel Orientation="Horizontal">
-                            <SymbolIcon x:Name="RightButtonIcon" Margin="5,0" HorizontalAlignment="Right" Symbol="ClosePane"/>
                             <!--<TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
+                            <SymbolIcon x:Name="RightButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
                         </StackPanel>
                     </Button>
                 </Grid>
