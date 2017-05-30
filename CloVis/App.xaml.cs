@@ -136,8 +136,8 @@ namespace CloVis
             // async ?
             Resumes = new List<Resume.Resume>
             {
-               // ResumeTest.GetResumeTest(),
-               // ResumeTest.GetResumeTest2()
+               ResumeTest.GetResumeTest(),
+               ResumeTest.GetResumeTest2()
             };
             
             //charger les cv déjà remplis
