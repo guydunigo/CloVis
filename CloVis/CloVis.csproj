@@ -198,6 +198,7 @@
     <Content Include="Resources\Images\profile.png" />
     <Content Include="Resources\Resumes\CV 2_-_profil.png" />
     <Content Include="Resources\Templates\Temp1_-_fond.png" />
+    <Content Include="Resources\Templates\Temp2_-_fond.png" />
     <Content Include="TutorialPictures\PageCV.png" />
     <Content Include="TutorialPictures\startpage.png" />
     <Content Include="Properties\Default.rd.xml" />

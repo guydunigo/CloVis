@@ -44,7 +44,7 @@ namespace Resume
 
             var fond3 = new BoxBackground(120, 100, 20, 70, 70, 20)
             {
-                Fill = new Color() { A = 200, R=255}
+                Fill = new Color() { A = 200, R = 255 }
             };
 
             template.Layout = new Layout();
@@ -77,10 +77,10 @@ namespace Resume
             var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "Diplômes");
             var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
-            
+
             var fond = new BoxBackground(0, 100, 50, 210, 190, 0)
-            { 
-                Fill = new Color() { A = 200, R = 255, G = 255, B=51} // fond jaune
+            {
+                Fill = new Color() { A = 200, R = 255, G = 255, B = 51 } // fond jaune
             };
 
             var fond2 = new BoxBackground(0, 0, 40, 210, 100)
@@ -95,7 +95,41 @@ namespace Resume
             template.Layout.AddTextBox(boite_langues);
             template.Layout.AddBackBox(fond);
             template.Layout.AddBackBox(fond2);
-           
+
+
+
+            return template;
+        }
+        public static Template GetTemplate_3()
+        {
+            var template = new Template("Temp3");
+
+            var fonts = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 9,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, true, true, false),    //italic, gras, souligné
+                new FontElement("Times New Roman", 7, new Color() { R = 0, G = 0, B = 150, A = 255 },true, true, false, true),
+                new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 0, A = 255 },true, false, false, false),
+                new FontElement("Tahoma", 4, new Color() { R = 170, G = 0, B = 0, A = 190 },false, false, true, false)
+            };
+
+            var boite_diplomes = new BoxText(20, 120, 35, 100, 75, 0, "Diplômes");
+            var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
+            var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
+
+            var fond = new BoxBackground(0, 0, 0, 297, 210, 0)
+            {
+                Fill = new Color() { A = 200, R = 255, G = 255, B = 51 } // fond jaune
+            };
+            var img = new DataImage("Temp2_-_fond", true);
+
+
+            template.Layout = new Layout();
+            template.Fonts = fonts;
+            template.Layout.AddTextBox(boite_coordonnées);
+            template.Layout.AddTextBox(boite_diplomes);
+            template.Layout.AddTextBox(boite_langues);
+            template.Layout.AddBackBox(fond);
+
 
 
             return template;
