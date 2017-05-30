@@ -159,7 +159,7 @@ namespace CloVis
             // Resumes.Add(temp);
         }
 
-        public void LoadTemplates()
+        public async void LoadTemplates()
         {
             Templates = new List<Template>();
             // async ?
@@ -182,8 +182,8 @@ namespace CloVis
                 {
                     if (Path.GetExtension(file.Name) == ".cv")
                     {
-                        var temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
-                        Templates.Add(temp);
+                        Resume.Resume temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Templates.Add(temp as Template);
                     }
                 }
             }
