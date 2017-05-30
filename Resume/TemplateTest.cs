@@ -116,12 +116,10 @@ namespace Resume
             var boite_coordonnées = new BoxText(20, 40, 20, 60, 70, 10, "Coordonnées");
             var boite_langues = new BoxText(20, 200, 10, 100, 50, 0, "Langues");
 
-            var fond = new BoxBackground(0, 0, 0, 297, 210, 0)
+            var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Fill = new Color() { A = 200, R = 255, G = 255, B = 51 } // fond jaune
+                Image = new DataImage("Temp2_-_fond", true)
             };
-            var img = new DataImage("Temp2_-_fond", true);
-
 
             template.Layout = new Layout();
             template.Fonts = fonts;
