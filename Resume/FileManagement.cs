@@ -646,7 +646,7 @@ namespace Resume
                                                     DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datadd);
-                                                //elem -= 1;
+                                                elem -= 1;
                                                 dts -= 1;
                                             }
                                             dde = 0;
