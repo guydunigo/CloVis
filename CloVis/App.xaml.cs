@@ -222,10 +222,15 @@ namespace CloVis
 
         public void SaveResumeInResumes(Resume.Resume cv)
         {
+            
             var temp = FindResume(cv.Name);
             if (temp != null)
             {
                 Resumes.Remove(temp);
+                Resumes.Insert(0, cv);
+            }
+            else
+            {
                 Resumes.Insert(0, cv);
             }
         }
