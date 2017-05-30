@@ -163,6 +163,7 @@ namespace CloVis
             resume.UpdateFromIndex();
 
             ReloadCV();
+            EmptyElementListsHistory();
 
             IsModified = true;
         }
@@ -173,7 +174,10 @@ namespace CloVis
 
             (CV.Child as Controls.Resume_Preview).Resume = null;
             (CV.Child as Controls.Resume_Preview).Resume = resume;
+        }
 
+        public void EmptyElementListsHistory()
+        {
             ListsHistory.Clear();
             AddToListsHistory(Index.Root);
         }
@@ -280,6 +284,7 @@ namespace CloVis
                 if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && !parent.ContainsKey(c.Tag as string) && Index.Find(c.Tag as string) is Element elmt)
                 {
                     parent.Add(elmt.Copy());
+                    IsModified = true;
                     ReloadCV();
                 }
             }
@@ -292,6 +297,7 @@ namespace CloVis
                 if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && parent.ContainsKey(c.Tag as string))
                 {
                     parent.Remove(parent.Find(c.Tag as string));
+                    IsModified = true;
                     ReloadCV();
                 }
             }
