@@ -18,7 +18,7 @@ namespace Resume
             {
                 new Data<string>("Nom", "Clovis", -1, "",true),
                 new Data<string>("Téléphone", "+33660606060", -1, "", true),
-                new Data<string>("Mél", "gloubiboulga@enib.fr", -1, "", true)
+                new Data<string>("Mél", "RoiDesFranc@enib.fr", -1, "", true)
             };
 
             var competences = new ElementList<Element>("Compétences")
@@ -47,30 +47,30 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Tahoma", 7, new Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true), //ARGB 0 on voit rien, 255 opaque
-                new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, true),
-                new FontElement("Tahoma", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
-                new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
+                new FontElement("Tahoma", 7, new Color() { R = 0, G = 0, B = 0, A = 255 },false, true, false, false), //ARGB 0 on voit rien, 255 opaque
+                new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 0, A = 255 },false, false, false, false),
+                new FontElement("Tahoma", 5, new Color() { R = 0, G = 0, B = 0, A = 255 },false, false, false, false),
+                new FontElement("Calibri", 5, new Color() { R = 0, G = 0, B = 0, A = 190 })
             };
 
-            var boite_de_langues = new BoxText(105, 150, 60, 105, 72.5, 0, "Langues"); //boite de texte qui contiendra les competences
-            var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
-            var boite_de_competences = new BoxText(0, 150, 60, 105, 60, 0, "Compétences");
-            var boite_de_diplomes = new BoxText(105, 222.5, 60, 105, 72.5, 0, "Diplômes");
+            var boite_de_langues = new BoxText(10, 230, 60, 105, 72.5, 0, "Langues"); //boite de texte qui contiendra les competences
+            var boite_de_coordonnees = new BoxText(110, 10, 0, 210, 40, 0, "Coordonnées");
+            var boite_de_competences = new BoxText(10, 150, 60, 105, 60, 0, "Compétences");
+            var boite_de_diplomes = new BoxText(10, 100, 60, 105, 72.5, 0, "Diplômes");
 
             var fond = new BoxBackground(0, 70, 10, 210, 60)
             {
-                Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
+                Fill = new Color() { A = 255, R = 196, G = 215, B=237 } //verte un peu transparente
             }; //boite de fond
 
             var fond2 = new BoxBackground(115, 150, 30, 160, 73, -40)
             {
-                Fill = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
+                Fill = new Color() { A = 255, R =171, B = 226, G = 200 } //turquoise ? transparent
             }; //boite de fond
 
             var fond3 = new BoxBackground(-15, -4, 50, 700, 65, 50)
             {
-                Fill = new Color() { A = 255, B = 200, G = 200, R = 255 }
+                Fill = new Color() { A = 255, B = 129, G = 93, R = 55 }
             };
 
             boite_de_competences.Element = competences;
