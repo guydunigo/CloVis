@@ -12,13 +12,32 @@
         <DataTemplate x:Key="CV_Template_Preview">
             <Grid Margin="5" Padding="1" MaxWidth="75">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition MaxHeight="30"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="2"/>
-                <Viewbox Grid.Row="1">
-                    <controls:Resume_Preview Resume="{Binding}"/>
+                <Viewbox Grid.Row="0">
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="2"/>
                 </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <controls:Resume_Preview Resume="{Binding}" IsTextSelectionEnable="False"/>
+                </Viewbox>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="OpenResume_Preview">
+            <Grid Margin="5" Padding="1" MaxWidth="75">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Viewbox Grid.Row="0">
+                    <TextBlock Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="{Binding Name}" Margin="2"/>
+                </Viewbox>
+                <Viewbox Grid.Row="1">
+                    <controls:Resume_Preview Resume="{Binding}" IsTextSelectionEnable="False"/>
+                </Viewbox>
+                <Button Grid.Row="1" x:Name="CloseCV" Tag="{Binding}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Click="CloseCV_Click" Foreground="Red">
+                    <SymbolIcon Foreground="Red" Symbol="Clear"/>
+                </Button>
             </Grid>
         </DataTemplate>
         <DataTemplate x:Key="ElementListView">
@@ -52,6 +71,7 @@
         <controls:SubElementTemplateSelector x:Key="ArrowOrNotArrow" TemplateForData="{StaticResource DataNoArrow}" TemplateForElementList="{StaticResource ElementListArrow}"/>
         <controls:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
         <controls:IsElmtNameInCVToBoolConverter x:Key="IsElmtNameInCVToBoolConverter"/>
+        <controls:ResumeCollectionToObservableConverter x:Key="ResumeCollectionToObservableConverter"/>
     </Page.Resources>
 
     <Page.TopAppBar>
@@ -151,14 +171,24 @@
                     </StackPanel>
                 </Grid>
             </SplitView.Pane>
-            <SplitView x:Name="RightPane" DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="False" OpenPaneLength="300" PanePlacement="Right">
+            <SplitView x:Name="RightPane" DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" OpenPaneLength="300" PanePlacement="Right">
                 <SplitView.Pane>
                     <Grid Padding="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <GridView MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
+                        <GridView MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
+                                  ItemClick="OpenResume_ItemClick" IsItemClickEnabled="True" SelectionMode="Single"
+                                  ItemsSource="{x:Bind OpenResumes, Converter={StaticResource ResumeCollectionToObservableConverter}, Mode=OneWay}" ItemTemplate="{StaticResource OpenResume_Preview}">
+                            <GridView.Header>
+                                <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="0,2">
+                                    <TextBlock VerticalAlignment="Top" Margin="0,0,0,5" HorizontalAlignment="Stretch" Foreground="White" FontSize="20" TextAlignment="Center" Text="CVs ouverts"/>
+                                </Border>
+                            </GridView.Header>
+                        </GridView>
+                        <GridView MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
                                   ItemClick="Resumes_ItemClick" IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind Resumes}" ItemTemplate="{StaticResource CV_Template_Preview }">
                             <GridView.Header>
@@ -200,7 +230,7 @@
                                 </StackPanel>
                             </GridViewItem>-->
                         </GridView>
-                        <GridView BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
+                        <GridView BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="2" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" SelectionMode="None"
                                   ItemClick="Templates_ItemClick" IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind Templates}" ItemTemplate="{StaticResource CV_Template_Preview}">
                             <GridView.Header>
@@ -303,7 +333,7 @@
                     <Button x:Name="RightButton" Background="{ThemeResource CloVisLightBlue}" Foreground="White" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="5" Margin="10,10" BorderThickness="1" BorderBrush="White" Click="RightButtonClick">
                         <StackPanel Orientation="Horizontal">
                             <!--<TextBlock x:Name="RightButtonText" HorizontalAlignment="Stretch" TextAlignment="Right">Réduire</TextBlock>-->
-                            <SymbolIcon x:Name="RightButtonIcon" HorizontalAlignment="Right" Symbol="ClosePane"/>
+                            <SymbolIcon x:Name="RightButtonIcon" HorizontalAlignment="Right" Symbol="OpenPane"/>
                         </StackPanel>
                     </Button>
                 </Grid>

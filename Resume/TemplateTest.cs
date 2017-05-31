@@ -102,7 +102,7 @@ namespace Resume
         }
         public static Template GetTemplate_3()
         {
-            var template = new Template("SimpleGreen");
+            var template = new Template("Green Peace");
 
             var fonts = new Fonts("Polices_cv")
             {
@@ -223,7 +223,7 @@ namespace Resume
 
         public static Template GetTemplate_4()
         {
-            var template = new Template("Black and white");
+            var template = new Template("Black & White");
 
             var fonts = new Fonts("Polices_cv")
             {

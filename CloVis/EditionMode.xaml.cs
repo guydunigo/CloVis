@@ -32,6 +32,61 @@ namespace CloVis
         public List<Resume.Resume> Resumes { get => ((App)(Application.Current)).Resumes; }
         public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
 
+        public List<Resume.Resume> OpenResumes { get; set; }
+
+        private void OpenCV(Resume.Resume res)
+        {
+            Resume = res;
+            OpenResumes.Add(res);
+            NotifyPropertyChanged("OpenResumes");
+            ReloadCV();
+            ReloadElementPanel();
+        }
+        private void CloseCV(Resume.Resume res)
+        {
+            if (OpenResumes.Count > 1)
+            {
+                OpenResumes.Remove(res);
+            }
+            else
+                Back();
+
+            if (Resume == res)
+            {
+                Resume = OpenResumes[0];
+
+                ReloadCV();
+                ReloadElementPanel();
+            }
+
+            NotifyPropertyChanged("OpenResumes");
+        }
+        private void ChangeCV(Resume.Resume res)
+        {
+            if (Resume != res)
+            {
+                Resume = OpenResumes[0];
+
+                ReloadCV();
+                ReloadElementPanel();
+            }
+            
+            NotifyPropertyChanged("OpenResumes");
+        }
+
+        public void ReloadCV()
+        {
+            (CV.Child as Controls.Resume_Preview).Resume = null;
+            (CV.Child as Controls.Resume_Preview).Resume = resume;
+        }
+
+        public void ReloadElementPanel()
+        {
+            NotifyPropertyChanged("CurrentList");
+            NotifyPropertyChanged("ListsHistory");
+            EmptyElementListsHistory();
+        }
+
         public Stack<ResumeElements.ElementList> ListsHistory { get; set; }
         public ResumeElements.ElementList CurrentList
         {
@@ -66,7 +121,7 @@ namespace CloVis
         }
 
         private Resume.Resume resume;
-        public Resume.Resume Resume { get => resume; set => resume = value; }
+        public Resume.Resume Resume { get => resume; set { resume = value; NotifyPropertyChanged("Resume"); } }
 
         public bool IsModified { get; set; }
 
@@ -82,6 +137,8 @@ namespace CloVis
             IsModified = false;
             ListsHistory = new Stack<ElementList>();
             AddToListsHistory(Index.Root);
+            OpenResumes = new List<Resume.Resume>();
+
             // Handle the back button use : (go back to start page)
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= (Application.Current as App).OnBackRequested;
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested += EditionMode_BackRequested;
@@ -108,19 +165,28 @@ namespace CloVis
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            resume = (e.Parameter as Resume.Resume);
+
+            var res = e.Parameter as Resume.Resume;
+            Resume = res;
+            OpenResumes.Add(res);
+            NotifyPropertyChanged("OpenResumes");
+
             CV.Child = new Controls.Resume_Preview() { Resume = resume, BorderThickness = new Thickness(1), BorderBrush = Application.Current.Resources["CloVisBlue"] as SolidColorBrush };
         }
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            if (e.ClickedItem is Resume.Resume r)
+            {
+                OpenCV(r);
+            }
         }
 
         private void Templates_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            Resumes_ItemClick(sender, e);
         }
+
         private void LeftButtonClick(object sender, RoutedEventArgs e)
         {
             if (LeftPane.IsPaneOpen)
@@ -168,13 +234,6 @@ namespace CloVis
             IsModified = true;
         }
 
-        public void ReloadCV()
-        {
-            var temp = resume;
-
-            (CV.Child as Controls.Resume_Preview).Resume = null;
-            (CV.Child as Controls.Resume_Preview).Resume = resume;
-        }
 
         public void EmptyElementListsHistory()
         {
@@ -197,12 +256,11 @@ namespace CloVis
         {
             Back();
         }
-        private async void SaveResume_Click(object sender, RoutedEventArgs e)
+        private void SaveResume_Click(object sender, RoutedEventArgs e)
         {
             SaveResume();
         }
-
-
+        
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Help));
@@ -301,6 +359,29 @@ namespace CloVis
                     ReloadCV();
                 }
             }
+        }
+
+        private async void CloseCV_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button btn && btn.Tag is Resume.Resume r)
+            {
+                if (IsModified == true)
+                {
+                    ClosingResult res = await PreventExitingWithoutSavingAsync();
+
+                    if (res == ClosingResult.Close)
+                    {
+                        CloseCV(r);
+                    }
+                }
+                else
+                    CloseCV(r);
+            }
+        }
+
+        private void OpenResume_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            ChangeCV(e.ClickedItem as Resume.Resume);
         }
     }
 }
