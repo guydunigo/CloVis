@@ -161,8 +161,8 @@ namespace ResumeElements
                 TimeSpan = d.TimeSpan;
                 DisplayFormat = d.DisplayFormat;
             }
-            else
-                throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+            //else
+            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
         public static DataTimeSpan<T> Replace(Data<T> data, TimeSpan timeSpan = default(TimeSpan), string displayFormat = "")

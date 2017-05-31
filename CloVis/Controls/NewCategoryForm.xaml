@@ -10,27 +10,29 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
+    <UserControl.Resources>
+        <controls:CollectionToObservableConverter x:Key="CollectionToObservableConverter"/>
+    </UserControl.Resources>
     <StackPanel HorizontalAlignment="Stretch" Padding="0,10">
         <Border BorderThickness="0,0,0,1" Margin="0,0,0,10" Padding="0,0,0,5" BorderBrush="White">
             <TextBlock Foreground="White" FontSize="18" Text="Nouvelle Catégorie"/>
         </Border>
-        <StackPanel x:Name="Fields">
+        <StackPanel x:Name="Fields" DataContext="{x:Bind IndexRoot,Mode=OneWay}">
             <TextBox x:Name="CatName" Margin="0,0,0,10"  PlaceholderText="Nom de la catégorie" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="CatName_KeyDown"/>
+            <TextBlock Foreground="White" VerticalAlignment="Center" Margin="0,0,0,10" Text="Ajouter à la catégorie :"/>
+            <ComboBox x:Name="CatList" Margin="0,0,0,10" Background="White" BorderBrush="Gray"
+                      ItemsSource="{Binding SubLists.Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button x:Name="CatAdd" Foreground="{ThemeResource CloVisBlue}" Background="White" Click="CatAdd_Click" HorizontalAlignment="Right">
                 <Button.Content>
                     Ajouter
                 </Button.Content>
             </Button>
         </StackPanel>
-        <!--<Button Grid.Row="1" Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Bottom" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <SymbolIcon HorizontalAlignment="Left" Symbol="Back" Grid.Column="0"/>
-                <TextBlock HorizontalAlignment="Stretch" TextAlignment="Right" Grid.Column="1">Glisser dans la liste</TextBlock>
-            </Grid>
-        </Button>-->
     </StackPanel>
 </UserControl>
