@@ -83,7 +83,7 @@ namespace CloVis.Controls
         {
             var temp = await DataImage.GetImagePicker().PickSingleFileAsync();
 
-            if(temp != null)
+            if (temp != null)
             {
                 Img = temp;
                 ImgFileName.Text = Img.Name;

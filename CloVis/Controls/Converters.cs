@@ -179,7 +179,7 @@ namespace CloVis.Controls
             if (value is IEnumerable<Element> ic)
             {
                 var temp = new SortedSet<Element>(new ElementComparer());
-                foreach(Element e in ic)
+                foreach (Element e in ic)
                 {
                     temp.Add(e);
                 }

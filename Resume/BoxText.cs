@@ -8,8 +8,8 @@ using Windows.UI;
 
 namespace Resume
 {
-    
-    public class BoxText: Box
+
+    public class BoxText : Box
     {
         public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "", Fonts fonts = null)//0 on the upper left corner - cm
             : base(x, y, z, sizeX, sizeY, angle)
@@ -31,7 +31,7 @@ namespace Resume
 
         protected ResumeElements.Element element;
         public ResumeElements.Element Element { get => element; set => element = value?.Copy(); }
-        
+
         public string DefaultElement { get; set; }
 
         /// <summary>

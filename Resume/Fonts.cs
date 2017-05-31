@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 
 namespace Resume
 {
-    public class Fonts: ICollection<FontElement>, IList<FontElement>, IEnumerable<FontElement>
+    public class Fonts : ICollection<FontElement>, IList<FontElement>, IEnumerable<FontElement>
     {
         public Fonts(string name, TextAlignment textAlignment = TextAlignment.Left)
         {
@@ -113,7 +113,7 @@ namespace Resume
         public Fonts Copy()
         {
             var temp = new Fonts(Name, TextAlignment);
-            foreach(FontElement e in List)
+            foreach (FontElement e in List)
             {
                 temp.List.Add(e.Copy());
             }

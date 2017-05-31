@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public class DataTimeSpan<T>: Data<T>, INotifyPropertyChanged
+    public class DataTimeSpan<T> : Data<T>, INotifyPropertyChanged
     {
         public DataTimeSpan(T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, span, displayFormat, level, description, isIndependant, isDefault)
         {
@@ -128,7 +128,7 @@ namespace ResumeElements
         {
             var res = "";
             var rank = format.IndexOf("$(");
-            res = format.Substring(rank+2);
+            res = format.Substring(rank + 2);
             rank = res.IndexOf(")$");
             res = res.Substring(0, rank);
 

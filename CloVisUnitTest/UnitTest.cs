@@ -18,7 +18,7 @@ namespace CloVisUnitTest
             list.Add(data);
             Assert.IsTrue(data.Categories.Contains(list));
         }
-        
+
         [TestMethod]
         public void AddListToDataCategory()
         {

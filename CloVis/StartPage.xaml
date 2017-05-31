@@ -52,7 +52,7 @@
             </Grid>
         </DataTemplate>
     </Page.Resources>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <SplitView  DisplayMode="Inline" PaneBackground="{ThemeResource CloVisBlue}" IsPaneOpen="True" PanePlacement="Left" VerticalAlignment="Stretch">
             <SplitView.Pane>
@@ -64,7 +64,7 @@
                     </Grid.RowDefinitions>
                     <ListView x:Name="TopNavLinkList" SelectionMode="None" Grid.Row="0" VerticalAlignment="Stretch"
                               ItemClick="NavLinkList_ItemClick" IsItemClickEnabled="True"/>
-                              <!--ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"--> 
+                    <!--ItemsSource="{x:Bind TopNavLinks}" ItemTemplate="{StaticResource NavLinkItemTemplate}"-->
                     <StackPanel Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                         <Button Background="Transparent" Foreground="White" Height="50" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch" BorderThickness="0,0,0,1" BorderBrush="White" Click="Open_Import">
                             <Grid>

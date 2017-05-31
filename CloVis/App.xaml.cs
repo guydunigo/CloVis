@@ -136,10 +136,10 @@ namespace CloVis
             // async ?
             Resumes = new List<Resume.Resume>
             {
-               //ResumeTest.GetResumeTest(),
-               //ResumeTest.GetResumeTest2()
+                //ResumeTest.GetResumeTest(),
+                //ResumeTest.GetResumeTest2()
             };
-            
+
             //charger les cv déjà remplis
             var storagelist = await FileManagement.GetResumeFoldersList();
             foreach (var stlist in storagelist)
@@ -237,9 +237,9 @@ namespace CloVis
         private async System.Threading.Tasks.Task<string> PreventSavingTemplateWithoutNameAsync()
         {
 
-                var temp = new PreventSavingTemplateWithoutNameDialog();
-                await temp.ShowAsync();
-                return temp.CV_name;
+            var temp = new PreventSavingTemplateWithoutNameDialog();
+            await temp.ShowAsync();
+            return temp.CV_name;
 
         }
 
@@ -248,7 +248,7 @@ namespace CloVis
             //throw new NotImplementedException("Async ?")
             //var file_saving = FileManagement.Save_File(cv);
             var temp = FindResume(cv.Name);
-           
+
             if (temp == null)
             {
                 string res = await PreventSavingTemplateWithoutNameAsync();
@@ -266,7 +266,7 @@ namespace CloVis
 
         public void SaveResumeInResumes(Resume.Resume cv)
         {
-            
+
             var temp = FindResume(cv.Name);
             if (temp != null)
             {

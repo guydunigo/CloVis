@@ -14,7 +14,7 @@
                 Veuillez nommer votre CV.
             </Run>
         </TextBlock>
-         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
             <TextBox x:Name="CvName" Margin="0,0,0,10"  PlaceholderText="Intitulé du CV" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="CvName_KeyDown"/>
             <Button Margin="10, 0" Click="SaveName_Click">
                 Valider
