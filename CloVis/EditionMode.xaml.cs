@@ -50,10 +50,10 @@ namespace CloVis
         public ElementList RemoveLastInListsHistory()
         {
             ElementList res = null;
-
             if (ListsHistory.Count > 1)
                 res = ListsHistory.Pop();
-            else
+
+            if (ListsHistory.Count <= 1)
             {
                 BackInListHistoryBtn.Visibility = Visibility.Collapsed;
                 res = ListsHistory.Peek();
@@ -281,7 +281,7 @@ namespace CloVis
         {
             if (sender is CheckBox c)
             {
-                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && !parent.ContainsKey(c.Tag as string) && Index.Find(c.Tag as string) is Element elmt)
+                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && c.Tag is string s && !parent.ContainsKey(s) && Index.Find(s) is Element elmt)
                 {
                     parent.Add(elmt.Copy());
                     IsModified = true;
@@ -294,7 +294,7 @@ namespace CloVis
         {
             if (sender is CheckBox c)
             {
-                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && parent.ContainsKey(c.Tag as string))
+                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && c.Tag is string s && parent.ContainsKey(s))
                 {
                     parent.Remove(parent.Find(c.Tag as string));
                     IsModified = true;
