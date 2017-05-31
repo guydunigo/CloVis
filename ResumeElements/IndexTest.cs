@@ -13,6 +13,7 @@ namespace ResumeElements
             (Index.DataIndex["Nom"] as Data<string>).Value = "Clovis";
             (Index.DataIndex["Téléphone"] as Data<string>).Value = "+33660606060";
             (Index.DataIndex["Mél"] as Data<string>).Value = "robert@enib.fr";
+            (Index.DataIndex["Profession"] as Data<string>).Value = "Ingénieur ENIB";
 
             Index.Root["Compétences"].Add(new ElementList<Element>("Informatique")
             {

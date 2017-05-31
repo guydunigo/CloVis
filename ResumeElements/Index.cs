@@ -108,6 +108,7 @@ namespace ResumeElements
                 new Data<string>("Téléphone", ""),
                 new Data<string>("Mél", ""),
                 new Data<string>("Adresse", ""),
+                new Data<string>("Profession", "")
 
                 //...
             },
