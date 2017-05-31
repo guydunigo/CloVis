@@ -94,7 +94,6 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <Content Include="CV_Examples\CV_Example_1_empty.png" />
     <Content Include="Resources\Resumes\CV 1.cv" />
     <Content Include="Resources\Resumes\CV 2.cv" />
   </ItemGroup>
@@ -200,9 +199,8 @@
     <Content Include="CV_Examples\CV_Example_6.png" />
     <Content Include="Resources\Images\profile.png" />
     <Content Include="Resources\Resumes\CV 2_-_profil.png" />
-    <Content Include="Resources\Templates\CV_Example_1_empty.png" />
-    <Content Include="Resources\Templates\Temp1_-_fond.png" />
-    <Content Include="Resources\Templates\Temp2_-_fond.png" />
+    <Content Include="Resources\Templates\Temp3_-_fond.png" />
+    <Content Include="Resources\Templates\Temp4_-_fond.png" />
     <Content Include="TutorialPictures\PageCV.png" />
     <Content Include="TutorialPictures\startpage.png" />
     <Content Include="Properties\Default.rd.xml" />

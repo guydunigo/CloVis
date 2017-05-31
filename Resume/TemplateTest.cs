@@ -117,7 +117,7 @@ namespace Resume
             var boite_competences = new BoxText(8,112,0,22,28,0,"Compétences");
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Image = new DataImage("CV_Example_1_empty.png", true)
+                Image = new DataImage("Temp3_-_fond", true)
             };
 
             template.Layout = new Layout();
