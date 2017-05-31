@@ -7,78 +7,80 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="30,10">
-        <RichTextBlock TextAlignment="Center" Margin="0,30">
-            <Paragraph>
-                <Bold>Bienvenue sur Clovis</Bold>
-            </Paragraph>
-            <Paragraph>
-                Ce didacticiel vous permettra de prendre en main le logiciel.
-            </Paragraph>
-        </RichTextBlock>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="10"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <RichTextBlock Grid.Row="0" Grid.Column="0">
+    <ScrollViewer Padding="30,0" Background="{ThemeResource CloVisLightBlue}">
+        <StackPanel MaxWidth="1000" Padding="50,20" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <RichTextBlock TextAlignment="Center" Margin="0,10,0,40" FontSize="30" FontWeight="Light" Foreground="{ThemeResource CloVisBlue}">
                 <Paragraph>
-                    <Bold>I-Renseigner ses informations personelles</Bold>
+                    <Bold>Bienvenue sur Clovis</Bold>
                 </Paragraph>
                 <Paragraph>
-                    Avant de créer votre premier CV, ou si vos informations ne sont pas à jour, vous pouvez les renseigner ou les modifier.
+                    Ce didacticiel vous permettra de prendre en main le logiciel.
+                </Paragraph>
+            </RichTextBlock>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <RichTextBlock Grid.Row="0" Grid.Column="0">
+                    <Paragraph>
+                        <Bold>I-Renseigner ses informations personelles</Bold>
+                    </Paragraph>
+                    <Paragraph>
+                        Avant de créer votre premier CV, ou si vos informations ne sont pas à jour, vous pouvez les renseigner ou les modifier.
                 Voici comment accéder aux modifications de vos données :
-                </Paragraph>
+                    </Paragraph>
+                    <Paragraph>
+                        Si vous vous situez sur la page de démarrage, cliquez sur
+                        <Italic>
+                            <Bold>"Modifier vos données"</Bold>
+                        </Italic>
+                    </Paragraph>
+                </RichTextBlock>
+
+                <Viewbox Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                    <Image Source="/TutorialPictures/StartPage.png"/>
+                </Viewbox>
+
+                <RichTextBlock Grid.Row="2" Grid.Column="0">
+                    <Paragraph>
+                        Si vous avez un CV d'ouvert, cliquez sur
+                        <Italic>
+                            <Bold>"Gérer les données"</Bold>
+                        </Italic> dans la barre latérale gauche.
+                    </Paragraph>
+                </RichTextBlock>
+
+                <Viewbox Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Image Source="/TutorialPictures/PageCV.png"/>
+                </Viewbox>
+            </Grid>
+            <RichTextBlock>
                 <Paragraph>
-                    Si vous vous situez sur la page de démarrage, cliquez sur
+                    <Bold>II-Choisir un modèle/CV</Bold>
+                </Paragraph>
+                <Paragraph>Une fois vos informations personnelles rentrées, l'heure est venue de choisir un modèle qui vous convient, ou un CV déjà confectionné.</Paragraph>
+                <Paragraph></Paragraph>
+                <Paragraph>Pour cela, cliquez sur un modèle ou un cv déjà existant ou importez en un en cliquant sur le bouton
                     <Italic>
-                        <Bold>"Modifier vos données"</Bold>
+                        <Bold>"Ouvrir/Importer".</Bold>
                     </Italic>
                 </Paragraph>
-            </RichTextBlock>
-
-            <Viewbox Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Stretch">
-                <Image Source="/TutorialPictures/StartPage.png"/>
-            </Viewbox>
-
-            <RichTextBlock Grid.Row="2" Grid.Column="0">
                 <Paragraph>
-                    Si vous avez un CV d'ouvert, cliquez sur
-                    <Italic>
-                        <Bold>"Gérer les données"</Bold>
-                    </Italic> dans la barre latérale gauche.
+                    <Bold>III-Editer votre CV</Bold>
                 </Paragraph>
+                <Paragraph>Une fois vos informations remplies et le choix de votre CV fait, vous pouvez réorganiser votre CV comme vous le souhaitez.</Paragraph>
+                <Paragraph>Pour ce faire, lorsque vous êtes en mode édition (en ayant cliqué sur le CV voulu), vous pouvez cocher et décocher les informations qui vous semblent nécessaires.</Paragraph>
+
             </RichTextBlock>
-
-            <Viewbox Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
-                <Image Source="/TutorialPictures/PageCV.png"/>
-            </Viewbox>
-        </Grid>
-        <RichTextBlock>
-            <Paragraph>
-                <Bold>II-Choisir un modèle/CV</Bold>
-            </Paragraph>
-            <Paragraph>Une fois vos informations personnelles rentrées, l'heure est venue de choisir un modèle qui vous convient, ou un CV déjà confectionné.</Paragraph>
-            <Paragraph></Paragraph>
-            <Paragraph>Pour cela, cliquez sur un modèle ou un cv déjà existant ou importez en un en cliquant sur le bouton
-                <Italic>
-                    <Bold>"Ouvrir/Importer".</Bold>
-                </Italic>
-            </Paragraph>
-            <Paragraph>
-                <Bold>III-Editer votre CV</Bold>
-            </Paragraph>
-            <Paragraph>Une fois vos informations remplies et le choix de votre CV fait, vous pouvez réorganiser votre CV comme vous le souhaitez.</Paragraph>
-            <Paragraph>Pour ce faire, lorsque vous êtes en mode édition (en ayant cliqué sur le CV voulu), vous pouvez cocher et décocher les informations qui vous semblent nécessaires.</Paragraph>
-
-        </RichTextBlock>
-        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="1,0,0,1" Click="Back_Click">
-            J'ai compris
-        </Button>
-    </StackPanel>
+            <Button VerticalAlignment="Bottom" HorizontalAlignment="Right" Foreground="White" Background="{ThemeResource CloVisBlue}" Margin="0,0,10,10" Click="Back_Click">
+                J'ai compris
+            </Button>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

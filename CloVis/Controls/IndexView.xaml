@@ -15,7 +15,7 @@
         <controls:CollectionToSortedObservableConverter x:Key="CollectionToSortedObservableConverter"/>
     </UserControl.Resources>
 
-    <StackPanel Width="1000" MinWidth="1000">
+    <StackPanel>
         <Border BorderThickness="0,0,0,2" Margin="20,0" Padding="0,10" BorderBrush="{ThemeResource CloVisBlue}">
             <TextBlock FontSize="30" VerticalAlignment="Center" FontWeight="ExtraLight" Text="Vos données"/>
         </Border>
