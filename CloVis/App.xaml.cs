@@ -165,10 +165,10 @@ namespace CloVis
             {
                 // async ?
 
-                TemplateTest.GetTemplate_1(),
+                /*TemplateTest.GetTemplate_1(),
                 TemplateTest.GetTemplate_2(),
                 TemplateTest.GetTemplate_3(),
-                TemplateTest.GetTemplate_4()
+                TemplateTest.GetTemplate_4()*/
             };
 
             //chargement des templates stockés dans les fichiers
