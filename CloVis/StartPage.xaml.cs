@@ -96,6 +96,14 @@ namespace CloVis
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
+            if (sender is MenuFlyoutItem b)
+            {
+                var res = b.Tag as Resume.Resume; // Tag retourne null
+                if(res != null)
+                {
+                    (Application.Current as App).RemoveResume(res);
+                }
+            }
         }
 
         private async void Open_Import(object sender, RoutedEventArgs e)

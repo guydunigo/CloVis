@@ -635,7 +635,7 @@ namespace Resume
                                         {
                                             for (int i = 1; i <= dde; i++)
                                             {
-                                                var datadd = new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                                                var datadd = new DataDated<string>(DD_name[i],DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                                                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                                                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
 
@@ -688,7 +688,7 @@ namespace Resume
                                     if (dde == 1 && elem == 0)
                                     {
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
-                                        var nvdd = new DataDated<string>(DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
+                                        var nvdd = new DataDated<string>(DD_name[dde],DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
                                         DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = ""; DD_dependant[dde] = false; DD_def[dde] = false; DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
                                         DD_categorie[dde, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
                                         dde = 0;
@@ -758,7 +758,7 @@ namespace Resume
         {
             for (int i = 1; i <= dde; i++)
             {
-                var datadd = new DataDated<string>(DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                var datadd = new DataDated<string>(DD_name[i],DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
                 for (int j = 1; j <= ddcatnum; j++)

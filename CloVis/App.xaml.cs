@@ -193,6 +193,29 @@ namespace CloVis
             }
         }
 
+        public async void RemoveResume(Resume.Resume cv)
+        {
+            var temp = FindResume(cv.Name);
+
+            if (temp != null) //si c'est un cv et pas un template
+            {
+                var storagelist = await FileManagement.GetResumeFoldersList();
+                foreach (var stlist in storagelist)
+                {
+                    var files = await stlist.GetFilesAsync();
+                    foreach (var file in files)
+                    {
+                        if (file.Name == cv.Name)
+                        {
+                            await file.DeleteAsync();
+                        }
+                    }
+                }
+                Resumes.Remove(cv);
+            }
+
+        }
+
         public async Task LoadContent()
         {
             await LoadResumes();
