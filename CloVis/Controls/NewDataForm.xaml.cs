@@ -20,10 +20,13 @@ namespace CloVis.Controls
 {
     public sealed partial class NewDataForm : UserControl
     {
+        public ElementList IndexRoot { get; set; }
+
         public NewDataForm()
         {
             this.InitializeComponent();
             this.Loaded += NewDataForm_Loaded;
+            IndexRoot = Index.Root;
         }
 
         private void NewDataForm_Loaded(object sender, RoutedEventArgs e)
@@ -45,7 +48,12 @@ namespace CloVis.Controls
                 txt.Text = "Ce nom est déjà utilisé";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (Index.Find("Divers") is ElementList el)
+            else if (CatList.SelectedIndex == -1)
+            {
+                txt.Text = "Selectionnez une catégorie de destination.";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else if (CatList.SelectedItem is ElementList el)
             {
                 if (DateBtn.IsChecked == true)
                     el.Add(new DataDated<string>(ElmtValue.Text, DateFirst.Date, DateSecond.Date,
@@ -60,7 +68,7 @@ namespace CloVis.Controls
                 DateBtn.IsChecked = false;
                 TimeSpanBtn.IsChecked = false;
 
-                txt.Text = "Donnée ajoutée à Divers.";
+                txt.Text = "Catégorie ajoutée à " + el.Name + ".";
             }
 
             var fo = new Flyout()

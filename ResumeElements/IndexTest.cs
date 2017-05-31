@@ -41,7 +41,6 @@ namespace ResumeElements
                 new Data<string>("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !")
             });
 
-
             Index.Root["Compétences"].Add(new Data<string>("Business Process", 4));
             Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", new DateTime(2016, 12, 24), new DateTime(2017, 06, 1), "En $1(Y)$"));
             Index.Root["Diplômes"].Add(new DataDated<string>("Doctorat en Sociologie", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
