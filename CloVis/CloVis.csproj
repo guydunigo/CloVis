@@ -96,6 +96,8 @@
     <None Include="project.json" />
     <Content Include="Resources\Resumes\CV 1.cv" />
     <Content Include="Resources\Resumes\CV 2.cv" />
+    <None Include="Resources\Templates\BlackAndWhite.cv" />
+    <None Include="Resources\Templates\SimpleGreen.cv" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
