@@ -43,7 +43,7 @@
                     </ContentControl>
                     <Button.Flyout>
                         <MenuFlyout>
-                            <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer"/>
+                            <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Supprimer" Click="Delete_Click"/>
                             <MenuFlyoutSeparator Foreground="{ThemeResource CloVisBlue}"/>
                             <MenuFlyoutItem Background="Transparent" Foreground="{ThemeResource CloVisBlue}" Text="Exporter"/>
                         </MenuFlyout>

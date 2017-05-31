@@ -47,7 +47,7 @@ namespace CloVis
         {
             Resumes = ((App)(Application.Current)).Resumes;
             Templates = ((App)(Application.Current)).Templates;
-            foreach(Resume.Template t in Templates)
+            foreach (Resume.Template t in Templates)
             {
                 t.UpdateFromIndex();
             }
@@ -83,7 +83,7 @@ namespace CloVis
             //((sender as Grid).FindName("Btn") as Button).Visibility = Visibility.Collapsed;
             //throw new NotImplementedException();
         }
-        
+
         private void Details_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(DetailsEdit));
@@ -92,6 +92,10 @@ namespace CloVis
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Help));
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
         }
 
         private async void Open_Import(object sender, RoutedEventArgs e)
@@ -105,13 +109,13 @@ namespace CloVis
 
             openPicker.FileTypeFilter.Add(".cv");
             var ImportCV = await openPicker.PickSingleFileAsync();
-            
+
             if (ImportCV != null)
             {
                 StorageFolder folder = await FileManagement.GetLocalResumeFolder();
                 await ImportCV.CopyAsync(folder, ImportCV.Name, NameCollisionOption.ReplaceExisting);
 
-                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name),folder);
+                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name), folder);
 
                 bool exist = false;
                 foreach (Resume.Resume r in Resumes)
@@ -126,7 +130,7 @@ namespace CloVis
                 }
                 if (!exist) Resumes.Add(cv);
             }
-            Window.Current.Content = new StartPage();        
+            Window.Current.Content = new StartPage();
         }
     }
 }
