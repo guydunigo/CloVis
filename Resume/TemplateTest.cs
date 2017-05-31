@@ -233,7 +233,7 @@ namespace Resume
 
             var fonts_titre = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 10,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                new FontElement("Colibri", 8,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
             var fonts_petit = new Fonts("Polices_cv")
@@ -248,12 +248,15 @@ namespace Resume
             };
 
             var boite_exp = new BoxText(57, 229, 20, 82, 32, 0, "Expériences professionnelles");
-            var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
-            var boite_diplomes = new BoxText(57, 229, 20, 82, 32, 0, "Diplômes");
-
+            var boite_coordonnées = new BoxText(123, 125, 20, 67, 52, 0, "Coordonnées");
+            var boite_competences = new BoxText(57, 229, 20, 82, 32, 0, "Compétences");
+            var boite_tel = new BoxText(123, 125, 20, 24, 6, 0);
+            var boite_mel = new BoxText(67, 136, 20, 46, 6, 0);
+            var boite_adresse = new BoxText(67, 125, 20, 45, 6, 0);
+            var boite_social = new BoxText(123, 136, 20, 24, 6, 0);
             var boite_nom = new BoxText(57, 34, 20, 58, 7, 0, "Nom", fonts_titre);
             var boite_profession = new BoxText(57, 42, 0, 42, 6, 0, "Profession");
-            var boite_competences = new BoxText(7, 112, 0, 22, 28, 0, "Compétences", fonts_petit);
+            var boite_diplomes = new BoxText(58, 164, 0, 82, 32, 0, "Diplômes", fonts_petit);
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
                 Image = new DataImage("Temp4_-_fond", true)
@@ -261,7 +264,10 @@ namespace Resume
 
             template.Layout = new Layout();
             template.Fonts = fonts;
-            template.Layout.AddTextBox(boite_coordonnées);
+            template.Layout.AddTextBox(boite_tel);
+            template.Layout.AddTextBox(boite_mel);
+            template.Layout.AddTextBox(boite_adresse);
+            template.Layout.AddTextBox(boite_social);
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddTextBox(boite_nom);
             template.Layout.AddTextBox(boite_profession);
