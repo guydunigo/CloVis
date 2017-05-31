@@ -120,7 +120,12 @@ namespace Resume
                 new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var fonts_tres_petit = new Fonts("Polices_cv")
+            var fonts_petit_droit = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Right)
+            {
+                new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_tres_petit = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Justify)
             {
                 new FontElement("Gadugi", 4,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
@@ -131,8 +136,28 @@ namespace Resume
                 new FontElement("Gadugi", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
             };
 
-            var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
-            var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
+            var fonts_corps = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Right)
+            {
+                new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, true),
+                new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)
+            };
+
+            var fonts_normal = new Fonts("Polices_cv")
+            {
+                new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false),
+                new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)
+            };
+
+            var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes", fonts_normal);
+            var boite_études = new BoxText(8, 200, 20, 193, 64, 0, "Études", fonts_normal);
+            var boite_pro = new BoxText(8, 220, 20, 193, 64, 0, "Expériences professionnelles", fonts_normal);
+
+            var boite_coordonnées2 = new BoxText(134, 45, 20, 67, 30, 0, "Coordonnées", fonts_corps);
+            var boite_coordonnées = new BoxText(157, 38, 20, 67, 52, 0, "Coordonnées", fonts_langues);
+
+            //var boite_coordonnées1 = new BoxText(134, 52, 20, 67, 52, 0, "Nom", fonts_petit_droit);
+            //var boite_coordonnées2 = new BoxText(134, 59, 20, 67, 52, 0, "Téléphone", fonts_petit_droit);
+            //var boite_coordonnées3= new BoxText(134, 66, 20, 67, 52, 0, "Mél", fonts_petit_droit);
 
             var boite_langues = new BoxText(172, 90, 10, 49, 28, 0, "Langues", fonts_langues);
             var boite_langue_1 = new BoxText(144, 108, 10, 29, 28, 0, "Langue 1", fonts_petit);
@@ -140,8 +165,8 @@ namespace Resume
             var boite_langue_3 = new BoxText(144, 124, 10, 29, 28, 0, "Langue 3", fonts_petit);
             var boite_langue_4 = new BoxText(144, 132, 10, 29, 28, 0, "Langue 4", fonts_petit);
 
-            var boite_d_obj = new BoxText(8, 40, 60, 70, 40, 0, "Mon Objectif", fonts_langues);
-            var boite_d_obj2 = new BoxText(15, 50, 60, 70, 40, 0, "obj", fonts_tres_petit);
+            var boite_d_obj = new BoxText(8, 38, 60, 70, 40, 0, "Mon Objectif", fonts_langues);
+            var boite_d_obj2 = new BoxText(7, 52, 60, 70, 40, 0, "obj", fonts_tres_petit);
 
 
             var boite_compétence_1 = new BoxText(7, 107, 10, 29, 28, 0, "Politique", fonts_petit);
@@ -151,7 +176,14 @@ namespace Resume
 
             var boite_nom = new BoxText(88, 12, 20, 81, 15, 0, "Nom", fonts_titre);
             var boite_profession = new BoxText(84, 33, 0, 81, 20, 0, "Profession");
-            var boite_competences = new BoxText(7,90,0,50,64,0,"Compétences", fonts_langues);
+            var boite_competences = new BoxText(7, 90, 0, 50, 64, 0, "Compétences", fonts_langues);
+
+            var img = new DataImage("profile", true);
+            var boite_photo = new BoxBackground(105 - 50 / 2, 90 + 5, 50, 40, 40, 0, BoxBackgroundShape.Ellipse)
+            {
+                Image = img
+            };
+
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
                 Image = new DataImage("Temp3_-_fond", true)
@@ -159,8 +191,15 @@ namespace Resume
 
             template.Layout = new Layout();
             template.Fonts = fonts;
+            template.Layout.AddTextBox(boite_coordonnées2);
             template.Layout.AddTextBox(boite_coordonnées);
+
+            //template.Layout.AddTextBox(boite_coordonnées1);
+            //template.Layout.AddTextBox(boite_coordonnées2);
+            //template.Layout.AddTextBox(boite_coordonnées3);
             template.Layout.AddTextBox(boite_diplomes);
+            template.Layout.AddTextBox(boite_études);
+            template.Layout.AddTextBox(boite_pro);
             template.Layout.AddTextBox(boite_langues);
             template.Layout.AddTextBox(boite_langue_1);
             template.Layout.AddTextBox(boite_langue_2);
@@ -176,7 +215,8 @@ namespace Resume
             template.Layout.AddTextBox(boite_profession);
             template.Layout.AddTextBox(boite_competences);
             template.Layout.AddBackBox(fond);
-            
+            template.Layout.AddBackBox(boite_photo);
+
             return template;
         }
 

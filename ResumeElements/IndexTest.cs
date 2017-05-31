@@ -43,10 +43,10 @@ namespace ResumeElements
 
 
             Index.Root["Compétences"].Add(new Data<string>("Business Process", 4));
-            Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", new DateTime(2017, 12, 24), new DateTime(2017, 12, 24), "En $1(Y)$"));
-            Index.Root["Diplômes"].Add(new DataDated<string>("Bac", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
-            Index.Root["Études"].Add(new DataDated<string>("Université de Ulm", new DateTime(1992, 11, 14), new DateTime(1998, 11, 14), "De $1(yy)$ à $2(yy)$"));
-            Index.Root["Diplômes"].Add(Index.Find("Université de Ulm"));
+            Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", new DateTime(2016, 12, 24), new DateTime(2017, 06, 1), "En $1(Y)$"));
+            Index.Root["Diplômes"].Add(new DataDated<string>("Doctorat en Sociologie", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
+            Index.Root["Études"].Add(new DataDated<string>("L'école de la vie", new DateTime(466, 11, 14), new DateTime(1998, 08, 24), "De $1(yy)$ à $2(yy)$"));
+            //Index.Root["Diplômes"].Add(Index.Find("Université de Ulm"));
             Index.Root["Expériences professionnelles"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", new TimeSpan(300,0,0,0), "Pendant $(%d)$ jours"));
 
             var temp = new DataDated<string>("Life", new DateTime(2000, 01, 02), new DateTime(2222, 11, 22), "Jusque $2(y)$ et depuis $1(y)$");
