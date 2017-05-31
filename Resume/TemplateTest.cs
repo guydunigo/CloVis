@@ -102,7 +102,7 @@ namespace Resume
         }
         public static Template GetTemplate_3()
         {
-            var template = new Template("Temp3");
+            var template = new Template("SimpleGreen");
 
             var fonts = new Fonts("Polices_cv")
             {
@@ -223,7 +223,7 @@ namespace Resume
 
         public static Template GetTemplate_4()
         {
-            var template = new Template("Temp4");
+            var template = new Template("Black and white");
 
             var fonts = new Fonts("Polices_cv")
             {
@@ -256,7 +256,7 @@ namespace Resume
             var boite_competences = new BoxText(7, 112, 0, 22, 28, 0, "Compétences", fonts_petit);
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Image = new DataImage("Temp3_-_fond", true)
+                Image = new DataImage("Temp4_-_fond", true)
             };
 
             template.Layout = new Layout();
