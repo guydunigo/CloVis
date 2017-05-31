@@ -13,7 +13,7 @@ namespace Resume
     public class FontElement
     {
 
-        public FontElement(string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false, double lineHeight = 0, string name = "")
+        public FontElement(string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false, string name = "")
         {
             Name = name;
             FontName = fontFamilyName;
@@ -24,7 +24,6 @@ namespace Resume
             Bold = bold;
             Underlined = underlined;
             UpperCase = upperCase;
-            LineHeight = lineHeight;
         }
         /* public FontElement(string fontFamilyName, double size, Color color, bool italic = false, bool bold = false, bool underlined = false, bool upperCase = false, string name = "")
              : this(new FontFamily(fontFamilyName), size, color, italic, bold, underlined, upperCase, name)
@@ -42,7 +41,6 @@ namespace Resume
              UpperCase = upperCase;
          }
          */
-
         public string Name { get; }
 
         public string FontName { get; set; }
@@ -57,7 +55,6 @@ namespace Resume
         /// Defines wether the text shown with this PoliceElement will be in upper case no matter how the user entered it or not
         /// </summary>
         public bool UpperCase { get; set; }
-        public double LineHeight { get; set; }
 
         /// <summary>
         /// Deep copy
@@ -65,7 +62,7 @@ namespace Resume
         /// <returns></returns>
         public FontElement Copy()
         {
-            return new FontElement(FontName, FontSize, Color, Italic, Bold, Underlined, UpperCase, LineHeight, Name);
+            return new FontElement(FontName, FontSize, Color, Italic, Bold, Underlined, UpperCase, Name);
         }
     }
 }
