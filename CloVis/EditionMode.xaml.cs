@@ -197,9 +197,31 @@ namespace CloVis
         {
             Back();
         }
-        private void SaveResume_Click(object sender, RoutedEventArgs e)
+        private async void SaveResume_Click(object sender, RoutedEventArgs e)
         {
-            SaveResume();
+            if (resume is Template)
+            {
+                string res = await PreventSavingTemplateWithoutNameAsync();
+                if (res != "")
+                {
+                    resume.Name = res;
+                    SaveResume();
+                }
+            }
+            else SaveResume();
+        }
+
+        private async System.Threading.Tasks.Task<string> PreventSavingTemplateWithoutNameAsync()
+        {
+            if (IsModified == true)
+            {
+                var temp = new PreventSavingTemplateWithoutNameDialog();
+                await temp.ShowAsync();
+                return temp.CV_name;
+                
+            }
+            else
+                return "";
         }
 
         private void Help_Click(object sender, RoutedEventArgs e)
@@ -237,7 +259,6 @@ namespace CloVis
             }
             */
         }
-
 
         public void SaveResume()
         {

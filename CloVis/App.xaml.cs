@@ -246,6 +246,16 @@ namespace CloVis
             return null;
         }
 
+        public bool ExistResume(string name)
+        {
+            foreach (Resume.Resume r in Resumes)
+            {
+                if (r.Name == name)
+                    return true;
+            }
+            return false;
+        }
+
         public void SaveResumes()
         {
             throw new NotImplementedException();

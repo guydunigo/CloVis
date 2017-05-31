@@ -1,0 +1,24 @@
+﻿<ContentDialog
+    x:Class="CloVis.PreventSavingTemplateWithoutNameDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CloVis"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="">
+
+    <StackPanel>
+        <TextBlock Margin="10,10,10,20" HorizontalAlignment="Stretch" TextWrapping="WrapWholeWords" TextAlignment="Justify">
+            <Run Foreground="OrangeRed">
+                Veuillez nommer votre CV.
+            </Run>
+        </TextBlock>
+         <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <TextBox x:Name="CvName" Margin="0,0,0,10"  PlaceholderText="Intitulé du CV" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="CvName_KeyDown"/>
+            <Button Margin="10, 0" Click="SaveName_Click">
+                Valider
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</ContentDialog>

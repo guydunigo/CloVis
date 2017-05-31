@@ -136,6 +136,9 @@
     <Compile Include="Controls\NewImageForm.xaml.cs">
       <DependentUpon>NewImageForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PreventSavingTemplateWithoutNameDialog.xaml.cs">
+      <DependentUpon>PreventSavingTemplateWithoutNameDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PreventClosingWithoutSavingDialog.xaml.cs">
       <DependentUpon>PreventClosingWithoutSavingDialog.xaml</DependentUpon>
     </Compile>
@@ -260,6 +263,10 @@
     <Page Include="Controls\NewImageForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PreventSavingTemplateWithoutNameDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="PreventClosingWithoutSavingDialog.xaml">
       <SubType>Designer</SubType>
