@@ -17,6 +17,7 @@ namespace Resume
         {
             Name = name;
         }
+
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
         /// It is maybe advisable to separate those two kinds of boxes

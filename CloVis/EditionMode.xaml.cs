@@ -197,10 +197,11 @@ namespace CloVis
         {
             Back();
         }
-        private void SaveResume_Click(object sender, RoutedEventArgs e)
+        private async void SaveResume_Click(object sender, RoutedEventArgs e)
         {
             SaveResume();
         }
+
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
@@ -237,7 +238,6 @@ namespace CloVis
             }
             */
         }
-
 
         public void SaveResume()
         {

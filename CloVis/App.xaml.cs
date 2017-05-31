@@ -210,11 +210,30 @@ namespace CloVis
             Index.ReloadImages();
         }
 
-        public void SaveResume(Resume.Resume cv)
+        private async System.Threading.Tasks.Task<string> PreventSavingTemplateWithoutNameAsync()
+        {
+
+                var temp = new PreventSavingTemplateWithoutNameDialog();
+                await temp.ShowAsync();
+                return temp.CV_name;
+
+        }
+
+        public async void SaveResume(Resume.Resume cv)
         {
             //throw new NotImplementedException("Async ?")
             //var file_saving = FileManagement.Save_File(cv);
-            
+            var temp = FindResume(cv.Name);
+           
+            if (temp == null)
+            {
+                string res = await PreventSavingTemplateWithoutNameAsync();
+                if (res != "")
+                {
+                    cv.Name = res;
+                }
+            }
+
             FileManagement.Save_File(cv);
             SaveResumeInResumes(cv);
 
@@ -244,6 +263,16 @@ namespace CloVis
                     return r;
             }
             return null;
+        }
+
+        public bool ExistResume(string name)
+        {
+            foreach (Resume.Resume r in Resumes)
+            {
+                if (r.Name == name)
+                    return true;
+            }
+            return false;
         }
 
         public void SaveResumes()
