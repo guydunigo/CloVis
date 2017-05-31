@@ -289,8 +289,8 @@ namespace ResumeElements
                 EndTime = d.EndTime;
                 DisplayFormat = d.DisplayFormat;
             }
-            else
-                throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+            //else
+            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
         public static DataDated<T> Replace(Data<T> data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")

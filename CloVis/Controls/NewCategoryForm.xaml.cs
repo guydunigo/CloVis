@@ -20,9 +20,12 @@ namespace CloVis.Controls
 {
     public sealed partial class NewCategoryForm : UserControl
     {
+        public ElementList IndexRoot { get; set; }
+
         public NewCategoryForm()
         {
             this.InitializeComponent();
+            IndexRoot = Index.Root;
         }
 
         public void Validate(object sender)
@@ -39,12 +42,18 @@ namespace CloVis.Controls
                 txt.Text = "Ce nom est déjà utilisé";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (Index.Find("Divers") is ElementList el)
+            else if (CatList.SelectedIndex == -1)
+            {
+                txt.Text = "Selectionnez une catégorie de destination.";
+                txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
+            }
+            else if (CatList.SelectedItem is ElementList el)
             {
                 el.Add(new ElementList<Element>(CatName.Text));
+
                 CatName.Text = "";
 
-                txt.Text = "Catégorie ajoutée à Divers.";
+                txt.Text = "Catégorie ajoutée à " + el.Name + ".";
             }
 
             var fo = new Flyout()

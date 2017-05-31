@@ -19,6 +19,8 @@ namespace ResumeElements
         public abstract void Clear();
         public abstract ICollection Values { get; }
         public abstract ICollection Keys { get; }
+
+        public abstract ElementList<ElementList> SubLists { get; }
     }
 
     public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string, T> where T : Element
@@ -30,13 +32,19 @@ namespace ResumeElements
             elements = new Dictionary<string, T>();
         }
 
+        public void NotifyListChanged()
+        {
+            NotifyPropertyChanged("Values");
+            NotifyPropertyChanged("Keys");
+            NotifyPropertyChanged("SubLists");
+        }
+
         protected void RemoveFromElements(Element e)
         {
             if (e is Data temp)
             {
                 temp.RemoveCategory(this);
-                NotifyPropertyChanged("Values");
-                NotifyPropertyChanged("Keys");
+                NotifyListChanged();
             }
         }
         protected void AddToElements(Element e)
@@ -44,8 +52,7 @@ namespace ResumeElements
             if (e is Data temp && !(temp.Categories.Contains(this)))
             {
                 temp.AddCategory(this);
-                NotifyPropertyChanged("Values");
-                NotifyPropertyChanged("Keys");
+                NotifyListChanged();
             }
         }
 
@@ -64,8 +71,7 @@ namespace ResumeElements
                     RemoveFromElements(elements[key]);
                     AddToElements(value);
                     elements[key] = value;
-                    NotifyPropertyChanged("Values");
-                    NotifyPropertyChanged("Keys");
+                    NotifyListChanged();
                 }
                 else throw new ArgumentException("The new value hasn't a name corresponding to the key"); // Or rename it ?
             }
@@ -112,8 +118,7 @@ namespace ResumeElements
                 elements.Add(value.Name, value);
                 if (addToElements)
                     AddToElements(value);
-                NotifyPropertyChanged("Values");
-                NotifyPropertyChanged("Keys");
+                NotifyListChanged();
             }
             //else // Removing a security, don't do stupid things (like loopholes, ;) ) !
             //    throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
@@ -181,8 +186,7 @@ namespace ResumeElements
             {
                 var temp = elements.Remove(value.Name);
                 RemoveFromElements(value);
-                NotifyPropertyChanged("Values");
-                NotifyPropertyChanged("Keys");
+                NotifyListChanged();
                 return temp;
             }
             else return false;
@@ -224,8 +228,7 @@ namespace ResumeElements
             {
                 RemoveFromElements(t);
             }
-            NotifyPropertyChanged("Values");
-            NotifyPropertyChanged("Keys");
+            NotifyListChanged();
             elements.Clear();
         }
 
@@ -318,6 +321,35 @@ namespace ResumeElements
             else
                 throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
             */
+        }
+
+        public override ElementList<ElementList> SubLists
+        {
+            get
+            {
+                ElementList<ElementList> res = null;
+                if (typeof(T) == typeof(Element) || typeof(T) == typeof(ElementList))
+                {
+                    res = new ElementList<ElementList>("Root");
+
+                    ElementList<ElementList> temp = null;
+
+                    foreach (Element e in Values)
+                    {
+                        if (e is ElementList el)
+                        {
+                            res.Add(el);
+                            temp = el.SubLists;
+                            foreach (ElementList ee in temp.Values)
+                            {
+                                res.Add(ee);
+                            }
+                        }
+                    }
+                }
+
+                return res;
+            }
         }
     }
 }
