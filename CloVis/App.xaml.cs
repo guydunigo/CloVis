@@ -136,7 +136,7 @@ namespace CloVis
             // async ?
             Resumes = new List<Resume.Resume>
             {
-                //ResumeTest.GetResumeTest(),
+               // ResumeTest.GetResumeTest(),
                 //ResumeTest.GetResumeTest2()
             };
 

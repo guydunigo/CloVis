@@ -9,15 +9,15 @@
       <SizeY>60</SizeY>
       <angle>0</angle>
       <Shape>Rectangle</Shape>
-      <Color_A>140</Color_A>
-      <Color_R>0</Color_R>
-      <Color_G>255</Color_G>
-      <Color_B>0</Color_B>
+      <Color_A>255</Color_A>
+      <Color_R>196</Color_R>
+      <Color_G>215</Color_G>
+      <Color_B>237</Color_B>
       <StrokeThikness>0</StrokeThikness>
       <Border_Color_A>0</Border_Color_A>
-      <Border_Color_R>255</Border_Color_R>
-      <Border_Color_G>255</Border_Color_G>
-      <Border_Color_B>255</Border_Color_B>
+      <Border_Color_R>0</Border_Color_R>
+      <Border_Color_G>0</Border_Color_G>
+      <Border_Color_B>0</Border_Color_B>
       <Border_radius>0</Border_radius>
     </BackBox>
     <BackBox>
@@ -28,15 +28,15 @@
       <SizeY>73</SizeY>
       <angle>-40</angle>
       <Shape>Rectangle</Shape>
-      <Color_A>190</Color_A>
-      <Color_R>0</Color_R>
-      <Color_G>255</Color_G>
-      <Color_B>170</Color_B>
+      <Color_A>255</Color_A>
+      <Color_R>171</Color_R>
+      <Color_G>200</Color_G>
+      <Color_B>226</Color_B>
       <StrokeThikness>0</StrokeThikness>
       <Border_Color_A>0</Border_Color_A>
-      <Border_Color_R>255</Border_Color_R>
-      <Border_Color_G>255</Border_Color_G>
-      <Border_Color_B>255</Border_Color_B>
+      <Border_Color_R>0</Border_Color_R>
+      <Border_Color_G>0</Border_Color_G>
+      <Border_Color_B>0</Border_Color_B>
       <Border_radius>0</Border_radius>
     </BackBox>
     <BackBox>
@@ -48,18 +48,18 @@
       <angle>50</angle>
       <Shape>Rectangle</Shape>
       <Color_A>255</Color_A>
-      <Color_R>255</Color_R>
-      <Color_G>200</Color_G>
-      <Color_B>200</Color_B>
+      <Color_R>55</Color_R>
+      <Color_G>93</Color_G>
+      <Color_B>129</Color_B>
       <StrokeThikness>0</StrokeThikness>
       <Border_Color_A>0</Border_Color_A>
-      <Border_Color_R>255</Border_Color_R>
-      <Border_Color_G>255</Border_Color_G>
-      <Border_Color_B>255</Border_Color_B>
+      <Border_Color_R>0</Border_Color_R>
+      <Border_Color_G>0</Border_Color_G>
+      <Border_Color_B>0</Border_Color_B>
       <Border_radius>0</Border_radius>
     </BackBox>
     <TextBox>
-      <x>0</x>
+      <x>10</x>
       <y>150</y>
       <z>60</z>
       <SizeX>105</SizeX>
@@ -131,8 +131,8 @@
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>0</x>
-      <y>0</y>
+      <x>110</x>
+      <y>10</y>
       <z>51</z>
       <SizeX>210</SizeX>
       <SizeY>40</SizeY>
@@ -172,7 +172,7 @@
             <DS_level>0</DS_level>
             <DS_name>Mél</DS_name>
             <DS_description />
-            <DS_value>gloubiboulga@enib.fr</DS_value>
+            <DS_value>RoiDesFranc@enib.fr</DS_value>
             <DS_dependant>True</DS_dependant>
             <DS_default>True</DS_default>
             <DS_categories>
@@ -183,8 +183,8 @@
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>105</x>
-      <y>150</y>
+      <x>10</x>
+      <y>230</y>
       <z>60</z>
       <SizeX>105</SizeX>
       <SizeY>72,5</SizeY>
@@ -235,8 +235,8 @@
       </ElementList>
     </TextBox>
     <TextBox>
-      <x>105</x>
-      <y>222,5</y>
+      <x>10</x>
+      <y>100</y>
       <z>60</z>
       <SizeX>105</SizeX>
       <SizeY>72,5</SizeY>
@@ -248,7 +248,7 @@
         <Element>
           <DataString_Element>
             <DS_level>0</DS_level>
-            <DS_name>Flying Spaghetti Monster degree</DS_name>
+            <DS_name />
             <DS_description />
             <DS_value>Flying Spaghetti Monster degree</DS_value>
             <DS_dependant>True</DS_dependant>
@@ -259,39 +259,12 @@
           </DataString_Element>
           <DataDated_Element>
             <DD_level>0</DD_level>
-            <DD_name>Flying Spaghetti Monster degree</DD_name>
+            <DD_name />
             <DD_description />
             <DD_value>Flying Spaghetti Monster degree</DD_value>
             <DD_start>24/12/2017 00:00:00 +01:00</DD_start>
             <DD_end>24/12/2017 00:00:00 +01:00</DD_end>
             <DD_Format>Le $1(d)$</DD_Format>
-            <DD_dependant>True</DD_dependant>
-            <DD_default>True</DD_default>
-            <DD_categories>
-              <categorie>Diplômes</categorie>
-            </DD_categories>
-          </DataDated_Element>
-        </Element>
-        <Element>
-          <DataString_Element>
-            <DS_level>0</DS_level>
-            <DS_name>Bac</DS_name>
-            <DS_description />
-            <DS_value>bac</DS_value>
-            <DS_dependant>True</DS_dependant>
-            <DS_default>True</DS_default>
-            <DS_categories>
-              <categorie>Diplômes</categorie>
-            </DS_categories>
-          </DataString_Element>
-          <DataDated_Element>
-            <DD_level>0</DD_level>
-            <DD_name>Bac</DD_name>
-            <DD_description />
-            <DD_value>bac</DD_value>
-            <DD_start>14/11/1992 00:00:00 +01:00</DD_start>
-            <DD_end>14/11/1992 00:00:00 +01:00</DD_end>
-            <DD_Format>Le $1(D)$</DD_Format>
             <DD_dependant>True</DD_dependant>
             <DD_default>True</DD_default>
             <DD_categories>
@@ -311,11 +284,11 @@
       <Font_Color_A>255</Font_Color_A>
       <Font_Color_R>0</Font_Color_R>
       <Font_Color_G>0</Font_Color_G>
-      <Font_Color_B>255</Font_Color_B>
-      <Font_Italic>True</Font_Italic>
+      <Font_Color_B>0</Font_Color_B>
+      <Font_Italic>False</Font_Italic>
       <Font_Bold>True</Font_Bold>
-      <Font_Underlined>True</Font_Underlined>
-      <Font_UpperCase>True</Font_UpperCase>
+      <Font_Underlined>False</Font_Underlined>
+      <Font_UpperCase>False</Font_UpperCase>
     </Font>
     <Font>
       <Font_Name />
@@ -324,21 +297,21 @@
       <Font_Color_A>255</Font_Color_A>
       <Font_Color_R>0</Font_Color_R>
       <Font_Color_G>0</Font_Color_G>
-      <Font_Color_B>150</Font_Color_B>
+      <Font_Color_B>0</Font_Color_B>
       <Font_Italic>False</Font_Italic>
-      <Font_Bold>True</Font_Bold>
+      <Font_Bold>False</Font_Bold>
       <Font_Underlined>False</Font_Underlined>
-      <Font_UpperCase>True</Font_UpperCase>
+      <Font_UpperCase>False</Font_UpperCase>
     </Font>
     <Font>
       <Font_Name />
       <Font_font>Tahoma</Font_font>
       <Font_fontSize>5</Font_fontSize>
       <Font_Color_A>255</Font_Color_A>
-      <Font_Color_R>100</Font_Color_R>
-      <Font_Color_G>100</Font_Color_G>
-      <Font_Color_B>200</Font_Color_B>
-      <Font_Italic>True</Font_Italic>
+      <Font_Color_R>0</Font_Color_R>
+      <Font_Color_G>0</Font_Color_G>
+      <Font_Color_B>0</Font_Color_B>
+      <Font_Italic>False</Font_Italic>
       <Font_Bold>False</Font_Bold>
       <Font_Underlined>False</Font_Underlined>
       <Font_UpperCase>False</Font_UpperCase>
@@ -348,9 +321,9 @@
       <Font_font>Calibri</Font_font>
       <Font_fontSize>5</Font_fontSize>
       <Font_Color_A>190</Font_Color_A>
-      <Font_Color_R>70</Font_Color_R>
-      <Font_Color_G>70</Font_Color_G>
-      <Font_Color_B>200</Font_Color_B>
+      <Font_Color_R>0</Font_Color_R>
+      <Font_Color_G>0</Font_Color_G>
+      <Font_Color_B>0</Font_Color_B>
       <Font_Italic>False</Font_Italic>
       <Font_Bold>False</Font_Bold>
       <Font_Underlined>False</Font_Underlined>
