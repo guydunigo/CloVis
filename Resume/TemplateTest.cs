@@ -250,9 +250,9 @@ namespace Resume
             var boite_exp = new BoxText(57, 229, 20, 82, 32, 0, "Expériences professionnelles");
             var boite_coordonnées = new BoxText(123, 125, 20, 67, 52, 0, "Coordonnées");
             var boite_competences = new BoxText(57, 229, 20, 82, 32, 0, "Compétences");
-            var boite_tel = new BoxText(123, 125, 20, 24, 6, 0);
-            var boite_mel = new BoxText(67, 136, 20, 46, 6, 0);
-            var boite_adresse = new BoxText(67, 125, 20, 45, 6, 0);
+            var boite_tel = new BoxText(123, 125, 20, 24, 6, 0, "Téléphone");
+            var boite_mel = new BoxText(67, 136, 20, 46, 6, 0, "Mél");
+            var boite_adresse = new BoxText(67, 125, 20, 45, 6, 0, "Adresse");
             var boite_social = new BoxText(123, 136, 20, 24, 6, 0);
             var boite_nom = new BoxText(57, 34, 20, 58, 7, 0, "Nom", fonts_titre);
             var boite_profession = new BoxText(57, 42, 0, 42, 6, 0, "Profession");
