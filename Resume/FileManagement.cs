@@ -358,7 +358,366 @@ namespace Resume
             }
             await writer.WriteEndElementAsync();
         }
+        public static async Task<Template> Read_template(string filename, StorageFolder folder)
+        {
+            //  StorageFolder folder = await GetLocalResumeFolder();
+            Template resumetoread = new Template(filename);
 
+            using (var stream = await folder.OpenStreamForReadAsync(filename + ".cv"))
+            {
+                XmlReaderSettings read_settings = new XmlReaderSettings();
+                read_settings.Async = true;
+                read_settings.IgnoreWhitespace = true;
+                XmlReader reader = XmlReader.Create(stream, read_settings);
+
+                //---------variables utiles
+                //mise en forme  
+                int liste = 0, elem = 0, dts = 0, dde = 0, dt = 0, ft = 0;
+                string box = "";
+                string balise = "";
+                BoxBackgroundShape Shape = BoxBackgroundShape.Rectangle;
+                string Img_name = "";
+                bool Img_dep = false;
+                double strokethikness = 0;
+                double x = 0, y = 0, z = 0, SizeX = 0, SizeY = 0, angle = 0;
+                byte Color_A = 0, Color_R = 0, Color_G = 0, Color_B = 0, Color_Border_A = 0, Color_Border_R = 0, Color_Border_G = 0, Color_Border_B = 0;
+                //data 
+
+                // data string 
+                string[] DS_name = new string[10], DS_description = new string[10], DS_value = new string[10];
+                double[] DS_level = new double[10];
+                bool[] DS_dependant = new bool[10], DS_def = new bool[10];
+                string[,] DS_categorie = new string[10, 10];
+                int dscatnum = 0;
+
+                //liste 
+                bool[] L_def = new bool[10], L_ReadOnly = new bool[10];
+                string[] L_Name = new string[10];
+                var nv = new ElementList<Element>("");
+
+                //datadated
+                string[] DD_format = new string[10], DD_name = new string[10], DD_description = new string[10], DD_value = new string[10];
+                double[] DD_level = new double[10];
+                bool[] DD_dependant = new bool[10], DD_def = new bool[10];
+                string[,] DD_categorie = new string[10, 10];
+                DateTime[] DD_start = new DateTime[10], DD_end = new DateTime[10];
+                for (int i = 0; i < 10; i++) { DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); }
+                int ddcatnum = 0;
+
+                //fonts générales
+                Windows.UI.Xaml.TextAlignment Fts_alignment = new Windows.UI.Xaml.TextAlignment();
+                string[] Ft_name = new string[10], Ft_source = new string[10];
+                double[] Ft_size = new double[10];
+                byte[] Ft_color_a = new byte[10], Ft_color_r = new byte[10], Ft_color_g = new byte[10], Ft_color_b = new byte[10];
+                bool[] Ft_italic = new bool[10], Ft_bold = new bool[10], Ft_underlined = new bool[10], Ft_uppercase = new bool[10];
+
+                // fonts d'une boite
+                int Ft_text = 0, ft_text = 0;
+                Windows.UI.Xaml.TextAlignment Fts_text_alignment = new Windows.UI.Xaml.TextAlignment();
+                string[] Ft_text_name = new string[10], Ft_text_source = new string[10];
+                double[] Ft_text_size = new double[10];
+                byte[] Ft_text_color_a = new byte[10], Ft_text_color_r = new byte[10], Ft_text_color_g = new byte[10], Ft_text_color_b = new byte[10];
+                bool[] Ft_text_italic = new bool[10], Ft_text_bold = new bool[10], Ft_text_underlined = new bool[10], Ft_text_uppercase = new bool[10];
+
+                for (int i = 0; i < 10; i++) { DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; L_Name[i] = ""; DD_format[i] = ""; DD_name[i] = ""; DD_description[i] = ""; DD_value[i] = ""; Ft_name[i] = ""; Ft_source[i] = ""; Ft_text_name[i] = ""; Ft_text_source[i] = ""; }
+                //---------début lecture
+                resumetoread.Layout = new Layout();
+                while (reader.Read())
+                {
+                    switch (reader.NodeType)
+                    {
+                        case XmlNodeType.Element:
+                            {
+                                if (reader.Name == "BackBox" || reader.Name == "TextBox" || (reader.Name == "Fonts" && box != "TextBox")) box = reader.Name;
+                                if (reader.Name == "ElementList") liste += 1;
+                                if (reader.Name == "Element") elem += 1;
+                                if (reader.Name == "DataString_Element") dts += 1;
+                                if (reader.Name == "DataDated_Element") dde += 1;
+                                if (reader.Name == "Data_Element") dt += 1;
+                                if (reader.Name == "Font" && box != "TextBox") ft += 1;
+                                if (reader.Name == "Font" && box == "TextBox")
+                                {
+                                    ft_text += 1;
+                                }
+                                if (reader.Name == "Fonts" && box == "TextBox") Ft_text = 1;
+                                else balise = reader.Name;
+                                break;
+                            }
+                        case XmlNodeType.Text:
+                            {
+                                if (Ft_text == 1)
+                                {
+                                    if (balise == "Font_Alignment")
+                                    {
+                                        if (reader.Value == "Left") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Left;
+                                        if (reader.Value == "Right") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Right;
+                                        if (reader.Value == "Justify") Fts_text_alignment = Windows.UI.Xaml.TextAlignment.Justify;
+                                    }
+                                }
+                                if (ft_text >= 1)
+                                {
+                                    if (balise == "Font_Name") Ft_text_name[ft_text] = reader.Value;
+                                    if (balise == "Font_font")
+                                    {
+                                        Ft_text_source[ft_text] = reader.Value;
+                                    }
+                                    if (balise == "Font_fontSize") Ft_text_size[ft_text] = double.Parse(reader.Value);
+                                    if (balise == "Font_Color_A") Ft_text_color_a[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_R") Ft_text_color_r[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_G") Ft_text_color_g[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_B") Ft_text_color_b[ft_text] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Italic") Ft_text_italic[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Bold") Ft_text_bold[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Underlined") Ft_text_underlined[ft_text] = bool.Parse(reader.Value);
+                                    if (balise == "Font_UpperCase") Ft_text_uppercase[ft_text] = bool.Parse(reader.Value);
+                                }
+                                if (box == "Fonts")
+                                {
+                                    if (balise == "Font_Alignment")
+                                    {
+                                        if (reader.Value == "Left") Fts_alignment = Windows.UI.Xaml.TextAlignment.Left;
+                                        if (reader.Value == "Right") Fts_alignment = Windows.UI.Xaml.TextAlignment.Right;
+                                        if (reader.Value == "Justify") Fts_alignment = Windows.UI.Xaml.TextAlignment.Justify;
+                                    }
+                                }
+                                if (ft >= 1)
+                                {
+                                    if (balise == "Font_Name") Ft_name[ft] = reader.Value;
+                                    if (balise == "Font_font") Ft_source[ft] = reader.Value;
+                                    if (balise == "Font_fontSize") Ft_size[ft] = double.Parse(reader.Value);
+                                    if (balise == "Font_Color_A") Ft_color_a[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_R") Ft_color_r[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_G") Ft_color_g[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Color_B") Ft_color_b[ft] = byte.Parse(reader.Value);
+                                    if (balise == "Font_Italic") Ft_italic[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Bold") Ft_bold[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_Underlined") Ft_underlined[ft] = bool.Parse(reader.Value);
+                                    if (balise == "Font_UpperCase") Ft_uppercase[ft] = bool.Parse(reader.Value);
+                                }
+                                if (box == "TextBox" || box == "BackBox")
+                                {
+                                    if (balise == "x") x = double.Parse(reader.Value);
+                                    if (balise == "y") y = double.Parse(reader.Value);
+                                    if (balise == "z") z = double.Parse(reader.Value);
+                                    if (balise == "SizeX") SizeX = double.Parse(reader.Value);
+                                    if (balise == "SizeY") SizeY = double.Parse(reader.Value);
+                                    if (balise == "angle") angle = double.Parse(reader.Value);
+                                }
+                                if (box == "BackBox")
+                                {
+                                    if (balise == "Shape")
+                                    {
+                                        if (reader.Value == "Rectangle") Shape = BoxBackgroundShape.Rectangle;
+                                        else Shape = BoxBackgroundShape.Ellipse;
+                                    }
+                                    if (balise == "img_name") Img_name = reader.Value;
+                                    if (balise == "img_dependant") Img_dep = bool.Parse(reader.Value);
+                                    if (balise == "StrokeThikness") strokethikness = double.Parse(reader.Value);
+                                    if (balise == "Color_A") Color_A = byte.Parse(reader.Value);
+                                    if (balise == "Color_R") Color_R = byte.Parse(reader.Value);
+                                    if (balise == "Color_G") Color_G = byte.Parse(reader.Value);
+                                    if (balise == "Color_B") Color_B = byte.Parse(reader.Value);
+                                    if (balise == "Color_Border_A") Color_Border_A = byte.Parse(reader.Value);
+                                    if (balise == "Color_Border_R") Color_Border_R = byte.Parse(reader.Value);
+                                    if (balise == "Color_Border_G") Color_Border_G = byte.Parse(reader.Value);
+                                    if (balise == "Color_Border_B") Color_Border_B = byte.Parse(reader.Value);
+
+                                }
+                                if (dts >= 1)
+                                {
+                                    if (balise == "DS_level") DS_level[dts] = double.Parse(reader.Value);
+                                    if (balise == "DS_name") DS_name[dts] = reader.Value;
+                                    if (balise == "DS_description") DS_description[dts] = reader.Value;
+                                    if (balise == "DS_value") DS_value[dts] = reader.Value;
+                                    if (balise == "DS_dependant") DS_dependant[dts] = bool.Parse(reader.Value);
+                                    if (balise == "DS_default") DS_def[dts] = bool.Parse(reader.Value);
+                                    if (balise == "DS_categorie") { dscatnum += 1; DS_categorie[dts, dscatnum] = reader.Value; }
+                                }
+                                if (dde >= 1)
+                                {
+                                    if (balise == "DD_level") DD_level[dde] = double.Parse(reader.Value);
+                                    if (balise == "Dd_name") DD_name[dde] = reader.Value;
+                                    if (balise == "DD_description") DD_description[dde] = reader.Value;
+                                    if (balise == "DD_value") DD_value[dde] = reader.Value;
+                                    if (balise == "DD_dependant") DD_dependant[dde] = bool.Parse(reader.Value);
+                                    if (balise == "DD_default") DD_def[dde] = bool.Parse(reader.Value);
+                                    if (balise == "DD_categorie") { ddcatnum += 1; DD_categorie[dde, ddcatnum] = reader.Value; }
+                                    if (balise == "DD_Format") DD_format[dde] = reader.Value;
+                                    if (balise == "DD_start") DD_start[dde] = Convert.ToDateTime(reader.Value);
+                                    if (balise == "DD_end") DD_end[dde] = Convert.ToDateTime(reader.Value);
+                                }
+                                if (dt >= 1) { }
+                                if (liste >= 1)
+                                {
+                                    if (balise == "List_Name") L_Name[liste] = reader.Value;
+                                    if (balise == "List_Default") L_def[liste] = bool.Parse(reader.Value);
+                                    if (balise == "List_ReadOnly") L_ReadOnly[liste] = bool.Parse(reader.Value);
+                                }
+                                break;
+                            }
+                        case XmlNodeType.EndElement: // prend n'importe quel end !! 
+                            {
+                                if (box == "Fonts" && reader.Name == "Fonts")
+                                {
+                                    resumetoread.Fonts = new Fonts("Polices_cv", Fts_alignment);
+                                    for (int i = 1; i <= ft; i++)
+                                    {
+                                        //pbs !( source a changer)
+                                        resumetoread.Fonts.List.Add(new FontElement(Ft_source[i], Ft_size[i], new Color() { A = Ft_color_a[i], R = Ft_color_r[i], G = Ft_color_g[i], B = Ft_color_b[i] }, Ft_italic[i], Ft_bold[i], Ft_underlined[i], Ft_uppercase[i], Ft_name[i]));
+                                        Ft_name[i] = "";
+                                        Ft_size[i] = 0;
+                                        Ft_color_a[i] = 0;
+                                        Ft_color_r[i] = 0; Ft_color_g[i] = 0; Ft_color_b[i] = 0;
+                                        Ft_italic[i] = false; Ft_bold[i] = false; Ft_underlined[i] = false; Ft_uppercase[i] = false;
+                                        Ft_source[i] = "";
+                                    }
+                                    ft = 0;
+                                }
+                                if (box == "BackBox" && reader.Name == "BackBox")
+                                {
+                                    var backbox = new BoxBackground(x, y, z, SizeX, SizeY, angle, Shape)
+                                    {
+                                        Fill = new Color() { A = Color_A, B = Color_B, R = Color_R, G = Color_G },
+                                        Stroke = new Color() { A = Color_Border_A, B = Color_Border_B, R = Color_Border_R, G = Color_Border_G },
+                                        StrokeThickness = strokethikness
+                                    };
+                                    if (Img_name != "")
+                                    {
+                                        backbox.Image = new DataImage(Img_name, Img_dep);
+                                    }
+                                    resumetoread.Layout.AddBackBox(backbox);
+                                    Shape = BoxBackgroundShape.Rectangle; Img_name = ""; Img_dep = false; strokethikness = 0;
+                                    box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
+                                    Color_A = 0; Color_R = 0; Color_G = 0; Color_B = 0; Color_Border_A = 0; Color_Border_R = 0; Color_Border_G = 0; Color_Border_B = 0;
+                                }
+                                if (liste > 1 && reader.Name == "ElementList")
+                                {
+                                    if (nv.Name != "")
+                                    {
+                                        var souslist = nv;
+                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        nv.Add(souslist);
+                                        L_Name[liste] = ""; L_def[liste] = false;
+                                    }
+                                    else nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                    dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name);
+                                    while (dt >= 1) { elem -= 1; dt -= 1; }
+                                    elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
+                                    dts = 0; box = ""; L_Name[liste] = ""; L_def[liste] = false; L_ReadOnly[liste] = false;
+                                    liste -= 1; elem -= 1;
+                                    break;
+                                }
+                                if (liste == 1 && reader.Name == "ElementList")
+                                {
+                                    var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, L_Name[liste]);
+                                    if (nv.Name != "")
+                                    {
+                                        var souslist = nv;
+                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
+                                        nv.Add(souslist);
+                                        while (dde >= 1 && elem >= 1) { dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name); }
+                                        while (dt >= 1 && elem >= 1) { elem -= 1; dt -= 1; }
+                                        while (dts >= 1 && elem >= 1)
+                                        {
+                                            elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
+                                            dts = 0;
+                                        }
+                                        if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
+                                        bnv.Element = nv;
+                                        L_Name[liste] = ""; L_def[liste] = false;
+                                        nv = new ElementList<Element>("");
+                                    }
+                                    else
+                                    {
+                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        while (dde >= 1 && elem >= 1)
+                                        {
+                                            for (int i = 1; i <= dde; i++)
+                                            {
+                                                var datadd = new DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                                                DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
+                                                DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
+
+                                                DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                                for (int j = 1; j <= dscatnum; j++)
+                                                {
+                                                    datadd.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    DS_categorie[i, j] = "";
+                                                }
+                                                nv.Add(datadd);
+                                                elem -= 1;
+                                                dts -= 1;
+                                            }
+                                            dde = 0;
+                                        }
+                                        while (dt >= 1 && elem >= 1) { dt -= 1; elem -= 1; }
+                                        while (dts >= 1 && elem >= 1)
+                                        {
+                                            for (int i = 1; i <= dts; i++)
+                                            {
+                                                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                                                DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
+                                                for (int j = 1; j <= dscatnum; j++)
+                                                {
+                                                    datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    DS_categorie[i, j] = "";
+                                                }
+                                                nv.Add(datastr);
+                                                elem -= 1;
+                                            }
+                                            dts = 0;
+                                        }
+                                        if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
+
+                                        //réinitialisation 
+                                        L_Name[liste] = ""; L_def[liste] = false;
+                                        L_ReadOnly[liste] = false;
+                                        bnv.Element = nv;
+                                        nv = new ElementList<Element>("");
+
+                                    }
+                                    resumetoread.Layout.AddTextBox(bnv);
+                                    x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
+                                    liste -= 1;
+                                    box = "";
+
+                                }
+                                if (liste == 0 && reader.Name == "DataString_Element")
+                                {
+                                    if (dde == 1 && elem == 0)
+                                    {
+                                        var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
+                                        var nvdd = new DataDated<string>(DD_name[dde], DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
+                                        DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = ""; DD_dependant[dde] = false; DD_def[dde] = false; DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
+                                        DD_categorie[dde, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
+                                        dde = 0;
+                                    }
+                                    if (dt == 1 && elem == 0) { }
+                                    if (dts == 1 && elem == 0)
+                                    {
+                                        var nvdt = new Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
+                                        var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
+                                        for (int j = 1; j <= dscatnum; j++)
+                                        {
+                                            nvdt.AddCategory(new ElementList<Element>(DS_categorie[1, j]));
+                                            DS_categorie[1, j] = "";
+                                        }
+
+                                        bnv.Element = nvdt;
+                                        resumetoread.Layout.AddTextBox(bnv);
+                                        DS_name[dts] = ""; DS_description[dts] = ""; DS_value[dts] = ""; DS_dependant[dts] = false; DS_def[dts] = false; DS_level[dts] = 0; DS_level[dts] = 0;
+                                        DS_categorie[dts, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0;
+                                        dts = 0;
+                                    }
+                                }
+                                break;
+                            }
+                    }
+                }
+            }
+
+            return resumetoread;
+        }
         public static async Task<Resume> Read_file(string filename, StorageFolder folder)
         {
             //  StorageFolder folder = await GetLocalResumeFolder();

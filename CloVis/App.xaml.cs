@@ -180,8 +180,8 @@ namespace CloVis
                 {
                     if (Path.GetExtension(file.Name) == ".cv")
                     {
-                        Resume.Resume temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
-                        Templates.Add(temp as Template);
+                        Resume.Template temp = await FileManagement.Read_template(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Templates.Add(temp );
                     }
                 }
             }
