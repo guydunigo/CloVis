@@ -65,7 +65,7 @@ namespace CloVis
         {
             if (Resume != res)
             {
-                Resume = OpenResumes[0];
+                Resume = res;
 
                 ReloadCV();
                 ReloadElementPanel();
