@@ -115,8 +115,8 @@ namespace ResumeElements
                 NotifyPropertyChanged("Values");
                 NotifyPropertyChanged("Keys");
             }
-            else // Removing a security, don't do stupid things (like loopholes, ;) ) !
-                throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
+            //else // Removing a security, don't do stupid things (like loopholes, ;) ) !
+            //    throw new ArgumentException("An element with the same name already exists in the dictionary or in its children.");
         }
         public void Add(string key, T value)
         {

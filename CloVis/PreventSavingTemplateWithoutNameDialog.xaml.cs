@@ -31,9 +31,13 @@ namespace CloVis
         public SavingTemplateResult Result { get; private set; }
 
         public string CV_name;
-
+        public PreventSavingTemplateWithoutNameDialog()
+        {
+            this.InitializeComponent();
+        }
         private void SaveName_Click(object sender, RoutedEventArgs e)
         {
+            Validate(sender);
             if (Window.Current.Content is Frame f && f.Content is EditionMode root)
             {
                 root.IsModified = false;
@@ -42,6 +46,10 @@ namespace CloVis
                 this.Hide();
             }
         }
+        private void CvName_KeyDown(object sender, KeyRoutedEventArgs e)
+        {
+        }
+
         public void Validate(object sender)
         {
             TextBlock txt = new TextBlock();
@@ -61,6 +69,7 @@ namespace CloVis
                 //ajouter le nom au CV
                 CV_name = CvName.Text;
                 txt.Text = "Cv Sauvegardé !";
+
             }
             var fo = new Flyout()
             {
