@@ -107,14 +107,37 @@ namespace Resume
             var fonts = new Fonts("Polices_cv")
             {
                 new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                
+            };
+
+            var fonts_titre = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 10,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_petit = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_langues = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 7,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false),
+                new FontElement("Colibri", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
             };
 
             var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
-            var boite_coordonnées = new BoxText(134, 52, 20, 67, 52, 0, "Coordonnées");
-            var boite_langues = new BoxText(150, 113, 10, 24, 28, 0, "Langues");
-            var boite_nom = new BoxText(64, 12, 20, 81, 15, 0, "Nom");
-            var boite_profession = new BoxText(64, 33, 0, 81, 6, 0, "Profession");
-            var boite_competences = new BoxText(8,112,0,22,28,0,"Compétences");
+            var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
+
+            var boite_langues = new BoxText(150, 90, 10, 29, 28, 0, "Langues", fonts_langues);
+            var boite_langue_1 = new BoxText(143, 107, 10, 29, 28, 0, "Langue 1", fonts_petit);
+            var boite_langue_2 = new BoxText(143, 115, 10, 29, 28, 0, "Langue 2", fonts_petit);
+            var boite_langue_3 = new BoxText(143, 124, 10, 29, 28, 0, "Langue 3", fonts_petit);
+
+
+            var boite_nom = new BoxText(84, 12, 20, 81, 15, 0, "Nom", fonts_titre);
+            var boite_profession = new BoxText(79, 33, 0, 81, 20, 0, "Profession");
+            var boite_competences = new BoxText(7,112,0,22,28,0,"Compétences", fonts_petit);
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
                 Image = new DataImage("Temp3_-_fond", true)
@@ -125,6 +148,9 @@ namespace Resume
             template.Layout.AddTextBox(boite_coordonnées);
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddTextBox(boite_langues);
+            template.Layout.AddTextBox(boite_langue_1);
+            template.Layout.AddTextBox(boite_langue_2);
+            template.Layout.AddTextBox(boite_langue_3);
             template.Layout.AddTextBox(boite_nom);
             template.Layout.AddTextBox(boite_profession);
             template.Layout.AddTextBox(boite_competences);

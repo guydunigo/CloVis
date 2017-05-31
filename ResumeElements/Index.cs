@@ -113,7 +113,12 @@ namespace ResumeElements
                 //...
             },
             new ElementList<Element>("Compétences"),
-            new ElementList<Element>("Langues"),
+            new ElementList<Element>("Langues")
+            {
+                new Data<string>("Langue 1",""),
+                new Data<string>("Langue 2",""),
+                new Data<string>("Langue 3","")
+            },
             new ElementList<Element>("Diplômes"),
             new ElementList<Element>("Études"),
             new ElementList<Element>("Expériences professionnelles"),

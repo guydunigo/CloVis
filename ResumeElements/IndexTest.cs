@@ -12,8 +12,12 @@ namespace ResumeElements
         {
             (Index.DataIndex["Nom"] as Data<string>).Value = "Clovis";
             (Index.DataIndex["Téléphone"] as Data<string>).Value = "+33660606060";
-            (Index.DataIndex["Mél"] as Data<string>).Value = "robert@enib.fr";
+            (Index.DataIndex["Mél"] as Data<string>).Value = "clovis@enib.fr";
             (Index.DataIndex["Profession"] as Data<string>).Value = "Ingénieur ENIB";
+            (Index.DataIndex["Langue 1"] as Data<string>).Value = "Anglais";
+            (Index.DataIndex["Langue 2"] as Data<string>).Value = "Allemand";
+            (Index.DataIndex["Langue 3"] as Data<string>).Value = "Turc";
+
 
             Index.Root["Compétences"].Add(new ElementList<Element>("Informatique")
             {
@@ -22,9 +26,6 @@ namespace ResumeElements
                 new Data<string>("Java",1)
             });
             Index.Root["Compétences"].Add(new Data<string>("Business Process", 4));
-            Index.Root["Langues"].Add(new Data<string>("Anglais", 5));
-            Index.Root["Langues"].Add(new Data<string>("Allemand", 5));
-            Index.Root["Langues"].Add(new Data<string>("Chinois", 5));
             Index.Root["Diplômes"].Add(new DataDated<string>("Flying Spaghetti Monster degree", new DateTime(2017, 12, 24), new DateTime(2017, 12, 24), "En $1(Y)$"));
             Index.Root["Diplômes"].Add(new DataDated<string>("Bac", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
             Index.Root["Études"].Add(new DataDated<string>("Université de Ulm", new DateTime(1992, 11, 14), new DateTime(1998, 11, 14), "De $1(yy)$ à $2(yy)$"));

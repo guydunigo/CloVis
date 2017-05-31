@@ -229,7 +229,7 @@ namespace CloVis
             this.Frame.Navigate(typeof(Help));
         }
 
-        private async void Export_Click(object sender, RoutedEventArgs e)
+        private void Export_Click(object sender, RoutedEventArgs e)
         {
             //this.Frame.Navigate(typeof(ExportToPdf));
 
