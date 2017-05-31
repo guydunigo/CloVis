@@ -227,18 +227,18 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                new FontElement("Colibri", 6,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
                 
             };
 
             var fonts_titre = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 8,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                new FontElement("Colibri", 8,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
             var fonts_petit = new Fonts("Polices_cv")
             {
-                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                new FontElement("Colibri", 6,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
             var fonts_langues = new Fonts("Polices_cv")
