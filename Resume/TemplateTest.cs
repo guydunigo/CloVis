@@ -158,5 +158,56 @@ namespace Resume
             
             return template;
         }
+
+
+        public static Template GetTemplate_4()
+        {
+            var template = new Template("Temp4");
+
+            var fonts = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                
+            };
+
+            var fonts_titre = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 10,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_petit = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_langues = new Fonts("Polices_cv")
+            {
+                new FontElement("Colibri", 7,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false),
+                new FontElement("Colibri", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
+            };
+
+            var boite_exp = new BoxText(57, 229, 20, 82, 32, 0, "Expériences professionnelles");
+            var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
+            var boite_diplomes = new BoxText(57, 229, 20, 82, 32, 0, "Diplômes");
+
+            var boite_nom = new BoxText(57, 34, 20, 58, 7, 0, "Nom", fonts_titre);
+            var boite_profession = new BoxText(57, 42, 0, 42, 6, 0, "Profession");
+            var boite_competences = new BoxText(7, 112, 0, 22, 28, 0, "Compétences", fonts_petit);
+            var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
+            {
+                Image = new DataImage("Temp3_-_fond", true)
+            };
+
+            template.Layout = new Layout();
+            template.Fonts = fonts;
+            template.Layout.AddTextBox(boite_coordonnées);
+            template.Layout.AddTextBox(boite_diplomes);
+            template.Layout.AddTextBox(boite_nom);
+            template.Layout.AddTextBox(boite_profession);
+            template.Layout.AddTextBox(boite_competences);
+            template.Layout.AddBackBox(fond);
+
+            return template;
+        }
     }
 }
