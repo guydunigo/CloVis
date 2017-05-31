@@ -17,7 +17,7 @@ namespace ResumeElements
         public FileAlreadyExistsException() : base()
         { }
 
-        public FileAlreadyExistsException(string message):base(message)
+        public FileAlreadyExistsException(string message) : base(message)
         { }
     }
 
@@ -31,20 +31,20 @@ namespace ResumeElements
     /// <summary>
     /// DataImages value is the file's name located
     /// </summary>
-    public class DataImage:Data<string>, INotifyPropertyChanged
+    public class DataImage : Data<string>, INotifyPropertyChanged
     {
         /// <summary>
         /// If you use this constructor, there must be an existing image named
         /// </summary>
         /// <param name="name"></param>
         /// <param name="description"></param>
-        public DataImage(string name, bool isIndependant = false):base(name, -1, "", true, false)
+        public DataImage(string name, bool isIndependant = false) : base(name, -1, "", true, false)
         {
             if (!isIndependant)
                 Index.AddImage(this);
         }
 
-        public DataImage(StorageFile source):this(source.Name,source)
+        public DataImage(StorageFile source) : this(source.Name, source)
         { }
 
         public DataImage(string name, StorageFile source) :
@@ -209,7 +209,7 @@ namespace ResumeElements
             }
             else
                 throw new FileAlreadyExistsException("An image already exists with that name");
-            
+
             value = GetNameWithoutExtension(copiedFile.Name);
         }
 
@@ -264,7 +264,7 @@ namespace ResumeElements
                 }
             }
         }
-        
+
         public async Task<RemoveOutput> Remove()
         {
             var res = RemoveOutput.NothingDone;
@@ -296,7 +296,7 @@ namespace ResumeElements
             var files = await sf.GetFilesAsync();
             var res = false;
 
-            foreach(StorageFile f in files)
+            foreach (StorageFile f in files)
             {
                 if (GetNameWithoutExtension(f.Name) == nameCut)
                 {

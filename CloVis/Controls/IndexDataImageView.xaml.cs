@@ -43,7 +43,7 @@ namespace CloVis.Controls
             }
         }
 
-        private async static void  OnImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private async static void OnImageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is IndexDataImageView instance && instance.Image != null)
             {
@@ -53,8 +53,8 @@ namespace CloVis.Controls
         }
 
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(DataImage), typeof(IndexDataImageView), new PropertyMetadata(null,OnImageChanged));
-        
+            DependencyProperty.Register("Image", typeof(DataImage), typeof(IndexDataImageView), new PropertyMetadata(null, OnImageChanged));
+
 
         public async void Delete_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +73,8 @@ namespace CloVis.Controls
             {
                 var f = new Flyout()
                 {
-                    Content = new TextBlock() {
+                    Content = new TextBlock()
+                    {
                         Text = "Cette image fait partie de l'application et ne peut être supprimée.",
                         Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush
                     }

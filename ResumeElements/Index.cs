@@ -87,7 +87,7 @@ namespace ResumeElements
         public static ElementList<Data> GetUnlistedData()
         {
             var misc = new ElementList<Data>("Non listés");
-            foreach(Data d in DataIndex.Values)
+            foreach (Data d in DataIndex.Values)
             {
                 if (d.Categories.Count == 0)
                 {
@@ -131,8 +131,8 @@ namespace ResumeElements
         public static ElementList FindParent(Element e)
         {
             Element prev = null, cur = Root;
-            
-            while(cur != e)
+
+            while (cur != e)
             {
                 prev = cur;
                 if (prev == null)

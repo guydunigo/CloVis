@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿﻿﻿﻿﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -57,23 +57,23 @@ namespace Resume
             var boite_de_coordonnees = new BoxText(0, 0, 0, 210, 40, 0, "Coordonnées");
             var boite_de_competences = new BoxText(0, 150, 60, 105, 60, 0, "Compétences");
             var boite_de_diplomes = new BoxText(105, 222.5, 60, 105, 72.5, 0, "Diplômes");
-            
+
             var fond = new BoxBackground(0, 70, 10, 210, 60)
             {
                 Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
-			var fond2 = new BoxBackground(115, 150, 30, 160, 73, -40)
-			{
-				Fill = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
-			}; //boite de fond
+            var fond2 = new BoxBackground(115, 150, 30, 160, 73, -40)
+            {
+                Fill = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
+            }; //boite de fond
 
             var fond3 = new BoxBackground(-15, -4, 50, 700, 65, 50)
-			{
-				Fill = new Color() { A = 255, B = 200, G = 200, R = 255}
-			};
+            {
+                Fill = new Color() { A = 255, B = 200, G = 200, R = 255 }
+            };
 
-			boite_de_competences.Element = competences;
+            boite_de_competences.Element = competences;
             boite_de_coordonnees.Element = coordonnees;
             boite_de_langues.Element = langues;
             boite_de_diplomes.Element = diplomes;
@@ -82,7 +82,7 @@ namespace Resume
             {
                 Fonts = fonts
             };
-            
+
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddBackBox(fond2);
@@ -95,18 +95,18 @@ namespace Resume
             return CV;
         }
 
-		public static Resume GetResumeTest2()
-		{
-			Resume CV;
+        public static Resume GetResumeTest2()
+        {
+            Resume CV;
 
             var nom = new Data<string>("Nom", "Clovis", -1, "", true);
             var titre = new Data<string>("Titre", "Roi des Francs", -1, "", true);
             var coordonnees = new ElementList<Element>("Coordonnées")
             {
-				new Data<string>("Téléphone", "+33660606060", -1, "", true),
-				new Data<string>("Mél", "clovis@enib.fr", -1, "", true),
+                new Data<string>("Téléphone", "+33660606060", -1, "", true),
+                new Data<string>("Mél", "clovis@enib.fr", -1, "", true),
                 new Data<string>("Adresse", "17 rue de la Réussite\n75012 Paris", -1, "", true)
-			};
+            };
 
             var objectif = new ElementList<Element>("Objectif")
             {
@@ -116,38 +116,38 @@ namespace Resume
                 }
             };
 
-			var competences = new ElementList<Element>("Compétences")
-			{
-				new ElementList<Element>("Diplomatie")
-				{
-					new Data<string>("Politique", "Politique", 4, "",true),
-					new Data<string>("Assassinat","Assassinat",3, "",true),
-					new Data<string>("Mariage","Mariage",2, "",true),
+            var competences = new ElementList<Element>("Compétences")
+            {
+                new ElementList<Element>("Diplomatie")
+                {
+                    new Data<string>("Politique", "Politique", 4, "",true),
+                    new Data<string>("Assassinat","Assassinat",3, "",true),
+                    new Data<string>("Mariage","Mariage",2, "",true),
                     new Data<string>("Soudoiement","Soudoiement",2, "",true),
-				},
-				
-			};
+                },
 
-			var langues = new ElementList<Element>("Langues")
-			{
-				new Data<string>("Francique", "Francique", 5, "",true),
-				new Data<string>("Français moderne","Français moderne",1, "",true),
-				new Data<string>("Allemand moderne","Allemand moderne",1, "",true),
-			};
+            };
 
-			var diplomes = new ElementList<Element>("Dynastie")
-			{
-				new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
-				
-			};
+            var langues = new ElementList<Element>("Langues")
+            {
+                new Data<string>("Francique", "Francique", 5, "",true),
+                new Data<string>("Français moderne","Français moderne",1, "",true),
+                new Data<string>("Allemand moderne","Allemand moderne",1, "",true),
+            };
 
-			var fonts = new Fonts("Polices_cv")
-			{
-				new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 255, A = 255 },false, false, false, true), //ARGB 0 on voit rien, 255 opaque
+            var diplomes = new ElementList<Element>("Dynastie")
+            {
+                new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
+
+            };
+
+            var fonts = new Fonts("Polices_cv")
+            {
+                new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 255, A = 255 },false, false, false, true), //ARGB 0 on voit rien, 255 opaque
                 new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, false),
-				new FontElement("Garamond", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
-				new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
-			};
+                new FontElement("Garamond", 5, new Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
+                new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
+            };
 
             var fonts1 = new Fonts("obj", Windows.UI.Xaml.TextAlignment.Justify)
             {
@@ -157,19 +157,19 @@ namespace Resume
             var boite_de_nom = new BoxText(90, 15, 60, 40, 20, 0, "nom");
             var boite_de_titre = new BoxText(80, 28, 60, 40, 10, 0, "titre");
             var boite_d_obj = new BoxText(15, 50, 60, 70, 40, 0, "obj", fonts1);
-			
-			var boite_de_coordonnees = new BoxText(140, 50, 60, 80, 60, 0, "Coordonnées");
-			var boite_de_competences = new BoxText(20, 95, 60, 40, 50, 0, "Diplomatie");
-			var boite_de_langues = new BoxText(140, 95, 60, 80, 50, 0, "Langues");
-			var boite_de_diplomes = new BoxText(15, 160, 60, 150, 15, 0, "Dynastie");
 
-			var fond = new BoxBackground(0, 90, 10, 210, 50)
-			{
-				Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
-			}; //boite de fond
+            var boite_de_coordonnees = new BoxText(140, 50, 60, 80, 60, 0, "Coordonnées");
+            var boite_de_competences = new BoxText(20, 95, 60, 40, 50, 0, "Diplomatie");
+            var boite_de_langues = new BoxText(140, 95, 60, 80, 50, 0, "Langues");
+            var boite_de_diplomes = new BoxText(15, 160, 60, 150, 15, 0, "Dynastie");
+
+            var fond = new BoxBackground(0, 90, 10, 210, 50)
+            {
+                Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
+            }; //boite de fond
 
             var img = new DataImage("CV 2_-_profil", true);
-            var photo = new BoxBackground(105 - 50 / 2, 90 + 5,50, 40, 40, 0, BoxBackgroundShape.Ellipse)
+            var photo = new BoxBackground(105 - 50 / 2, 90 + 5, 50, 40, 40, 0, BoxBackgroundShape.Ellipse)
             {
                 Image = img
             };
@@ -187,18 +187,18 @@ namespace Resume
             boite_de_nom.Element = nom;
             boite_de_titre.Element = titre;
             boite_d_obj.Element = objectif;
-			boite_de_competences.Element = competences;
-			boite_de_coordonnees.Element = coordonnees;
-			boite_de_langues.Element = langues;
-			boite_de_diplomes.Element = diplomes;
+            boite_de_competences.Element = competences;
+            boite_de_coordonnees.Element = coordonnees;
+            boite_de_langues.Element = langues;
+            boite_de_diplomes.Element = diplomes;
 
-			CV = new Resume("CV 2")
-			{
-				Fonts = fonts
-			};
+            CV = new Resume("CV 2")
+            {
+                Fonts = fonts
+            };
 
-			CV.Layout = new Layout();
-			CV.Layout.AddBackBox(fond);
+            CV.Layout = new Layout();
+            CV.Layout.AddBackBox(fond);
             CV.Layout.AddBackBox(photo);
             //CV.Layout.AddBackBox(fond2);
             //CV.Layout.AddBackBox(fond3);
@@ -207,11 +207,11 @@ namespace Resume
             CV.Layout.AddTextBox(boite_de_nom);
             CV.Layout.AddTextBox(boite_de_titre);
             CV.Layout.AddTextBox(boite_de_competences);
-			CV.Layout.AddTextBox(boite_de_coordonnees);
-			CV.Layout.AddTextBox(boite_de_langues);
-			CV.Layout.AddTextBox(boite_de_diplomes);
+            CV.Layout.AddTextBox(boite_de_coordonnees);
+            CV.Layout.AddTextBox(boite_de_langues);
+            CV.Layout.AddTextBox(boite_de_diplomes);
 
-			return CV;
-		}
+            return CV;
+        }
     }
 }

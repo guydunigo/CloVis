@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Resume
 {
-    public class Template: Resume
+    public class Template : Resume
     {
-        public Template(string name): base(name) // Useless ?
+        public Template(string name) : base(name) // Useless ?
         {
             //throw new NotImplementedException("Useless ?");
         }

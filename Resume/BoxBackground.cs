@@ -19,7 +19,7 @@ namespace Resume
     public class BoxBackground : Box
     {
         public BoxBackground(double x = 0, double y = 0, double z = 10, double sizeX = 10, double sizeY = 10, double angle = 0, BoxBackgroundShape shape = BoxBackgroundShape.Rectangle)
-            :base(x,y,z,sizeX,sizeY,angle)
+            : base(x, y, z, sizeX, sizeY, angle)
         {
             Shape = shape;
             Fill = Colors.Orange;

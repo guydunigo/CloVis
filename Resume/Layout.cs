@@ -7,18 +7,18 @@ using System.Xml.Serialization;
 
 namespace Resume
 {
-   
+
     public class Layout
     {
         public Layout()
         {
-           
+
             BackBoxes = new List<BoxBackground>();
             TextBoxes = new List<BoxText>();
         }
 
         public List<BoxBackground> BackBoxes { get; set; }
-        
+
         public List<BoxText> TextBoxes { get; set; }
         // Element List + Index
 
@@ -29,7 +29,7 @@ namespace Resume
         public Layout Copy()
         {
             var tempBB = new List<BoxBackground>();
-            foreach(BoxBackground b in BackBoxes)
+            foreach (BoxBackground b in BackBoxes)
             {
                 tempBB.Add(b.Copy());
             }

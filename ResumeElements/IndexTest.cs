@@ -18,7 +18,7 @@ namespace ResumeElements
             (Index.DataIndex["Langue 2"] as Data<string>).Value = "Allemand";
             (Index.DataIndex["Langue 3"] as Data<string>).Value = "Chinois";
             (Index.DataIndex["Langue 4"] as Data<string>).Value = "Espéranto";
-            
+
 
 
             Index.Root["Compétences"].Add(new ElementList<Element>("Informatique")
@@ -47,7 +47,7 @@ namespace ResumeElements
             Index.Root["Diplômes"].Add(new DataDated<string>("Doctorat en Sociologie", new DateTime(1992, 11, 14), new DateTime(1992, 11, 14), "En $1(y)$"));
             Index.Root["Études"].Add(new DataDated<string>("L'école de la vie", new DateTime(466, 11, 14), new DateTime(1998, 08, 24), "De $1(yy)$ à $2(yy)$"));
             //Index.Root["Diplômes"].Add(Index.Find("Université de Ulm"));
-            Index.Root["Expériences professionnelles"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", new TimeSpan(300,0,0,0), "Pendant $(%d)$ jours"));
+            Index.Root["Expériences professionnelles"].Add(new DataTimeSpan<string>("Ingénieur narcoleptiques", new TimeSpan(300, 0, 0, 0), "Pendant $(%d)$ jours"));
 
             var temp = new DataDated<string>("Life", new DateTime(2000, 01, 02), new DateTime(2222, 11, 22), "Jusque $2(y)$ et depuis $1(y)$");
             temp.AddCategory(Index.Find("Divers") as ElementList);

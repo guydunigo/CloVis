@@ -12,16 +12,16 @@ namespace ResumeElements
         }
     }
 
-    public abstract class Data: Element, INotifyPropertyChanged
+    public abstract class Data : Element, INotifyPropertyChanged
     {
-		public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
+        public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
             double Level = level;
             categories = new SortedSet<ElementList>(new CategoriesComparer());
 
             this.IsIndependant = isIndependant;
-	        if (!isIndependant) Index.AddData(this);
+            if (!isIndependant) Index.AddData(this);
         }
 
         protected string description;
@@ -98,7 +98,7 @@ namespace ResumeElements
         public void ClearCategories()
         {
             var copy = new List<ElementList>(categories);
-            foreach(ElementList e in copy)
+            foreach (ElementList e in copy)
             {
                 e.Remove(this);
             }
@@ -112,7 +112,8 @@ namespace ResumeElements
         /// Level value between 0 and 5
         /// If it is undefined, Level is -1
         /// </summary>
-        public double Level {
+        public double Level
+        {
             get
             {
                 return level;
@@ -165,7 +166,7 @@ namespace ResumeElements
         public override Element Copy()
         {
             var temp = new Data<T>(Name, Value, Level, Description, true, true);
-            foreach(ElementList el in categories)
+            foreach (ElementList el in categories)
             {
                 temp.AddCategory(el);
             }

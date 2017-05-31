@@ -99,7 +99,7 @@ namespace CloVis
             if (sender is MenuFlyoutItem b)
             {
                 var res = b.Tag as Resume.Resume; // Tag retourne null
-                if(res != null)
+                if (res != null)
                 {
                     (Application.Current as App).RemoveResume(res);
                 }

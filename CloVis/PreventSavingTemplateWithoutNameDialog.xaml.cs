@@ -24,8 +24,8 @@ namespace CloVis
         Validate,
         NotValidate
     }
-    
-    
+
+
     public sealed partial class PreventSavingTemplateWithoutNameDialog : ContentDialog
     {
         public SavingTemplateResult Result { get; private set; }

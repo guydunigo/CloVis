@@ -17,7 +17,7 @@
         <controls:TimeSpanValueToTextConverter x:Key="TimeSpanValueToTextConverter"/>
         <controls:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     </UserControl.Resources>
-    
+
     <StackPanel HorizontalAlignment="Stretch" Padding="0,10">
         <Border BorderThickness="0,0,0,1" Margin="0,0,0,10" Padding="0,0,0,5" BorderBrush="White">
             <TextBlock Foreground="White" FontSize="18" Text="Nouvelle donnée"/>

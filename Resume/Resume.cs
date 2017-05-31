@@ -10,7 +10,7 @@ using System.IO;
 
 namespace Resume
 {
-   
+
     public class Resume
     {
         public Resume(string name)
@@ -24,18 +24,18 @@ namespace Resume
         /// ! If you add an TextBox, you have to register its element to le elmts list.
         /// </summary>
         public Layout Layout { get; set; }
-       
+
         /// <summary>
         /// Defines how each kind of text will be displayed on the resume
         /// </summary>
         public Fonts Fonts { get; set; }
 
-      
+
         public string Name { get; set; }
 
         public void UpdateFromIndex()
         {
-            foreach(BoxText b in Layout.TextBoxes)
+            foreach (BoxText b in Layout.TextBoxes)
             {
                 b.UpdateFromIndex();
             }

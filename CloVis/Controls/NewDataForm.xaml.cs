@@ -93,15 +93,15 @@ namespace CloVis.Controls
 
         private void DateSecond_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-                // Hide or show the last fields :
-                if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
-                {
-                    HideSecondDate();
-                }
-                else
-                {
-                    ShowSecondDate();
-                }
+            // Hide or show the last fields :
+            if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
+            {
+                HideSecondDate();
+            }
+            else
+            {
+                ShowSecondDate();
+            }
         }
         public void ShowSecondDate()
         {
@@ -120,7 +120,7 @@ namespace CloVis.Controls
                 DateEndword.Visibility = Visibility.Collapsed;
             }
         }
-        
+
         public void DateTimeSpanToggle_Checked(object sender, RoutedEventArgs e)
         {
             if (sender == DateBtn)

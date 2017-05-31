@@ -10,7 +10,7 @@ namespace ResumeElements
     /// <summary>
     /// Specifies a timespan with set starting and ending dates
     /// </summary>
-    public class DataDated<T>: Data<T>, INotifyPropertyChanged
+    public class DataDated<T> : Data<T>, INotifyPropertyChanged
     {
         /// <summary>
         /// 
@@ -155,7 +155,7 @@ namespace ResumeElements
                 return false;
             try
             {
-                date.ToString(GetDisplayFormatFrom(format,1));
+                date.ToString(GetDisplayFormatFrom(format, 1));
             }
             catch (Exception)
             {
@@ -166,14 +166,14 @@ namespace ResumeElements
             {
                 try
                 {
-                    date.ToString(GetDisplayFormatFrom(format,2));
+                    date.ToString(GetDisplayFormatFrom(format, 2));
                 }
                 catch (Exception)
                 {
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -191,7 +191,7 @@ namespace ResumeElements
         {
             var res = "";
             var rank = format.IndexOf("$" + date.ToString());
-            res = format.Substring(rank+3);
+            res = format.Substring(rank + 3);
             rank = res.IndexOf(")$");
             res = res.Substring(0, rank);
 
@@ -221,7 +221,8 @@ namespace ResumeElements
         }
 
         protected DateTimeOffset startTime;
-        public DateTimeOffset StartTime {
+        public DateTimeOffset StartTime
+        {
             get => startTime;
             set
             {
@@ -306,7 +307,7 @@ namespace ResumeElements
 
             var dest = new DataDated<T>(data.Name, data.Value, start, end, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
 
-            foreach(ElementList el in cats)
+            foreach (ElementList el in cats)
             {
                 dest.AddCategory(el);
             }
@@ -330,7 +331,7 @@ namespace ResumeElements
             string temp = first + "$" + ((firstStartEnd == 1 || firstStartEnd == 2) ? firstStartEnd.ToString() : "1") + "(" + firstFormat + ")$" + middle;
 
             if (secondStartEnd > 0)
-                temp +=  "$" + ((secondStartEnd == 1 || secondStartEnd == 2) ? secondStartEnd.ToString() : "2") + ")$" + end;
+                temp += "$" + ((secondStartEnd == 1 || secondStartEnd == 2) ? secondStartEnd.ToString() : "2") + ")$" + end;
 
             return temp;
         }

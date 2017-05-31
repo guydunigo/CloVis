@@ -29,7 +29,7 @@ namespace CloVis.Controls
             elementsToAdd = new SortedList<double, UIElement>();
         }
 
-        private SortedList<double,UIElement> elementsToAdd;
+        private SortedList<double, UIElement> elementsToAdd;
 
         public bool IsTextSelectionEnable
         {
@@ -92,7 +92,8 @@ namespace CloVis.Controls
             {
                 var cv_template_Folds = await FileManagement.GetResumeTemplateFoldersList();
                 //throw new NotImplementedException("other folders ...");
-                return new ImageBrush() {
+                return new ImageBrush()
+                {
                     ImageSource = await DataImage.GetImageSource(b.Image.Value, cv_template_Folds)
                 };
             }
@@ -243,7 +244,7 @@ namespace CloVis.Controls
                 var LayersNumber = 3;
 
                 RenderElement(box, fonts, element, LayersNumber);
-                
+
                 box.TextAlignment = fonts.TextAlignment;
             }
             else if (fonts == null) throw new NullReferenceException("Fonts is null !");
