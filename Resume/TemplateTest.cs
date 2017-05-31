@@ -106,6 +106,87 @@ namespace Resume
 
             var fonts = new Fonts("Polices_cv")
             {
+                new FontElement("Gadugi", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+                
+            };
+
+            var fonts_titre = new Fonts("Polices_cv")
+            {
+                new FontElement("Gadugi", 10,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_petit = new Fonts("Polices_cv")
+            {
+                new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_tres_petit = new Fonts("Polices_cv")
+            {
+                new FontElement("Gadugi", 4,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
+            };
+
+            var fonts_langues = new Fonts("Polices_cv")
+            {
+                new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, true),
+                new FontElement("Gadugi", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
+            };
+
+            var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
+            var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
+
+            var boite_langues = new BoxText(172, 90, 10, 49, 28, 0, "Langues", fonts_langues);
+            var boite_langue_1 = new BoxText(144, 108, 10, 29, 28, 0, "Langue 1", fonts_petit);
+            var boite_langue_2 = new BoxText(144, 116, 10, 29, 28, 0, "Langue 2", fonts_petit);
+            var boite_langue_3 = new BoxText(144, 124, 10, 29, 28, 0, "Langue 3", fonts_petit);
+            var boite_langue_4 = new BoxText(144, 132, 10, 29, 28, 0, "Langue 4", fonts_petit);
+
+            var boite_d_obj = new BoxText(8, 40, 60, 70, 40, 0, "Mon Objectif", fonts_langues);
+            var boite_d_obj2 = new BoxText(15, 50, 60, 70, 40, 0, "obj", fonts_tres_petit);
+
+
+            var boite_compétence_1 = new BoxText(7, 107, 10, 29, 28, 0, "Politique", fonts_petit);
+            var boite_compétence_2 = new BoxText(7, 115, 10, 29, 28, 0, "Meurtre", fonts_petit);
+            var boite_compétence_3 = new BoxText(7, 123, 10, 29, 28, 0, "Mariage", fonts_petit);
+            var boite_compétence_4 = new BoxText(7, 131, 10, 29, 28, 0, "Ruse", fonts_petit);
+
+            var boite_nom = new BoxText(88, 12, 20, 81, 15, 0, "Nom", fonts_titre);
+            var boite_profession = new BoxText(84, 33, 0, 81, 20, 0, "Profession");
+            var boite_competences = new BoxText(7,90,0,50,64,0,"Compétences", fonts_langues);
+            var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
+            {
+                Image = new DataImage("Temp3_-_fond", true)
+            };
+
+            template.Layout = new Layout();
+            template.Fonts = fonts;
+            template.Layout.AddTextBox(boite_coordonnées);
+            template.Layout.AddTextBox(boite_diplomes);
+            template.Layout.AddTextBox(boite_langues);
+            template.Layout.AddTextBox(boite_langue_1);
+            template.Layout.AddTextBox(boite_langue_2);
+            template.Layout.AddTextBox(boite_langue_3);
+            template.Layout.AddTextBox(boite_langue_4);
+            template.Layout.AddTextBox(boite_compétence_1);
+            template.Layout.AddTextBox(boite_compétence_2);
+            template.Layout.AddTextBox(boite_compétence_3);
+            template.Layout.AddTextBox(boite_compétence_4);
+            template.Layout.AddTextBox(boite_nom);
+            template.Layout.AddTextBox(boite_d_obj);
+            template.Layout.AddTextBox(boite_d_obj2);
+            template.Layout.AddTextBox(boite_profession);
+            template.Layout.AddTextBox(boite_competences);
+            template.Layout.AddBackBox(fond);
+            
+            return template;
+        }
+
+
+        public static Template GetTemplate_4()
+        {
+            var template = new Template("Temp4");
+
+            var fonts = new Fonts("Polices_cv")
+            {
                 new FontElement("Colibri", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
                 
             };
@@ -126,18 +207,13 @@ namespace Resume
                 new FontElement("Colibri", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
             };
 
-            var boite_diplomes = new BoxText(8, 170, 20, 193, 64, 0, "Diplômes");
+            var boite_exp = new BoxText(57, 229, 20, 82, 32, 0, "Expériences professionnelles");
             var boite_coordonnées = new BoxText(144, 52, 20, 67, 52, 0, "Coordonnées");
+            var boite_diplomes = new BoxText(57, 229, 20, 82, 32, 0, "Diplômes");
 
-            var boite_langues = new BoxText(150, 90, 10, 29, 28, 0, "Langues", fonts_langues);
-            var boite_langue_1 = new BoxText(143, 107, 10, 29, 28, 0, "Langue 1", fonts_petit);
-            var boite_langue_2 = new BoxText(143, 115, 10, 29, 28, 0, "Langue 2", fonts_petit);
-            var boite_langue_3 = new BoxText(143, 124, 10, 29, 28, 0, "Langue 3", fonts_petit);
-
-
-            var boite_nom = new BoxText(84, 12, 20, 81, 15, 0, "Nom", fonts_titre);
-            var boite_profession = new BoxText(79, 33, 0, 81, 20, 0, "Profession");
-            var boite_competences = new BoxText(7,112,0,22,28,0,"Compétences", fonts_petit);
+            var boite_nom = new BoxText(57, 34, 20, 58, 7, 0, "Nom", fonts_titre);
+            var boite_profession = new BoxText(57, 42, 0, 42, 6, 0, "Profession");
+            var boite_competences = new BoxText(7, 112, 0, 22, 28, 0, "Compétences", fonts_petit);
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
                 Image = new DataImage("Temp3_-_fond", true)
@@ -147,15 +223,11 @@ namespace Resume
             template.Fonts = fonts;
             template.Layout.AddTextBox(boite_coordonnées);
             template.Layout.AddTextBox(boite_diplomes);
-            template.Layout.AddTextBox(boite_langues);
-            template.Layout.AddTextBox(boite_langue_1);
-            template.Layout.AddTextBox(boite_langue_2);
-            template.Layout.AddTextBox(boite_langue_3);
             template.Layout.AddTextBox(boite_nom);
             template.Layout.AddTextBox(boite_profession);
             template.Layout.AddTextBox(boite_competences);
             template.Layout.AddBackBox(fond);
-            
+
             return template;
         }
     }

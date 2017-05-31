@@ -117,7 +117,8 @@ namespace ResumeElements
             {
                 new Data<string>("Langue 1",""),
                 new Data<string>("Langue 2",""),
-                new Data<string>("Langue 3","")
+                new Data<string>("Langue 3",""),
+                new Data<string>("Langue 4","")
             },
             new ElementList<Element>("Diplômes"),
             new ElementList<Element>("Études"),
