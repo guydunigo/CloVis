@@ -20,7 +20,7 @@
         <StackPanel x:Name="Fields" DataContext="{x:Bind IndexRoot,Mode=OneWay}">
             <TextBox x:Name="CatName" Margin="0,0,0,10"  PlaceholderText="Nom de la catégorie" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="CatName_KeyDown"/>
             <TextBlock Foreground="White" VerticalAlignment="Center" Margin="0,0,0,10" Text="Ajouter à la catégorie :"/>
-            <ComboBox x:Name="CatList" Margin="0,0,0,10" Background="White" BorderBrush="Gray"
+            <ComboBox x:Name="CatList" Margin="5,0,0,10" Background="White" BorderBrush="Gray"
                       ItemsSource="{Binding SubLists.Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>

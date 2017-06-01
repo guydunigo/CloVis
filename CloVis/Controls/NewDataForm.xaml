@@ -73,8 +73,8 @@
                 <TextBox x:Name="TSMiddleword" PlaceholderText="Nombre de jours"  Margin="0,0,0,10" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ElmtValue_KeyDown"/>
                 <TextBox x:Name="TSEndword" PlaceholderText="Texte après la durée" Margin="0,0,0,10" Background="White" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" KeyDown="ElmtValue_KeyDown"/>
             </StackPanel>
-            <TextBlock Foreground="White" VerticalAlignment="Center" Margin="0,0,0,10" Text="Ajouter à la catégorie :"/>
-            <ComboBox x:Name="CatList"  DataContext="{x:Bind IndexRoot,Mode=OneWay}" Margin="0,0,0,10" Background="White" BorderBrush="Gray"
+            <TextBlock Foreground="White" VerticalAlignment="Center" Margin="5,0,0,10" Text="Ajouter à la catégorie :"/>
+            <ComboBox x:Name="CatList"  DataContext="{x:Bind IndexRoot,Mode=OneWay}" Margin="5,0,0,10" Background="White" BorderBrush="Gray"
                       ItemsSource="{Binding SubLists.Values, Converter={StaticResource CollectionToObservableConverter}, Mode=OneWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
