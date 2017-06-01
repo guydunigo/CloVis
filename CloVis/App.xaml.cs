@@ -247,10 +247,14 @@ namespace CloVis
                 if (tempRes.Result == SavingTemplateResult.Validate && tempRes.CV_name != "")
                 {
                     cv.Name = tempRes.CV_name;
-
                     FileManagement.Save_File(cv);
                     SaveResumeInResumes(cv);
                 }
+            }
+            else
+            {
+                FileManagement.Save_File(cv);
+                SaveResumeInResumes(cv);
             }
 
             //await file_saving;
