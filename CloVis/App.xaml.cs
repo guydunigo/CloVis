@@ -234,15 +234,6 @@ namespace CloVis
             Index.ReloadImages();
         }
 
-        private async System.Threading.Tasks.Task<string> PreventSavingTemplateWithoutNameAsync()
-        {
-
-            var temp = new PreventSavingTemplateWithoutNameDialog();
-            await temp.ShowAsync();
-            return temp.CV_name;
-
-        }
-
         public async void SaveResume(Resume.Resume cv)
         {
             //throw new NotImplementedException("Async ?")
@@ -251,15 +242,16 @@ namespace CloVis
 
             if (temp == null)
             {
-                string res = await PreventSavingTemplateWithoutNameAsync();
-                if (res != "")
+                var tempRes = new PreventSavingTemplateWithoutNameDialog();
+                await tempRes.ShowAsync();
+                if (tempRes.Result == SavingTemplateResult.Validate && tempRes.CV_name != "")
                 {
-                    cv.Name = res;
+                    cv.Name = tempRes.CV_name;
+
+                    FileManagement.Save_File(cv);
+                    SaveResumeInResumes(cv);
                 }
             }
-
-            FileManagement.Save_File(cv);
-            SaveResumeInResumes(cv);
 
             //await file_saving;
         }

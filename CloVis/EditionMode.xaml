@@ -81,8 +81,8 @@
             <AppBarButton Icon="Save" Label="Enregistrer" Foreground="White" Click="SaveResume_Click"/>
             <AppBarButton Icon="Download" Label="Importer" Foreground="White"/>
             <AppBarButton Icon="Upload"  Label="Exporter" Foreground="White" Click="Export_Click"/>
-            <AppBarSeparator Foreground="White"/>
-            <AppBarButton Icon="Setting" Label="Paramètres" Foreground="White"/>
+            <!--<AppBarSeparator Foreground="White"/>
+            <AppBarButton Icon="Setting" Label="Paramètres" Foreground="White"/>-->
             <AppBarButton Icon="Help" Label="Aide" Foreground="White" Click="Help_Click"/>
             <AppBarSeparator Foreground="White"/>
             <AppBarButton Icon="Clear" Label="Retour à l'accueil" Foreground="White" Click="Back_Click"/>
@@ -180,7 +180,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <GridView MaxHeight="300" BorderThickness="0,1,0,1" Padding="0" BorderBrush="White" Margin="0,5" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"
-                                  ItemClick="OpenResume_ItemClick" IsItemClickEnabled="True" SelectionMode="Single"
+                                  ItemClick="OpenResume_ItemClick" IsItemClickEnabled="True"
                                   ItemsSource="{x:Bind OpenResumes, Converter={StaticResource ResumeCollectionToObservableConverter}, Mode=OneWay}" ItemTemplate="{StaticResource OpenResume_Preview}">
                             <GridView.Header>
                                 <Border BorderThickness="0,0,0,1" BorderBrush="White" Margin="0,2">

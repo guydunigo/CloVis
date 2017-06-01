@@ -34,20 +34,16 @@ namespace CloVis
         public PreventSavingTemplateWithoutNameDialog()
         {
             this.InitializeComponent();
+            Result = SavingTemplateResult.NotValidate;
         }
         private void SaveName_Click(object sender, RoutedEventArgs e)
         {
             Validate(sender);
-            if (Window.Current.Content is Frame f && f.Content is EditionMode root)
-            {
-                root.IsModified = false;
-
-                this.Result = SavingTemplateResult.Validate;
-                this.Hide();
-            }
         }
         private void CvName_KeyDown(object sender, KeyRoutedEventArgs e)
         {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+                SaveName_Click(sender, e);
         }
 
         public void Validate(object sender)
@@ -68,14 +64,33 @@ namespace CloVis
             {
                 //ajouter le nom au CV
                 CV_name = CvName.Text;
-                txt.Text = "Cv Sauvegardé !";
 
+                if (Window.Current.Content is Frame f && f.Content is EditionMode root)
+                {
+                    root.IsModified = false;
+
+                    this.Result = SavingTemplateResult.Validate;
+                    this.Hide();
+                }
+
+                return;
             }
             var fo = new Flyout()
             {
                 Content = txt
             };
             fo.ShowAt(CvName);
+
+        }
+
+        private void Save_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            Validate(sender);
+        }
+
+        private void Cancel_Click(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
+            this.Hide();
         }
     }
 }
