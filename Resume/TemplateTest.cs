@@ -246,14 +246,12 @@ namespace Resume
                 new FontElement("Colibri", 5,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
 
-
             var fonts_competences = new Fonts("Polices_cv")
             {
                 new FontElement("Colibri", 7,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false),
                 new FontElement("Colibri", 5,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false),
                 new FontElement("Colibri", 4,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
-
 
             var boite_exp = new BoxText(57, 229, 20, 82, 32, 0, "Expériences professionnelles");
             var boite_coordonnées = new BoxText(123, 125, 20, 67, 52, 0, "Coordonnées");

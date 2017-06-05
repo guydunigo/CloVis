@@ -18,9 +18,7 @@ namespace ResumeElements
             (Index.DataIndex["Langue 2"] as Data<string>).Value = "Allemand";
             (Index.DataIndex["Langue 3"] as Data<string>).Value = "Chinois";
             (Index.DataIndex["Langue 4"] as Data<string>).Value = "Espéranto";
-
-
-
+            
             Index.Root["Compétences"].Add(new ElementList<Element>("Informatique")
             {
                 new Data<string>("C", 2),

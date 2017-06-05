@@ -33,7 +33,7 @@ namespace Resume
 
         public string Name { get; set; }
 
-        public void UpdateFromIndex()
+        public virtual void UpdateFromIndex()
         {
             foreach (BoxText b in Layout.TextBoxes)
             {
