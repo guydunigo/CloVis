@@ -13,6 +13,7 @@ namespace ResumeElements
         public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
         }
+
         public abstract void Add(object item);
         public abstract void Remove(Element item);
         public abstract bool ContainsKey(string e);
@@ -32,28 +33,39 @@ namespace ResumeElements
             elements = new Dictionary<string, T>();
         }
 
+        public override ElementList<ElementList> SubLists
+        {
+            get
+            {
+                ElementList<ElementList> res = new ElementList<ElementList>("Root");
+
+                if (typeof(T) == typeof(Element) || typeof(T) == typeof(ElementList))
+                {
+                    ElementList<ElementList> temp = null;
+
+                    foreach (Element e in Values)
+                    {
+                        if (e is ElementList el)
+                        {
+                            res.Add(el);
+                            temp = el.SubLists;
+                            foreach (ElementList ee in temp.Values)
+                            {
+                                res.Add(ee);
+                            }
+                        }
+                    }
+                }
+
+                return res;
+            }
+        }
+
         public void NotifyListChanged()
         {
             NotifyPropertyChanged("Values");
             NotifyPropertyChanged("Keys");
             NotifyPropertyChanged("SubLists");
-        }
-
-        protected void RemoveFromElements(Element e)
-        {
-            if (e is Data temp)
-            {
-                temp.RemoveCategory(this);
-                NotifyListChanged();
-            }
-        }
-        protected void AddToElements(Element e)
-        {
-            if (e is Data temp && !(temp.Categories.Contains(this)))
-            {
-                temp.AddCategory(this);
-                NotifyListChanged();
-            }
         }
 
         public override ICollection Keys => elements.Keys;
@@ -90,6 +102,23 @@ namespace ResumeElements
         public int Count => elements.Count;
 
         public bool IsReadOnly => false;
+
+        protected void AddToElements(Element e)
+        {
+            if (e is Data temp && !(temp.Categories.Contains(this)))
+            {
+                temp.AddCategory(this);
+                NotifyListChanged();
+            }
+        }
+        protected void RemoveFromElements(Element e)
+        {
+            if (e is Data temp)
+            {
+                temp.RemoveCategory(this);
+                NotifyListChanged();
+            }
+        }
 
         /// <summary>
         /// Shouldn't be called as you can only add a T kind of value
@@ -321,35 +350,6 @@ namespace ResumeElements
             else
                 throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
             */
-        }
-
-        public override ElementList<ElementList> SubLists
-        {
-            get
-            {
-                ElementList<ElementList> res = null;
-                if (typeof(T) == typeof(Element) || typeof(T) == typeof(ElementList))
-                {
-                    res = new ElementList<ElementList>("Root");
-
-                    ElementList<ElementList> temp = null;
-
-                    foreach (Element e in Values)
-                    {
-                        if (e is ElementList el)
-                        {
-                            res.Add(el);
-                            temp = el.SubLists;
-                            foreach (ElementList ee in temp.Values)
-                            {
-                                res.Add(ee);
-                            }
-                        }
-                    }
-                }
-
-                return res;
-            }
         }
     }
 }

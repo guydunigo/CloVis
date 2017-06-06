@@ -104,7 +104,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="ClassDiagramResumeElements.cd" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +115,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="Index.cs" />
     <Compile Include="IndexTest.cs" />
+    <Compile Include="NonGenericElementList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\ResumeElements.rd.xml" />
   </ItemGroup>
