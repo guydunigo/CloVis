@@ -94,6 +94,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <Content Include="Assets\wallpaper_CloVis.png" />
     <Content Include="Resources\Resumes\CV 1.cv" />
     <None Include="Resources\Resumes\CV 2.cv" />
     <None Include="Resources\Templates\BlackAndWhite.cv" />
