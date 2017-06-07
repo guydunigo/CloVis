@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ResumeElements
 {
@@ -41,7 +37,11 @@ namespace ResumeElements
         {
             StartTime = start;
             EndTime = end;
-            DisplayFormat = displayFormat;
+
+            if (IsDisplayFormatGood(displayFormat))
+                DisplayFormat = displayFormat;
+            else
+                DisplayFormat = GenerateDefaultDisplayFormat();
         }
 
         public string RenderedDates
@@ -63,11 +63,11 @@ namespace ResumeElements
             set
             {
                 if (IsDisplayFormatGood(value))
+                {
                     displayFormat = value;
-                else
-                    displayFormat = GenerateDefaultDisplayFormat();
-                NotifyPropertyChanged("DisplayFormat");
-                NotifyPropertyChanged("RenderedDates");
+                    NotifyPropertyChanged("DisplayFormat");
+                    NotifyPropertyChanged("RenderedDates");
+                }
             }
         }
 

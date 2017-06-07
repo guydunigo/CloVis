@@ -1,29 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public class DataTimeSpan<T> : Data<T>, INotifyPropertyChanged
+    class DataTextTimeSpan : DataText, INotifyPropertyChanged
     {
-        public DataTimeSpan(T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, span, displayFormat, level, description, isIndependant, isDefault)
+        public DataTextTimeSpan(string value, double length, string displayFormat, double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, length, displayFormat, level, isIndependant, isDefault)
         {
         }
 
-        public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
+        public DataTextTimeSpan(string name, string value, double length, string displayFormat, double level = -1, bool isIndependant = false, bool isDefault = true) : base(name, value, level, isIndependant, isDefault)
         {
-            TimeSpan = span;
-
-            if (IsDisplayFormatGood(displayFormat))
-            {
-                this.displayFormat = displayFormat;
-            }
-            else
-                displayFormat = GenerateDefaultDisplayFormat();
+            Length = length;
         }
 
         public string RenderedTimeSpan
@@ -31,14 +19,14 @@ namespace ResumeElements
             get => RenderTimeSpan();
         }
 
-        private TimeSpan timespan;
-        public TimeSpan TimeSpan
+        private double length;
+        public double Length
         {
-            get => timespan;
+            get => length;
             set
             {
-                timespan = value;
-                NotifyPropertyChanged("TimeSpan");
+                length = value;
+                NotifyPropertyChanged("Length");
                 NotifyPropertyChanged("RenderedTimeSpan");
             }
         }
@@ -81,7 +69,7 @@ namespace ResumeElements
         }
 
         /// <summary>
-        /// ["foreword","format","endword"]
+        /// ["foreword","endword"]
         /// </summary>
         /// <returns></returns>
         public string[] GetDisplayFormatStructure()
@@ -93,7 +81,7 @@ namespace ResumeElements
         {
             var res = GetDisplayFormatStructure();
 
-            return res[0] + TimeSpan.ToString(res[1]) + res[2];
+            return res[0] + Length.ToString(res[1]) + res[2];
         }
 
         /// <summary>
@@ -102,7 +90,7 @@ namespace ResumeElements
         /// <returns></returns>
         public static bool IsDisplayFormatGood(string format)
         {
-            var ts = new TimeSpan(2000, 12, 1);
+            double ts = 34.12;
 
             if (format == "") return false;
 
@@ -146,7 +134,7 @@ namespace ResumeElements
         /// <returns></returns>
         public string GenerateDefaultDisplayFormat()
         {
-            return "Pendant $(%d)$ jours";
+            return "Pendant $(G)$ jours";
         }
 
         /// <summary>
@@ -155,34 +143,35 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true);
+            return new DataTextTimeSpan(Name, Value, Length, DisplayFormat, Level, true);
         }
 
         public override void UpdateFromIndex()
         {
             base.UpdateFromIndex();
-            if (Index.Find(Name) is DataTimeSpan<T> d)
+            if (Index.Find(Name) is DataTextTimeSpan d)
             {
-                TimeSpan = d.TimeSpan;
+                Length = d.Length;
                 DisplayFormat = d.DisplayFormat;
             }
             //else
             //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
-        public static DataTimeSpan<T> Replace(Data<T> data, TimeSpan timeSpan = default(TimeSpan), string displayFormat = "")
+        public static DataTextTimeSpan Replace(DataText data, double length = 1.0, string displayFormat = "")
         {
             // Mew mew (== Mewtwo)
             var cats = data.Categories;
 
             if (!data.IsIndependant)
             {
-                Index.Erase(data);
+                //Index.Erase(data);
+                throw new NotImplementedException();
             }
 
-            var dest = new DataTimeSpan<T>(data.Name, data.Value, timeSpan, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
+            var dest = new DataTextTimeSpan(data.Name, data.Value, length, displayFormat, data.Level, data.IsIndependant, data.IsDefault);
 
-            foreach (ElementList el in cats)
+            foreach (NonGenericElementList el in cats)
             {
                 dest.AddCategory(el);
             }

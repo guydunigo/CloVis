@@ -112,6 +112,7 @@
     <Compile Include="DataImage.cs" />
     <Compile Include="DataText.cs" />
     <Compile Include="DataTextDated.cs" />
+    <Compile Include="DataTextTimeSpan.cs" />
     <Compile Include="DataTimeSpan.cs" />
     <Compile Include="ElementList.cs" />
     <Compile Include="Element.cs" />

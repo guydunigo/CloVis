@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 namespace ResumeElements
 {
     internal class CategoriesComparer : IComparer<ElementList>
