@@ -1,47 +1,75 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    /// <summary>
-    /// Specifies a timespan with set starting and ending dates
-    /// </summary>
-    public class DataDated<T> : Data<T>, INotifyPropertyChanged
+    class DataTextDated : DataText, INotifyPropertyChanged
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <param name="start"></param>
-        /// <param name="end">If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.</param>
-        /// <param name="displayFormat"></param>
-        /// <param name="level"></param>
-        /// <param name="description"></param>
-        /// <param name="isDefault"></param>
-        public DataDated(T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, description, isIndependant, isDefault)
+        public DataTextDated(string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, isIndependant, isDefault)
         {
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <param name="start"></param>
-        /// <param name="end">If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.</param>
-        /// <param name="displayFormat"></param>
-        /// <param name="level"></param>
-        /// <param name="description"></param>
-        /// <param name="isDefault"></param>
-        public DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
+        public DataTextDated(string name, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isIndependant = false, bool isDefault = true) : base(name, value, level, isIndependant, isDefault)
         {
             StartTime = start;
             EndTime = end;
-            DisplayFormat = displayFormat;
+
+            if (IsDisplayFormatGood(displayFormat))
+            {
+                this.displayFormat = displayFormat;
+            }
+            else
+                displayFormat = GenerateDefaultDisplayFormat();
+        }
+
+        protected DateTimeOffset startTime;
+        public DateTimeOffset StartTime
+        {
+            get => startTime;
+            set
+            {
+                if (startTime == EndTime)
+                {
+                    startTime = value;
+                    endTime = value;
+                }
+                else if (value > EndTime && EndTime != default(DateTimeOffset)) // If value is a date after endTime, set endTime to one day after the new value
+                {
+                    startTime = value;
+                    endTime = startTime + new TimeSpan(1, 0, 0, 0);
+                }
+                else
+                {
+                    startTime = value;
+                }
+                NotifyPropertyChanged("StartTime");
+                NotifyPropertyChanged("RenderedDates");
+            }
+        }
+
+        protected DateTimeOffset endTime;
+        /// <summary>
+        /// If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.
+        /// Also, EndTime cannot be prior to StartTime, in which case it is set to StartTime
+        /// </summary>
+        public DateTimeOffset EndTime
+        {
+            get => endTime;
+            set
+            {
+                if (value == default(DateTimeOffset))
+                {
+                    endTime = default(DateTimeOffset);
+                }
+                else if (value < StartTime)
+                {
+                    endTime = StartTime + new TimeSpan(1, 0, 0, 0);
+                }
+                else
+                    endTime = value;
+                NotifyPropertyChanged("EndTime");
+                NotifyPropertyChanged("RenderedDates");
+            }
         }
 
         public string RenderedDates
@@ -63,11 +91,11 @@ namespace ResumeElements
             set
             {
                 if (IsDisplayFormatGood(value))
+                {
                     displayFormat = value;
-                else
-                    displayFormat = GenerateDefaultDisplayFormat();
-                NotifyPropertyChanged("DisplayFormat");
-                NotifyPropertyChanged("RenderedDates");
+                    NotifyPropertyChanged("DisplayFormat");
+                    NotifyPropertyChanged("RenderedDates");
+                }
             }
         }
 
@@ -220,103 +248,6 @@ namespace ResumeElements
             return res;
         }
 
-        protected DateTimeOffset startTime;
-        public DateTimeOffset StartTime
-        {
-            get => startTime;
-            set
-            {
-                if (startTime == endTime)
-                {
-                    startTime = value;
-                    endTime = value;
-                }
-                else if (value > endTime && endTime != default(DateTimeOffset)) // If value is a date after endTime, set endTime to one day after the new value
-                {
-                    startTime = value;
-                    endTime = startTime + new TimeSpan(1, 0, 0, 0);
-                }
-                else
-                {
-                    startTime = value;
-                }
-                NotifyPropertyChanged("StartTime");
-                NotifyPropertyChanged("RenderedDates");
-            }
-        }
-
-        protected DateTimeOffset endTime;
-        /// <summary>
-        /// If it hasn't finished, EndTime is default(DateTime). If there is just a date, EndTime equals StartTime.
-        /// Also, EndTime cannot be prior to StartTime, in which case it is set to StartTime
-        /// </summary>
-        public DateTimeOffset EndTime
-        {
-            get
-            {
-                return endTime;
-            }
-            set
-            {
-                if (value == default(DateTimeOffset))
-                {
-                    endTime = default(DateTimeOffset);
-                }
-                else if (value < StartTime)
-                {
-                    endTime = StartTime;
-                }
-                else
-                    endTime = value;
-                NotifyPropertyChanged("EndTime");
-                NotifyPropertyChanged("RenderedDates");
-            }
-        }
-
-        /// <summary>
-        /// Provides a deep copy of every Elements and sub-Elements.
-        /// </summary>
-        /// <returns></returns>
-        public override Element Copy()
-        {
-            return new DataDated<T>(Name, Value, StartTime, EndTime, DisplayFormat, Level, Description, true, IsDefault);
-        }
-
-        public override void UpdateFromIndex()
-        {
-            base.UpdateFromIndex();
-            if (Index.Find(Name) is DataDated<T> d)
-            {
-                StartTime = d.StartTime;
-                EndTime = d.EndTime;
-                DisplayFormat = d.DisplayFormat;
-            }
-            //else
-            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
-        }
-
-        public static DataDated<T> Replace(Data<T> data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")
-        {
-            // Mew mew (== Mewtwo)
-            var cats = data.Categories;
-
-            if (!data.IsIndependant)
-            {
-                Index.Erase(data);
-            }
-
-            var dest = new DataDated<T>(data.Name, data.Value, start, end, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
-
-            foreach (ElementList el in cats)
-            {
-                dest.AddCategory(el);
-            }
-
-            data.ClearCategories();
-
-            return dest;
-        }
-
         /// <summary>
         /// 
         /// </summary>
@@ -336,6 +267,59 @@ namespace ResumeElements
                 temp += "$" + ((secondStartEnd == 1 || secondStartEnd == 2) ? secondStartEnd.ToString() : "2") + ")$" + end;
 
             return temp;
+        }
+
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            return new DataTextDated(Name, Value, StartTime, EndTime, DisplayFormat, Level, true, IsDefault);
+        }
+
+        public override void UpdateFromIndex()
+        {
+            base.UpdateFromIndex();
+            if (Index.Find(Name) is DataTextDated d)
+            {
+                StartTime = d.StartTime;
+                EndTime = d.EndTime;
+                DisplayFormat = d.DisplayFormat;
+            }
+            //else
+            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
+        }
+
+        /// <summary>
+        /// Used when you want to transform any DataText to DataTextDated
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="start"></param>
+        /// <param name="end"></param>
+        /// <param name="displayFormat"></param>
+        /// <returns></returns>
+        public static DataTextDated Replace(DataText data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")
+        {
+            // Mew mew (== Mewtwo)
+            var cats = data.Categories;
+
+            if (!data.IsIndependant)
+            {
+                //Index.Erase(data);
+                throw new NotImplementedException();
+            }
+
+            var dest = new DataTextDated(data.Name, data.Value, start, end, displayFormat, data.Level, data.IsIndependant, data.IsDefault);
+
+            foreach (NonGenericElementList el in cats)
+            {
+                dest.AddCategory(el);
+            }
+
+            data.ClearCategories();
+
+            return dest;
         }
     }
 }

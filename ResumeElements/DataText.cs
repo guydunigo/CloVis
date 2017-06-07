@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ResumeElements
 {
@@ -150,18 +147,11 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            var temp = new DataText(Name, Value, Level, true, IsDefault);
-            foreach (NonGenericElementList el in categories)
-            {
-                temp.AddCategory(el);
-            }
-
-            return temp;
+            return new DataText(Name, Value, Level, true, IsDefault);
         }
 
         public override void UpdateFromIndex()
         {
-            // + in daughters
             var temp = Index.Find(Name);
             if (temp is DataText d)
             {
