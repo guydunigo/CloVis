@@ -154,59 +154,18 @@ namespace ResumeElements
         }
         public void Add(string key, T value)
         {
-            if (key == null) throw new ArgumentNullException("Key is null");
-            else if (elements.ContainsKey(key)) throw new ArgumentException("An element with the given key already exists in the dictionary");
-            else if (value.Name != key) throw new ArgumentException("The Elements name must be the same as the key");
+            if (key == null)
+                throw new ArgumentNullException("Key is null");
+            else if (elements.ContainsKey(key))
+                throw new ArgumentException("An Element with the given key already exists in the dictionary");
+            else if (value.Name != key)
+                throw new ArgumentException("The Elements name must be the same as the key");
             else
-            {
                 Add(value);
-            }
         }
-
         public void Add(KeyValuePair<string, T> item)
         {
             Add(item.Key, item.Value);
-        }
-
-        public bool Contains(T item)
-        {
-            return elements.Values.Contains(item);
-        }
-
-        public bool Contains(KeyValuePair<string, T> item)
-        {
-            if (item.Key != item.Value.Name) throw new ArgumentException("The key does match the items name");
-            return Contains(item.Value);
-        }
-
-        public override bool ContainsKey(string key)
-        {
-            return elements.Keys.Contains(key);
-        }
-
-        public void CopyTo(T[] array, int index)
-        {
-            if (array.Length - index < elements.Count) throw new ArgumentException("Array is too small");
-            else if (index < 0) throw new IndexOutOfRangeException("Index must be positive");
-            else if (array == null) throw new ArgumentNullException("Undefined array");
-
-            List<T> temp = elements.Values.ToList<T>();
-            for (int i = 0; i < temp.Count; i++)
-                array[index + i] = temp[i];
-        }
-
-        public void CopyTo(KeyValuePair<string, T>[] array, int index)
-        {
-            if (array.Length - index < elements.Count) throw new ArgumentException("Array is too small");
-            else if (index < 0) throw new IndexOutOfRangeException("Index must be positive");
-            else if (array == null) throw new ArgumentNullException("Undefined array");
-
-            int i = 0;
-            foreach (string s in elements.Keys)
-            {
-                array[index + i] = new KeyValuePair<string, T>(s, elements[s]);
-                i++;
-            }
         }
 
         protected bool CommonRemove(Element value)
@@ -233,13 +192,11 @@ namespace ResumeElements
         {
             return CommonRemove(value);
         }
-
         public bool Remove(KeyValuePair<string, T> item)
         {
             if (item.Key != item.Value.Name) throw new ArgumentException("The key does match the items name");
             else return Remove(item.Value);
         }
-
         bool IDictionary<string, T>.Remove(string key)
         {
             if (elements.ContainsKey(key))
@@ -257,8 +214,46 @@ namespace ResumeElements
             {
                 RemoveFromElements(t);
             }
-            NotifyListChanged();
             elements.Clear();
+            NotifyListChanged();
+        }
+
+        public bool Contains(T item)
+        {
+            return elements.Values.Contains(item);
+        }
+        public bool Contains(KeyValuePair<string, T> item)
+        {
+            if (item.Key != item.Value.Name) throw new ArgumentException("The key does match the items name");
+            return Contains(item.Value);
+        }
+        public override bool ContainsKey(string key)
+        {
+            return elements.Keys.Contains(key);
+        }
+
+        public void CopyTo(T[] array, int index)
+        {
+            if (array.Length - index < elements.Count) throw new ArgumentException("Array is too small");
+            else if (index < 0) throw new IndexOutOfRangeException("Index must be positive");
+            else if (array == null) throw new ArgumentNullException("Undefined array");
+
+            List<T> temp = elements.Values.ToList<T>();
+            for (int i = 0; i < temp.Count; i++)
+                array[index + i] = temp[i];
+        }
+        public void CopyTo(KeyValuePair<string, T>[] array, int index)
+        {
+            if (array.Length - index < elements.Count) throw new ArgumentException("Array is too small");
+            else if (index < 0) throw new IndexOutOfRangeException("Index must be positive");
+            else if (array == null) throw new ArgumentNullException("Undefined array");
+
+            int i = 0;
+            foreach (string s in elements.Keys)
+            {
+                array[index + i] = new KeyValuePair<string, T>(s, elements[s]);
+                i++;
+            }
         }
 
         public bool TryGetValue(string key, out T value)
@@ -280,12 +275,10 @@ namespace ResumeElements
         {
             return elements.Values.GetEnumerator();
         }
-
         IEnumerator<KeyValuePair<string, T>> IEnumerable<KeyValuePair<string, T>>.GetEnumerator()
         {
             return elements.GetEnumerator();
         }
-
         public IEnumerator GetEnumerator()
         {
             return elements.GetEnumerator();
@@ -299,23 +292,29 @@ namespace ResumeElements
         /// <returns>The first Element matching the given name or null if not found.</returns>
         public override Element Find(string name)
         {
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
             T[] es = new T[elements.Count];
             elements.Values.CopyTo(es, 0);
 
             Element res = null;
 
             if (Name == name)
+            {
                 return this;
+            }
             else if (elements.Keys.Contains(name))
             {
                 return this[name];
             }
             else
+            {
                 foreach (Element e in es)
                 {
                     res = e.Find(name);
                     if (res != null) return res;
                 }
+            }
+
             return null;
         }
 
@@ -325,21 +324,30 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            var temp = new ElementList<T>(Name, true);
-            foreach (T e in elements.Values)
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
+            T[] temp = new T[elements.Count];
+            elements.Values.CopyTo(temp, 0);
+
+            var res = new ElementList<T>(Name, IsDefault);
+            foreach (T e in temp)
             {
-                temp.Add(e.Copy());
+                res.Add(e.Copy());
             }
 
-            return temp;
+            return res;
         }
 
         public override void UpdateFromIndex()
         {
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
+            T[] tempList = new T[elements.Count];
+            elements.Values.CopyTo(tempList, 0);
+
             var temp = Index.Find(Name);
+
             if (temp is ElementList<T> l)
             {
-                foreach (T t in elements.Values)
+                foreach (Element t in tempList)
                 {
                     t.UpdateFromIndex();
                 }

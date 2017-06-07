@@ -17,7 +17,7 @@ namespace ResumeElements
         public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
-            double Level = level;
+            Level = level;
             categories = new SortedSet<ElementList>(new CategoriesComparer());
 
             this.IsIndependant = isIndependant;
@@ -54,10 +54,6 @@ namespace ResumeElements
                 return new SortedSet<ElementList>(categories, new CategoriesComparer());
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cat"></param>
         public void AddCategory(ElementList cat)
         {
             if (!categories.Contains(cat))
@@ -88,8 +84,8 @@ namespace ResumeElements
                     cat.Remove(this);
                 categories.Remove(cat);
 
-                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers")
-                    AddCategory(Index.Find("Divers") as ElementList);
+                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is ElementList misc)
+                    AddCategory(misc);
 
                 NotifyPropertyChanged("Categories");
             }
@@ -107,7 +103,6 @@ namespace ResumeElements
         }
 
         protected double level;
-
         /// <summary>
         /// Level value between 0 and 5
         /// If it is undefined, Level is -1
@@ -165,7 +160,7 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            var temp = new Data<T>(Name, Value, Level, Description, true, true);
+            var temp = new Data<T>(Name, Value, Level, Description, true, IsDefault);
             foreach (ElementList el in categories)
             {
                 temp.AddCategory(el);
@@ -183,6 +178,7 @@ namespace ResumeElements
                 Level = d.Level;
                 Value = d.Value;
                 Description = d.Description;
+                IsDefault = d.IsDefault;
             }
             //else if (temp == null)
             //    throw new MissingFieldException("The element can't be found in the Index and can't be updated.");

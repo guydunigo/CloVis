@@ -77,44 +77,71 @@ namespace ResumeElements
             }
         }
 
-        protected void AddToElements(Element e)
-        {
-            throw new NotImplementedException();
-        }
-        protected void RemoveFromElements(Element e)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Add(Element item)
         {
-            throw new NotImplementedException();
+            // Preventing self-containing lists
+            if (item.Find(Name) != null)
+            {
+                throw new ArgumentException("A list can't contain itself or another list containing it.");
+            }
+            else if (!ContainsKey(item.Name))
+            {
+                elements.Add(item.Name, item);
+
+                if (item is DataText dt && !(dt.Categories.Contains(this)))
+                    dt.AddCategory(this, false);
+
+                NotifyListChanged();
+            }
         }
         public void Add(string key, Element value)
         {
-            ((IDictionary<string, Element>)elements).Add(key, value);
+            if (key == null)
+                throw new ArgumentNullException("Key is null");
+            else if (elements.ContainsKey(key))
+                throw new ArgumentException("An Element with the given key already exists in the dictionary");
+            else if (value.Name != key)
+                throw new ArgumentException("The Elements name must be the same as the key");
+            else
+                Add(value);
         }
         public void Add(KeyValuePair<string, Element> item)
         {
-            ((IDictionary<string, Element>)elements).Add(item);
+            Add(item.Key, item.Value);
         }
 
         public bool Remove(string key)
         {
-            return ((IDictionary<string, Element>)elements).Remove(key);
+            if (ContainsKey(key))
+            {
+                var temp = elements.Remove(key);
+                if (this[key] is DataText dt && dt.Categories.Contains(this))
+                    dt.RemoveCategory(this, false);
+                NotifyListChanged();
+            }
+            else
+                return false;
+            throw new NotImplementedException();
         }
         public bool Remove(Element item)
         {
-            throw new NotImplementedException();
+            return Remove(item.Name);
         }
         public bool Remove(KeyValuePair<string, Element> item)
         {
-            return ((IDictionary<string, Element>)elements).Remove(item);
+            return Remove(item.Key);
         }
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            var copy = new List<Element>(elements.Values);
+            foreach(Element e in copy)
+            {
+                if (e is DataText dt)
+                    dt.RemoveCategory(this, false);
+            }
+            elements.Clear();
+            NotifyListChanged();
         }
 
         public bool ContainsKey(string key)
@@ -162,6 +189,82 @@ namespace ResumeElements
         IEnumerator<KeyValuePair<string, Element>> IEnumerable<KeyValuePair<string, Element>>.GetEnumerator()
         {
             return ((IDictionary<string, Element>)elements).GetEnumerator();
+        }
+
+        /// <summary>
+        /// Returns an Element matching the given name if it exists or null if it doesn't.
+        /// As every Element should have a different name, there shouldn't be any problems
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>The first Element matching the given name or null if not found.</returns>
+        public override Element Find(string name)
+        {
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
+            Element[] temp = new Element[elements.Count];
+            elements.Values.CopyTo(temp, 0);
+
+            Element res = null;
+
+            if (Name == name)
+            {
+                return this;
+            }
+            else if (elements.Keys.Contains(name))
+            {
+                return this[name];
+            }
+            else
+            {
+                foreach (Element e in temp)
+                {
+                    res = e.Find(name);
+                    if (res != null) return res;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Provides a deep copy of every Elements and sub-Elements.
+        /// </summary>
+        /// <returns></returns>
+        public override Element Copy()
+        {
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
+            Element[] temp = new Element[elements.Count];
+            elements.Values.CopyTo(temp, 0);
+
+            var res = new NonGenericElementList(Name, IsDefault);
+            foreach (Element e in temp)
+            {
+                res.Add(e.Copy());
+            }
+
+            return res;
+        }
+
+        public override void UpdateFromIndex()
+        {
+            // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
+            Element[] tempList = new Element[elements.Count];
+            elements.Values.CopyTo(tempList, 0);
+
+            var temp = Index.Find(Name);
+
+            if (temp is NonGenericElementList l)
+            {
+                foreach (Element t in tempList)
+                {
+                    t.UpdateFromIndex();
+                }
+            }
+            /*
+            else if (temp == null)
+                throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+            else
+                throw new InvalidCastException("The Element in the Index does not match this one and can't be updated.");
+            */
         }
     }
 }
