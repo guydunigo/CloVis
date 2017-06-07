@@ -47,7 +47,7 @@ namespace ResumeElements
             NotifyPropertyChanged("Values");
             NotifyPropertyChanged("Keys");
             NotifyPropertyChanged("SubLists");
-            throw new NotImplementedException("All properties");
+            NotifyPropertyChanged("Count");
         }
 
         public int Count => elements.Count;
@@ -69,8 +69,8 @@ namespace ResumeElements
                     // Removing previous Element before (because of Data.Categories list)
                     Remove(key);
                     Add(key, value);
-                    NotifyListChanged();
-                    throw new NotImplementedException("NotifyListChanged called thrice :/ (do it manually)");
+                    //NotifyListChanged();
+                    //throw new NotImplementedException("NotifyListChanged called thrice :/ (do it manually)");
                 }
                 else
                     throw new ArgumentException("The new value hasn't a name corresponding to the key"); // Or rename it ?
@@ -118,10 +118,11 @@ namespace ResumeElements
                 if (this[key] is DataText dt && dt.Categories.Contains(this))
                     dt.RemoveCategory(this, false);
                 NotifyListChanged();
+
+                return temp;
             }
             else
                 return false;
-            throw new NotImplementedException();
         }
         public bool Remove(Element item)
         {
@@ -135,7 +136,7 @@ namespace ResumeElements
         public void Clear()
         {
             var copy = new List<Element>(elements.Values);
-            foreach(Element e in copy)
+            foreach (Element e in copy)
             {
                 if (e is DataText dt)
                     dt.RemoveCategory(this, false);

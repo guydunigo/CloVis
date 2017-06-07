@@ -66,6 +66,7 @@ namespace ResumeElements
             NotifyPropertyChanged("Values");
             NotifyPropertyChanged("Keys");
             NotifyPropertyChanged("SubLists");
+            NotifyPropertyChanged("Count");
         }
 
         public override ICollection Keys => elements.Keys;
