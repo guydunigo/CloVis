@@ -52,7 +52,7 @@ namespace CloVis.Controls
 
         private void ReloadImages_Click(object sender, RoutedEventArgs e)
         {
-            Deprecated_Index.ReloadImages();
+            Deprecated_Index.ReloadImagesAsync();
         }
     }
 }

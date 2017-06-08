@@ -11,7 +11,7 @@ namespace ResumeElements
         public static Deprecated_ElementList<Deprecated_Data> DataIndex { get; } = new Deprecated_ElementList<Deprecated_Data>("Index");
         public static Deprecated_ElementList<Deprecated_DataImage> Images { get; } = new Deprecated_ElementList<Deprecated_DataImage>("Images");
 
-        public static async void ReloadImages()
+        public static async void ReloadImagesAsync()
         {
             Deprecated_Index.Images.Clear();
 

@@ -231,7 +231,7 @@ namespace CloVis
 
         public void LoadImages()
         {
-            Deprecated_Index.ReloadImages();
+            Deprecated_Index.ReloadImagesAsync();
         }
 
         public async void SaveResume(Resume.Resume cv)

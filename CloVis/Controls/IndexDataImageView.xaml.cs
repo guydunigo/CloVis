@@ -59,7 +59,7 @@ namespace CloVis.Controls
         public async void Delete_Click(object sender, RoutedEventArgs e)
         {
             var temp = await Image.Remove();
-            if (temp == RemoveOutput.RestoredToDefault)
+            if (temp == ImageRemovedOutput.RestoredToDefault)
             {
                 Img.Source = await Deprecated_DataImage.GetImageSource(Image.Value);
                 NotifyPropertyChanged("Img");
@@ -69,7 +69,7 @@ namespace CloVis.Controls
                 };
                 f.ShowAt(this);
             }
-            else if (temp == RemoveOutput.NothingDone)
+            else if (temp == ImageRemovedOutput.NothingDone)
             {
                 var f = new Flyout()
                 {
