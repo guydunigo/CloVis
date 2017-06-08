@@ -6,7 +6,7 @@ namespace ResumeElements
     /// <summary>
     /// Specifies a timespan with set starting and ending dates
     /// </summary>
-    public class DataDated<T> : Data<T>, INotifyPropertyChanged
+    public class Deprecated_DataDated<T> : Deprecated_Data<T>, INotifyPropertyChanged
     {
         /// <summary>
         /// 
@@ -18,7 +18,7 @@ namespace ResumeElements
         /// <param name="level"></param>
         /// <param name="description"></param>
         /// <param name="isDefault"></param>
-        public DataDated(T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, description, isIndependant, isDefault)
+        public Deprecated_DataDated(T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Deprecated_Index.GetUnusedName(value), value, start, end, displayFormat, level, description, isIndependant, isDefault)
         {
         }
 
@@ -33,7 +33,7 @@ namespace ResumeElements
         /// <param name="level"></param>
         /// <param name="description"></param>
         /// <param name="isDefault"></param>
-        public DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
+        public Deprecated_DataDated(string name, T value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
             StartTime = start;
             EndTime = end;
@@ -279,13 +279,13 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataDated<T>(Name, Value, StartTime, EndTime, DisplayFormat, Level, Description, true, IsDefault);
+            return new Deprecated_DataDated<T>(Name, Value, StartTime, EndTime, DisplayFormat, Level, Description, true, IsDefault);
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             base.UpdateFromIndex();
-            if (Index.Find(Name) is DataDated<T> d)
+            if (Deprecated_Index.Find(Name) is Deprecated_DataDated<T> d)
             {
                 StartTime = d.StartTime;
                 EndTime = d.EndTime;
@@ -295,19 +295,19 @@ namespace ResumeElements
             //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
-        public static DataDated<T> Replace(Data<T> data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")
+        public static Deprecated_DataDated<T> Replace(Deprecated_Data<T> data, DateTimeOffset start = default(DateTimeOffset), DateTimeOffset end = default(DateTimeOffset), string displayFormat = "")
         {
             // Mew mew (== Mewtwo)
             var cats = data.Categories;
 
             if (!data.IsIndependant)
             {
-                Index.Erase(data);
+                Deprecated_Index.Erase(data);
             }
 
-            var dest = new DataDated<T>(data.Name, data.Value, start, end, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
+            var dest = new Deprecated_DataDated<T>(data.Name, data.Value, start, end, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
 
-            foreach (ElementList el in cats)
+            foreach (Deprecated_ElementList el in cats)
             {
                 dest.AddCategory(el);
             }

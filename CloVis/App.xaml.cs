@@ -226,12 +226,12 @@ namespace CloVis
         public void LoadIndex()
         {
             LoadImages();
-            IndexTest.FillIndex();
+            Deprecated_IndexTest.FillIndex();
         }
 
         public void LoadImages()
         {
-            Index.ReloadImages();
+            Deprecated_Index.ReloadImages();
         }
 
         public async void SaveResume(Resume.Resume cv)

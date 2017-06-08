@@ -27,14 +27,14 @@ namespace CloVis.Controls
 
             this.DataContext = this;
 
-            Root = Index.Root;
-            DataIndex = Index.DataIndex;
-            Images = Index.Images;
+            Root = Deprecated_Index.Root;
+            DataIndex = Deprecated_Index.DataIndex;
+            Images = Deprecated_Index.Images;
         }
 
-        public ElementList Root { get; set; }
-        public ElementList DataIndex { get; set; }
-        public ElementList Images { get; set; }
+        public Deprecated_ElementList Root { get; set; }
+        public Deprecated_ElementList DataIndex { get; set; }
+        public Deprecated_ElementList Images { get; set; }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -52,7 +52,7 @@ namespace CloVis.Controls
 
         private void ReloadImages_Click(object sender, RoutedEventArgs e)
         {
-            Index.ReloadImages();
+            Deprecated_Index.ReloadImages();
         }
     }
 }

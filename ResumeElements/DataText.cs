@@ -13,7 +13,7 @@ namespace ResumeElements
 
     public class DataText : Element, INotifyPropertyChanged
     {
-        public DataText(NewIndex index, string value, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, level, index, isDefault)
+        public DataText(Index index, string value, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, level, index, isDefault)
         {
         }
 
@@ -25,7 +25,7 @@ namespace ResumeElements
         /// <param name="level"></param>
         /// <param name="index">If index is null, the DataText is considered independant.</param>
         /// <param name="isDefault"></param>
-        public DataText(string name, string value, double level = -1, NewIndex index = null, bool isDefault = true) : base(name, isDefault)
+        public DataText(string name, string value, double level = -1, Index index = null, bool isDefault = true) : base(name, isDefault)
         {
             Value = value;
 
@@ -48,7 +48,7 @@ namespace ResumeElements
             }
         }
         
-        public NewIndex Index { get; }
+        public Index Index { get; }
 
         protected double level;
         /// <summary>
@@ -151,7 +151,7 @@ namespace ResumeElements
         /// 
         /// </summary>
         /// <param name="index">If the index param is defined, use this one instead of the private property.</param>
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             if (indexToUse == null)
                 indexToUse = Index;

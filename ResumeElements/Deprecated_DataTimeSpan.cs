@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public class DataTimeSpan<T> : Data<T>, INotifyPropertyChanged
+    public class Deprecated_DataTimeSpan<T> : Deprecated_Data<T>, INotifyPropertyChanged
     {
-        public DataTimeSpan(T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, span, displayFormat, level, description, isIndependant, isDefault)
+        public Deprecated_DataTimeSpan(T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Deprecated_Index.GetUnusedName(value), value, span, displayFormat, level, description, isIndependant, isDefault)
         {
         }
 
-        public DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
+        public Deprecated_DataTimeSpan(string name, T value, TimeSpan span, string displayFormat, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, value, level, description, isIndependant, isDefault)
         {
             TimeSpan = span;
 
@@ -155,13 +155,13 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true, IsDefault);
+            return new Deprecated_DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true, IsDefault);
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             base.UpdateFromIndex();
-            if (Index.Find(Name) is DataTimeSpan<T> d)
+            if (Deprecated_Index.Find(Name) is Deprecated_DataTimeSpan<T> d)
             {
                 TimeSpan = d.TimeSpan;
                 DisplayFormat = d.DisplayFormat;
@@ -170,19 +170,19 @@ namespace ResumeElements
             //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
-        public static DataTimeSpan<T> Replace(Data<T> data, TimeSpan timeSpan = default(TimeSpan), string displayFormat = "")
+        public static Deprecated_DataTimeSpan<T> Replace(Deprecated_Data<T> data, TimeSpan timeSpan = default(TimeSpan), string displayFormat = "")
         {
             // Mew mew (== Mewtwo)
             var cats = data.Categories;
 
             if (!data.IsIndependant)
             {
-                Index.Erase(data);
+                Deprecated_Index.Erase(data);
             }
 
-            var dest = new DataTimeSpan<T>(data.Name, data.Value, timeSpan, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
+            var dest = new Deprecated_DataTimeSpan<T>(data.Name, data.Value, timeSpan, displayFormat, data.Level, data.Description, data.IsIndependant, data.IsDefault);
 
-            foreach (ElementList el in cats)
+            foreach (Deprecated_ElementList el in cats)
             {
                 dest.AddCategory(el);
             }

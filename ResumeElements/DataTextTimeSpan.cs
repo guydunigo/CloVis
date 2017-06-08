@@ -5,11 +5,11 @@ namespace ResumeElements
 {
     public class DataTextTimeSpan : DataText, INotifyPropertyChanged
     {
-        public DataTextTimeSpan(NewIndex index, string value, double length, string displayFormat, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, length, displayFormat, level, index, isDefault)
+        public DataTextTimeSpan(Index index, string value, double length, string displayFormat, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, length, displayFormat, level, index, isDefault)
         {
         }
 
-        public DataTextTimeSpan(string name, string value, double length, string displayFormat, double level = -1, NewIndex index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
+        public DataTextTimeSpan(string name, string value, double length, string displayFormat, double level = -1, Index index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
         {
             Length = length;
         }
@@ -146,7 +146,7 @@ namespace ResumeElements
             return new DataTextTimeSpan(Name, Value, Length, DisplayFormat, Level, null, isDefault);
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse)
+        public override void UpdateFromIndex(Index indexToUse)
         {
             base.UpdateFromIndex(indexToUse);
 

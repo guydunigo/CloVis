@@ -38,7 +38,7 @@ namespace CloVis.Controls
                 txt.Text = "Veuillez renseigner un nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (Index.Find(ImgName.Text) != null)
+            else if (Deprecated_Index.Find(ImgName.Text) != null)
             {
                 txt.Text = "Ce nom est déjà utilisé pour un autre élément.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;

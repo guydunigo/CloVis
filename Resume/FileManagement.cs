@@ -154,7 +154,7 @@ namespace Resume
                     await writer.WriteElementStringAsync("", "angle", "Resume", Convert.ToString(resumetosave.Layout.TextBoxes[numT].Angle));
                     Save_Font(resumetosave.Layout.TextBoxes[numT], writer);
                     Save_Element(resumetosave, writer, numT);
-                    if (resumetosave.Layout.TextBoxes[numT].Element is ElementList<Element> list) Save_ElementList(list, writer, numT);
+                    if (resumetosave.Layout.TextBoxes[numT].Element is Deprecated_ElementList<Element> list) Save_ElementList(list, writer, numT);
                     await writer.WriteEndElementAsync();
                     numT += 1;
                 }
@@ -220,7 +220,7 @@ namespace Resume
 
         public static async void Save_Element(Resume resumetosave, XmlWriter writer, int numT)
         {
-            if (resumetosave.Layout.TextBoxes[numT].Element is Data data && !(resumetosave.Layout.TextBoxes[numT].Element is Data<string>))
+            if (resumetosave.Layout.TextBoxes[numT].Element is Deprecated_Data data && !(resumetosave.Layout.TextBoxes[numT].Element is Deprecated_Data<string>))
             {
                 await writer.WriteStartElementAsync("", "Data_Element", "Resume");
                 await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(data.Level));
@@ -238,7 +238,7 @@ namespace Resume
                 await writer.WriteEndElementAsync();
                 await writer.WriteEndElementAsync();
             }
-            if (resumetosave.Layout.TextBoxes[numT].Element is Data<string> datestr)
+            if (resumetosave.Layout.TextBoxes[numT].Element is Deprecated_Data<string> datestr)
             {
                 var box = resumetosave.Layout.TextBoxes[numT];
                 await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
@@ -258,7 +258,7 @@ namespace Resume
                 await writer.WriteEndElementAsync();
                 await writer.WriteEndElementAsync();
             }
-            if (resumetosave.Layout.TextBoxes[numT].Element is DataDated<string> dateD)
+            if (resumetosave.Layout.TextBoxes[numT].Element is Deprecated_DataDated<string> dateD)
             {
                 await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
                 await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(dateD.Level));
@@ -282,7 +282,7 @@ namespace Resume
             }
         }
 
-        public static async void Save_ElementList(ElementList<Element> list, XmlWriter writer, int numT)
+        public static async void Save_ElementList(Deprecated_ElementList<Element> list, XmlWriter writer, int numT)
         {
             await writer.WriteStartElementAsync("", "ElementList", "Resume");
             await writer.WriteElementStringAsync("", "List_Name", "Resume", list.Name);
@@ -292,8 +292,8 @@ namespace Resume
             foreach (var j in list.Values)
             {
                 await writer.WriteStartElementAsync("", "Element", "Resume");
-                if (j is ElementList<Element> sous_list) Save_ElementList(sous_list, writer, numT);
-                if (j is Data Ldata && !(j is Data<string>))
+                if (j is Deprecated_ElementList<Element> sous_list) Save_ElementList(sous_list, writer, numT);
+                if (j is Deprecated_Data Ldata && !(j is Deprecated_Data<string>))
                 {
                     await writer.WriteStartElementAsync("", "Data_Element", "Resume");
                     await writer.WriteElementStringAsync("", "D_level", "Resume", Convert.ToString(Ldata.Level));
@@ -311,7 +311,7 @@ namespace Resume
                     await writer.WriteEndElementAsync();
                     await writer.WriteEndElementAsync();
                 }
-                if (j is Data<string> dstr)
+                if (j is Deprecated_Data<string> dstr)
                 {
                     await writer.WriteStartElementAsync("", "DataString_Element", "Resume");
                     await writer.WriteElementStringAsync("", "DS_level", "Resume", Convert.ToString(dstr.Level));
@@ -331,7 +331,7 @@ namespace Resume
                     await writer.WriteEndElementAsync();
                 }
 
-                if (j is DataDated<string> ddstr)
+                if (j is Deprecated_DataDated<string> ddstr)
                 {
                     await writer.WriteStartElementAsync("", "DataDated_Element", "Resume");
                     await writer.WriteElementStringAsync("", "DD_level", "Resume", Convert.ToString(ddstr.Level));
@@ -393,7 +393,7 @@ namespace Resume
                 //liste 
                 bool[] L_def = new bool[10], L_ReadOnly = new bool[10];
                 string[] L_Name = new string[10];
-                var nv = new ElementList<Element>("");
+                var nv = new Deprecated_ElementList<Element>("");
 
                 //datadated
                 string[] DD_format = new string[10], DD_name = new string[10], DD_description = new string[10], DD_value = new string[10];
@@ -595,11 +595,11 @@ namespace Resume
                                     if (nv.Name != "")
                                     {
                                         var souslist = nv;
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                         nv.Add(souslist);
                                         L_Name[liste] = ""; L_def[liste] = false;
                                     }
-                                    else nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                    else nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                     dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name);
                                     while (dt >= 1) { elem -= 1; dt -= 1; }
                                     elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
@@ -613,7 +613,7 @@ namespace Resume
                                     if (nv.Name != "")
                                     {
                                         var souslist = nv;
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
                                         while (dde >= 1 && elem >= 1) { dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name); }
                                         while (dt >= 1 && elem >= 1) { elem -= 1; dt -= 1; }
@@ -625,23 +625,23 @@ namespace Resume
                                         if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
-                                        nv = new ElementList<Element>("");
+                                        nv = new Deprecated_ElementList<Element>("");
                                     }
                                     else
                                     {
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                         while (dde >= 1 && elem >= 1)
                                         {
                                             for (int i = 1; i <= dde; i++)
                                             {
-                                                var datadd = new DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                                                var datadd = new Deprecated_DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                                                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                                                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
 
                                                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
                                                 for (int j = 1; j <= dscatnum; j++)
                                                 {
-                                                    datadd.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    datadd.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[i, j]));
                                                     DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datadd);
@@ -655,11 +655,11 @@ namespace Resume
                                         {
                                             for (int i = 1; i <= dts; i++)
                                             {
-                                                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                                                var datastr = new Deprecated_Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
                                                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
                                                 for (int j = 1; j <= dscatnum; j++)
                                                 {
-                                                    datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    datastr.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[i, j]));
                                                     DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datastr);
@@ -673,7 +673,7 @@ namespace Resume
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
                                         bnv.Element = nv;
-                                        nv = new ElementList<Element>("");
+                                        nv = new Deprecated_ElementList<Element>("");
 
                                     }
                                     resumetoread.Layout.AddTextBox(bnv);
@@ -687,7 +687,7 @@ namespace Resume
                                     if (dde == 1 && elem == 0)
                                     {
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
-                                        var nvdd = new DataDated<string>(DD_name[dde], DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
+                                        var nvdd = new Deprecated_DataDated<string>(DD_name[dde], DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
                                         DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = ""; DD_dependant[dde] = false; DD_def[dde] = false; DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
                                         DD_categorie[dde, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
                                         dde = 0;
@@ -695,11 +695,11 @@ namespace Resume
                                     if (dt == 1 && elem == 0) { }
                                     if (dts == 1 && elem == 0)
                                     {
-                                        var nvdt = new Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
+                                        var nvdt = new Deprecated_Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
                                         for (int j = 1; j <= dscatnum; j++)
                                         {
-                                            nvdt.AddCategory(new ElementList<Element>(DS_categorie[1, j]));
+                                            nvdt.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[1, j]));
                                             DS_categorie[1, j] = "";
                                         }
 
@@ -753,7 +753,7 @@ namespace Resume
                 //liste 
                 bool[] L_def = new bool[10], L_ReadOnly = new bool[10];
                 string[] L_Name = new string[10];
-                var nv = new ElementList<Element>("");
+                var nv = new Deprecated_ElementList<Element>("");
 
                 //datadated
                 string[] DD_format = new string[10], DD_name = new string[10], DD_description = new string[10], DD_value = new string[10];
@@ -955,11 +955,11 @@ namespace Resume
                                     if (nv.Name != "")
                                     {
                                         var souslist = nv;
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                         nv.Add(souslist);
                                         L_Name[liste] = ""; L_def[liste] = false;
                                     }
-                                    else nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                    else nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                     dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name);
                                     while (dt >= 1) { elem -= 1; dt -= 1; }
                                     elem = Creation_DTS(resumetoread, nv, dts, DS_value, DS_level, DS_description, DS_dependant, DS_def, DS_categorie, dscatnum, DS_name, elem);
@@ -973,7 +973,7 @@ namespace Resume
                                     if (nv.Name != "")
                                     {
                                         var souslist = nv;
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]); // n'a pas de nom !
                                         nv.Add(souslist);
                                         while (dde >= 1 && elem >= 1) { dde = Creation_DDE(resumetoread, nv, dde, DD_value, DD_start, DD_end, DD_format, DD_level, DD_description, DD_dependant, DD_def, DD_categorie, ddcatnum, DD_name); }
                                         while (dt >= 1 && elem >= 1) { elem -= 1; dt -= 1; }
@@ -985,23 +985,23 @@ namespace Resume
                                         if (ft_text >= 1) ft_text = Creation_BoxFonts(bnv, ft_text, Fts_text_alignment, Ft_text_source, Ft_text_size, Ft_text_color_a, Ft_text_color_r, Ft_text_color_g, Ft_text_color_b, Ft_text_italic, Ft_text_bold, Ft_text_underlined, Ft_text_uppercase, Ft_text_name);
                                         bnv.Element = nv;
                                         L_Name[liste] = ""; L_def[liste] = false;
-                                        nv = new ElementList<Element>("");
+                                        nv = new Deprecated_ElementList<Element>("");
                                     }
                                     else
                                     {
-                                        nv = new ElementList<Element>(L_Name[liste], L_def[liste]);
+                                        nv = new Deprecated_ElementList<Element>(L_Name[liste], L_def[liste]);
                                         while (dde >= 1 && elem >= 1)
                                         {
                                             for (int i = 1; i <= dde; i++)
                                             {
-                                                var datadd = new DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                                                var datadd = new Deprecated_DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                                                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                                                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
 
                                                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
                                                 for (int j = 1; j <= dscatnum; j++)
                                                 {
-                                                    datadd.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    datadd.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[i, j]));
                                                     DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datadd);
@@ -1015,11 +1015,11 @@ namespace Resume
                                         {
                                             for (int i = 1; i <= dts; i++)
                                             {
-                                                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                                                var datastr = new Deprecated_Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
                                                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
                                                 for (int j = 1; j <= dscatnum; j++)
                                                 {
-                                                    datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                                                    datastr.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[i, j]));
                                                     DS_categorie[i, j] = "";
                                                 }
                                                 nv.Add(datastr);
@@ -1033,7 +1033,7 @@ namespace Resume
                                         L_Name[liste] = ""; L_def[liste] = false;
                                         L_ReadOnly[liste] = false;
                                         bnv.Element = nv;
-                                        nv = new ElementList<Element>("");
+                                        nv = new Deprecated_ElementList<Element>("");
 
                                     }
                                     resumetoread.Layout.AddTextBox(bnv);
@@ -1047,7 +1047,7 @@ namespace Resume
                                     if (dde == 1 && elem == 0)
                                     {
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DD_name[dde]);
-                                        var nvdd = new DataDated<string>(DD_name[dde], DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
+                                        var nvdd = new Deprecated_DataDated<string>(DD_name[dde], DD_value[dde], DD_start[dde], DD_end[dde], DD_format[dde], DD_level[dde], DD_description[dde], DD_dependant[dde], DD_def[dde]);
                                         DD_name[dde] = ""; DD_value[dde] = ""; DD_format[dde] = ""; DD_level[dde] = 0; DD_description[dde] = ""; DD_dependant[dde] = false; DD_def[dde] = false; DD_start[dde] = default(DateTime); DD_end[dde] = default(DateTime);
                                         DD_categorie[dde, 1] = ""; box = ""; x = 0; y = 0; z = 0; SizeX = 0; SizeY = 0; angle = 0; DD_level[dde] = 0;
                                         dde = 0;
@@ -1055,11 +1055,11 @@ namespace Resume
                                     if (dt == 1 && elem == 0) { }
                                     if (dts == 1 && elem == 0)
                                     {
-                                        var nvdt = new Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
+                                        var nvdt = new Deprecated_Data<string>(DS_name[dts], DS_value[dts], DS_level[dts], DS_description[dts], DS_dependant[dts], DS_def[dts]);
                                         var bnv = new BoxText(x, y, z, SizeX, SizeY, angle, DS_name[dts]);
                                         for (int j = 1; j <= dscatnum; j++)
                                         {
-                                            nvdt.AddCategory(new ElementList<Element>(DS_categorie[1, j]));
+                                            nvdt.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[1, j]));
                                             DS_categorie[1, j] = "";
                                         }
 
@@ -1095,16 +1095,16 @@ namespace Resume
             return 0;
         }
 
-        private static int Creation_DTS(Resume resumetoread, ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie, int dscatnum, string[] DS_name, int elem)
+        private static int Creation_DTS(Resume resumetoread, Deprecated_ElementList<Element> nv, int dts, string[] DS_value, double[] DS_level, string[] DS_description, bool[] DS_dependant, bool[] DS_def, string[,] DS_categorie, int dscatnum, string[] DS_name, int elem)
         {
             for (int i = 1; i <= dts; i++)
             {
-                var datastr = new Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
+                var datastr = new Deprecated_Data<string>(DS_name[i], DS_value[i], DS_level[i], DS_description[i], DS_dependant[i], DS_def[i]);
                 DS_name[i] = ""; DS_description[i] = ""; DS_value[i] = ""; DS_dependant[i] = false; DS_def[i] = false; DS_level[i] = 0;
 
                 for (int j = 1; j <= dscatnum; j++)
                 {
-                    datastr.AddCategory(new ElementList<Element>(DS_categorie[i, j]));
+                    datastr.AddCategory(new Deprecated_ElementList<Element>(DS_categorie[i, j]));
                     DS_categorie[i, j] = "";
                 }
                 nv.Add(datastr);
@@ -1113,16 +1113,16 @@ namespace Resume
             return elem;
         }
 
-        private static int Creation_DDE(Resume resumetoread, ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie, int ddcatnum, string[] DD_name)
+        private static int Creation_DDE(Resume resumetoread, Deprecated_ElementList<Element> nv, int dde, string[] DD_value, DateTime[] DD_start, DateTime[] DD_end, string[] DD_format, double[] DD_level, string[] DD_description, bool[] DD_dependant, bool[] DD_def, string[,] DD_categorie, int ddcatnum, string[] DD_name)
         {
             for (int i = 1; i <= dde; i++)
             {
-                var datadd = new DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
+                var datadd = new Deprecated_DataDated<string>(DD_name[i], DD_value[i], DD_start[i], DD_end[i], DD_format[i], DD_level[i], DD_description[i], DD_dependant[i], DD_def[i]);
                 DD_value[i] = ""; DD_start[i] = default(DateTime); DD_end[i] = default(DateTime); DD_format[i] = ""; DD_level[i] = 0; DD_description[i] = "";
                 DD_dependant[i] = false; DD_def[i] = false; DD_name[i] = "";
                 for (int j = 1; j <= ddcatnum; j++)
                 {
-                    datadd.AddCategory(new ElementList<Element>(DD_categorie[i, j]));
+                    datadd.AddCategory(new Deprecated_ElementList<Element>(DD_categorie[i, j]));
                     DD_categorie[i, j] = "";
                 }
                 nv.Add(datadd);

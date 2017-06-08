@@ -14,35 +14,35 @@ namespace Resume
         {
             Resume CV;
 
-            var coordonnees = new ElementList<Element>("Coordonnées")
+            var coordonnees = new Deprecated_ElementList<Element>("Coordonnées")
             {
-                new Data<string>("Nom", "Clovis", -1, "",true),
-                new Data<string>("Téléphone", "+33660606060", -1, "", true),
-                new Data<string>("Mél", "RoiDesFranc@enib.fr", -1, "", true)
+                new Deprecated_Data<string>("Nom", "Clovis", -1, "",true),
+                new Deprecated_Data<string>("Téléphone", "+33660606060", -1, "", true),
+                new Deprecated_Data<string>("Mél", "RoiDesFranc@enib.fr", -1, "", true)
             };
 
-            var competences = new ElementList<Element>("Compétences")
+            var competences = new Deprecated_ElementList<Element>("Compétences")
             {
-                new ElementList<Element>("Informatique")
+                new Deprecated_ElementList<Element>("Informatique")
                 {
-                    new Data<string>("C", "C", 2, "",true),
-                    new Data<string>("C++","C++",1, "",true),
-                    new Data<string>("Java","java",1, "",true)
+                    new Deprecated_Data<string>("C", "C", 2, "",true),
+                    new Deprecated_Data<string>("C++","C++",1, "",true),
+                    new Deprecated_Data<string>("Java","java",1, "",true)
                 },
-                new Data<string>("Business process", "Business Process", 4, "",true)
+                new Deprecated_Data<string>("Business process", "Business Process", 4, "",true)
             };
 
-            var langues = new ElementList<Element>("Langues")
+            var langues = new Deprecated_ElementList<Element>("Langues")
             {
-                new Data<string>("Anglais", "anglais", 5, "",true),
-                new Data<string>("Allemand","allemand",2, "",true),
-                new Data<string>("Chinois","chinois",1.5, "",true),
+                new Deprecated_Data<string>("Anglais", "anglais", 5, "",true),
+                new Deprecated_Data<string>("Allemand","allemand",2, "",true),
+                new Deprecated_Data<string>("Chinois","chinois",1.5, "",true),
             };
 
-            var diplomes = new ElementList<Element>("Diplômes")
+            var diplomes = new Deprecated_ElementList<Element>("Diplômes")
             {
-                new DataDated<string>("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(d)$",-1, "",true),
-                new DataDated<string>("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1, "",true)
+                new Deprecated_DataDated<string>("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(d)$",-1, "",true),
+                new Deprecated_DataDated<string>("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1, "",true)
             };
 
             var fonts = new Fonts("Polices_cv")
@@ -99,45 +99,45 @@ namespace Resume
         {
             Resume CV;
 
-            var nom = new Data<string>("Nom", "Clovis", -1, "", true);
-            var titre = new Data<string>("Titre", "Roi des Francs", -1, "", true);
-            var coordonnees = new ElementList<Element>("Coordonnées")
+            var nom = new Deprecated_Data<string>("Nom", "Clovis", -1, "", true);
+            var titre = new Deprecated_Data<string>("Titre", "Roi des Francs", -1, "", true);
+            var coordonnees = new Deprecated_ElementList<Element>("Coordonnées")
             {
-                new Data<string>("Téléphone", "+33660606060", -1, "", true),
-                new Data<string>("Mél", "clovis@enib.fr", -1, "", true),
-                new Data<string>("Adresse", "17 rue de la Réussite\n75012 Paris", -1, "", true)
+                new Deprecated_Data<string>("Téléphone", "+33660606060", -1, "", true),
+                new Deprecated_Data<string>("Mél", "clovis@enib.fr", -1, "", true),
+                new Deprecated_Data<string>("Adresse", "17 rue de la Réussite\n75012 Paris", -1, "", true)
             };
 
-            var objectif = new ElementList<Element>("Objectif")
+            var objectif = new Deprecated_ElementList<Element>("Objectif")
             {
-                new ElementList<Element>("Mon Objectif")
+                new Deprecated_ElementList<Element>("Mon Objectif")
                 {
-                    new Data<string>("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !", -1, "",true)
+                    new Deprecated_Data<string>("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !", -1, "",true)
                 }
             };
 
-            var competences = new ElementList<Element>("Compétences")
+            var competences = new Deprecated_ElementList<Element>("Compétences")
             {
-                new ElementList<Element>("Diplomatie")
+                new Deprecated_ElementList<Element>("Diplomatie")
                 {
-                    new Data<string>("Politique", "Politique", 4, "",true),
-                    new Data<string>("Assassinat","Assassinat",3, "",true),
-                    new Data<string>("Mariage","Mariage",2, "",true),
-                    new Data<string>("Soudoiement","Soudoiement",2, "",true),
+                    new Deprecated_Data<string>("Politique", "Politique", 4, "",true),
+                    new Deprecated_Data<string>("Assassinat","Assassinat",3, "",true),
+                    new Deprecated_Data<string>("Mariage","Mariage",2, "",true),
+                    new Deprecated_Data<string>("Soudoiement","Soudoiement",2, "",true),
                 },
 
             };
 
-            var langues = new ElementList<Element>("Langues")
+            var langues = new Deprecated_ElementList<Element>("Langues")
             {
-                new Data<string>("Francique", "Francique", 5, "",true),
-                new Data<string>("Français moderne","Français moderne",1, "",true),
-                new Data<string>("Allemand moderne","Allemand moderne",1, "",true),
+                new Deprecated_Data<string>("Francique", "Francique", 5, "",true),
+                new Deprecated_Data<string>("Français moderne","Français moderne",1, "",true),
+                new Deprecated_Data<string>("Allemand moderne","Allemand moderne",1, "",true),
             };
 
-            var diplomes = new ElementList<Element>("Dynastie")
+            var diplomes = new Deprecated_ElementList<Element>("Dynastie")
             {
-                new DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
+                new Deprecated_DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
 
             };
 

@@ -107,18 +107,18 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data.cs" />
-    <Compile Include="DataDated.cs" />
+    <Compile Include="Deprecated_Data.cs" />
+    <Compile Include="Deprecated_DataDated.cs" />
     <Compile Include="DataImage.cs" />
     <Compile Include="DataText.cs" />
     <Compile Include="DataTextDated.cs" />
     <Compile Include="DataTextTimeSpan.cs" />
-    <Compile Include="DataTimeSpan.cs" />
-    <Compile Include="ElementList.cs" />
+    <Compile Include="Deprecated_DataTimeSpan.cs" />
+    <Compile Include="Deprecated_ElementList.cs" />
     <Compile Include="Element.cs" />
+    <Compile Include="Deprecated_Index.cs" />
+    <Compile Include="Deprecated_IndexTest.cs" />
     <Compile Include="Index.cs" />
-    <Compile Include="IndexTest.cs" />
-    <Compile Include="NewIndex.cs" />
     <Compile Include="NonGenericElementList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\ResumeElements.rd.xml" />

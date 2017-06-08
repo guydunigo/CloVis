@@ -50,7 +50,7 @@ namespace Resume
             else
             {
                 // Try to find the default element in the index
-                Element = ResumeElements.Index.Find(DefaultElement);
+                Element = ResumeElements.Deprecated_Index.Find(DefaultElement);
             }
         }
     }

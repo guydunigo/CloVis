@@ -13,8 +13,8 @@ namespace CloVisUnitTest
         [TestMethod]
         public void AddDataToElementList()
         {
-            var list = new ElementList<Element>("test");
-            var data = new Data<string>("data", "value", -1, "", true);
+            var list = new Deprecated_ElementList<Element>("test");
+            var data = new Deprecated_Data<string>("data", "value", -1, "", true);
             list.Add(data);
             Assert.IsTrue(data.Categories.Contains(list));
         }
@@ -22,8 +22,8 @@ namespace CloVisUnitTest
         [TestMethod]
         public void AddListToDataCategory()
         {
-            var list = new ElementList<Element>("test");
-            var data = new Data<string>("data", "value", -1, "", true);
+            var list = new Deprecated_ElementList<Element>("test");
+            var data = new Deprecated_Data<string>("data", "value", -1, "", true);
             data.AddCategory(list);
             Assert.IsTrue(data.Categories.Contains(list));
             Assert.IsTrue(list.Contains(data));

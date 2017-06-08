@@ -1,130 +1,127 @@
 ﻿using System;
+using System.IO;
 using Windows.Storage;
 
 namespace ResumeElements
 {
-    /// <summary>
-    /// The index lists all piece of Data that can be put in a resume and it contains the root of the whole hierarchy of those/this data
-    /// </summary>
-    public static class Index
+    public class Index
     {
-        public static ElementList<Data> DataIndex { get; } = new ElementList<Data>("Index");
-        public static ElementList<DataImage> Images { get; } = new ElementList<DataImage>("Images");
-
-        public static async void ReloadImages()
-        {
-            Index.Images.Clear();
-
-            var imgFolds = await DataImage.GetImageFoldersList();
-            foreach (StorageFolder imgFold in imgFolds)
-            {
-                var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
-                foreach (StorageFile f in imgs)
-                {
-                    var temp = DataImage.GetNameWithoutExtension(f.Name);
-                    if (!Index.Images.ContainsKey(temp))
-                        new DataImage(temp);
-                }
-            }
-        }
-
-        public static void AddData(Data d)
-        {
-            DataIndex.Add(d, false);
-        }
-        public static void RemoveData(Data d)
-        {
-            if (DataIndex.Contains(d))
-            {
-                d.ClearCategories();
-                DataIndex.Remove(d);
-            }
-        }
-        public static void RemoveData(string name)
-        {
-            if (DataIndex.Find(name) is Data t)
-            {
-                RemoveData(t);
-            }
-        }
-        public static void AddImage(DataImage d)
-        {
-            Images.Add(d, false);
-        }
-        public static void RemoveImage(DataImage d)
-        {
-            if (Images.Contains(d))
-            {
-                d.ClearCategories();
-                Images.Remove(d);
-            }
-        }
-        public static void RemoveImage(string name)
-        {
-            if (Images.Find(name) is DataImage t)
-            {
-                RemoveImage(t);
-            }
-        }
-
-        public static Element Find(string name)
-        {
-            var temp = DataIndex.Find(name);
-            if (temp != null) return temp;
-            temp = Images.Find(name);
-            if (temp != null) return temp;
-            return Root.Find(name);
-        }
-
-        /// <summary>
-        /// Return a list of all pieces of Data unlisted in any categories other than the index
-        /// </summary>
-        /// <returns></returns>
-        public static ElementList<Data> GetUnlistedData()
-        {
-            var misc = new ElementList<Data>("Non listés");
-            foreach (Data d in DataIndex.Values)
-            {
-                if (d.Categories.Count == 0)
-                {
-                    misc.Add(d, false);
-                }
-            }
-            return misc;
-        }
+        public NonGenericElementList DataIndex { get; }
+        public NonGenericElementList Images { get; }
 
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
         /// </summary>
-        public static ElementList<ElementList> Root { get; set; } = new ElementList<ElementList>("root")
+        public NonGenericElementList Root { get; set; }
+
+        public Index()
         {
-            new ElementList<Element>("Coordonnées")
-            {
-                new Data<string>("Nom", ""),
-                new Data<string>("Téléphone", ""),
-                new Data<string>("Mél", ""),
-                new Data<string>("Adresse", ""),
-                new Data<string>("Profession", "")
+            DataIndex = new NonGenericElementList("DataIndex");
+            Images = new NonGenericElementList("Images");
 
-                //...
-            },
-            new ElementList<Element>("Compétences"),
-            new ElementList<Element>("Langues")
+            Root = new NonGenericElementList("root")
             {
-                new Data<string>("Langue 1",""),
-                new Data<string>("Langue 2",""),
-                new Data<string>("Langue 3",""),
-                new Data<string>("Langue 4","")
-            },
-            new ElementList<Element>("Diplômes"),
-            new ElementList<Element>("Études"),
-            new ElementList<Element>("Expériences professionnelles"),
-            new ElementList<Element>("Centres d'intérêts"),
-            new ElementList<Element>("Divers"),
-            // Remplir
-        };
+                new NonGenericElementList("Coordonnées")
+                {
+                    new DataText("Nom", ""),
+                    new DataText("Téléphone", ""),
+                    new DataText("Mél", ""),
+                    new DataText("Adresse", ""),
+                    new DataText("Profession", "")
+                },
+                new NonGenericElementList("Compétences"),
+                new NonGenericElementList("Langues")
+                {
+                    new DataText("Langue 1",""),
+                    new DataText("Langue 2",""),
+                    new DataText("Langue 3",""),
+                    new DataText("Langue 4","")
+                },
+                new NonGenericElementList("Diplômes"),
+                new NonGenericElementList("Études"),
+                new NonGenericElementList("Expériences professionnelles"),
+                new NonGenericElementList("Centres d'intérêts"),
+                new NonGenericElementList("Divers"),
+            };
+        }
 
-        public static ElementList FindParent(Element e)
+        public async void ReloadImagesAsync()
+        {
+            Images.Clear();
+
+            var imgFolds = await DataImage.GetImageFoldersList();
+            foreach (StorageFolder f in imgFolds)
+            {
+                var temp = Path.GetExtension(f.Name);
+                if (!Images.ContainsKey(temp))
+                    new DataImage(temp);
+            }
+            throw new NotImplementedException();
+        }
+
+        protected void AddDataTo(DataText d, NonGenericElementList list)
+        {
+            list.Add(d, false);
+        }
+        protected void RemoveDataFrom(DataText d, NonGenericElementList list)
+        {
+            if (list.Contains(d))
+            {
+                d.ClearCategories();
+                list.Remove(d);
+            }
+        }
+        protected void RemoveDataFrom(string name, NonGenericElementList list)
+        {
+            if (DataIndex.Find(name) is DataText t)
+            {
+                RemoveDataFrom(t, list);
+            }
+        }
+
+        public void AddData(DataText d)
+        {
+            AddDataTo(d, DataIndex);
+        }
+        public void RemoveData(DataText d)
+        {
+            RemoveDataFrom(d, DataIndex);
+        }
+        public void RemoveData(string name)
+        {
+            RemoveDataFrom(name, DataIndex);
+        }
+
+        public void AddImage(DataImage d)
+        {
+            //AddDataTo(d, Images);
+            throw new NotImplementedException();
+        }
+        public void RemoveImage(DataImage d)
+        {
+            //RemoveDataFrom(d, Images);
+            throw new NotImplementedException();
+        }
+        public void RemoveImage(string name)
+        {
+            RemoveDataFrom(name, Images);
+            throw new NotImplementedException();
+        }
+
+        public Element Find(string name)
+        {
+            var temp = DataIndex.Find(name);
+            if (temp != null)
+                return temp;
+
+            return Root.Find(name);
+        }
+        public Element FindImage(string name)
+        {
+            return Images.Find(name);
+        }
+
+        public NonGenericElementList FindParent(Element e)
         {
             Element prev = null, cur = Root;
 
@@ -134,7 +131,7 @@ namespace ResumeElements
                 if (prev == null)
                     break;
 
-                if (prev is ElementList i)
+                if (prev is NonGenericElementList i)
                 {
                     foreach (Element el in i.Values)
                     {
@@ -148,18 +145,35 @@ namespace ResumeElements
                 }
             }
 
-            return prev as ElementList;
+            return prev as NonGenericElementList;
         }
 
-        public static void Erase(ElementList e)
+        /// <summary>
+        /// Return a list of all pieces of Data unlisted in any categories other than the index
+        /// </summary>
+        /// <returns></returns>
+        public NonGenericElementList GetUnlistedData()
+        {
+            var misc = new NonGenericElementList("Non listés");
+            foreach (DataText d in DataIndex.Values)
+            {
+                if (d.Categories.Count == 0)
+                {
+                    misc.Add(d, false);
+                }
+            }
+            return misc;
+        }
+
+        public void Erase(NonGenericElementList e)
         {
             e.Clear();
-            FindParent(e).Remove(e);
+            FindParent(e)?.Remove(e);
         }
-        public static void Erase(Data d)
+        public void Erase(DataText d)
         {
             d.ClearCategories();
-            (Index.Find("Divers") as ElementList).Remove(d);
+            (Find("Divers") as Deprecated_ElementList).Remove(d);
             DataIndex.Remove(d);
         }
 
@@ -169,23 +183,22 @@ namespace ResumeElements
         /// <param name="baseValue">If given, the name will include this string.
         /// If the Index doesn't contain baseValue, baseValue is returned</param>
         /// <returns></returns>
-        public static string GetUnusedName(object baseValue = null)
+        public string GetUnusedName(string baseValue = "")
         {
-            string res = baseValue as string;
-            if (res == null || res == "")
+            if (baseValue == "")
             {
-                for (int i = 0; i >= 0 && Index.Find(res) != null; i++)
-                    res = i.ToString();
+                for (int i = 0; Find(baseValue) != null; i++)
+                    baseValue = i.ToString();
             }
-            else if (Index.Find(res) != null)
+            else if (Find(baseValue) != null)
             {
-                while (Index.Find(res) != null)
+                while (Find(baseValue) != null)
                 {
-                    res = "_" + res;
+                    baseValue = "_" + baseValue;
                 }
             }
 
-            return res;
+            return baseValue;
         }
     }
 }

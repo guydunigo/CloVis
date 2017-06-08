@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace ResumeElements
 {
-    public abstract class ElementList : Element, INotifyPropertyChanged
+    public abstract class Deprecated_ElementList : Element, INotifyPropertyChanged
     {
-        public ElementList(string name, bool isDefault = true) : base(name, isDefault)
+        public Deprecated_ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
         }
 
@@ -19,35 +19,35 @@ namespace ResumeElements
         public abstract ICollection Values { get; }
         public abstract ICollection Keys { get; }
 
-        public abstract ElementList<ElementList> SubLists { get; }
+        public abstract Deprecated_ElementList<Deprecated_ElementList> SubLists { get; }
     }
 
-    public class ElementList<T> : ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string, T> where T : Element
+    public class Deprecated_ElementList<T> : Deprecated_ElementList, ICollection<T>, IEnumerable<T>, IDictionary<string, T> where T : Element
     {
         protected Dictionary<string, T> elements;
 
-        public ElementList(string name, bool isDefault = true) : base(name, isDefault)
+        public Deprecated_ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
             elements = new Dictionary<string, T>();
         }
 
-        public override ElementList<ElementList> SubLists
+        public override Deprecated_ElementList<Deprecated_ElementList> SubLists
         {
             get
             {
-                ElementList<ElementList> res = new ElementList<ElementList>("Root");
+                Deprecated_ElementList<Deprecated_ElementList> res = new Deprecated_ElementList<Deprecated_ElementList>("Root");
 
-                if (typeof(T) == typeof(Element) || typeof(T) == typeof(ElementList))
+                if (typeof(T) == typeof(Element) || typeof(T) == typeof(Deprecated_ElementList))
                 {
-                    ElementList<ElementList> temp = null;
+                    Deprecated_ElementList<Deprecated_ElementList> temp = null;
 
                     foreach (Element e in Values)
                     {
-                        if (e is ElementList el)
+                        if (e is Deprecated_ElementList el)
                         {
                             res.Add(el);
                             temp = el.SubLists;
-                            foreach (ElementList ee in temp.Values)
+                            foreach (Deprecated_ElementList ee in temp.Values)
                             {
                                 res.Add(ee);
                             }
@@ -104,7 +104,7 @@ namespace ResumeElements
 
         protected void AddToElements(Element e)
         {
-            if (e is Data temp && !(temp.Categories.Contains(this)))
+            if (e is Deprecated_Data temp && !(temp.Categories.Contains(this)))
             {
                 temp.AddCategory(this);
                 NotifyListChanged();
@@ -112,7 +112,7 @@ namespace ResumeElements
         }
         protected void RemoveFromElements(Element e)
         {
-            if (e is Data temp)
+            if (e is Deprecated_Data temp)
             {
                 temp.RemoveCategory(this);
                 NotifyListChanged();
@@ -327,7 +327,7 @@ namespace ResumeElements
             T[] temp = new T[elements.Count];
             elements.Values.CopyTo(temp, 0);
 
-            var res = new ElementList<T>(Name, IsDefault);
+            var res = new Deprecated_ElementList<T>(Name, IsDefault);
             foreach (T e in temp)
             {
                 res.Add(e.Copy());
@@ -336,15 +336,15 @@ namespace ResumeElements
             return res;
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
             T[] tempList = new T[elements.Count];
             elements.Values.CopyTo(tempList, 0);
 
-            var temp = Index.Find(Name);
+            var temp = Deprecated_Index.Find(Name);
 
-            if (temp is ElementList<T> l)
+            if (temp is Deprecated_ElementList<T> l)
             {
                 foreach (Element t in tempList)
                 {

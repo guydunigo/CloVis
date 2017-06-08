@@ -36,9 +36,9 @@ namespace CloVis.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ElementList ElementList
+        public Deprecated_ElementList ElementList
         {
-            get => (ElementList)(GetValue(ElementListProperty));
+            get => (Deprecated_ElementList)(GetValue(ElementListProperty));
             set
             {
                 SetValue(ElementListProperty, value);
@@ -47,7 +47,7 @@ namespace CloVis.Controls
         }
 
         public static readonly DependencyProperty ElementListProperty =
-            DependencyProperty.Register("ElementList", typeof(ResumeElements.ElementList), typeof(IndexElementListView), new PropertyMetadata(null, OnElementListChanged));
+            DependencyProperty.Register("ElementList", typeof(ResumeElements.Deprecated_ElementList), typeof(IndexElementListView), new PropertyMetadata(null, OnElementListChanged));
 
         private static void OnElementListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -103,9 +103,9 @@ namespace CloVis.Controls
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            if (!Index.Root.Contains(ElementList))
+            if (!Deprecated_Index.Root.Contains(ElementList))
             {
-                Index.Erase(ElementList);
+                Deprecated_Index.Erase(ElementList);
             }
         }
 

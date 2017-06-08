@@ -2,24 +2,24 @@
 using System.ComponentModel;
 namespace ResumeElements
 {
-    internal class CategoriesComparer : IComparer<ElementList>
+    internal class Deprecated_CategoriesComparer : IComparer<Deprecated_ElementList>
     {
-        public int Compare(ElementList x, ElementList y)
+        public int Compare(Deprecated_ElementList x, Deprecated_ElementList y)
         {
             return x.Name.CompareTo(y.Name);
         }
     }
 
-    public abstract class Data : Element, INotifyPropertyChanged
+    public abstract class Deprecated_Data : Element, INotifyPropertyChanged
     {
-        public Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
+        public Deprecated_Data(string name, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, isDefault)//appel au constructeur de la classe mere (element)
         {
             Description = description;
             Level = level;
-            categories = new SortedSet<ElementList>(new CategoriesComparer());
+            categories = new SortedSet<Deprecated_ElementList>(new Deprecated_CategoriesComparer());
 
             this.IsIndependant = isIndependant;
-            if (!isIndependant) Index.AddData(this);
+            if (!isIndependant) Deprecated_Index.AddData(this);
         }
 
         protected string description;
@@ -41,18 +41,18 @@ namespace ResumeElements
 
         public bool IsIndependant { get; set; }
 
-        protected SortedSet<ElementList> categories;
+        protected SortedSet<Deprecated_ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
         /// </summary>
-        public SortedSet<ElementList> Categories
+        public SortedSet<Deprecated_ElementList> Categories
         {
             get
             {
-                return new SortedSet<ElementList>(categories, new CategoriesComparer());
+                return new SortedSet<Deprecated_ElementList>(categories, new Deprecated_CategoriesComparer());
             }
         }
-        public void AddCategory(ElementList cat)
+        public void AddCategory(Deprecated_ElementList cat)
         {
             if (!categories.Contains(cat))
             {
@@ -64,7 +64,7 @@ namespace ResumeElements
                     categories.Add(cat);
 
                 if (!IsIndependant && categories.Count == 2)
-                    (Index.Find("Divers") as ElementList).Remove(this);
+                    (Deprecated_Index.Find("Divers") as Deprecated_ElementList).Remove(this);
 
                 NotifyPropertyChanged("Categories");
             }
@@ -74,7 +74,7 @@ namespace ResumeElements
         /// 
         /// </summary>
         /// <param name="cat"></param>
-        public void RemoveCategory(ElementList cat)
+        public void RemoveCategory(Deprecated_ElementList cat)
         {
             if (categories.Contains(cat))
             {
@@ -82,7 +82,7 @@ namespace ResumeElements
                     cat.Remove(this);
                 categories.Remove(cat);
 
-                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is ElementList misc)
+                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers" && Deprecated_Index.Find("Divers") is Deprecated_ElementList misc)
                     AddCategory(misc);
 
                 NotifyPropertyChanged("Categories");
@@ -91,8 +91,8 @@ namespace ResumeElements
 
         public void ClearCategories()
         {
-            var copy = new List<ElementList>(categories);
-            foreach (ElementList e in copy)
+            var copy = new List<Deprecated_ElementList>(categories);
+            foreach (Deprecated_ElementList e in copy)
             {
                 e.Remove(this);
             }
@@ -127,13 +127,13 @@ namespace ResumeElements
     /// 
     /// </summary>
     /// <typeparam name="T">Can be a string, or an image (ie. Data<string> or Data<int>)</typeparam>
-    public class Data<T> : Data, INotifyPropertyChanged
+    public class Deprecated_Data<T> : Deprecated_Data, INotifyPropertyChanged
     {
-        public Data(T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, level, description, isIndependant, isDefault)
+        public Deprecated_Data(T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : this(Deprecated_Index.GetUnusedName(value), value, level, description, isIndependant, isDefault)
         {
         }
 
-        public Data(string name, T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, level, description, isIndependant, isDefault)
+        public Deprecated_Data(string name, T value, double level = -1, string description = "", bool isIndependant = false, bool isDefault = true) : base(name, level, description, isIndependant, isDefault)
         {
             Value = value;
         }
@@ -158,8 +158,8 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            var temp = new Data<T>(Name, Value, Level, Description, true, IsDefault);
-            foreach (ElementList el in categories)
+            var temp = new Deprecated_Data<T>(Name, Value, Level, Description, true, IsDefault);
+            foreach (Deprecated_ElementList el in categories)
             {
                 temp.AddCategory(el);
             }
@@ -167,10 +167,10 @@ namespace ResumeElements
             return temp;
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             // + in daughters
-            if (Index.Find(Name) is Data<T> d)
+            if (Deprecated_Index.Find(Name) is Deprecated_Data<T> d)
             {
                 Level = d.Level;
                 Value = d.Value;

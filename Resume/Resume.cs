@@ -54,11 +54,11 @@ namespace Resume
             };
         }
 
-        public ElementList LocalIndex
+        public Deprecated_ElementList LocalIndex
         {
             get
             {
-                var res = new ElementList<Element>("Root");
+                var res = new Deprecated_ElementList<Element>("Root");
 
                 foreach (BoxText bt in Layout.TextBoxes)
                 {

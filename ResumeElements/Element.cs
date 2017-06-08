@@ -44,6 +44,6 @@ namespace ResumeElements
 
         public abstract Element Find(string name);
 
-        public abstract void UpdateFromIndex(NewIndex index = null);
+        public abstract void UpdateFromIndex(Index index = null);
     }
 }

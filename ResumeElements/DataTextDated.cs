@@ -5,11 +5,11 @@ namespace ResumeElements
 {
     public class DataTextDated : DataText, INotifyPropertyChanged
     {
-        public DataTextDated(NewIndex index, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, start, end, displayFormat, level, index, isDefault)
+        public DataTextDated(Index index, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, start, end, displayFormat, level, index, isDefault)
         {
         }
 
-        public DataTextDated(string name, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, NewIndex index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
+        public DataTextDated(string name, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, Index index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
         {
             StartTime = start;
             EndTime = end;
@@ -278,7 +278,7 @@ namespace ResumeElements
             return new DataTextDated(Name, Value, StartTime, EndTime, DisplayFormat, Level, null, IsDefault);
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             base.UpdateFromIndex(indexToUse);
 

@@ -20,12 +20,12 @@ namespace CloVis.Controls
 {
     public sealed partial class NewCategoryForm : UserControl
     {
-        public ElementList IndexRoot { get; set; }
+        public Deprecated_ElementList IndexRoot { get; set; }
 
         public NewCategoryForm()
         {
             this.InitializeComponent();
-            IndexRoot = Index.Root;
+            IndexRoot = Deprecated_Index.Root;
         }
 
         public void Validate(object sender)
@@ -37,7 +37,7 @@ namespace CloVis.Controls
                 txt.Text = "Veuillez renseigner un nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (Index.Find(CatName.Text) != null)
+            else if (Deprecated_Index.Find(CatName.Text) != null)
             {
                 txt.Text = "Ce nom est déjà utilisé";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
@@ -47,9 +47,9 @@ namespace CloVis.Controls
                 txt.Text = "Selectionnez une catégorie de destination.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (CatList.SelectedItem is ElementList el)
+            else if (CatList.SelectedItem is Deprecated_ElementList el)
             {
-                el.Add(new ElementList<Element>(CatName.Text));
+                el.Add(new Deprecated_ElementList<Element>(CatName.Text));
 
                 CatName.Text = "";
 

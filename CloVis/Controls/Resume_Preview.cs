@@ -264,7 +264,7 @@ namespace CloVis.Controls
                 //TextIndent = layer > 0 ? 10 * (layer - 1) : 0
             };
 
-            if (element is ElementList list)
+            if (element is Deprecated_ElementList list)
             {
                 fonts.TryGetValue(layer, out fe);
 
@@ -279,16 +279,16 @@ namespace CloVis.Controls
                     }
                 }
             }
-            else if (element is Data<string> d)
+            else if (element is Deprecated_Data<string> d)
             {
                 string text = "";
 
                 // Adds date if DataDated or DataTimeSpan then display the value
-                if (d is DataDated<string> dd)
+                if (d is Deprecated_DataDated<string> dd)
                 {
                     text = dd.RenderDates();
                 }
-                else if (d is DataTimeSpan<string> dts)
+                else if (d is Deprecated_DataTimeSpan<string> dts)
                 {
                     text = dts.RenderTimeSpan();
                 }

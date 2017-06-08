@@ -14,7 +14,7 @@ namespace CloVis.Controls
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string str && Index.Find(str) is DataTimeSpan<string> dts)
+            if (value is string str && Deprecated_Index.Find(str) is Deprecated_DataTimeSpan<string> dts)
                 return Visibility.Visible;
             else
                 return Visibility.Collapsed;
@@ -29,7 +29,7 @@ namespace CloVis.Controls
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string str && Index.Find(str) is DataDated<string> dts)
+            if (value is string str && Deprecated_Index.Find(str) is Deprecated_DataDated<string> dts)
                 return Visibility.Visible;
             else
                 return Visibility.Collapsed;
@@ -44,7 +44,7 @@ namespace CloVis.Controls
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string str && (Index.Find(str) is DataTimeSpan<string> dts || Index.Find(str) is DataDated<string> dd))
+            if (value is string str && (Deprecated_Index.Find(str) is Deprecated_DataTimeSpan<string> dts || Deprecated_Index.Find(str) is Deprecated_DataDated<string> dd))
                 return Visibility.Collapsed;
             else
                 return Visibility.Visible;
@@ -93,7 +93,7 @@ namespace CloVis.Controls
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is string s && parameter is string si && int.TryParse(si, out int i))
-                return (DataTimeSpan<string>.GetDisplayFormatStructure(s))[i];
+                return (Deprecated_DataTimeSpan<string>.GetDisplayFormatStructure(s))[i];
             else
                 return null;
         }
@@ -123,7 +123,7 @@ namespace CloVis.Controls
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if (value is string s && parameter is string si && int.TryParse(si, out int i))
-                return (DataDated<string>.GetDisplayFormatStructure(s))[i];
+                return (Deprecated_DataDated<string>.GetDisplayFormatStructure(s))[i];
             else
                 return null;
         }
@@ -203,9 +203,9 @@ namespace CloVis.Controls
 
         protected override DataTemplate SelectTemplateCore(object item)
         {
-            if (item is Data<string> d)
+            if (item is Deprecated_Data<string> d)
                 return TemplateForData;
-            else if (item is ElementList el)
+            else if (item is Deprecated_ElementList el)
                 return TemplateForElementList;
 
             return null;
@@ -216,7 +216,7 @@ namespace CloVis.Controls
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is string s && Index.Root.ContainsKey(s))
+            if (value is string s && Deprecated_Index.Root.ContainsKey(s))
                 return Visibility.Collapsed;
             else
                 return Visibility.Visible;

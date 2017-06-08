@@ -87,12 +87,12 @@ namespace CloVis
             EmptyElementListsHistory();
         }
 
-        public Stack<ResumeElements.ElementList> ListsHistory { get; set; }
-        public ResumeElements.ElementList CurrentList
+        public Stack<ResumeElements.Deprecated_ElementList> ListsHistory { get; set; }
+        public ResumeElements.Deprecated_ElementList CurrentList
         {
             get => ListsHistory.Peek();
         }
-        public void AddToListsHistory(ElementList el)
+        public void AddToListsHistory(Deprecated_ElementList el)
         {
             ListsHistory.Push(el);
             if (ListsHistory.Count > 1)
@@ -102,9 +102,9 @@ namespace CloVis
             NotifyPropertyChanged("ListsHistory");
         }
 
-        public ElementList RemoveLastInListsHistory()
+        public Deprecated_ElementList RemoveLastInListsHistory()
         {
-            ElementList res = null;
+            Deprecated_ElementList res = null;
             if (ListsHistory.Count > 1)
                 res = ListsHistory.Pop();
 
@@ -135,8 +135,8 @@ namespace CloVis
         {
             this.InitializeComponent();
             IsModified = false;
-            ListsHistory = new Stack<ElementList>();
-            AddToListsHistory(Index.Root);
+            ListsHistory = new Stack<Deprecated_ElementList>();
+            AddToListsHistory(Deprecated_Index.Root);
             OpenResumes = new List<Resume.Resume>();
 
             // Handle the back button use : (go back to start page)
@@ -238,7 +238,7 @@ namespace CloVis
         public void EmptyElementListsHistory()
         {
             ListsHistory.Clear();
-            AddToListsHistory(Index.Root);
+            AddToListsHistory(Deprecated_Index.Root);
         }
 
         private void ZoomSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
@@ -331,7 +331,7 @@ namespace CloVis
 
         private void EnterInLists_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is ElementList el)
+            if (e.ClickedItem is Deprecated_ElementList el)
                 AddToListsHistory(el);
         }
 
@@ -339,7 +339,7 @@ namespace CloVis
         {
             if (sender is CheckBox c)
             {
-                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && c.Tag is string s && !parent.ContainsKey(s) && Index.Find(s) is Element elmt)
+                if (Resume.LocalIndex.Find(CurrentList.Name) is Deprecated_ElementList<Element> parent && c.Tag is string s && !parent.ContainsKey(s) && Deprecated_Index.Find(s) is Element elmt)
                 {
                     parent.Add(elmt.Copy());
                     IsModified = true;
@@ -352,7 +352,7 @@ namespace CloVis
         {
             if (sender is CheckBox c)
             {
-                if (Resume.LocalIndex.Find(CurrentList.Name) is ElementList<Element> parent && c.Tag is string s && parent.ContainsKey(s))
+                if (Resume.LocalIndex.Find(CurrentList.Name) is Deprecated_ElementList<Element> parent && c.Tag is string s && parent.ContainsKey(s))
                 {
                     parent.Remove(parent.Find(c.Tag as string));
                     IsModified = true;

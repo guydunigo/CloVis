@@ -29,9 +29,9 @@ namespace CloVis.Controls
             this.InitializeComponent();
         }
 
-        public ResumeElements.Data<string> Data
+        public ResumeElements.Deprecated_Data<string> Data
         {
-            get => (ResumeElements.Data<string>)(GetValue(DataProperty));
+            get => (ResumeElements.Deprecated_Data<string>)(GetValue(DataProperty));
             set
             {
                 SetValue(DataProperty, value);
@@ -48,7 +48,7 @@ namespace CloVis.Controls
             }
         }
         public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(ResumeElements.Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
+            DependencyProperty.Register("Data", typeof(ResumeElements.Deprecated_Data<string>), typeof(IndexDataTextView), new PropertyMetadata(null, OnDataChanged));
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -61,7 +61,7 @@ namespace CloVis.Controls
             DataView.Visibility = Visibility.Collapsed;
             DataEdit.Visibility = Visibility.Visible;
             // Update fields if it is a DataDated :
-            if (Data is DataDated<string> dd)
+            if (Data is Deprecated_DataDated<string> dd)
             {
                 var stru = dd.GetDisplayFormatStructure();
                 DateForeword.Text = stru[0];
@@ -132,7 +132,7 @@ namespace CloVis.Controls
             if (ValueEdit.Text != "")
             {
                 Data.Value = ValueEdit.Text;
-                if (Data is DataDated<string> dd)
+                if (Data is Deprecated_DataDated<string> dd)
                 {
                     var temp = DateForeword.Text + "$";
 
@@ -168,12 +168,12 @@ namespace CloVis.Controls
 
                     dd.DisplayFormat = temp;
                 }
-                else if (Data is DataTimeSpan<string> dts)
+                else if (Data is Deprecated_DataTimeSpan<string> dts)
                 {
                     if (int.TryParse(TSMiddleword.Text, out int i))
                         dts.TimeSpan = new TimeSpan(i, 0, 0, 0);
 
-                    dts.DisplayFormat = DataTimeSpan<string>.GenerateDisplayFormat(TSForeword.Text, TSEndword.Text, dts.GetDisplayFormat());
+                    dts.DisplayFormat = Deprecated_DataTimeSpan<string>.GenerateDisplayFormat(TSForeword.Text, TSEndword.Text, dts.GetDisplayFormat());
                 }
 
                 // Back to View mode :
@@ -256,7 +256,7 @@ namespace CloVis.Controls
 
         private void RemoveCategoryButton_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is string str && Index.Find(str) is ElementList el)
+            if (sender is Button btn && btn.Tag is string str && Deprecated_Index.Find(str) is Deprecated_ElementList el)
             {
                 Data.RemoveCategory(el);
             }
@@ -265,7 +265,7 @@ namespace CloVis.Controls
         private void DateFirst_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Change the date in the first field :
-            if (Data is DataDated<string> dd)
+            if (Data is Deprecated_DataDated<string> dd)
             {
                 if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
                 {
@@ -280,7 +280,7 @@ namespace CloVis.Controls
 
         private void DateSecond_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Data is DataDated<string> dd)
+            if (Data is Deprecated_DataDated<string> dd)
             {
                 // Hide or show the last fields :
                 if (e.AddedItems.Contains((sender as ComboBox).Items[0]))
@@ -306,22 +306,22 @@ namespace CloVis.Controls
 
         private void RemoveBtn_Click(object sender, RoutedEventArgs e)
         {
-            Index.Erase(Data);
+            Deprecated_Index.Erase(Data);
         }
 
         private void AddDate_Click(object sender, RoutedEventArgs e)
         {
-            if (!(Data is DataDated<string>) && !(Data is DataTimeSpan<string>))
+            if (!(Data is Deprecated_DataDated<string>) && !(Data is Deprecated_DataTimeSpan<string>))
             {
-                Data = DataDated<string>.Replace(Data);
+                Data = Deprecated_DataDated<string>.Replace(Data);
             }
         }
 
         private void AddTimeSpan_Click(object sender, RoutedEventArgs e)
         {
-            if (!(Data is DataDated<string>) && !(Data is DataTimeSpan<string>))
+            if (!(Data is Deprecated_DataDated<string>) && !(Data is Deprecated_DataTimeSpan<string>))
             {
-                Data = DataTimeSpan<string>.Replace(Data);
+                Data = Deprecated_DataTimeSpan<string>.Replace(Data);
             }
         }
     }

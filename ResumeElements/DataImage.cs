@@ -31,7 +31,7 @@ namespace ResumeElements
     /// <summary>
     /// DataImages value is the file's name located
     /// </summary>
-    public class DataImage : Data<string>, INotifyPropertyChanged
+    public class DataImage : Deprecated_Data<string>, INotifyPropertyChanged
     {
         /// <summary>
         /// If you use this constructor, there must be an existing image named
@@ -41,7 +41,7 @@ namespace ResumeElements
         public DataImage(string name, bool isIndependant = false) : base(name, -1, "", true, false)
         {
             if (!isIndependant)
-                Index.AddImage(this);
+                Deprecated_Index.AddImage(this);
         }
 
         public DataImage(StorageFile source) : this(source.Name, source)
@@ -218,7 +218,7 @@ namespace ResumeElements
             throw new NotImplementedException();
         }
 
-        public override void UpdateFromIndex(NewIndex indexToUse = null)
+        public override void UpdateFromIndex(Index indexToUse = null)
         {
             throw new NotImplementedException();
         }
@@ -279,7 +279,7 @@ namespace ResumeElements
             // If it is not a default picture
             if ((await GetImageFileFrom(value, await GetAppImageFolder())) == null)
             {
-                Index.Images.Remove(this);
+                Deprecated_Index.Images.Remove(this);
                 res = RemoveOutput.RemovedFromIndex;
             }
 
