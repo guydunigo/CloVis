@@ -33,9 +33,9 @@ namespace CloVis.Controls
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public DataImage Image
+        public Deprecated_DataImage Image
         {
-            get => (DataImage)(GetValue(ImageProperty));
+            get => (Deprecated_DataImage)(GetValue(ImageProperty));
             set
             {
                 SetValue(ImageProperty, value);
@@ -47,13 +47,13 @@ namespace CloVis.Controls
         {
             if (d is IndexDataImageView instance && instance.Image != null)
             {
-                instance.Img.Source = await DataImage.GetImageSource(instance.Image.Value);
+                instance.Img.Source = await Deprecated_DataImage.GetImageSource(instance.Image.Value);
                 instance.NotifyPropertyChanged("Image");
             }
         }
 
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(DataImage), typeof(IndexDataImageView), new PropertyMetadata(null, OnImageChanged));
+            DependencyProperty.Register("Image", typeof(Deprecated_DataImage), typeof(IndexDataImageView), new PropertyMetadata(null, OnImageChanged));
 
 
         public async void Delete_Click(object sender, RoutedEventArgs e)
@@ -61,7 +61,7 @@ namespace CloVis.Controls
             var temp = await Image.Remove();
             if (temp == RemoveOutput.RestoredToDefault)
             {
-                Img.Source = await DataImage.GetImageSource(Image.Value);
+                Img.Source = await Deprecated_DataImage.GetImageSource(Image.Value);
                 NotifyPropertyChanged("Img");
                 var f = new Flyout()
                 {
@@ -90,12 +90,12 @@ namespace CloVis.Controls
 
         public async void Replace_Click(object sender, RoutedEventArgs e)
         {
-            var temp = await DataImage.GetImagePicker().PickSingleFileAsync();
+            var temp = await Deprecated_DataImage.GetImagePicker().PickSingleFileAsync();
 
             if (temp != null)
             {
                 await Image.ReplaceImageFile(temp);
-                Img.Source = await DataImage.GetImageSource(Image.Value);
+                Img.Source = await Deprecated_DataImage.GetImageSource(Image.Value);
                 NotifyPropertyChanged("Img");
             }
         }

@@ -49,7 +49,7 @@ namespace Resume
         /// <summary>
         /// Defines the background image of the box
         /// </summary>
-        public DataImage Image { get; set; }
+        public Deprecated_DataImage Image { get; set; }
 
         /// <summary>
         /// Performs a deep copy of the box

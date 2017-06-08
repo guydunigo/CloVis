@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloVis", "CloVis\CloVis.csproj", "{F5D0E7E5-2247-4B38-B2AC-3D78C218DD50}"
 EndProject
@@ -13,8 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloVisUnitTest", "CloVisUnitTest\CloVisUnitTest.csproj", "{927E7881-5899-40CF-8945-B2F84602A00A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,26 +78,6 @@ Global
 		{B637103C-6B4C-4C79-AA6B-072220AEF70D}.Release|x64.Build.0 = Release|x64
 		{B637103C-6B4C-4C79-AA6B-072220AEF70D}.Release|x86.ActiveCfg = Release|x86
 		{B637103C-6B4C-4C79-AA6B-072220AEF70D}.Release|x86.Build.0 = Release|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|ARM.ActiveCfg = Debug|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|ARM.Build.0 = Debug|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|ARM.Deploy.0 = Debug|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x64.ActiveCfg = Debug|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x64.Build.0 = Debug|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x64.Deploy.0 = Debug|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x86.ActiveCfg = Debug|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x86.Build.0 = Debug|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Debug|x86.Deploy.0 = Debug|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|Any CPU.ActiveCfg = Release|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|ARM.ActiveCfg = Release|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|ARM.Build.0 = Release|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|ARM.Deploy.0 = Release|ARM
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x64.ActiveCfg = Release|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x64.Build.0 = Release|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x64.Deploy.0 = Release|x64
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x86.ActiveCfg = Release|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x86.Build.0 = Release|x86
-		{927E7881-5899-40CF-8945-B2F84602A00A}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

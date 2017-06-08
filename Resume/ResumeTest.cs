@@ -168,7 +168,7 @@ namespace Resume
                 Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
-            var img = new DataImage("CV 2_-_profil", true);
+            var img = new Deprecated_DataImage("CV 2_-_profil", true);
             var photo = new BoxBackground(105 - 50 / 2, 90 + 5, 50, 40, 40, 0, BoxBackgroundShape.Ellipse)
             {
                 Image = img

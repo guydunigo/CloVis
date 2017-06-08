@@ -9,21 +9,21 @@ namespace ResumeElements
     public static class Deprecated_Index
     {
         public static Deprecated_ElementList<Deprecated_Data> DataIndex { get; } = new Deprecated_ElementList<Deprecated_Data>("Index");
-        public static Deprecated_ElementList<DataImage> Images { get; } = new Deprecated_ElementList<DataImage>("Images");
+        public static Deprecated_ElementList<Deprecated_DataImage> Images { get; } = new Deprecated_ElementList<Deprecated_DataImage>("Images");
 
         public static async void ReloadImages()
         {
             Deprecated_Index.Images.Clear();
 
-            var imgFolds = await DataImage.GetImageFoldersList();
+            var imgFolds = await Deprecated_DataImage.GetImageFoldersList();
             foreach (StorageFolder imgFold in imgFolds)
             {
                 var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
                 foreach (StorageFile f in imgs)
                 {
-                    var temp = DataImage.GetNameWithoutExtension(f.Name);
+                    var temp = Deprecated_DataImage.GetNameWithoutExtension(f.Name);
                     if (!Deprecated_Index.Images.ContainsKey(temp))
-                        new DataImage(temp);
+                        new Deprecated_DataImage(temp);
                 }
             }
         }
@@ -47,11 +47,11 @@ namespace ResumeElements
                 RemoveData(t);
             }
         }
-        public static void AddImage(DataImage d)
+        public static void AddImage(Deprecated_DataImage d)
         {
             Images.Add(d, false);
         }
-        public static void RemoveImage(DataImage d)
+        public static void RemoveImage(Deprecated_DataImage d)
         {
             if (Images.Contains(d))
             {
@@ -61,7 +61,7 @@ namespace ResumeElements
         }
         public static void RemoveImage(string name)
         {
-            if (Images.Find(name) is DataImage t)
+            if (Images.Find(name) is Deprecated_DataImage t)
             {
                 RemoveImage(t);
             }

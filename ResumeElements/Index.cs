@@ -49,12 +49,12 @@ namespace ResumeElements
         {
             Images.Clear();
 
-            var imgFolds = await DataImage.GetImageFoldersList();
+            var imgFolds = await Deprecated_DataImage.GetImageFoldersList();
             foreach (StorageFolder f in imgFolds)
             {
                 var temp = Path.GetExtension(f.Name);
                 if (!Images.ContainsKey(temp))
-                    new DataImage(temp);
+                    new Deprecated_DataImage(temp);
             }
             throw new NotImplementedException();
         }
@@ -92,12 +92,12 @@ namespace ResumeElements
             RemoveDataFrom(name, DataIndex);
         }
 
-        public void AddImage(DataImage d)
+        public void AddImage(Deprecated_DataImage d)
         {
             //AddDataTo(d, Images);
             throw new NotImplementedException();
         }
-        public void RemoveImage(DataImage d)
+        public void RemoveImage(Deprecated_DataImage d)
         {
             //RemoveDataFrom(d, Images);
             throw new NotImplementedException();

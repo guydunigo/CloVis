@@ -583,7 +583,7 @@ namespace Resume
                                     };
                                     if (Img_name != "")
                                     {
-                                        backbox.Image = new DataImage(Img_name, Img_dep);
+                                        backbox.Image = new Deprecated_DataImage(Img_name, Img_dep);
                                     }
                                     resumetoread.Layout.AddBackBox(backbox);
                                     Shape = BoxBackgroundShape.Rectangle; Img_name = ""; Img_dep = false; strokethikness = 0;
@@ -943,7 +943,7 @@ namespace Resume
                                     };
                                     if (Img_name != "")
                                     {
-                                        backbox.Image = new DataImage(Img_name, Img_dep);
+                                        backbox.Image = new Deprecated_DataImage(Img_name, Img_dep);
                                     }
                                     resumetoread.Layout.AddBackBox(backbox);
                                     Shape = BoxBackgroundShape.Rectangle; Img_name = ""; Img_dep = false; strokethikness = 0;

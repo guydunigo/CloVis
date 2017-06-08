@@ -48,14 +48,14 @@ namespace CloVis.Controls
                 txt.Text = "Veuillez selectionner une image.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
-            else if (await DataImage.IsImageFilePresent(ImgName.Text))
+            else if (await Deprecated_DataImage.IsImageFilePresent(ImgName.Text))
             {
                 txt.Text = "Il existe déjà une image portant ce nom.";
                 txt.Foreground = (Application.Current as App).Resources["CloVisOrange"] as SolidColorBrush;
             }
             else
             {
-                new DataImage(ImgName.Text, Img);
+                new Deprecated_DataImage(ImgName.Text, Img);
                 ImgName.Text = "";
 
                 txt.Text = "Image ajoutée à Images.";
@@ -81,7 +81,7 @@ namespace CloVis.Controls
 
         private async void PickImg_Click(object sender, RoutedEventArgs e)
         {
-            var temp = await DataImage.GetImagePicker().PickSingleFileAsync();
+            var temp = await Deprecated_DataImage.GetImagePicker().PickSingleFileAsync();
 
             if (temp != null)
             {

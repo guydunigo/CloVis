@@ -178,7 +178,7 @@ namespace Resume
             var boite_profession = new BoxText(84, 33, 0, 81, 20, 0, "Profession");
             var boite_competences = new BoxText(7, 90, 0, 50, 64, 0, "Compétences", fonts_langues);
 
-            var img = new DataImage("profile", true);
+            var img = new Deprecated_DataImage("profile", true);
             var boite_photo = new BoxBackground(105 - 50 / 2, 90 + 5, 50, 40, 40, 0, BoxBackgroundShape.Ellipse)
             {
                 Image = img
@@ -186,7 +186,7 @@ namespace Resume
 
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Image = new DataImage("Temp3_-_fond", true)
+                Image = new Deprecated_DataImage("Temp3_-_fond", true)
             };
 
             template.Layout = new Layout();
@@ -264,7 +264,7 @@ namespace Resume
             var boite_diplomes = new BoxText(58, 164, 0, 82, 100, 0, "Compétences", fonts_competences);
             var fond = new BoxBackground(0, 0, 0, 210, 297, 0)
             {
-                Image = new DataImage("Temp4_-_fond", true)
+                Image = new Deprecated_DataImage("Temp4_-_fond", true)
             };
 
             template.Layout = new Layout();
