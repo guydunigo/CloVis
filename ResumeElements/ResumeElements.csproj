@@ -117,8 +117,9 @@
     <Compile Include="Deprecated_ElementList.cs" />
     <Compile Include="Element.cs" />
     <Compile Include="Deprecated_Index.cs" />
-    <Compile Include="Deprecated_IndexTest.cs" />
+    <Compile Include="Deprecated_Index_Test.cs" />
     <Compile Include="Index.cs" />
+    <Compile Include="Index_Test.cs" />
     <Compile Include="NonGenericElementList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\ResumeElements.rd.xml" />

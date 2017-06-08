@@ -226,7 +226,7 @@ namespace CloVis
         public void LoadIndex()
         {
             LoadImages();
-            Deprecated_IndexTest.FillIndex();
+            Deprecated_Index_Test.FillIndex();
         }
 
         public void LoadImages()

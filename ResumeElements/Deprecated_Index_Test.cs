@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResumeElements
 {
-    public static class Deprecated_IndexTest
+    public static class Deprecated_Index_Test
     {
         public static void FillIndex()
         {
