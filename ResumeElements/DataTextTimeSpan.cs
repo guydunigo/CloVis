@@ -5,11 +5,11 @@ namespace ResumeElements
 {
     public class DataTextTimeSpan : DataText, INotifyPropertyChanged
     {
-        public DataTextTimeSpan(string value, double length, string displayFormat, double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, length, displayFormat, level, isIndependant, isDefault)
+        public DataTextTimeSpan(NewIndex index, string value, double length, string displayFormat, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, length, displayFormat, level, index, isDefault)
         {
         }
 
-        public DataTextTimeSpan(string name, string value, double length, string displayFormat, double level = -1, bool isIndependant = false, bool isDefault = true) : base(name, value, level, isIndependant, isDefault)
+        public DataTextTimeSpan(string name, string value, double length, string displayFormat, double level = -1, NewIndex index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
         {
             Length = length;
         }
@@ -143,19 +143,26 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataTextTimeSpan(Name, Value, Length, DisplayFormat, Level, true);
+            return new DataTextTimeSpan(Name, Value, Length, DisplayFormat, Level, null, isDefault);
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse)
         {
-            base.UpdateFromIndex();
-            if (Index.Find(Name) is DataTextTimeSpan d)
+            base.UpdateFromIndex(indexToUse);
+
+            if (indexToUse == null)
+                indexToUse = Index;
+
+            if (indexToUse != null)
             {
-                Length = d.Length;
-                DisplayFormat = d.DisplayFormat;
+                if (indexToUse.Find(Name) is DataTextTimeSpan d)
+                {
+                    Length = d.Length;
+                    DisplayFormat = d.DisplayFormat;
+                }
+                //else
+                //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
             }
-            //else
-            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
         public static DataTextTimeSpan Replace(DataText data, double length = 1.0, string displayFormat = "")
@@ -163,13 +170,12 @@ namespace ResumeElements
             // Mew mew (== Mewtwo)
             var cats = data.Categories;
 
-            if (!data.IsIndependant)
+            if (data.Index != null)
             {
-                //Index.Erase(data);
-                throw new NotImplementedException();
+                data.Index.Erase(data);
             }
 
-            var dest = new DataTextTimeSpan(data.Name, data.Value, length, displayFormat, data.Level, data.IsIndependant, data.IsDefault);
+            var dest = new DataTextTimeSpan(data.Name, data.Value, length, displayFormat, data.Level, data.Index, data.IsDefault);
 
             foreach (NonGenericElementList el in cats)
             {

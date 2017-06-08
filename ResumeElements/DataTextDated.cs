@@ -5,11 +5,11 @@ namespace ResumeElements
 {
     public class DataTextDated : DataText, INotifyPropertyChanged
     {
-        public DataTextDated(string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, isIndependant, isDefault)
+        public DataTextDated(NewIndex index, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, start, end, displayFormat, level, index, isDefault)
         {
         }
 
-        public DataTextDated(string name, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isIndependant = false, bool isDefault = true) : base(name, value, level, isIndependant, isDefault)
+        public DataTextDated(string name, string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, NewIndex index = null, bool isDefault = true) : base(name, value, level, index, isDefault)
         {
             StartTime = start;
             EndTime = end;
@@ -275,20 +275,27 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataTextDated(Name, Value, StartTime, EndTime, DisplayFormat, Level, true, IsDefault);
+            return new DataTextDated(Name, Value, StartTime, EndTime, DisplayFormat, Level, null, IsDefault);
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
-            base.UpdateFromIndex();
-            if (Index.Find(Name) is DataTextDated d)
+            base.UpdateFromIndex(indexToUse);
+
+            if (indexToUse == null)
+                indexToUse = Index;
+
+            if (indexToUse != null)
             {
-                StartTime = d.StartTime;
-                EndTime = d.EndTime;
-                DisplayFormat = d.DisplayFormat;
+                if (indexToUse.Find(Name) is DataTextDated d)
+                {
+                    StartTime = d.StartTime;
+                    EndTime = d.EndTime;
+                    DisplayFormat = d.DisplayFormat;
+                }
+                //else
+                //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
             }
-            //else
-            //    throw new InvalidCastException("The piece of Data in the Index does not match this one and can't be updated.");
         }
 
         /// <summary>
@@ -304,13 +311,12 @@ namespace ResumeElements
             // Mew mew (== Mewtwo)
             var cats = data.Categories;
 
-            if (!data.IsIndependant)
+            if (data.Index != null)
             {
-                //Index.Erase(data);
-                throw new NotImplementedException();
+                data.Index.Erase(data);
             }
 
-            var dest = new DataTextDated(data.Name, data.Value, start, end, displayFormat, data.Level, data.IsIndependant, data.IsDefault);
+            var dest = new DataTextDated(data.Name, data.Value, start, end, displayFormat, data.Level, data.Index, data.IsDefault);
 
             foreach (NonGenericElementList el in cats)
             {

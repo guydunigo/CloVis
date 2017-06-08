@@ -155,7 +155,7 @@ namespace ResumeElements
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true);
+            return new DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true, IsDefault);
         }
 
         public override void UpdateFromIndex()

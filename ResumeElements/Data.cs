@@ -167,11 +167,10 @@ namespace ResumeElements
             return temp;
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex index = null)
         {
             // + in daughters
-            var temp = Index.Find(Name);
-            if (temp is Data<T> d)
+            if (Index.Find(Name) is Data<T> d)
             {
                 Level = d.Level;
                 Value = d.Value;

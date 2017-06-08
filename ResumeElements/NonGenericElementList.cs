@@ -251,19 +251,19 @@ namespace ResumeElements
             return res;
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex index)
         {
             // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
             Element[] tempList = new Element[elements.Count];
             elements.Values.CopyTo(tempList, 0);
 
-            var temp = Index.Find(Name);
+            var temp = index.Find(Name);
 
             if (temp is NonGenericElementList l)
             {
                 foreach (Element t in tempList)
                 {
-                    t.UpdateFromIndex();
+                    t.UpdateFromIndex(index);
                 }
             }
             /*

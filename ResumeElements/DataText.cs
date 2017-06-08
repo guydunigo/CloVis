@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace ResumeElements
@@ -14,21 +13,28 @@ namespace ResumeElements
 
     public class DataText : Element, INotifyPropertyChanged
     {
-        public DataText(string value, double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, level, isIndependant, isDefault)
+        public DataText(NewIndex index, string value, double level = -1, bool isDefault = true) : this(index.GetUnusedName(value), value, level, index, isDefault)
         {
         }
 
-        public DataText(string name, string value, double level = -1, bool isIndependant = false, bool isDefault = true) : base(name, isDefault)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <param name="level"></param>
+        /// <param name="index">If index is null, the DataText is considered independant.</param>
+        /// <param name="isDefault"></param>
+        public DataText(string name, string value, double level = -1, NewIndex index = null, bool isDefault = true) : base(name, isDefault)
         {
             Value = value;
 
             Level = level;
             categories = new SortedSet<NonGenericElementList>(new NonGenericElementListComparer());
 
-            IsIndependant = isIndependant;
-            //if (!isIndependant)
-            //    Index.AddData(this);
-            throw new NotImplementedException();
+            Index = index;
+            if (index != null)
+                index.AddData(this);
         }
 
         protected string value;
@@ -41,17 +47,8 @@ namespace ResumeElements
                 NotifyPropertyChanged("Value");
             }
         }
-
-        protected bool isIndependant;
-        public bool IsIndependant
-        {
-            get => isIndependant;
-            set
-            {
-                isIndependant = value;
-                NotifyPropertyChanged("IsIndependant");
-            }
-        }
+        
+        public NewIndex Index { get; }
 
         protected double level;
         /// <summary>
@@ -99,7 +96,7 @@ namespace ResumeElements
                     cat.Add(this);
 
                 // Remove the misc cat if the element is listed elsewhere and is dependant
-                if (!IsIndependant && categories.Count >= 2)
+                if (Index != null && categories.Count >= 2)
                     (Index.Find("Divers") as NonGenericElementList)?.Remove(this);
 
                 NotifyPropertyChanged("Categories");
@@ -115,7 +112,7 @@ namespace ResumeElements
                     cat.Remove(this);
 
                 // Add the misc cat if the element isn't listed anywhere else and is dependant
-                if (!IsIndependant && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is NonGenericElementList misc)
+                if (Index != null && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is NonGenericElementList misc)
                     AddCategory(misc);
 
                 NotifyPropertyChanged("Categories");
@@ -142,27 +139,36 @@ namespace ResumeElements
 
         /// <summary>
         /// Provides a deep copy of every Elements and sub-Elements.
-        /// The return Element is Independant and isn't registered in the Index
+        /// The return Element is independant and isn't registered in the Index
         /// </summary>
         /// <returns></returns>
         public override Element Copy()
         {
-            return new DataText(Name, Value, Level, true, IsDefault);
+            return new DataText(Name, Value, Level, null, IsDefault);
         }
 
-        public override void UpdateFromIndex()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="index">If the index param is defined, use this one instead of the private property.</param>
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
-            var temp = Index.Find(Name);
-            if (temp is DataText d)
+            if (indexToUse == null)
+                indexToUse = Index;
+
+            if (indexToUse != null)
             {
-                Level = d.Level;
-                Value = d.Value;
-                IsDefault = d.IsDefault;
+                if (indexToUse.Find(Name) is DataText d)
+                {
+                    Level = d.Level;
+                    Value = d.Value;
+                    IsDefault = d.IsDefault;
+                }
+                //else if (temp == null)
+                //    throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
+                //else
+                //    throw new InvalidCastException("The type of the Element in the Index does not match this one and therefore, it can't be updated.");
             }
-            //else if (temp == null)
-            //    throw new MissingFieldException("The element can't be found in the Index and can't be updated.");
-            //else
-            //    throw new InvalidCastException("The type of the Element in the Index does not match this one and therefore, it can't be updated.");
         }
     }
 }
