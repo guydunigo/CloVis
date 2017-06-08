@@ -75,7 +75,7 @@ namespace ResumeElements
             }
         }
 
-        public void Add(Element item)
+        public void Add(Element item, bool AddToCategoriesAsWell)
         {
             // Preventing self-containing lists
             if (item.Find(Name) != null)
@@ -86,11 +86,15 @@ namespace ResumeElements
             {
                 elements.Add(item.Name, item);
 
-                if (item is DataText dt && !(dt.Categories.Contains(this)))
+                if (AddToCategoriesAsWell && item is DataText dt && !(dt.Categories.Contains(this)))
                     dt.AddCategory(this, false);
 
                 NotifyListChanged();
             }
+        }
+        public void Add(Element item)
+        {
+            Add(item, true);
         }
         public void Add(string key, Element value)
         {
@@ -108,12 +112,12 @@ namespace ResumeElements
             Add(item.Key, item.Value);
         }
 
-        public bool Remove(string key)
+        public bool Remove(string key, bool RemoveFromCategoriesAsWell)
         {
             if (ContainsKey(key))
             {
                 var temp = elements.Remove(key);
-                if (this[key] is DataText dt && dt.Categories.Contains(this))
+                if (RemoveFromCategoriesAsWell && this[key] is DataText dt && dt.Categories.Contains(this))
                     dt.RemoveCategory(this, false);
                 NotifyListChanged();
 
@@ -121,6 +125,10 @@ namespace ResumeElements
             }
             else
                 return false;
+        }
+        public bool Remove(string key)
+        {
+            return Remove(key, true);
         }
         public bool Remove(Element item)
         {

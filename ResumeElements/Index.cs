@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 namespace ResumeElements
@@ -40,8 +36,8 @@ namespace ResumeElements
         {
             if (DataIndex.Contains(d))
             {
-                DataIndex.Remove(d);
                 d.ClearCategories();
+                DataIndex.Remove(d);
             }
         }
         public static void RemoveData(string name)
@@ -59,8 +55,8 @@ namespace ResumeElements
         {
             if (Images.Contains(d))
             {
-                Images.Remove(d);
                 d.ClearCategories();
+                Images.Remove(d);
             }
         }
         public static void RemoveImage(string name)
