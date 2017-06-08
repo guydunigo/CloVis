@@ -218,7 +218,7 @@ namespace ResumeElements
             throw new NotImplementedException();
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
             throw new NotImplementedException();
         }

@@ -94,12 +94,12 @@ namespace ResumeElements
 
         public void AddImage(DataImage d)
         {
-            AddDataTo(d, Images);
+            //AddDataTo(d, Images);
             throw new NotImplementedException();
         }
         public void RemoveImage(DataImage d)
         {
-            RemoveDataFrom(d, Images);
+            //RemoveDataFrom(d, Images);
             throw new NotImplementedException();
         }
         public void RemoveImage(string name)

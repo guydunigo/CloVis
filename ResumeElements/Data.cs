@@ -167,7 +167,7 @@ namespace ResumeElements
             return temp;
         }
 
-        public override void UpdateFromIndex(NewIndex index = null)
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
             // + in daughters
             if (Index.Find(Name) is Data<T> d)

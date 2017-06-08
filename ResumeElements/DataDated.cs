@@ -282,7 +282,7 @@ namespace ResumeElements
             return new DataDated<T>(Name, Value, StartTime, EndTime, DisplayFormat, Level, Description, true, IsDefault);
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
             base.UpdateFromIndex();
             if (Index.Find(Name) is DataDated<T> d)

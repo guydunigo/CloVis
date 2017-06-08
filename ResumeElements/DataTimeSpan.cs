@@ -158,7 +158,7 @@ namespace ResumeElements
             return new DataTimeSpan<T>(Name, Value, TimeSpan, DisplayFormat, Level, Description, true, IsDefault);
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
             base.UpdateFromIndex();
             if (Index.Find(Name) is DataTimeSpan<T> d)

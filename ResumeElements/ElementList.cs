@@ -336,7 +336,7 @@ namespace ResumeElements
             return res;
         }
 
-        public override void UpdateFromIndex()
+        public override void UpdateFromIndex(NewIndex indexToUse = null)
         {
             // Copy the dictionnary to avoid problems with it being modified elsewhere while in the loop
             T[] tempList = new T[elements.Count];
