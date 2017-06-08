@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace ResumeElements
 {
-    class DataTextTimeSpan : DataText, INotifyPropertyChanged
+    public class DataTextTimeSpan : DataText, INotifyPropertyChanged
     {
         public DataTextTimeSpan(string value, double length, string displayFormat, double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, length, displayFormat, level, isIndependant, isDefault)
         {

@@ -118,6 +118,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="Index.cs" />
     <Compile Include="IndexTest.cs" />
+    <Compile Include="NewIndex.cs" />
     <Compile Include="NonGenericElementList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\ResumeElements.rd.xml" />

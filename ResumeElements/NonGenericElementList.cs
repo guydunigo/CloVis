@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace ResumeElements
 {
-    class NonGenericElementList : Element, ICollection<Element>, IEnumerable<Element>, IDictionary<string, Element>, INotifyPropertyChanged
+    public class NonGenericElementList : Element, ICollection<Element>, IEnumerable<Element>, IDictionary<string, Element>, INotifyPropertyChanged
     {
         public NonGenericElementList(string name, bool isDefault = true) : base(name, isDefault)
         {

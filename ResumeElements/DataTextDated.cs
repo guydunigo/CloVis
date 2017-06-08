@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace ResumeElements
 {
-    class DataTextDated : DataText, INotifyPropertyChanged
+    public class DataTextDated : DataText, INotifyPropertyChanged
     {
         public DataTextDated(string value, DateTimeOffset start, DateTimeOffset end = default(DateTimeOffset), string displayFormat = "", double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, start, end, displayFormat, level, isIndependant, isDefault)
         {

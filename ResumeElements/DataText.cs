@@ -12,7 +12,7 @@ namespace ResumeElements
         }
     }
 
-    class DataText : Element, INotifyPropertyChanged
+    public class DataText : Element, INotifyPropertyChanged
     {
         public DataText(string value, double level = -1, bool isIndependant = false, bool isDefault = true) : this(Index.GetUnusedName(value), value, level, isIndependant, isDefault)
         {
