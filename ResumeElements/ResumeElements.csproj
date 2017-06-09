@@ -131,7 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ResumeElements_Resources\Images\profile.png" />
-    <Content Include="ResumeElements_Resources\Images\StoreLogo.png" />
+    <Content Include="ResumeElements_Resources\Assets\StoreLogo.png" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

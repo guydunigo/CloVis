@@ -182,7 +182,7 @@ namespace ResumeElements.FileManagment
 
         public static async Task<StorageFile> GetDefaultAsync()
         {
-            return await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///ResumeElements/ResumeElements_Resources/Images/StoreLogo.png"));
+            return await StorageFile.GetFileFromApplicationUriAsync(new Uri(@"ms-appx:///ResumeElements/ResumeElements_Resources/Assets/StoreLogo.png"));
         }
 
         public static FileOpenPicker GetPicker()
