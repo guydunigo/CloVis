@@ -48,7 +48,7 @@ namespace ResumeElements
             }
         }
         
-        public Index Index { get; }
+        public Index Index { get; protected set; }
 
         protected double level;
         /// <summary>

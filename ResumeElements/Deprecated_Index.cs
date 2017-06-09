@@ -15,13 +15,13 @@ namespace ResumeElements
         {
             Deprecated_Index.Images.Clear();
 
-            var imgFolds = await Deprecated_DataImage.GetImageFoldersList();
+            var imgFolds = await FileManagment.Images.GetFoldersListAsync();
             foreach (StorageFolder imgFold in imgFolds)
             {
                 var imgs = await imgFold.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.OrderByName);
                 foreach (StorageFile f in imgs)
                 {
-                    var temp = Deprecated_DataImage.GetNameWithoutExtension(f.Name);
+                    var temp = FileManagment.Images.GetNameWithoutExtension(f.Name);
                     if (!Deprecated_Index.Images.ContainsKey(temp))
                         new Deprecated_DataImage(temp);
                 }

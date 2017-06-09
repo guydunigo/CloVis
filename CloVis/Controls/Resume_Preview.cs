@@ -94,7 +94,7 @@ namespace CloVis.Controls
                 //throw new NotImplementedException("other folders ...");
                 return new ImageBrush()
                 {
-                    ImageSource = await Deprecated_DataImage.GetImageSource(b.Image.Value, cv_template_Folds)
+                    ImageSource = await ResumeElements.FileManagment.Images.GetImageSourceAsync(b.Image.Value, cv_template_Folds)
                 };
             }
             else

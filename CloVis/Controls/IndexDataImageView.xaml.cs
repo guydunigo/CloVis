@@ -47,7 +47,7 @@ namespace CloVis.Controls
         {
             if (d is IndexDataImageView instance && instance.Image != null)
             {
-                instance.Img.Source = await Deprecated_DataImage.GetImageSource(instance.Image.Value);
+                instance.Img.Source = await ResumeElements.FileManagment.Images.GetImageSourceAsync(instance.Image.Value);
                 instance.NotifyPropertyChanged("Image");
             }
         }
@@ -58,10 +58,10 @@ namespace CloVis.Controls
 
         public async void Delete_Click(object sender, RoutedEventArgs e)
         {
-            var temp = await Image.Remove();
-            if (temp == ImageRemovedOutput.RestoredToDefault)
+            var temp = await Image.RemoveAsync();
+            if (temp == ResumeElements.FileManagment.ImageRemovedOutput.RestoredToDefault)
             {
-                Img.Source = await Deprecated_DataImage.GetImageSource(Image.Value);
+                Img.Source = await ResumeElements.FileManagment.Images.GetImageSourceAsync(Image.Value);
                 NotifyPropertyChanged("Img");
                 var f = new Flyout()
                 {
@@ -69,7 +69,7 @@ namespace CloVis.Controls
                 };
                 f.ShowAt(this);
             }
-            else if (temp == ImageRemovedOutput.NothingDone)
+            else if (temp == ResumeElements.FileManagment.ImageRemovedOutput.NothingDone)
             {
                 var f = new Flyout()
                 {
@@ -90,12 +90,12 @@ namespace CloVis.Controls
 
         public async void Replace_Click(object sender, RoutedEventArgs e)
         {
-            var temp = await Deprecated_DataImage.GetImagePicker().PickSingleFileAsync();
+            var temp = await ResumeElements.FileManagment.Images.GetPicker().PickSingleFileAsync();
 
             if (temp != null)
             {
                 await Image.ReplaceImageFile(temp);
-                Img.Source = await Deprecated_DataImage.GetImageSource(Image.Value);
+                Img.Source = await ResumeElements.FileManagment.Images.GetImageSourceAsync(Image.Value);
                 NotifyPropertyChanged("Img");
             }
         }
