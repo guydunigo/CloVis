@@ -1,13 +1,8 @@
 ﻿using ResumeElements.FileManagment;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.Storage.Streams;
-using Windows.UI.Xaml.Media.Imaging;
 
 namespace ResumeElements
 {
@@ -54,7 +49,7 @@ namespace ResumeElements
 
         public async Task ImportImageAsync(StorageFile file, string desiredName)
         {
-            value = await Images.ImportFileAsync(file,desiredName);
+            value = await Images.ImportFileAsync(file, desiredName);
         }
         public async Task ReplaceImageFile(StorageFile newFile)
         {
@@ -64,7 +59,7 @@ namespace ResumeElements
         {
             var res = await FileManagment.Images.RemoveFileAsync(Name);
 
-            // If it is not a default picture
+            // If it is not a default picture, remove it from the index.
             if ((await Images.GetFileAsync(value, await Images.GetAppFolderAsync())) == null)
             {
                 Deprecated_Index.Images.Remove(this);
