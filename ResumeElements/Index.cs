@@ -54,9 +54,8 @@ namespace ResumeElements
             {
                 var temp = FileManagment.Images.GetNameWithoutExtension(f.Name);
                 if (!Images.ContainsKey(temp))
-                    new Deprecated_DataImage(temp);
+                    new DataImage(temp);
             }
-            throw new NotImplementedException();
         }
 
         protected void AddDataTo(DataText d, NonGenericElementList list)
