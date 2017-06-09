@@ -119,7 +119,7 @@
     <Compile Include="Element.cs" />
     <Compile Include="Deprecated_Index.cs" />
     <Compile Include="Deprecated_Index_Test.cs" />
-    <Compile Include="FileManagment.cs" />
+    <Compile Include="FileManagement\Images.cs" />
     <Compile Include="Index.cs" />
     <Compile Include="Index_Test.cs" />
     <Compile Include="NonGenericElementList.cs" />

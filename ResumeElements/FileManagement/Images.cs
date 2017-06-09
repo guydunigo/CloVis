@@ -7,7 +7,7 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace ResumeElements.FileManagment
+namespace ResumeElements.FileManagement
 {
     public class FileAlreadyExistsException : Exception
     {

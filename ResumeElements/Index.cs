@@ -49,10 +49,10 @@ namespace ResumeElements
         {
             Images.Clear();
 
-            var imgFolds = await FileManagment.Images.GetFoldersListAsync();
+            var imgFolds = await FileManagement.Images.GetFoldersListAsync();
             foreach (StorageFolder f in imgFolds)
             {
-                var temp = FileManagment.Images.GetNameWithoutExtension(f.Name);
+                var temp = FileManagement.Images.GetNameWithoutExtension(f.Name);
                 if (!Images.ContainsKey(temp))
                     new DataImage(temp);
             }

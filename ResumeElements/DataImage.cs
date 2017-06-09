@@ -1,4 +1,4 @@
-﻿using ResumeElements.FileManagment;
+﻿using ResumeElements.FileManagement;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -35,7 +35,7 @@ namespace ResumeElements
 
         public async Task<StorageFile> GetImageFileAsync()
         {
-            return await FileManagment.Images.GetFileAsync(value);
+            return await FileManagement.Images.GetFileAsync(value);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace ResumeElements
         }
         public async Task<ImageRemovedOutput> RemoveAsync()
         {
-            var res = await FileManagment.Images.RemoveFileAsync(Name);
+            var res = await FileManagement.Images.RemoveFileAsync(Name);
 
             // If it is not a default picture, remove it from the index.
             if (Index != null && (await Images.GetFileAsync(value, await Images.GetAppFolderAsync())) == null)
