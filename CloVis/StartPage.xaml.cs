@@ -1,4 +1,4 @@
-﻿using Resume;
+﻿using ResumeStructure;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -40,14 +40,14 @@ namespace CloVis
         };
         public ObservableCollection<NavLink> BottomNavLinks { get => bottomNavLinks; }
         */
-        public List<Resume.Resume> Resumes { get; set; }
-        public List<Resume.Template> Templates { get; set; }
+        public List<Resume> Resumes { get; set; }
+        public List<Template> Templates { get; set; }
 
         public StartPage()
         {
             Resumes = ((App)(Application.Current)).Resumes;
             Templates = ((App)(Application.Current)).Templates;
-            foreach (Resume.Template t in Templates)
+            foreach (Template t in Templates)
             {
                 t.UpdateFromIndex();
             }
@@ -61,7 +61,7 @@ namespace CloVis
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is Resume.Resume r)
+            if (e.ClickedItem is Resume r)
             {
                 this.Frame.Navigate(typeof(EditionMode), r.Copy());
             }
@@ -98,8 +98,8 @@ namespace CloVis
         {
             if (sender is MenuFlyoutItem b)
             {
-                var res = b.Tag as Resume.Resume; // Tag retourne null
-                if (res != null)
+                // Tag retourne null
+                if (b.Tag is Resume res)
                 {
                     (Application.Current as App).RemoveResume(res);
                 }
@@ -120,13 +120,13 @@ namespace CloVis
 
             if (ImportCV != null)
             {
-                StorageFolder folder = await FileManagement.GetLocalResumeFolder();
+                StorageFolder folder = await ResumeStructure.FileManagement.Resumes.GetLocalResumeFolder();
                 await ImportCV.CopyAsync(folder, ImportCV.Name, NameCollisionOption.ReplaceExisting);
 
-                var cv = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name), folder);
+                var cv = await ResumeStructure.FileManagement.Resumes.Read_file(Path.GetFileNameWithoutExtension(ImportCV.Name), folder);
 
                 bool exist = false;
-                foreach (Resume.Resume r in Resumes)
+                foreach (Resume r in Resumes)
                 {
                     if (r.Name == cv.Name)
                     {

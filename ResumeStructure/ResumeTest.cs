@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ResumeElements;
+﻿using ResumeElements;
+using System;
 using Windows.UI;
 
-namespace Resume
+namespace ResumeStructure
 {
     public static class ResumeTest
     {
@@ -60,12 +56,12 @@ namespace Resume
 
             var fond = new BoxBackground(0, 70, 10, 210, 60)
             {
-                Fill = new Color() { A = 255, R = 196, G = 215, B=237 } //verte un peu transparente
+                Fill = new Color() { A = 255, R = 196, G = 215, B = 237 } //verte un peu transparente
             }; //boite de fond
 
             var fond2 = new BoxBackground(115, 150, 30, 160, 73, -40)
             {
-                Fill = new Color() { A = 255, R =171, B = 226, G = 200 } //turquoise ? transparent
+                Fill = new Color() { A = 255, R = 171, B = 226, G = 200 } //turquoise ? transparent
             }; //boite de fond
 
             var fond3 = new BoxBackground(-15, -4, 50, 700, 65, 50)

@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using Resume;
+using ResumeStructure;
 using ResumeElements;
 using System.Threading.Tasks;
 using Windows.Storage;
@@ -128,20 +128,20 @@ namespace CloVis
             deferral.Complete();
         }
 
-        public List<Resume.Resume> Resumes { get; set; }
-        public List<Resume.Template> Templates { get; set; }
+        public List<Resume> Resumes { get; set; }
+        public List<Template> Templates { get; set; }
 
         public async Task LoadResumes()
         {
             // async ?
-            Resumes = new List<Resume.Resume>
+            Resumes = new List<Resume>
             {
                // ResumeTest.GetResumeTest(),
                 //ResumeTest.GetResumeTest2()
             };
 
             //charger les cv déjà remplis
-            var storagelist = await FileManagement.GetResumeFoldersList();
+            var storagelist = await ResumeStructure.FileManagement.Resumes.GetResumeFoldersList();
             foreach (var stlist in storagelist)
             {
                 var files = await stlist.GetFilesAsync();
@@ -149,14 +149,11 @@ namespace CloVis
                 {
                     if (Path.GetExtension(file.Name) == ".cv")
                     {
-                        var temp = await FileManagement.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        var temp = await ResumeStructure.FileManagement.Resumes.Read_file(Path.GetFileNameWithoutExtension(file.Name), stlist);
                         Resumes.Add(temp);
                     }
                 }
             }
-
-            // var temp = await FileManagement.Read_file("CV_test");
-            // Resumes.Add(temp);
         }
 
         public async Task LoadTemplates()
@@ -172,7 +169,7 @@ namespace CloVis
             };
 
             //chargement des templates stockés dans les fichiers
-            var storagelist = await FileManagement.GetTemplateFoldersList();
+            var storagelist = await ResumeStructure.FileManagement.Resumes.GetTemplateFoldersList();
             foreach (var stlist in storagelist)
             {
                 var files = await stlist.GetFilesAsync();
@@ -180,7 +177,7 @@ namespace CloVis
                 {
                     if (Path.GetExtension(file.Name) == ".cv")
                     {
-                        Resume.Template temp = await FileManagement.Read_template(Path.GetFileNameWithoutExtension(file.Name), stlist);
+                        Template temp = await ResumeStructure.FileManagement.Resumes.Read_template(Path.GetFileNameWithoutExtension(file.Name), stlist);
                         Templates.Add(temp );
                     }
                 }
@@ -194,13 +191,13 @@ namespace CloVis
             }
         }
 
-        public async void RemoveResume(Resume.Resume cv)
+        public async void RemoveResume(Resume cv)
         {
             var temp = FindResume(cv.Name);
 
             if (temp != null) //si c'est un cv et pas un template
             {
-                var storagelist = await FileManagement.GetResumeFoldersList();
+                var storagelist = await ResumeStructure.FileManagement.Resumes.GetResumeFoldersList();
                 foreach (var stlist in storagelist)
                 {
                     var files = await stlist.GetFilesAsync();
@@ -234,10 +231,10 @@ namespace CloVis
             Deprecated_Index.ReloadImagesAsync();
         }
 
-        public async void SaveResume(Resume.Resume cv)
+        public async void SaveResume(Resume cv)
         {
             //throw new NotImplementedException("Async ?")
-            //var file_saving = FileManagement.Save_File(cv);
+            //var file_saving = Resume.FileManagement.Resumes.Save_File(cv);
             var temp = FindResume(cv.Name);
 
             if (temp == null)
@@ -247,20 +244,20 @@ namespace CloVis
                 if (tempRes.Result == SavingTemplateResult.Validate && tempRes.CV_name != "")
                 {
                     cv.Name = tempRes.CV_name;
-                    FileManagement.Save_File(cv);
+                    ResumeStructure.FileManagement.Resumes.Save_File(cv);
                     SaveResumeInResumes(cv);
                 }
             }
             else
             {
-                FileManagement.Save_File(cv);
+                ResumeStructure.FileManagement.Resumes.Save_File(cv);
                 SaveResumeInResumes(cv);
             }
 
             //await file_saving;
         }
 
-        public void SaveResumeInResumes(Resume.Resume cv)
+        public void SaveResumeInResumes(Resume cv)
         {
 
             var temp = FindResume(cv.Name);
@@ -275,9 +272,9 @@ namespace CloVis
             }
         }
 
-        public Resume.Resume FindResume(string name)
+        public Resume FindResume(string name)
         {
-            foreach (Resume.Resume r in Resumes)
+            foreach (Resume r in Resumes)
             {
                 if (r.Name == name)
                     return r;
@@ -287,7 +284,7 @@ namespace CloVis
 
         public bool ExistResume(string name)
         {
-            foreach (Resume.Resume r in Resumes)
+            foreach (Resume r in Resumes)
             {
                 if (r.Name == name)
                     return true;

@@ -1,5 +1,4 @@
-﻿
-using ResumeElements;
+﻿using ResumeElements;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -153,8 +152,8 @@ namespace CloVis.Controls
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value is IEnumerable<Resume.Resume> ic)
-                return new ObservableCollection<Resume.Resume>(ic);
+            if (value is IEnumerable<ResumeStructure.Resume> ic)
+                return new ObservableCollection<ResumeStructure.Resume>(ic);
             else
                 return null;
         }

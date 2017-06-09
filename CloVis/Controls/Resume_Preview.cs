@@ -1,19 +1,13 @@
-﻿using System;
+﻿using ResumeStructure;
+using ResumeElements;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Documents;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Resume;
-using ResumeElements;
 using Windows.UI.Xaml.Shapes;
-using System.Threading.Tasks;
-using System.Collections;
-using Windows.Foundation;
 
 // The Templated Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234235
 
@@ -48,9 +42,9 @@ namespace CloVis.Controls
             OnResumeChanged(d, e);
         }
 
-        public Resume.Resume Resume
+        public Resume Resume
         {
-            get => (Resume.Resume)(GetValue(ResumeProperty));
+            get => (Resume)(GetValue(ResumeProperty));
             set
             {
                 SetValue(ResumeProperty, value);
@@ -58,7 +52,7 @@ namespace CloVis.Controls
         }
 
         public static readonly DependencyProperty ResumeProperty =
-            DependencyProperty.Register("Resume", typeof(Resume.Resume), typeof(Resume_Preview), new PropertyMetadata(null, OnResumeChanged));
+            DependencyProperty.Register("Resume", typeof(Resume), typeof(Resume_Preview), new PropertyMetadata(null, OnResumeChanged));
 
         private static async void OnResumeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -90,7 +84,7 @@ namespace CloVis.Controls
         {
             if (b.Image != null)
             {
-                var cv_template_Folds = await FileManagement.GetResumeTemplateFoldersList();
+                var cv_template_Folds = await ResumeStructure.FileManagement.Resumes.GetResumeTemplateFoldersList();
                 //throw new NotImplementedException("other folders ...");
                 return new ImageBrush()
                 {
@@ -234,7 +228,7 @@ namespace CloVis.Controls
             return res;
         }
 
-        private RichTextBlock RenderTextBox(Element element, Resume.Fonts fonts)
+        private RichTextBlock RenderTextBox(Element element, Fonts fonts)
         {
             RichTextBlock box = new RichTextBlock();
 
@@ -254,7 +248,7 @@ namespace CloVis.Controls
             return box;
         }
 
-        private void RenderElement(RichTextBlock box, Resume.Fonts fonts, Element element, int remainingLayers, int layer = 0)
+        private void RenderElement(RichTextBlock box, Fonts fonts, Element element, int remainingLayers, int layer = 0)
         {
             Paragraph para = null;
 

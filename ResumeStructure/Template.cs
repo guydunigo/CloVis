@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Resume
+﻿namespace ResumeStructure
 {
     public class Template : Resume
     {
@@ -15,7 +9,7 @@ namespace Resume
 
         public override void UpdateFromIndex()
         {
-            foreach(BoxText b in Layout.TextBoxes)
+            foreach (BoxText b in Layout.TextBoxes)
             {
                 b.Element = null;
             }

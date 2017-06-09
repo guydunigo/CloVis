@@ -1,19 +1,16 @@
-
+using ResumeElements;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using System.Xml;
-using System.IO;
 using Windows.Storage;
-using ResumeElements;
 using Windows.UI;
 using Windows.UI.Xaml;
 
-namespace Resume
+namespace ResumeStructure.FileManagement
 {
-    public static class FileManagement
+    public static class Resumes
     {
         public async static Task<StorageFolder[]> GetResumeTemplateFoldersList()
         {
@@ -43,7 +40,9 @@ namespace Resume
         }
         public async static Task<StorageFolder> GetAppTemplateFolder()
         {
-            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Resources");
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("ResumeStructure");
+            appFolder = await appFolder.GetFolderAsync("ResumeStructure_Resources");
+
             return await appFolder.GetFolderAsync("Templates");
         }
         public async static Task<StorageFolder> GetLocalTemplateFolder()
@@ -70,7 +69,9 @@ namespace Resume
         }
         public async static Task<StorageFolder> GetAppResumeFolder()
         {
-            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Resources");
+            StorageFolder appFolder = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("ResumeStructure");
+            appFolder = await appFolder.GetFolderAsync("ResumeStructure_Resources");
+
             return await appFolder.GetFolderAsync("Resumes");
         }
         public async static Task<StorageFolder> GetLocalResumeFolder()

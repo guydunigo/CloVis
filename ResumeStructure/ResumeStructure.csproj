@@ -7,8 +7,8 @@
     <ProjectGuid>{B637103C-6B4C-4C79-AA6B-072220AEF70D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Resume</RootNamespace>
-    <AssemblyName>Resume</AssemblyName>
+    <RootNamespace>ResumeStructure</RootNamespace>
+    <AssemblyName>ResumeStructure</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
@@ -104,13 +104,20 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="ResumeStructure_Resources\Resumes\CV 2_-_profil.png" />
+    <Content Include="ResumeStructure_Resources\Templates\Temp3_-_fond.png" />
+    <Content Include="ResumeStructure_Resources\Templates\Temp4_-_fond.png" />
     <None Include="project.json" />
+    <Content Include="ResumeStructure_Resources\Resumes\CV 1.cv" />
+    <None Include="ResumeStructure_Resources\Resumes\CV 2.cv" />
+    <None Include="ResumeStructure_Resources\Templates\BlackAndWhite.cv" />
+    <None Include="ResumeStructure_Resources\Templates\SimpleGreen.cv" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Box.cs" />
     <Compile Include="BoxBackground.cs" />
     <Compile Include="BoxText.cs" />
-    <Compile Include="FileManagement.cs" />
+    <Compile Include="FileManagement\Resumes.cs" />
     <Compile Include="Fonts.cs" />
     <Compile Include="FontElement.cs" />
     <Compile Include="Layout.cs" />

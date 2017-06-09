@@ -1,4 +1,4 @@
-﻿using Resume;
+﻿using ResumeStructure;
 using ResumeElements;
 using System;
 using System.Collections.Generic;
@@ -29,12 +29,12 @@ namespace CloVis
     /// </summary>
     public sealed partial class EditionMode : Page, INotifyPropertyChanged
     {
-        public List<Resume.Resume> Resumes { get => ((App)(Application.Current)).Resumes; }
-        public List<Resume.Template> Templates { get => ((App)(Application.Current)).Templates; }
+        public List<Resume> Resumes { get => ((App)(Application.Current)).Resumes; }
+        public List<Template> Templates { get => ((App)(Application.Current)).Templates; }
 
-        public List<Resume.Resume> OpenResumes { get; set; }
+        public List<Resume> OpenResumes { get; set; }
 
-        private void OpenCV(Resume.Resume res)
+        private void OpenCV(Resume res)
         {
             Resume = res;
             OpenResumes.Add(res);
@@ -42,7 +42,7 @@ namespace CloVis
             ReloadCV();
             ReloadElementPanel();
         }
-        private void CloseCV(Resume.Resume res)
+        private void CloseCV(Resume res)
         {
             if (OpenResumes.Count > 1)
             {
@@ -61,7 +61,7 @@ namespace CloVis
 
             NotifyPropertyChanged("OpenResumes");
         }
-        private void ChangeCV(Resume.Resume res)
+        private void ChangeCV(Resume res)
         {
             if (Resume != res)
             {
@@ -120,8 +120,8 @@ namespace CloVis
             return res;
         }
 
-        private Resume.Resume resume;
-        public Resume.Resume Resume { get => resume; set { resume = value; NotifyPropertyChanged("Resume"); } }
+        private Resume resume;
+        public Resume Resume { get => resume; set { resume = value; NotifyPropertyChanged("Resume"); } }
 
         public bool IsModified { get; set; }
 
@@ -137,7 +137,7 @@ namespace CloVis
             IsModified = false;
             ListsHistory = new Stack<Deprecated_ElementList>();
             AddToListsHistory(Deprecated_Index.Root);
-            OpenResumes = new List<Resume.Resume>();
+            OpenResumes = new List<Resume>();
 
             // Handle the back button use : (go back to start page)
             Windows.UI.Core.SystemNavigationManager.GetForCurrentView().BackRequested -= (Application.Current as App).OnBackRequested;
@@ -166,7 +166,7 @@ namespace CloVis
         {
             base.OnNavigatedTo(e);
 
-            var res = e.Parameter as Resume.Resume;
+            var res = e.Parameter as Resume;
             Resume = res;
             OpenResumes.Add(res);
             NotifyPropertyChanged("OpenResumes");
@@ -176,7 +176,7 @@ namespace CloVis
 
         private void Resumes_ItemClick(object sender, ItemClickEventArgs e)
         {
-            if (e.ClickedItem is Resume.Resume r)
+            if (e.ClickedItem is Resume r)
             {
                 OpenCV(r);
             }
@@ -363,7 +363,7 @@ namespace CloVis
 
         private async void CloseCV_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is Button btn && btn.Tag is Resume.Resume r)
+            if (sender is Button btn && btn.Tag is Resume r)
             {
                 if (IsModified == true)
                 {
@@ -381,7 +381,7 @@ namespace CloVis
 
         private void OpenResume_ItemClick(object sender, ItemClickEventArgs e)
         {
-            ChangeCV(e.ClickedItem as Resume.Resume);
+            ChangeCV(e.ClickedItem as Resume);
         }
     }
 }

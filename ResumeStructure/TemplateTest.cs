@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ResumeElements;
+﻿using ResumeElements;
 using Windows.UI;
 
-
-
-namespace Resume
+namespace ResumeStructure
 {
     public static class TemplateTest
     {
@@ -228,7 +221,7 @@ namespace Resume
             var fonts = new Fonts("Polices_cv")
             {
                 new FontElement("Colibri", 6,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
-                
+
             };
 
             var fonts_titre = new Fonts("Polices_cv")

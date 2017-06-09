@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloVis", "CloVis\CloVis.csproj", "{F5D0E7E5-2247-4B38-B2AC-3D78C218DD50}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeElements", "ResumeElements\ResumeElements.csproj", "{E433860B-EA04-4FE9-B3F3-1BCC0CEB2D7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resume", "Resume\Resume.csproj", "{B637103C-6B4C-4C79-AA6B-072220AEF70D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResumeStructure", "ResumeStructure\ResumeStructure.csproj", "{B637103C-6B4C-4C79-AA6B-072220AEF70D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ACC4140A-4E17-4EB3-8D23-7FC91F5FAC2A}"
 	ProjectSection(SolutionItems) = preProject

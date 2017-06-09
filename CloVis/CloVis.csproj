@@ -94,10 +94,6 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
-    <Content Include="Resources\Resumes\CV 1.cv" />
-    <None Include="Resources\Resumes\CV 2.cv" />
-    <None Include="Resources\Templates\BlackAndWhite.cv" />
-    <None Include="Resources\Templates\SimpleGreen.cv" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -202,9 +198,6 @@
     <Content Include="CV_Examples\CV_Example_4.png" />
     <Content Include="CV_Examples\CV_Example_5.png" />
     <Content Include="CV_Examples\CV_Example_6.png" />
-    <Content Include="Resources\Resumes\CV 2_-_profil.png" />
-    <Content Include="Resources\Templates\Temp3_-_fond.png" />
-    <Content Include="Resources\Templates\Temp4_-_fond.png" />
     <Content Include="TutorialPictures\PageCV.png" />
     <Content Include="TutorialPictures\startpage.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -291,9 +284,9 @@
       <Project>{e433860b-ea04-4fe9-b3f3-1bcc0ceb2d7d}</Project>
       <Name>ResumeElements</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Resume\Resume.csproj">
+    <ProjectReference Include="..\ResumeStructure\ResumeStructure.csproj">
       <Project>{b637103c-6b4c-4c79-aa6b-072220aef70d}</Project>
-      <Name>Resume</Name>
+      <Name>ResumeStructure</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

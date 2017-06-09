@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ResumeElements;
-using System.Xml;
-using System.Xml.Serialization;
-using System.IO;
+﻿using ResumeElements;
 
-namespace Resume
+namespace ResumeStructure
 {
-
     public class Resume
     {
         public Resume(string name)
