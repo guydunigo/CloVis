@@ -3,9 +3,9 @@ using System.ComponentModel;
 
 namespace ResumeElements
 {
-    internal class NonGenericElementListComparer : IComparer<NonGenericElementList>
+    internal class NonGenericElementListComparer : IComparer<ElementList>
     {
-        public int Compare(NonGenericElementList x, NonGenericElementList y)
+        public int Compare(ElementList x, ElementList y)
         {
             return x.Name.CompareTo(y.Name);
         }
@@ -30,7 +30,7 @@ namespace ResumeElements
             Value = value;
 
             Level = level;
-            categories = new SortedSet<NonGenericElementList>(new NonGenericElementListComparer());
+            categories = new SortedSet<ElementList>(new NonGenericElementListComparer());
 
             Index = index;
             if (index != null)
@@ -73,18 +73,18 @@ namespace ResumeElements
             }
         }
 
-        protected SortedSet<NonGenericElementList> categories;
+        protected SortedSet<ElementList> categories;
         /// <summary>
         /// Lists all the categories this element is listed in. The accessor will return a copy of it to prevent unwanted modifications.
         /// </summary>
-        public SortedSet<NonGenericElementList> Categories
+        public SortedSet<ElementList> Categories
         {
             get
             {
-                return new SortedSet<NonGenericElementList>(categories, new NonGenericElementListComparer());
+                return new SortedSet<ElementList>(categories, new NonGenericElementListComparer());
             }
         }
-        public void AddCategory(NonGenericElementList cat, bool AddIntoCatAsWell = true)
+        public void AddCategory(ElementList cat, bool AddIntoCatAsWell = true)
         {
             if (!categories.Contains(cat))
             {
@@ -97,12 +97,12 @@ namespace ResumeElements
 
                 // Remove the misc cat if the element is listed elsewhere and is dependant
                 if (Index != null && categories.Count >= 2)
-                    (Index.Find("Divers") as NonGenericElementList)?.Remove(this);
+                    (Index.Find("Divers") as ElementList)?.Remove(this);
 
                 NotifyPropertyChanged("Categories");
             }
         }
-        public void RemoveCategory(NonGenericElementList cat, bool RemoveFromCatAsWell = true)
+        public void RemoveCategory(ElementList cat, bool RemoveFromCatAsWell = true)
         {
             if (categories.Contains(cat))
             {
@@ -112,7 +112,7 @@ namespace ResumeElements
                     cat.Remove(this);
 
                 // Add the misc cat if the element isn't listed anywhere else and is dependant
-                if (Index != null && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is NonGenericElementList misc)
+                if (Index != null && categories.Count == 0 && cat.Name != "Divers" && Index.Find("Divers") is ElementList misc)
                     AddCategory(misc);
 
                 NotifyPropertyChanged("Categories");
@@ -120,8 +120,8 @@ namespace ResumeElements
         }
         public void ClearCategories()
         {
-            var copy = new List<NonGenericElementList>(categories);
-            foreach (NonGenericElementList e in copy)
+            var copy = new List<ElementList>(categories);
+            foreach (ElementList e in copy)
             {
                 e.Remove(this);
             }

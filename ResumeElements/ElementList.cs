@@ -6,30 +6,30 @@ using System.Linq;
 
 namespace ResumeElements
 {
-    public class NonGenericElementList : Element, ICollection<Element>, IEnumerable<Element>, IDictionary<string, Element>, INotifyPropertyChanged
+    public class ElementList : Element, ICollection<Element>, IEnumerable<Element>, IDictionary<string, Element>, INotifyPropertyChanged
     {
-        public NonGenericElementList(string name, bool isDefault = true) : base(name, isDefault)
+        public ElementList(string name, bool isDefault = true) : base(name, isDefault)
         {
             elements = new Dictionary<string, Element>();
         }
 
         protected Dictionary<string, Element> elements;
 
-        public NonGenericElementList SubLists
+        public ElementList SubLists
         {
             get
             {
-                NonGenericElementList res = new NonGenericElementList("Root");
+                ElementList res = new ElementList("Root");
 
-                NonGenericElementList temp = null;
+                ElementList temp = null;
 
                 foreach (Element e in Values)
                 {
-                    if (e is NonGenericElementList el)
+                    if (e is ElementList el)
                     {
                         res.Add(el);
                         temp = el.SubLists;
-                        foreach (NonGenericElementList ee in temp.Values)
+                        foreach (ElementList ee in temp.Values)
                         {
                             res.Add(ee);
                         }
@@ -242,7 +242,7 @@ namespace ResumeElements
             Element[] temp = new Element[elements.Count];
             elements.Values.CopyTo(temp, 0);
 
-            var res = new NonGenericElementList(Name, IsDefault);
+            var res = new ElementList(Name, IsDefault);
             foreach (Element e in temp)
             {
                 res.Add(e.Copy());
@@ -259,7 +259,7 @@ namespace ResumeElements
 
             var temp = index.Find(Name);
 
-            if (temp is NonGenericElementList l)
+            if (temp is ElementList l)
             {
                 foreach (Element t in tempList)
                 {

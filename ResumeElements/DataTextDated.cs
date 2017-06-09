@@ -318,7 +318,7 @@ namespace ResumeElements
 
             var dest = new DataTextDated(data.Name, data.Value, start, end, displayFormat, data.Level, data.Index, data.IsDefault);
 
-            foreach (NonGenericElementList el in cats)
+            foreach (ElementList el in cats)
             {
                 dest.AddCategory(el);
             }

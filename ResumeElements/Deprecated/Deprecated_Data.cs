@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+
 namespace ResumeElements
 {
     internal class Deprecated_CategoriesComparer : IComparer<Deprecated_ElementList>

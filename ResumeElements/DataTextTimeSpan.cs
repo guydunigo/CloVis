@@ -177,7 +177,7 @@ namespace ResumeElements
 
             var dest = new DataTextTimeSpan(data.Name, data.Value, length, displayFormat, data.Level, data.Index, data.IsDefault);
 
-            foreach (NonGenericElementList el in cats)
+            foreach (ElementList el in cats)
             {
                 dest.AddCategory(el);
             }

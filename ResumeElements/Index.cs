@@ -6,22 +6,22 @@ namespace ResumeElements
 {
     public class Index
     {
-        public NonGenericElementList DataIndex { get; }
-        public NonGenericElementList Images { get; }
+        public ElementList DataIndex { get; }
+        public ElementList Images { get; }
 
         /// <summary>
         /// Root defines the topmost ElementList, mother of all Elements that can be put in a resume
         /// </summary>
-        public NonGenericElementList Root { get; set; }
+        public ElementList Root { get; set; }
 
         public Index()
         {
-            DataIndex = new NonGenericElementList("DataIndex");
-            Images = new NonGenericElementList("Images");
+            DataIndex = new ElementList("DataIndex");
+            Images = new ElementList("Images");
 
-            Root = new NonGenericElementList("root")
+            Root = new ElementList("root")
             {
-                new NonGenericElementList("Coordonnées")
+                new ElementList("Coordonnées")
                 {
                     new DataText("Nom", ""),
                     new DataText("Téléphone", ""),
@@ -29,19 +29,19 @@ namespace ResumeElements
                     new DataText("Adresse", ""),
                     new DataText("Profession", "")
                 },
-                new NonGenericElementList("Compétences"),
-                new NonGenericElementList("Langues")
+                new ElementList("Compétences"),
+                new ElementList("Langues")
                 {
                     new DataText("Langue 1",""),
                     new DataText("Langue 2",""),
                     new DataText("Langue 3",""),
                     new DataText("Langue 4","")
                 },
-                new NonGenericElementList("Diplômes"),
-                new NonGenericElementList("Études"),
-                new NonGenericElementList("Expériences professionnelles"),
-                new NonGenericElementList("Centres d'intérêts"),
-                new NonGenericElementList("Divers"),
+                new ElementList("Diplômes"),
+                new ElementList("Études"),
+                new ElementList("Expériences professionnelles"),
+                new ElementList("Centres d'intérêts"),
+                new ElementList("Divers"),
             };
         }
 
@@ -58,11 +58,11 @@ namespace ResumeElements
             }
         }
 
-        protected void AddDataTo(DataText d, NonGenericElementList list)
+        protected void AddDataTo(DataText d, ElementList list)
         {
             list.Add(d, false);
         }
-        protected void RemoveDataFrom(DataText d, NonGenericElementList list)
+        protected void RemoveDataFrom(DataText d, ElementList list)
         {
             if (list.Contains(d))
             {
@@ -70,7 +70,7 @@ namespace ResumeElements
                 list.Remove(d);
             }
         }
-        protected void RemoveDataFrom(string name, NonGenericElementList list)
+        protected void RemoveDataFrom(string name, ElementList list)
         {
             if (DataIndex.Find(name) is DataText t)
             {
@@ -117,7 +117,7 @@ namespace ResumeElements
             return Images.Find(name);
         }
 
-        public NonGenericElementList FindParent(Element e)
+        public ElementList FindParent(Element e)
         {
             Element prev = null, cur = Root;
 
@@ -127,7 +127,7 @@ namespace ResumeElements
                 if (prev == null)
                     break;
 
-                if (prev is NonGenericElementList i)
+                if (prev is ElementList i)
                 {
                     foreach (Element el in i.Values)
                     {
@@ -141,16 +141,16 @@ namespace ResumeElements
                 }
             }
 
-            return prev as NonGenericElementList;
+            return prev as ElementList;
         }
 
         /// <summary>
         /// Return a list of all pieces of Data unlisted in any categories other than the index
         /// </summary>
         /// <returns></returns>
-        public NonGenericElementList GetUnlistedData()
+        public ElementList GetUnlistedData()
         {
-            var misc = new NonGenericElementList("Non listés");
+            var misc = new ElementList("Non listés");
             foreach (DataText d in DataIndex.Values)
             {
                 if (d.Categories.Count == 0)
@@ -161,7 +161,7 @@ namespace ResumeElements
             return misc;
         }
 
-        public void Erase(NonGenericElementList e)
+        public void Erase(ElementList e)
         {
             e.Clear();
             FindParent(e)?.Remove(e);
