@@ -47,5 +47,14 @@ namespace ResumeStructure
                 Element = index.Find(DefaultElement)?.Copy();
             }
         }
+
+        /// <summary>
+        /// Empty Element property
+        /// </summary>
+        /// <param name="index"></param>
+        public void ClearElement()
+        {
+            Element = null;
+        }
     }
 }
