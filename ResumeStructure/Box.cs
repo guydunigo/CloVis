@@ -12,7 +12,13 @@
             Angle = angle;
         }
 
+        /// <summary>
+        /// Millimeters from the top-left corner
+        /// </summary>
         public double X { get; set; }
+        /// <summary>
+        /// Millimeters from the top-left corner
+        /// </summary>
         public double Y { get; set; }
         protected double z;
         /// <summary>
@@ -21,8 +27,14 @@
         public abstract double Z { get; set; }
 
         protected double sizeX;
+        /// <summary>
+        /// Millimeters
+        /// </summary>
         public double SizeX { get => sizeX; set => sizeX = value > 0 ? value : 0; }
         protected double sizeY;
+        /// <summary>
+        /// Millimeters
+        /// </summary>
         public double SizeY { get => sizeY; set => sizeY = value > 0 ? value : 0; }
 
         protected double angle;

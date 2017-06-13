@@ -5,7 +5,7 @@ namespace ResumeStructure
 
     public class BoxText : Box
     {
-        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "", Fonts fonts = null)//0 on the upper left corner - cm
+        public BoxText(double x = 0, double y = 0, double z = 60, double sizeX = 10, double sizeY = 10, double angle = 0, string defaultElmt = "", Fonts fonts = null)
             : base(x, y, z, sizeX, sizeY, angle)
         {
             DefaultElement = defaultElmt;

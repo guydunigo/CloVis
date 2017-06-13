@@ -11,8 +11,6 @@ namespace ResumeStructure
 
         /// <summary>
         /// Lists all the boxes (background and text boxes of the resume
-        /// It is maybe advisable to separate those two kinds of boxes
-        /// ! If you add an TextBox, you have to register its element to le elmts list.
         /// </summary>
         public Layout Layout { get; set; }
 

@@ -6,16 +6,14 @@ namespace ResumeStructure
 {
     public class Fonts : ICollection<FontElement>, IList<FontElement>, IEnumerable<FontElement>
     {
-        public Fonts(string name, TextAlignment textAlignment = TextAlignment.Left)
+        public Fonts(TextAlignment textAlignment = TextAlignment.Left)
         {
-            Name = name;
             List = new List<FontElement>();
             TextAlignment = textAlignment;
         }
 
         public FontElement this[int index] { get => List[index]; set => List[index] = value; }
-
-        public string Name { get; set; }
+        
         public TextAlignment TextAlignment { get; set; }
 
         /// <summary>
@@ -33,9 +31,9 @@ namespace ResumeStructure
         public static Fonts GetDefault()
         {
             //throw new NotImplementedException("Create a more generic Fonts");
-            return new Fonts("Polices_cv")
+            return new Fonts()
             {
-                new FontElement("Tahoma", 7, new Windows.UI.Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true), //ARGB 0 on voit rien, 255 opaque
+                new FontElement("Tahoma", 7, new Windows.UI.Color() { R = 0, G = 0, B = 255, A = 255 },true, true, true, true),
                 new FontElement("Tahoma", 6, new Windows.UI.Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, true),
                 new FontElement("Tahoma", 5, new Windows.UI.Color() { R = 100, G = 100, B = 200, A = 255 },true, false, false, false),
                 new FontElement("Calibri", 5, new Windows.UI.Color() { R = 70, G = 70, B = 200, A = 190 })
@@ -107,7 +105,7 @@ namespace ResumeStructure
         /// <returns></returns>
         public Fonts Copy()
         {
-            var temp = new Fonts(Name, TextAlignment);
+            var temp = new Fonts(TextAlignment);
             foreach (FontElement e in List)
             {
                 temp.List.Add(e.Copy());

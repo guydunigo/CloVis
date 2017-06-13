@@ -11,13 +11,13 @@ namespace ResumeStructure
             var template = new Template("Temp1");
 
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Times New Roman", 7,  new Color() { R = 255, G = 0, B = 0, A = 100 }, false, true, true, false),    //italic, gras, souligné
                 new FontElement("Calibri", 5, new Color() { R = 0, G = 255, B = 0, A = 255 },true, true, false, true),
                 new FontElement("Verdana", 4, new Color() { R = 255, G = 0, B = 255, A = 255 },true, false, false, false),
                 new FontElement("Comic Sans MS", 3, new Color() { R = 70, G = 70, B = 200, A = 190 },false, false, false, false)
-        };
+            };
             var boite_competences = new BoxText(75, 80, 50, 105, 75, 0, "Compétences");
             var boite_coordonnées = new BoxText(5, 40, 20, 200, 60, 10, "Coordonnées");
             var boite_etudes = new BoxText(75, 200, 10, 150, 50, 0, "Études");
@@ -59,7 +59,7 @@ namespace ResumeStructure
         {
             var template = new Template("Temp2");
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Colibri", 9,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, true, true, false),    //italic, gras, souligné
                 new FontElement("Times New Roman", 7, new Color() { R = 0, G = 0, B = 150, A = 255 },true, true, false, true),
@@ -97,45 +97,45 @@ namespace ResumeStructure
         {
             var template = new Template("Green Peace");
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Gadugi", 6,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
                 
             };
 
-            var fonts_titre = new Fonts("Polices_cv")
+            var fonts_titre = new Fonts()
             {
                 new FontElement("Gadugi", 10,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var fonts_petit = new Fonts("Polices_cv")
+            var fonts_petit = new Fonts()
             {
                 new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var fonts_petit_droit = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Right)
+            var fonts_petit_droit = new Fonts(Windows.UI.Xaml.TextAlignment.Right)
             {
                 new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var fonts_tres_petit = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Justify)
+            var fonts_tres_petit = new Fonts(Windows.UI.Xaml.TextAlignment.Justify)
             {
                 new FontElement("Gadugi", 4,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)   //italic, gras, souligné
             };
 
-            var fonts_langues = new Fonts("Polices_cv")
+            var fonts_langues = new Fonts()
             {
                 new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, true),
                 new FontElement("Gadugi", 1,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, false)
             };
 
-            var fonts_corps = new Fonts("Polices_cv", Windows.UI.Xaml.TextAlignment.Right)
+            var fonts_corps = new Fonts(Windows.UI.Xaml.TextAlignment.Right)
             {
                 new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 0 }, false, false, false, true),
                 new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
 
-            var fonts_normal = new Fonts("Polices_cv")
+            var fonts_normal = new Fonts()
             {
                 new FontElement("Gadugi", 6.5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false),
                 new FontElement("Gadugi", 5,  new Color() { R = 120, G = 0, B = 0, A = 200 }, false, false, false, false)
@@ -186,10 +186,7 @@ namespace ResumeStructure
             template.Fonts = fonts;
             template.Layout.AddTextBox(boite_coordonnées2);
             template.Layout.AddTextBox(boite_coordonnées);
-
-            //template.Layout.AddTextBox(boite_coordonnées1);
-            //template.Layout.AddTextBox(boite_coordonnées2);
-            //template.Layout.AddTextBox(boite_coordonnées3);
+            
             template.Layout.AddTextBox(boite_diplomes);
             template.Layout.AddTextBox(boite_études);
             template.Layout.AddTextBox(boite_pro);
@@ -218,28 +215,28 @@ namespace ResumeStructure
         {
             var template = new Template("Black & White");
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Colibri", 6,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
 
             };
 
-            var fonts_titre = new Fonts("Polices_cv")
+            var fonts_titre = new Fonts()
             {
                 new FontElement("Colibri", 16,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
 
-            var fonts_petit = new Fonts("Polices_cv")
+            var fonts_petit = new Fonts()
             {
                 new FontElement("Colibri", 6,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
 
-            var fonts_langues = new Fonts("Polices_cv")
+            var fonts_langues = new Fonts()
             {
                 new FontElement("Colibri", 5,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false)
             };
 
-            var fonts_competences = new Fonts("Polices_cv")
+            var fonts_competences = new Fonts()
             {
                 new FontElement("Colibri", 7,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false),
                 new FontElement("Colibri", 5,  new Color() { R = 0, G = 0, B = 0, A = 200 }, false, false, false, false),

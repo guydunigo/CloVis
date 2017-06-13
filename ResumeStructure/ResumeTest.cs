@@ -41,7 +41,7 @@ namespace ResumeStructure
                 new DataTextDated("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1)
             };
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Tahoma", 7, new Color() { R = 0, G = 0, B = 0, A = 255 },false, true, false, false), //ARGB 0 on voit rien, 255 opaque
                 new FontElement("Tahoma", 6, new Color() { R = 0, G = 0, B = 0, A = 255 },false, false, false, false),
@@ -137,7 +137,7 @@ namespace ResumeStructure
 
             };
 
-            var fonts = new Fonts("Polices_cv")
+            var fonts = new Fonts()
             {
                 new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 255, A = 255 },false, false, false, true), //ARGB 0 on voit rien, 255 opaque
                 new FontElement("Garamond", 5, new Color() { R = 0, G = 0, B = 150, A = 255 },false, true, false, false),
@@ -145,7 +145,7 @@ namespace ResumeStructure
                 new FontElement("Calibri", 5, new Color() { R = 70, G = 70, B = 200, A = 190 })
             };
 
-            var fonts1 = new Fonts("obj", Windows.UI.Xaml.TextAlignment.Justify)
+            var fonts1 = new Fonts(Windows.UI.Xaml.TextAlignment.Justify)
             {
                 new FontElement("Garamond", 5, new Color() { R = 168, G = 215, B = 203, A = 255 },false, false, false, false),
             };
