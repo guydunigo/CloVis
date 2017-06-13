@@ -30,5 +30,11 @@
         /// Defines the angle of the box in degrees clockwise
         /// </summary>
         public double Angle { get => angle; set => angle = value % 360; }
+
+        /// <summary>
+        /// "Deep" copy of the box
+        /// </summary>
+        /// <returns></returns>
+        public abstract Box Copy();
     }
 }

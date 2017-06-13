@@ -1,4 +1,6 @@
-﻿namespace ResumeStructure
+﻿using ResumeElements;
+
+namespace ResumeStructure
 {
 
     public class BoxText : Box
@@ -30,19 +32,19 @@
         /// Performs a deep copy of the box
         /// </summary>
         /// <returns></returns>
-        public BoxText Copy()
+        public override Box Copy()
         {
             return new BoxText(X, Y, Z, SizeX, SizeY, Angle, DefaultElement, Fonts?.Copy()) { Element = Element?.Copy() };
         }
 
-        public void UpdateFromIndex()
+        public void UpdateFromIndex(Index index = null)
         {
             if (Element != null)
-                Element.UpdateFromIndex();
-            else
+                Element.UpdateFromIndex(index);
+            else if (index != null)
             {
                 // Try to find the default element in the index
-                Element = ResumeElements.Deprecated_Index.Find(DefaultElement);
+                Element = index.Find(DefaultElement)?.Copy();
             }
         }
     }

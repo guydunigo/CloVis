@@ -24,11 +24,11 @@ namespace ResumeStructure
 
         public string Name { get; set; }
 
-        public virtual void UpdateFromIndex()
+        public virtual void UpdateFromIndex(Index index = null)
         {
             foreach (BoxText b in Layout.TextBoxes)
             {
-                b.UpdateFromIndex();
+                b.UpdateFromIndex(index);
             }
         }
 
@@ -45,11 +45,11 @@ namespace ResumeStructure
             };
         }
 
-        public Deprecated_ElementList LocalIndex
+        public ElementList LocalIndex
         {
             get
             {
-                var res = new Deprecated_ElementList<Element>("Root");
+                var res = new ElementList("Root");
 
                 foreach (BoxText bt in Layout.TextBoxes)
                 {

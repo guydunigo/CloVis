@@ -22,12 +22,12 @@ namespace ResumeStructure
             Image = null;
         }
 
+        public BoxBackgroundShape Shape { get; set; }
+
         /// <summary>
         /// Only works when shape is Rectangle
         /// </summary>
         public double BorderRadius { get; set; }
-        public double StrokeThickness { get; set; }
-        public BoxBackgroundShape Shape { get; set; }
 
         /// <summary>
         /// Box depth position, determines whether an element is above another one or below.
@@ -38,21 +38,22 @@ namespace ResumeStructure
         /// Color defines the background color of the box and the transparancy of it.
         /// </summary>
         public Color Fill { get; set; }
+        public double StrokeThickness { get; set; }
         public Color Stroke { get; set; }
         /// <summary>
         /// Defines the background image of the box
         /// </summary>
-        public Deprecated_DataImage Image { get; set; }
+        public DataImage Image { get; set; }
 
         /// <summary>
         /// Performs a deep copy of the box
         /// </summary>
         /// <returns></returns>
-        public BoxBackground Copy()
+        public override Box Copy()
         {
             return new BoxBackground(X, Y, Z, SizeX, SizeY, Angle, Shape)
             {
-                Image = Image,
+                Image = Image.Copy() as DataImage,
                 Fill = Fill,
                 Stroke = Stroke,
                 StrokeThickness = StrokeThickness,

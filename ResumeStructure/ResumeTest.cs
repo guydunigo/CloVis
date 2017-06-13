@@ -10,35 +10,35 @@ namespace ResumeStructure
         {
             Resume CV;
 
-            var coordonnees = new Deprecated_ElementList<Element>("Coordonnées")
+            var coordonnees = new ElementList("Coordonnées")
             {
-                new Deprecated_Data<string>("Nom", "Clovis", -1, "",true),
-                new Deprecated_Data<string>("Téléphone", "+33660606060", -1, "", true),
-                new Deprecated_Data<string>("Mél", "RoiDesFranc@enib.fr", -1, "", true)
+                new DataText("Nom", "Clovis", -1),
+                new DataText("Téléphone", "+33660606060", -1),
+                new DataText("Mél", "RoiDesFranc@enib.fr", -1)
             };
 
-            var competences = new Deprecated_ElementList<Element>("Compétences")
+            var competences = new ElementList("Compétences")
             {
-                new Deprecated_ElementList<Element>("Informatique")
+                new ElementList("Informatique")
                 {
-                    new Deprecated_Data<string>("C", "C", 2, "",true),
-                    new Deprecated_Data<string>("C++","C++",1, "",true),
-                    new Deprecated_Data<string>("Java","java",1, "",true)
+                    new DataText("C", "C", 2),
+                    new DataText("C++","C++",1),
+                    new DataText("Java","java",1)
                 },
-                new Deprecated_Data<string>("Business process", "Business Process", 4, "",true)
+                new DataText("Business process", "Business Process", 4)
             };
 
-            var langues = new Deprecated_ElementList<Element>("Langues")
+            var langues = new ElementList("Langues")
             {
-                new Deprecated_Data<string>("Anglais", "anglais", 5, "",true),
-                new Deprecated_Data<string>("Allemand","allemand",2, "",true),
-                new Deprecated_Data<string>("Chinois","chinois",1.5, "",true),
+                new DataText("Anglais", "anglais", 5),
+                new DataText("Allemand","allemand",2),
+                new DataText("Chinois","chinois",1.5),
             };
 
-            var diplomes = new Deprecated_ElementList<Element>("Diplômes")
+            var diplomes = new ElementList("Diplômes")
             {
-                new Deprecated_DataDated<string>("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(d)$",-1, "",true),
-                new Deprecated_DataDated<string>("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1, "",true)
+                new DataTextDated("Flying Spaghetti Monster degree", "Flying Spaghetti Monster degree", new DateTime(2017,12,24), new DateTime(2017,12,24), "Le $1(d)$",-1),
+                new DataTextDated("Bac","bac",new DateTime(1992,11,14), new DateTime(1992,11,14), "Le $1(D)$",-1)
             };
 
             var fonts = new Fonts("Polices_cv")
@@ -95,45 +95,45 @@ namespace ResumeStructure
         {
             Resume CV;
 
-            var nom = new Deprecated_Data<string>("Nom", "Clovis", -1, "", true);
-            var titre = new Deprecated_Data<string>("Titre", "Roi des Francs", -1, "", true);
-            var coordonnees = new Deprecated_ElementList<Element>("Coordonnées")
+            var nom = new DataText("Nom", "Clovis", -1);
+            var titre = new DataText("Titre", "Roi des Francs", -1);
+            var coordonnees = new ElementList("Coordonnées")
             {
-                new Deprecated_Data<string>("Téléphone", "+33660606060", -1, "", true),
-                new Deprecated_Data<string>("Mél", "clovis@enib.fr", -1, "", true),
-                new Deprecated_Data<string>("Adresse", "17 rue de la Réussite\n75012 Paris", -1, "", true)
+                new DataText("Téléphone", "+33660606060", -1),
+                new DataText("Mél", "clovis@enib.fr", -1),
+                new DataText("Adresse", "17 rue de la Réussite\n75012 Paris", -1)
             };
 
-            var objectif = new Deprecated_ElementList<Element>("Objectif")
+            var objectif = new ElementList("Objectif")
             {
-                new Deprecated_ElementList<Element>("Mon Objectif")
+                new ElementList("Mon Objectif")
                 {
-                    new Deprecated_Data<string>("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !", -1, "",true)
+                    new DataText("obj", "Je compte unir les Francs, conquérir le nord de la Loire, puis l'Est, et je vaincrai les Burgondes. Mais je ne cesserai pas, et je m'emparerai du Centre et du Sud Ouest de la gaule !", -1)
                 }
             };
 
-            var competences = new Deprecated_ElementList<Element>("Compétences")
+            var competences = new ElementList("Compétences")
             {
-                new Deprecated_ElementList<Element>("Diplomatie")
+                new ElementList("Diplomatie")
                 {
-                    new Deprecated_Data<string>("Politique", "Politique", 4, "",true),
-                    new Deprecated_Data<string>("Assassinat","Assassinat",3, "",true),
-                    new Deprecated_Data<string>("Mariage","Mariage",2, "",true),
-                    new Deprecated_Data<string>("Soudoiement","Soudoiement",2, "",true),
+                    new DataText("Politique", "Politique", 4),
+                    new DataText("Assassinat","Assassinat",3),
+                    new DataText("Mariage","Mariage",2),
+                    new DataText("Soudoiement","Soudoiement",2),
                 },
 
             };
 
-            var langues = new Deprecated_ElementList<Element>("Langues")
+            var langues = new ElementList("Langues")
             {
-                new Deprecated_Data<string>("Francique", "Francique", 5, "",true),
-                new Deprecated_Data<string>("Français moderne","Français moderne",1, "",true),
-                new Deprecated_Data<string>("Allemand moderne","Allemand moderne",1, "",true),
+                new DataText("Francique", "Francique", 5),
+                new DataText("Français moderne","Français moderne",1),
+                new DataText("Allemand moderne","Allemand moderne",1),
             };
 
-            var diplomes = new Deprecated_ElementList<Element>("Dynastie")
+            var diplomes = new ElementList("Dynastie")
             {
-                new Deprecated_DataDated<string>("Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1, "",true),
+                new DataTextDated("Mérovingien", "Mérovingien", new DateTime(466,1,1), default(DateTimeOffset), "Depuis $1(yyy)$",-1),
 
             };
 
@@ -164,21 +164,11 @@ namespace ResumeStructure
                 Fill = new Color() { A = 140, G = 255 } //verte un peu transparente
             }; //boite de fond
 
-            var img = new Deprecated_DataImage("CV 2_-_profil", true);
+            var img = new DataImage("CV 2_-_profil");
             var photo = new BoxBackground(105 - 50 / 2, 90 + 5, 50, 40, 40, 0, BoxBackgroundShape.Ellipse)
             {
                 Image = img
             };
-
-            /*var fond2 = new BoxBackground(115, 150, 100, 160, 73, null, -40)
-			{
-				Color = new Color() { A = 190, B = 170, G = 255 } //turquoise ? transparent
-			}; //boite de fond
-
-			var fond3 = new BoxBackground(-15, -4, 100, 700, 65, null, 50)
-			{
-				Color = new Color() { A = 255, B = 200, G = 200, R = 255 }
-			};*/
 
             boite_de_nom.Element = nom;
             boite_de_titre.Element = titre;
@@ -196,8 +186,6 @@ namespace ResumeStructure
             CV.Layout = new Layout();
             CV.Layout.AddBackBox(fond);
             CV.Layout.AddBackBox(photo);
-            //CV.Layout.AddBackBox(fond2);
-            //CV.Layout.AddBackBox(fond3);
 
             CV.Layout.AddTextBox(boite_d_obj);
             CV.Layout.AddTextBox(boite_de_nom);
