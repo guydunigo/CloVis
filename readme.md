@@ -1,3 +1,5 @@
+[short English version below]
+
 CloVis est un logiciel de mise en forme automatique de curriculum vitae qui permet, à l’aide d’informations renseignées au préalable, de générer entièrement un CV qui aura l’apparence d’un modèle présélectionné.
 
 Ce logiciel s’adresse à tous. Tant pour valoriser au mieux les compétences de chacun que pour permettre aux recruteurs de voir en un coup d’œil si le profil présenté leur correspond.
@@ -8,3 +10,9 @@ Bien sûr, tout est modifiable : couleur, police, disposition des éléments.
 Le logiciel ne sera - dans un premier temps - compatible qu’avec Windows, mais nous avons envisagé des versions Mac et Linux, pour que CloVis soit le plus accessible possible.
 
 Pour tout renseignement ou suggestion, nous sommes à votre disposition : c4caron@enib.fr (merci de préciser "CloVis" dans le sujet du mail ;))
+
+*** English ***
+
+CloVis is an all-in-one solution, designed to fill in instantly numerous high quality CV templates. Simply enter your details once: training, contact information, picture, skills, work experience, hobbies etc. and CloVis will automaticaly create all the CVs you may dream of.
+
+If you have any question or suggestion, feel free to contact us at c4caron@enib.fr (please mention "CloVis" in the subject of your e-mail) :)
